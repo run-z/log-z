@@ -23,8 +23,12 @@
   "types": "index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/log-z.mjs",
-      "require": "./dist/log-z.js"
+      "import": "./dist/log-z.js",
+      "require": "./dist/log-z.cjs"
+    },
+    "./node": {
+      "import": "./dist/log-z.node.js",
+      "require": "./dist/log-z.node.cjs"
     }
   },
   "devDependencies": {
@@ -63,7 +67,7 @@
     "doc": "run-z +z --then typedoc",
     "doc:publish": "run-z doc --then gh-pages --dist target/typedoc --dotfiles",
     "lint": "run-z +z --then eslint .",
-    "test": "run-z +z --then jest --config ./jest.config.cjs",
+    "test": "run-z +z --then jest",
     "z": "run-z +bootstrap,+doc,+lint,+test"
   }
 }

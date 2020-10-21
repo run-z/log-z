@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "main": "../dist/log-z.node.cjs",
+  "module": "../dist/log-z.node.js",
+  "types": "index.d.ts"
+}
