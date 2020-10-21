@@ -1,0 +1,69 @@
+{
+  "name": "@run-z/log-z",
+  "version": "1.0.0-dev.0",
+  "description": "Log that. Minimalistic platform-agnostic logging library",
+  "keywords": [
+    "log",
+    "logger",
+    "logging"
+  ],
+  "homepage": "https://github.com/run-z/log-z",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:run-z/log-z.git"
+  },
+  "license": "MIT",
+  "author": "Ruslan Lopatin <ruslan.lopatin@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/run-z/log-z/issues"
+  },
+  "type": "module",
+  "main": "dist/log-z.cjs",
+  "module": "dist/log-z.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/log-z.mjs",
+      "require": "./dist/log-z.js"
+    }
+  },
+  "devDependencies": {
+    "@proc7ts/eslint-config": "^2.0.5",
+    "@proc7ts/rollup-helpers": "^1.0.0",
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^12.12.67",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "codecov": "^3.8.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-jest": "^24.1.0",
+    "gh-pages": "^3.1.0",
+    "jest": "^26.6.0",
+    "jest-junit": "^12.0.0",
+    "rollup": "^2.32.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.28.0",
+    "run-z": "~1.4.0",
+    "shx": "^0.3.2",
+    "strip-ansi": "^6.0.0",
+    "ts-jest": "^26.4.1",
+    "tslib": "^2.0.3",
+    "typedoc": "^0.19.0",
+    "typedoc-plugin-external-module-name": "^4.0.3",
+    "typescript": "^4.0.3"
+  },
+  "scripts": {
+    "all": "run-z build,lint,test",
+    "bootstrap": "rollup --config ./rollup.config.js",
+    "build": "run-z +z bootstrap",
+    "ci:all": "run-z all +test/--ci/--runInBand",
+    "clean": "run-z +z --then shx rm -rf d.ts dist target",
+    "doc": "run-z +z --then typedoc",
+    "doc:publish": "run-z doc --then gh-pages --dist target/typedoc --dotfiles",
+    "lint": "run-z +z --then eslint .",
+    "test": "run-z +z --then jest --config ./jest.config.cjs",
+    "z": "run-z +bootstrap,+doc,+lint,+test"
+  }
+}

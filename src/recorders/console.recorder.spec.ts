@@ -1,0 +1,170 @@
+import { createZLogger } from '../create-logger';
+import { ZLogLevel } from '../log-level';
+import type { ZLogger } from '../logger';
+import { consoleZLogRecorder } from './console.recorder';
+
+describe('consoleZLogRecorder', () => {
+
+  let testConsole: Console;
+  let errorSpy: jest.SpyInstance;
+  let warnSpy: jest.SpyInstance;
+  let infoSpy: jest.SpyInstance;
+  let logSpy: jest.SpyInstance;
+  let debugSpy: jest.SpyInstance;
+  let traceSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    testConsole = {
+      error: () => {/* noop */},
+      warn: () => {/* noop */},
+      info: () => {/* noop */},
+      log: () => {/* noop */},
+      debug: () => {/* noop */},
+      trace: () => {/* noop */},
+    } as any;
+    spyOnConsole(testConsole);
+  });
+  afterEach(() => {
+    errorSpy.mockRestore();
+    warnSpy.mockRestore();
+    infoSpy.mockRestore();
+    logSpy.mockRestore();
+    debugSpy.mockRestore();
+    traceSpy.mockRestore();
+  });
+
+  let logger: ZLogger;
+
+  beforeEach(() => {
+    logger = createZLogger({ recorder: consoleZLogRecorder(testConsole), level: 0 });
+  });
+
+  it('logs to global console by default', () => {
+    spyOnConsole(console);
+    logger = createZLogger();
+    logger.error('Test');
+    expect(errorSpy).toHaveBeenCalledWith('Test');
+  });
+
+  it('logs error', () => {
+
+    const error = new Error('!!!');
+
+    logger.error(error);
+    expect(errorSpy).toHaveBeenCalledWith(error.message, error);
+  });
+
+  it('logs details', () => {
+
+    const error = new Error('!!!');
+    const details = { details: 'many' };
+
+    logger.error(error, details);
+    expect(errorSpy).toHaveBeenCalledWith(error.message, details, error);
+  });
+
+  it('logs extra', () => {
+
+    const error = new Error('!!!');
+    const details = { details: 'many' };
+
+    logger.error(error, details, 'Error', [['extra']]);
+    expect(errorSpy).toHaveBeenCalledWith('Error', ['extra'], details, error);
+  });
+
+  describe('fatal', () => {
+    it('logs with `console.error` and FATAL! prefix', () => {
+      logger.fatal('Error');
+      expect(errorSpy).toHaveBeenCalledWith('FATAL! Error');
+    });
+    it('logs with `console.error` and FATAL! prefix with higher level', () => {
+      logger.log(ZLogLevel.Fatal + 1, 'Error');
+      expect(errorSpy).toHaveBeenCalledWith('FATAL! Error');
+    });
+  });
+
+  describe('error', () => {
+    it('logs with `console.error`', () => {
+      logger.error('Error');
+      expect(errorSpy).toHaveBeenCalledWith('Error');
+    });
+    it('logs with `console.error` with higher level', () => {
+      logger.log(ZLogLevel.Fatal - 1, 'Error');
+      expect(errorSpy).toHaveBeenCalledWith('Error');
+    });
+  });
+
+  describe('warn', () => {
+    it('logs with `console.warn`', () => {
+      logger.warn('Error');
+      expect(warnSpy).toHaveBeenCalledWith('Error');
+    });
+    it('logs with `console.warn` with higher level', () => {
+      logger.log(ZLogLevel.Error - 1, 'Error');
+      expect(warnSpy).toHaveBeenCalledWith('Error');
+    });
+  });
+
+  describe('info', () => {
+    it('logs with `console.info`', () => {
+      logger.info('Error');
+      expect(infoSpy).toHaveBeenCalledWith('Error');
+    });
+    it('logs with `console.info` with higher level', () => {
+      logger.log(ZLogLevel.Warning - 1, 'Error');
+      expect(infoSpy).toHaveBeenCalledWith('Error');
+    });
+  });
+
+  describe('debug', () => {
+    it('logs with `console.log`', () => {
+      logger.debug('Error');
+      expect(logSpy).toHaveBeenCalledWith('Error');
+    });
+    it('logs with `console.log` with higher level', () => {
+      logger.log(ZLogLevel.Info - 1, 'Error');
+      expect(logSpy).toHaveBeenCalledWith('Error');
+    });
+  });
+
+  describe('trace', () => {
+    it('logs with `console.debug` without `stackTrace` set', () => {
+      logger.trace('Error');
+      expect(debugSpy).toHaveBeenCalledWith('Error');
+    });
+    it('logs with `console.trace` with `stackTrace` set', () => {
+      logger.trace('Error', { stackTrace: true });
+      expect(traceSpy).toHaveBeenCalledWith('Error');
+    });
+    it('logs with `console.debug` with higher level', () => {
+      logger.log(ZLogLevel.Debug - 1, 'Error');
+      expect(debugSpy).toHaveBeenCalledWith('Error');
+    });
+    it('logs with `console.debug` with lower level', () => {
+      logger.log(ZLogLevel.Trace - 1, 'Error');
+      expect(debugSpy).toHaveBeenCalledWith('Error');
+    });
+  });
+
+  describe('whenLogged', () => {
+    it('always resolves to `true`', async () => {
+      expect(await logger.whenLogged()).toBe(true);
+    });
+  });
+
+  describe('discard', () => {
+    it('does nothing', async () => {
+      expect(await logger.discard()).toBeUndefined();
+    });
+  });
+
+  function spyOnConsole(testConsole: typeof console): void {
+    errorSpy = jest.spyOn(testConsole, 'error').mockImplementation(() => {/* noop */});
+    warnSpy = jest.spyOn(testConsole, 'warn').mockImplementation(() => {/* noop */});
+    infoSpy = jest.spyOn(testConsole, 'info').mockImplementation(() => {/* noop */});
+    logSpy = jest.spyOn(testConsole, 'log').mockImplementation(() => {/* noop */});
+    debugSpy = jest.spyOn(testConsole, 'debug').mockImplementation(() => {/* noop */});
+    traceSpy = jest.spyOn(testConsole, 'trace').mockImplementation(() => {/* noop */});
+  }
+
+});

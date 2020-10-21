@@ -1,0 +1,15 @@
+{
+  "disableAutoModuleName": true,
+  "exclude": [
+    "**/index.ts",
+    "**/*.impl.ts",
+    "**/impl/**/*.ts",
+    "**/spec/**/*.ts",
+    "**/*.spec.ts"
+  ],
+  "excludeNotExported": true,
+  "mode": "modules",
+  "name": "Log Z",
+  "out": "./target/typedoc",
+  "tsconfig": "tsconfig.main.json"
+}
