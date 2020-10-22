@@ -96,23 +96,6 @@ export abstract class ZLogger implements ZLogRecorder {
 
   abstract whenLogged(): Promise<boolean>;
 
-  abstract discard(): Promise<void>;
-
-  /**
-   * Finishes the remaining messages logging and stops log recording after that.
-   *
-   * @returns A promise resolved when messages logged and log recording stopped.
-   */
-  finish(): Promise<void> {
-    return this.whenLogged().then(
-        () => this.discard(),
-        error => {
-
-          const returnError = (): Promise<void> => Promise.reject(error);
-
-          return this.discard().then(returnError, returnError);
-        },
-    );
-  }
+  abstract end(): Promise<void>;
 
 }

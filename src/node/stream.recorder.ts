@@ -43,38 +43,40 @@ export interface StreamZLogConfig {
 export function streamZLogRecorder(output: Writable, config: StreamZLogConfig = {}): ZLogRecorder {
 
   const { errors = output, errorLevel = ZLogLevel.Error } = config;
-  const writeOut = logWriterFor(output);
-  const writeError = errors === output ? writeOut : logWriterFor(errors);
+  const recordMessage = logRecorderFor(output);
+  const recordError = errors === output ? recordMessage : logRecorderFor(errors);
 
-  let whenRecorded = Promise.resolve<boolean>(true);
-  let record = (message: ZLogMessage): void => {
+  let whenLogged = Promise.resolve<boolean>(true);
+  let record = (message: ZLogMessage): Promise<boolean> => (message.level < errorLevel
+      ? recordMessage
+      : recordError)(message);
+  let end = (): Promise<void> => {
+    record = doNotLogZ;
+    whenLogged = Promise.resolve(false);
 
-    const write = message.level < errorLevel ? writeOut : writeError;
+    const whenOutputEnded = endLogging(output);
+    const whenAllEnded = (output === errors
+        ? whenOutputEnded
+        : Promise.all([whenOutputEnded, endLogging(errors)]))
+        .then(() => void 0);
 
-    whenRecorded = whenRecorded.then(ok => ok && record !== doNotLogZ ? write(message) : Promise.resolve(false));
+    end = () => whenAllEnded;
+
+    return whenAllEnded;
   };
 
   return {
 
     record(message) {
-      record(message);
+      whenLogged = record(message);
     },
 
     whenLogged(): Promise<boolean> {
-      return whenRecorded;
+      return whenLogged;
     },
 
-    discard(): Promise<void> {
-      record = doNotLogZ;
-      whenRecorded = Promise.resolve(false);
-
-      return new Promise((resolve, reject) => {
-        output.once('close', resolve);
-        output.once('finish', resolve);
-        output.once('error', reject);
-        output.destroy();
-        output.end();
-      });
+    end(): Promise<void> {
+      return end();
     },
 
   };
@@ -83,58 +85,61 @@ export function streamZLogRecorder(output: Writable, config: StreamZLogConfig = 
 /**
  * @internal
  */
-function doNotLogZ(_message: ZLogMessage): void {
-  // Do not log message
+function doNotLogZ(_message: ZLogMessage): Promise<false> {
+  return Promise.resolve(false);
 }
 
 /**
  * @internal
  */
-function logWriterFor(out: Writable): (message: ZLogMessage) => Promise<boolean> {
-
-  const write = writerFor(out);
-
-  if (out.writableObjectMode) {
-    return write;
+function logRecorderFor(out: Writable): (message: ZLogMessage) => Promise<boolean> {
+  if (out.writableEnded) {
+    return doNotLogZ;
   }
 
-  return message => write(message.text);
+  let record: (message: ZLogMessage) => Promise<boolean>;
+
+  if (out.writableObjectMode) {
+    record = message => {
+      out.write(message);
+      return Promise.resolve(true);
+    };
+  } else {
+    record = message => {
+      out.write(message.text);
+      return Promise.resolve(true);
+    };
+  }
+
+  whenLoggingStopped(out).finally(() => record = doNotLogZ);
+
+  return message => record(message);
 }
 
 /**
  * @internal
  */
-function writerFor(out: Writable): (data: any) => Promise<true> {
+function whenLoggingStopped(out: Writable): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (out.writableFinished) {
+      resolve();
+    } else {
+      out.once('close', resolve);
+      out.once('finish', resolve);
+      out.once('error', reject);
+    }
+  });
+}
 
-  let ready: Promise<true> = Promise.resolve(true);
+/**
+ * @internal
+ */
+function endLogging(out: Writable): Promise<unknown> {
 
-  return data => ready.then(
-      () => new Promise<true>((resolve, reject) => {
+  const whenEnded = new Promise(resolve => out.end(resolve));
+  const whenStopped = whenLoggingStopped(out);
 
-        const ok = out.write(
-            data,
-            err => {
-              if (err != null) {
-                reject(err);
-              } else {
-                resolve(true);
-              }
-            },
-        );
+  out.destroy();
 
-        if (!ok) {
-          ready = new Promise<true>(makeReady => {
-            out.once(
-                'drain',
-                () => {
-                  ready = Promise.resolve(true);
-                  makeReady();
-                },
-            );
-          });
-        }
-
-        resolve(true);
-      }),
-  );
+  return Promise.race([whenStopped, whenEnded]);
 }

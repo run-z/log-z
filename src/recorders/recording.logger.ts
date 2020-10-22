@@ -30,8 +30,8 @@ export class RecordingZLogger extends ZLogger {
     return this.recorder.whenLogged();
   }
 
-  discard(): Promise<void> {
-    return this.recorder.discard();
+  end(): Promise<void> {
+    return this.recorder.end();
   }
 
 }

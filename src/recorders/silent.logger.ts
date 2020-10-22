@@ -14,7 +14,7 @@ class SilentZLogger extends ZLogger {
     return Promise.resolve(false);
   }
 
-  discard(): Promise<void> {
+  end(): Promise<void> {
     return Promise.resolve();
   }
 

@@ -13,7 +13,7 @@ describe('levelZLogRecorder', () => {
     recorder = {
       record: jest.fn(),
       whenLogged: jest.fn(() => Promise.resolve(true)),
-      discard: jest.fn(() => Promise.resolve()),
+      end: jest.fn(() => Promise.resolve()),
     };
     logger = createZLogger({ recorder });
   });

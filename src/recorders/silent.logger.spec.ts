@@ -13,8 +13,8 @@ describe('silentZLogger', () => {
     logger.info('TEST');
     expect(await logger.whenLogged()).toBe(false);
   });
-  it('is always discarded', async () => {
-    expect(await logger.discard()).toBeUndefined();
-    expect(await logger.discard()).toBeUndefined();
+  it('is stopped', async () => {
+    expect(await logger.end()).toBeUndefined();
+    expect(await logger.end()).toBeUndefined();
   });
 });
