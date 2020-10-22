@@ -37,8 +37,8 @@ export function levelZLogRecorder(recorder: ZLogRecorder, level = ZLogLevel.Info
       return whenLogged || (whenLogged = recorder.whenLogged());
     },
 
-    discard(): Promise<void> {
-      return recorder.discard();
+    end(): Promise<void> {
+      return recorder.end();
     },
 
   };

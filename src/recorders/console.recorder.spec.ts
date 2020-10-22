@@ -152,9 +152,9 @@ describe('consoleZLogRecorder', () => {
     });
   });
 
-  describe('discard', () => {
+  describe('end', () => {
     it('does nothing', async () => {
-      expect(await logger.discard()).toBeUndefined();
+      expect(await logger.end()).toBeUndefined();
     });
   });
 

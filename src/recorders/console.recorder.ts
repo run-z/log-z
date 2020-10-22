@@ -53,7 +53,7 @@ export function consoleZLogRecorder(console = globalConsole()): ZLogRecorder {
       return Promise.resolve(true);
     },
 
-    discard(): Promise<void> {
+    end(): Promise<void> {
       return Promise.resolve();
     },
 

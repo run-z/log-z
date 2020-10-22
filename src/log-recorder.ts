@@ -21,19 +21,19 @@ export interface ZLogRecorder {
   record(message: ZLogMessage): void;
 
   /**
-   * Awaits for the last recorded message to be logged.
+   * Awaits for the last recorded message to be logged or discarded.
    *
    * @returns A promise resolved to `true` when the last recorded message is logged, or to `false` when it is discarded.
    */
   whenLogged(): Promise<boolean>;
 
   /**
-   * Discards not logged messages and stops log recording.
+   * Ends log recording.
    *
-   * Makes this recorder unusable.
+   * All messages discarded after this method call.
    *
    * @returns A promise resolved when recorder stopped.
    */
-  discard(): Promise<void>;
+  end(): Promise<void>;
 
 }
