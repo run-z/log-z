@@ -1,4 +1,5 @@
 import { Writable, WritableOptions } from 'stream';
+import { zlogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
 import { RecordingZLogger } from '../recorders';
@@ -6,7 +7,7 @@ import { streamZLogRecorder } from './stream.recorder';
 
 describe('streamZLogRecorder', () => {
 
-  it('writes message text to stream', async () => {
+  it('formats message', async () => {
 
     const out = new TestWritable();
     const logger = new RecordingZLogger(streamZLogRecorder(out));
@@ -16,7 +17,41 @@ describe('streamZLogRecorder', () => {
 
     expect(await logger.whenLogged()).toBe(true);
 
-    expect(out.chunks).toEqual(['TEST', 'ERROR']);
+    expect(out.chunks).toEqual(['[INFO ] TEST', '[ERROR] ERROR']);
+  });
+  it('formats message with custom format', async () => {
+
+    const out = new TestWritable();
+    const logger = new RecordingZLogger(streamZLogRecorder(
+        out,
+        {
+          format: { text: ({ text }) => `${text}.` },
+        },
+    ));
+
+    logger.info('TEST');
+    logger.error('ERROR');
+
+    expect(await logger.whenLogged()).toBe(true);
+
+    expect(out.chunks).toEqual(['[INFO ] TEST.', '[ERROR] ERROR.']);
+  });
+  it('formats message by custom formatter', async () => {
+
+    const out = new TestWritable();
+    const logger = new RecordingZLogger(streamZLogRecorder(
+        out,
+        {
+          format: zlogFormatter({ text: ({ text }) => `${text}.` }),
+        },
+    ));
+
+    logger.info('TEST');
+    logger.error('ERROR');
+
+    expect(await logger.whenLogged()).toBe(true);
+
+    expect(out.chunks).toEqual(['[INFO ] TEST.', '[ERROR] ERROR.']);
   });
   it('writes message as is in object mode', async () => {
 
