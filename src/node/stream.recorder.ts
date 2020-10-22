@@ -33,6 +33,10 @@ export interface StreamZLogConfig {
  *
  * Logs messages as is when the stream is in [object mode]. Logs only {@link ZLogMessage.text message text} otherwise.
  *
+ * Can log {@link StreamZLogConfig.errorLevel errors} to {@link StreamZLogConfig.errors separate stream}.
+ *
+ * Ends underlying stream(s) on {@link ZLogRecorder.end .end()} method call.
+ *
  * @param output  Writable stream to log to.
  * @param config  Streaming log recorder configuration.
  *
@@ -139,7 +143,5 @@ function endLogging(out: Writable): Promise<unknown> {
   const whenEnded = new Promise(resolve => out.end(resolve));
   const whenStopped = whenLoggingStopped(out);
 
-  out.destroy();
-
-  return Promise.race([whenStopped, whenEnded]);
+  return Promise.race([whenEnded, whenStopped]);
 }
