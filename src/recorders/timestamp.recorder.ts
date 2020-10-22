@@ -36,7 +36,7 @@ export interface TimestampZLogConfig {
  * Timestamp recorder appends timestamp to log messages and records them with `target` recorder. Timestamps are not
  * overridden if present.
  *
- * @param target  The log recorder to log timestamped messages to.
+ * @param target  The log recorder to log timestamped messages with.
  *
  * @returns New log recorder.
  */
@@ -49,7 +49,7 @@ export function timestampZLogRecorder(target: ZLogRecorder): ZLogRecorder;
  * overridden if present.
  *
  * @param config  Timestamp log recorder configuration.
- * @param target  The log recorder to log timestamped messages to.
+ * @param target  The log recorder to log timestamped messages with.
  *
  * @returns New log recorder.
  */
