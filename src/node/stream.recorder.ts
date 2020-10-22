@@ -3,6 +3,8 @@
  * @module @run-z/log-z/node
  */
 import type { Writable } from 'stream';
+import type { ZLogFormat, ZLogFormatter } from '../formats';
+import { zlogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
@@ -26,12 +28,23 @@ export interface StreamZLogConfig {
    */
   readonly errorLevel?: ZLogLevel;
 
+  /**
+   * Message format or formatter to use for message recording.
+   *
+   * Ignored for streams in [object mode].
+   *
+   * [object mode]: https://nodejs.org/dist/latest/docs/api/stream.html#stream_object_mode
+   *
+   * @default {@link defaultZLogFormat Default log format}.
+   */
+  readonly format?: ZLogFormat | ZLogFormatter;
+
 }
 
 /**
  * Creates log recorder that writes a log to output stream.
  *
- * Logs messages as is when the stream is in [object mode]. Logs only {@link ZLogMessage.text message text} otherwise.
+ * Logs messages as is when the stream is in [object mode], or {@link StreamZLogConfig.format formats them} otherwise.
  *
  * Can log {@link StreamZLogConfig.errorLevel errors} to {@link StreamZLogConfig.errors separate stream}.
  *
@@ -47,8 +60,8 @@ export interface StreamZLogConfig {
 export function streamZLogRecorder(output: Writable, config: StreamZLogConfig = {}): ZLogRecorder {
 
   const { errors = output, errorLevel = ZLogLevel.Error } = config;
-  const recordMessage = logRecorderFor(output);
-  const recordError = errors === output ? recordMessage : logRecorderFor(errors);
+  const recordMessage = logRecorderFor(output, config);
+  const recordError = errors === output ? recordMessage : logRecorderFor(errors, config);
 
   let whenLogged = Promise.resolve<boolean>(true);
   let record = (message: ZLogMessage): Promise<boolean> => (message.level < errorLevel
@@ -96,10 +109,17 @@ function doNotLogZ(_message: ZLogMessage): Promise<false> {
 /**
  * @internal
  */
-function logRecorderFor(out: Writable): (message: ZLogMessage) => Promise<boolean> {
+function logRecorderFor(
+    out: Writable,
+    { format }: StreamZLogConfig,
+): (message: ZLogMessage) => Promise<boolean> {
   if (out.writableEnded) {
     return doNotLogZ;
   }
+
+  const formatter = typeof format === 'function'
+      ? format
+      : zlogFormatter(format);
 
   let record: (message: ZLogMessage) => Promise<boolean>;
 
@@ -110,7 +130,7 @@ function logRecorderFor(out: Writable): (message: ZLogMessage) => Promise<boolea
     };
   } else {
     record = message => {
-      out.write(message.text);
+      out.write(formatter(message));
       return Promise.resolve(true);
     };
   }
