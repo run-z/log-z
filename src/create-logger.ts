@@ -13,18 +13,18 @@ import { consoleZLogRecorder, levelZLogRecorder, RecordingZLogger } from './reco
 export interface ZLoggerConfig {
 
   /**
-   * The log recorder to record messages with.
-   *
-   * @default {@link consoleZLogRecorder console log recorder}.
-   */
-  readonly recorder?: ZLogRecorder;
-
-  /**
    * The minimum log level of logged messages. The messages with lower levels will be discarded.
    *
    * @default {@link ZLogLevel.Info Info}.
    */
   readonly level?: ZLogLevel;
+
+  /**
+   * The log recorder to record messages with.
+   *
+   * @default {@link consoleZLogRecorder console log recorder}.
+   */
+  readonly recorder?: ZLogRecorder;
 
 }
 

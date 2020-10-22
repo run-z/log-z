@@ -36,7 +36,7 @@ describe('consoleZLogRecorder', () => {
   let logger: ZLogger;
 
   beforeEach(() => {
-    logger = createZLogger({ recorder: consoleZLogRecorder(testConsole), level: 0 });
+    logger = createZLogger({ level: 0, recorder: consoleZLogRecorder(testConsole) });
   });
 
   it('logs to global console by default', () => {
