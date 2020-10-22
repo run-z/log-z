@@ -62,24 +62,4 @@ describe('timestampZLogRecorder', () => {
         { timestamp: 12, ts: 13 },
     ));
   });
-
-  describe('whenLogged', () => {
-    it('calls target', async () => {
-
-      const whenLogged = logger.whenLogged();
-
-      expect(await whenLogged).toBe(true);
-      expect(target.whenLogged).toHaveLastReturnedWith(whenLogged);
-    });
-  });
-
-  describe('end', () => {
-    it('calls target', async () => {
-
-      const whenStopped = logger.end();
-
-      expect(await whenStopped).toBeUndefined();
-      expect(target.end).toHaveLastReturnedWith(whenStopped);
-    });
-  });
 });

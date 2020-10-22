@@ -4,6 +4,7 @@
  */
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
+import { updateZLogRecorder } from './update.recorder';
 
 /**
  * {@link timestampZLogRecorder Timestamp log recorder} configuration.
@@ -73,24 +74,16 @@ export function timestampZLogRecorder(
 
   const { key = 'timestamp', timestamp = defaultZLogTimestamp } = config;
 
-  return {
-
-    record(message) {
-
-      const ts = timestamp(message);
-
-      log.record({ ...message, details: { [key]: ts, ...message.details } });
-    },
-
-    whenLogged() {
-      return log.whenLogged();
-    },
-
-    end() {
-      return log.end();
-    },
-
-  };
+  return updateZLogRecorder(
+      message => ({
+        ...message,
+        details: {
+          [key]: timestamp(message),
+          ...message.details,
+        },
+      }),
+      log,
+  );
 }
 
 /**
