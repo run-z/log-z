@@ -7,7 +7,7 @@ Log That
 [![GitHub Project][github-image]][github-url]
 [![API Documentation][api-docs-image]][API documentation]
 
-Minimalistic platform-agnostic logging library.
+Logging library for browser and Node.js applications.
 
 
 [npm-image]: https://img.shields.io/npm/v/@run-z/log-z.svg?logo=npm

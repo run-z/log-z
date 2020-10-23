@@ -1,7 +1,7 @@
 {
   "name": "@run-z/log-z",
   "version": "1.0.0-dev.0",
-  "description": "Log that. Minimalistic platform-agnostic logging library",
+  "description": "Log that in browser or Node.js",
   "keywords": [
     "log",
     "logger",
