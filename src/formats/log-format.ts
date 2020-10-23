@@ -66,7 +66,7 @@ export interface ZLogFormat {
    *
    * @param message  Source log message.
    *
-   * @returns Either formatted error string, or noting.
+   * @returns Either formatted error string, or nothing.
    */
   error?(message: ZLogMessage): string | null | undefined;
 

@@ -9,15 +9,17 @@ import { zlogFormat } from './log-format';
 /**
  * Log message formatter signature.
  *
- * Builds a string representation of the message.
+ * Formats the message and represents it in another form.
+ *
+ * @typeParam TForm  A type of formatted message form.
  */
-export type ZLogFormatter =
+export type ZLogFormatter<TForm = string> =
 /**
  * @param message  Log message to format.
  *
- * @returns String representation of the message.
+ * @returns Formatted message form.
  */
-    (this: void, message: ZLogMessage) => string;
+    (this: void, message: ZLogMessage) => TForm;
 
 /**
  * Builds a log message formatter for the given format.
