@@ -1,16 +1,16 @@
 import { Writable, WritableOptions } from 'stream';
 import { zlogFormatter } from '../formats';
+import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
-import { RecordingZLogger } from '../recorders';
-import { streamZLogRecorder } from './stream.recorder';
+import { logZToStream } from './to-stream.log';
 
-describe('streamZLogRecorder', () => {
+describe('logZToStream', () => {
 
   it('formats message', async () => {
 
     const out = new TestWritable();
-    const logger = new RecordingZLogger(streamZLogRecorder(out));
+    const logger = logZBy(logZToStream(out));
 
     logger.info('TEST');
     logger.error('ERROR');
@@ -22,7 +22,7 @@ describe('streamZLogRecorder', () => {
   it('formats message with custom format', async () => {
 
     const out = new TestWritable();
-    const logger = new RecordingZLogger(streamZLogRecorder(
+    const logger = logZBy(logZToStream(
         out,
         {
           format: { text: ({ text }) => `${text}.` },
@@ -39,7 +39,7 @@ describe('streamZLogRecorder', () => {
   it('formats message by custom formatter', async () => {
 
     const out = new TestWritable();
-    const logger = new RecordingZLogger(streamZLogRecorder(
+    const logger = logZBy(logZToStream(
         out,
         {
           format: zlogFormatter({ text: ({ text }) => `${text}.` }),
@@ -56,7 +56,7 @@ describe('streamZLogRecorder', () => {
   it('writes message as is in object mode', async () => {
 
     const out = new TestWritable({ objectMode: true });
-    const logger = new RecordingZLogger(streamZLogRecorder(out));
+    const logger = logZBy(logZToStream(out));
 
     logger.info('TEST');
     logger.error('ERROR');
@@ -72,7 +72,7 @@ describe('streamZLogRecorder', () => {
 
     const out = new TestWritable({ objectMode: true });
     const errors = new TestWritable({ objectMode: true });
-    const logger = new RecordingZLogger(streamZLogRecorder(out, { errors }));
+    const logger = logZBy(logZToStream(out, { errors }));
 
     logger.info('TEST');
     logger.error('ERROR');
@@ -86,10 +86,28 @@ describe('streamZLogRecorder', () => {
       zlogMessage(ZLogLevel.Error, 'ERROR'),
     ]);
   });
+  it('writes errors to dedicated stream in specific format', async () => {
+
+    const out = new TestWritable({ objectMode: true });
+    const errors = new TestWritable({ objectMode: false });
+    const logger = logZBy(logZToStream(out, { errors: { to: errors, format: message => message.text + '!' } }));
+
+    logger.info('TEST');
+    logger.error('ERROR');
+
+    expect(await logger.whenLogged()).toBe(true);
+
+    expect(out.chunks).toEqual([
+      zlogMessage(ZLogLevel.Info, 'TEST'),
+    ]);
+    expect(errors.chunks).toEqual([
+        'ERROR!',
+    ]);
+  });
   it('stops logging when stream finished', async () => {
 
     const out = new TestWritable({ objectMode: true });
-    const logger = new RecordingZLogger(streamZLogRecorder(out));
+    const logger = logZBy(logZToStream(out));
 
     await new Promise(resolve => {
       out.end(resolve);
@@ -105,7 +123,7 @@ describe('streamZLogRecorder', () => {
 
     out.end();
 
-    const logger = new RecordingZLogger(streamZLogRecorder(out));
+    const logger = logZBy(logZToStream(out));
 
     logger.info('TEST');
     expect(await logger.whenLogged()).toBe(false);
@@ -116,7 +134,7 @@ describe('streamZLogRecorder', () => {
     it('stops logging', async () => {
 
       const out = new TestWritable({ objectMode: true });
-      const logger = new RecordingZLogger(streamZLogRecorder(out));
+      const logger = logZBy(logZToStream(out));
 
       await logger.end();
 
@@ -130,7 +148,7 @@ describe('streamZLogRecorder', () => {
 
       const out = new TestWritable({ objectMode: true });
       const errors = new TestWritable({ objectMode: false });
-      const logger = new RecordingZLogger(streamZLogRecorder(out, { errors }));
+      const logger = logZBy(logZToStream(out, { errors }));
 
       await logger.end();
 
@@ -152,7 +170,7 @@ describe('streamZLogRecorder', () => {
     it('does nothing after the second time', async () => {
 
       const out = new TestWritable({ objectMode: true });
-      const logger = new RecordingZLogger(streamZLogRecorder(out));
+      const logger = logZBy(logZToStream(out));
       const whenEnded = logger.end();
 
       expect(logger.end()).toBe(whenEnded);

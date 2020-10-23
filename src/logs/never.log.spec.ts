@@ -1,12 +1,12 @@
 import type { ZLogger } from '../logger';
-import { silentZLogger } from './silent.logger';
+import { neverLogZ } from './never.log';
 
-describe('silentZLogger', () => {
+describe('neverLogZ', () => {
 
   let logger: ZLogger;
 
   beforeEach(() => {
-    logger = silentZLogger;
+    logger = neverLogZ;
   });
 
   it('discards messages', async () => {

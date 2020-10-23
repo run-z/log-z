@@ -1,11 +1,11 @@
-import { createZLogger } from '../create-logger';
+import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
-import { timestampZLogRecorder } from './timestamp.recorder';
+import { logZTimestamp } from './timestamp.log';
 
-describe('timestampZLogRecorder', () => {
+describe('logZTimestamp', () => {
 
   let target: jest.Mocked<ZLogRecorder>;
 
@@ -20,10 +20,10 @@ describe('timestampZLogRecorder', () => {
   let logger: ZLogger;
 
   beforeEach(() => {
-    logger = createZLogger({ level: 0, recorder: timestampZLogRecorder(target) });
+    logger = logZ({ atLeast: 0, by: logZTimestamp(target) });
   });
 
-  it('records timestamp to messages', () => {
+  it('adds timestamp to messages', () => {
     logger.log(ZLogLevel.Error, 'Message');
     expect(target.record).toHaveBeenCalledWith(zlogMessage(
         ZLogLevel.Error,
@@ -40,7 +40,7 @@ describe('timestampZLogRecorder', () => {
     ));
   });
   it('records timestamp to custom details property', () => {
-    logger = createZLogger({ level: 0, recorder: timestampZLogRecorder({ key: 'ts' }, target) });
+    logger = logZ({ atLeast: 0, by: logZTimestamp({ to: 'ts' }, target) });
 
     logger.log(ZLogLevel.Error, 'Message');
     expect(target.record).toHaveBeenCalledWith(zlogMessage(
@@ -50,9 +50,15 @@ describe('timestampZLogRecorder', () => {
     ));
   });
   it('generates timestamp by custom method', () => {
-    logger = createZLogger({
-      level: 0,
-      recorder: timestampZLogRecorder({ timestamp: ({ details: { timestamp } }) => +timestamp + 1, key: 'ts' }, target),
+    logger = logZ({
+      atLeast: 0,
+      by: logZTimestamp(
+          {
+            to: 'ts',
+            get: ({ details: { timestamp } }) => +timestamp + 1,
+          },
+          target,
+      ),
     });
 
     logger.log(ZLogLevel.Error, 'Message', { timestamp: 12 });

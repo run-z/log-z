@@ -8,7 +8,7 @@ import { ZLogger } from '../logger';
 /**
  * @internal
  */
-class SilentZLogger extends ZLogger {
+class DiscardingZLogger extends ZLogger {
 
   record(_message: ZLogMessage): void {
     /* Never log */
@@ -29,4 +29,4 @@ class SilentZLogger extends ZLogger {
  *
  * All recorded messages are discarded.
  */
-export const silentZLogger: ZLogger = (/*#__PURE__*/ new SilentZLogger());
+export const neverLogZ: ZLogger = (/*#__PURE__*/ new DiscardingZLogger());

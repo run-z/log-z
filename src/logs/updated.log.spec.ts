@@ -1,12 +1,12 @@
-import { createZLogger } from '../create-logger';
+import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import { zlogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
-import { updateZLogRecorder } from './update.recorder';
+import { logZUpdated } from './updated.log';
 
-describe('updateZLogRecorder', () => {
+describe('logZUpdated', () => {
 
   let target: jest.Mocked<ZLogRecorder>;
 
@@ -23,7 +23,7 @@ describe('updateZLogRecorder', () => {
 
   beforeEach(() => {
     update = jest.fn(message => message);
-    logger = createZLogger({ level: 0, recorder: updateZLogRecorder(update, target) });
+    logger = logZ({ atLeast: 0, by: logZUpdated(update, target) });
   });
 
   it('records updated message', () => {

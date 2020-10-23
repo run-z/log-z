@@ -1,1 +1,1 @@
-export * from './stream.recorder';
+export * from './to-stream.log';

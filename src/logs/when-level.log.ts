@@ -9,19 +9,34 @@ import type { ZLogRecorder } from '../log-recorder';
 /**
  * Creates a log recorder of messages with at least the required level. Messages with lower levels are discarded.
  *
- * @param recorder  The recorder to log messages with.
- * @param level  Required log level. {@link ZLogLevel.Info Info} by default.
+ * @param atLeast  Required log level. {@link ZLogLevel.Info Info} by default.
+ * @param by  The recorder to log messages by.
  *
  * @returns New log recorder.
  */
-export function levelZLogRecorder(recorder: ZLogRecorder, level = ZLogLevel.Info): ZLogRecorder {
+export function logZWhenLevel(atLeast: ZLogLevel, by: ZLogRecorder): ZLogRecorder;
+
+export function logZWhenLevel(by: ZLogRecorder): ZLogRecorder;
+
+export function logZWhenLevel(atLeastOrBy: ZLogLevel | ZLogRecorder, by?: ZLogRecorder): ZLogRecorder {
+
+  let recorder: ZLogRecorder;
+  let atLeast: ZLogLevel;
+
+  if (by) {
+    recorder = by;
+    atLeast = atLeastOrBy as ZLogLevel;
+  } else {
+    recorder = atLeastOrBy as ZLogRecorder;
+    atLeast = ZLogLevel.Info;
+  }
 
   let whenLogged: Promise<boolean> | undefined;
 
   return {
 
     record(message: ZLogMessage): void {
-      if (message.level < level) {
+      if (message.level < atLeast) {
         if (whenLogged) {
           whenLogged = whenLogged.then(() => false);
         } else {

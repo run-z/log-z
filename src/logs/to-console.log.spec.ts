@@ -1,9 +1,9 @@
-import { createZLogger } from '../create-logger';
+import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
 import type { ZLogger } from '../logger';
-import { consoleZLogRecorder } from './console.recorder';
+import { logZToConsole } from './to-console.log';
 
-describe('consoleZLogRecorder', () => {
+describe('logZToConsole', () => {
 
   let testConsole: Console;
   let errorSpy: jest.SpyInstance;
@@ -36,12 +36,12 @@ describe('consoleZLogRecorder', () => {
   let logger: ZLogger;
 
   beforeEach(() => {
-    logger = createZLogger({ level: 0, recorder: consoleZLogRecorder(testConsole) });
+    logger = logZ({ atLeast: 0, by: logZToConsole(testConsole) });
   });
 
   it('logs to global console by default', () => {
     spyOnConsole(console);
-    logger = createZLogger();
+    logger = logZ();
     logger.error('Test');
     expect(errorSpy).toHaveBeenCalledWith('Test');
   });

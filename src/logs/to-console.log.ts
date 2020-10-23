@@ -7,13 +7,13 @@ import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 
 /**
- * Creates console log recorder.
+ * Creates a log recorder that logs to global console.
  *
  * @param console  Console instance to log messages to. Global `console` by default.
  *
  * @returns New console log recorder.
  */
-export function consoleZLogRecorder(console = globalConsole()): ZLogRecorder {
+export function logZToConsole(console = globalConsole()): ZLogRecorder {
   return {
 
     record(message: ZLogMessage): void {
