@@ -167,7 +167,11 @@ const defaultTextZLogTokens: Exclude<TextZLogFormat['tokens'], undefined> = [
 export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
   return message => {
 
+    const allTokens = new Map<number, string[]>();
+    let currentOrder = 0;
     let currentTokens: string[] = [];
+
+    allTokens.set(currentOrder, currentTokens);
 
     class TextZLogLine$ extends TextZLogLine {
 
@@ -188,24 +192,7 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
     }
 
     const formatted = new TextZLogLine$();
-
     const { tokens = defaultTextZLogTokens } = format;
-    const allTokens = new Map<number, string[]>();
-    let currentOrder = 0;
-
-    const applyCurrentTokens = (): void => {
-
-      // Change the order of the following tokens.
-      const formerTokens = allTokens.get(currentOrder);
-
-      if (formerTokens) {
-        formerTokens.push(...currentTokens);
-        currentTokens.length = 0;
-      } else {
-        allTokens.set(currentOrder, currentTokens);
-        currentTokens = [];
-      }
-    };
 
     for (const token of tokens) {
       if (typeof token === 'function') {
@@ -215,12 +202,19 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
         // Add separator.
         currentTokens.push(token);
       } else {
-        applyCurrentTokens();
+        // Change the order of the following tokens.
         currentOrder = token;
+
+        const orderTokens = allTokens.get(currentOrder);
+
+        if (orderTokens) {
+          currentTokens = orderTokens;
+        } else {
+          currentTokens = [];
+          allTokens.set(currentOrder, currentTokens);
+        }
       }
     }
-
-    applyCurrentTokens();
 
     return zlogTokensToText(allTokens);
   };
