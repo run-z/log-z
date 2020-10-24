@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
-import { zlofDecorator, zlofError, zlofExtra, zlofLevel, zlofMessage } from '../fields';
+import { zlofDecorator, zlofDetails, zlofError, zlofExtra, zlofLevel, zlofMessage } from '../fields';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
@@ -43,6 +43,14 @@ const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
         suffix: ')',
       },
       (/*#__PURE__*/ zlofExtra()),
+  )),
+  ' ',
+  (/*#__PURE__*/ zlofDecorator(
+      {
+        prefix: '{ ',
+        suffix: ' }',
+      },
+      (/*#__PURE__*/ zlofDetails()),
   )),
   ' ',
   (/*#__PURE__*/ zlofError()),

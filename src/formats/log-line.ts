@@ -116,7 +116,7 @@ export abstract class ZLogLine {
    *
    * For array, writes its elements by {@link writeElements}, and encloses them into square brackets.
    *
-   * Otherwise, writes own object properties by {@link writeKeyAndValue}, and encloses them into curly brackets.
+   * For anything else, writes object properties by {@link writeProperties}, and encloses them into curly brackets.
    *
    * @param value  Object value to write.
    */
@@ -127,19 +127,35 @@ export abstract class ZLogLine {
       this.write(']');
     } else {
 
-      let written = false;
+      const formatted = this.format(line => line.writeProperties(value));
 
-      for (const key of Reflect.ownKeys(value)) {
+      this.write(formatted ? `{ ${formatted} }` : '{}');
+    }
+  }
+
+  /**
+   * Writes object properties.
+   *
+   * Writes own object properties by {@link writeKeyAndValue}.
+   *
+   * @param value  Object value to write.
+   */
+  writeProperties(value: object): void {
+
+    let written = false;
+
+    for (const key of Reflect.ownKeys(value)) {
+
+      const formatted = this.format(line => line.writeKeyAndValue(key as string | symbol, (value as any)[key]));
+
+      if (formatted != null) {
         if (written) {
-          this.write(', ');
+          this.write('; ');
         } else {
           written = true;
-          this.write('{ ');
         }
-        this.writeKeyAndValue(key as string | symbol, (value as any)[key]);
+        this.write(formatted);
       }
-
-      this.write(written ? ' }' : '{}');
     }
   }
 

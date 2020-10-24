@@ -1,4 +1,4 @@
-import { textZLogFormatter, ZLogFormatter, zlogFormatter } from '../formats';
+import { textZLogFormatter, ZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
 
@@ -29,19 +29,5 @@ describe('zlofExtra', () => {
   it('formats empty array parameter', () => {
     expect(format(zlogMessage(ZLogLevel.Error, 'Message', [[]])))
         .toBe('[ERROR] Message ([])');
-  });
-  it('does not format parameter without representation', () => {
-
-    format = zlogFormatter({ value: v => v === 'skip' ? null : v });
-
-    expect(format(zlogMessage(ZLogLevel.Error, ['skip', 'do-not-skip'])))
-        .toBe(`[ERROR] (do-not-skip)`);
-  });
-  it('does not format parameters without representations', () => {
-
-    format = zlogFormatter({ value: () => null });
-
-    expect(format(zlogMessage(ZLogLevel.Error, ['skip', 'skip-too'])))
-        .toBe(`[ERROR]`);
   });
 });
