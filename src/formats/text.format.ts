@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
-import { zlofError, zlofLevel, zlofMessage } from '../fields';
+import { zlofDecorator, zlofError, zlofExtra, zlofLevel, zlofMessage } from '../fields';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
@@ -36,6 +36,14 @@ const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
   (/*#__PURE__*/ zlofLevel()),
   ' ',
   (/*#__PURE__*/ zlofMessage()),
+  ' ',
+  (/*#__PURE__*/ zlofDecorator(
+      {
+        prefix: '(',
+        suffix: ')',
+      },
+      (/*#__PURE__*/ zlofExtra()),
+  )),
   ' ',
   (/*#__PURE__*/ zlofError()),
 ];
@@ -75,8 +83,8 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
         }
       }
 
-      format(field: ZLogField, message: ZLogMessage = this.message): string | undefined {
-        return textZLogFormatter({ fields: [field] })(message);
+      format(field: ZLogField<this>, message: ZLogMessage = this.message): string | undefined {
+        return textZLogFormatter({ fields: [field as ZLogField] })(message);
       }
 
     }
@@ -155,5 +163,13 @@ function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | und
     return delimiter;
   }
 
-  return (prefix || '') + (text || '') + (delimiter || ''); // Prefix and suffix delimiters are always added
+  if (text == null) {
+    return prefix == null
+        ? delimiter
+        : (delimiter == null
+            ? prefix
+            : prefix + delimiter);
+  }
+
+  return (prefix || '') + text + (delimiter || ''); // Prefix and suffix delimiters are always added
 }

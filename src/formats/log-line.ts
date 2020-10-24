@@ -56,7 +56,7 @@ export abstract class ZLogLine {
    *
    * @returns Either a string written to log line, or `undefined` if nothing is written.
    */
-  abstract format(field: ZLogField, message?: ZLogMessage): string | undefined;
+  abstract format(field: ZLogField<this>, message?: ZLogMessage): string | undefined;
 
   /**
    * Writes raw string.
