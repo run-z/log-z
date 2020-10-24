@@ -15,7 +15,7 @@ describe('textZLogFormatter', () => {
     it('delimits fields multiple times', () => {
       expect(format({ fields: [line => line.write('1'), '-', '|', '-', line => line.write('2')] })).toBe('1-|-2');
     });
-    it('does not delimit absent fields', () => {
+    it('does not delimit not written fields', () => {
       expect(format({
         fields: [
           line => line.write('1'),
@@ -41,13 +41,13 @@ describe('textZLogFormatter', () => {
     it('adds prefix', () => {
       expect(format({ fields: ['prefix-', line => line.write('field')] })).toBe('prefix-field');
     });
-    it('adds prefix before absent field', () => {
+    it('adds prefix before not written field', () => {
       expect(format({ fields: ['prefix-', () => void 0, line => line.write('field')] })).toBe('prefix-field');
     });
     it('adds prefix before empty field', () => {
       expect(format({ fields: ['prefix-', line => line.write(''), line => line.write('field')] })).toBe('prefix-field');
     });
-    it('adds prefix if all fields are absent', () => {
+    it('adds prefix if no fields written', () => {
       expect(format({ fields: ['prefix-', () => void 0] })).toBe('prefix-');
     });
     it('adds prefix if all fields are empty', () => {
@@ -57,17 +57,27 @@ describe('textZLogFormatter', () => {
     it('adds suffix', () => {
       expect(format({ fields: [line => line.write('field'), '-suffix'] })).toBe('field-suffix');
     });
-    it('adds suffix after absent field', () => {
+    it('adds suffix after not written field', () => {
       expect(format({ fields: [line => line.write('field'), () => void 0, '-suffix'] })).toBe('field-suffix');
     });
     it('adds suffix after empty field', () => {
       expect(format({ fields: [line => line.write('field'), line => line.write(''), '-suffix'] })).toBe('field-suffix');
     });
-    it('adds suffix if all fields are absent', () => {
+    it('adds suffix if no fields written', () => {
       expect(format({ fields: [() => void 0, '-suffix'] })).toBe('-suffix');
     });
     it('adds suffix if all fields are empty', () => {
       expect(format({ fields: [line => line.write(''), '-suffix'] })).toBe('-suffix');
+    });
+
+    it('adds prefix and suffix no other fields', () => {
+      expect(format({ fields: ['prefix-', '-suffix'] })).toBe('prefix--suffix');
+    });
+    it('adds prefix and suffix if no fields written', () => {
+      expect(format({ fields: ['prefix-', () => void 0, '-suffix'] })).toBe('prefix--suffix');
+    });
+    it('adds prefix and suffix if all fields are empty', () => {
+      expect(format({ fields: ['prefix-', line => line.write(''), '-suffix'] })).toBe('prefix--suffix');
     });
   });
 
