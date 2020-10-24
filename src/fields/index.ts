@@ -4,3 +4,4 @@ export * from './error.field';
 export * from './extra.field';
 export * from './level.field';
 export * from './message.field';
+export * from './timestamp.field';

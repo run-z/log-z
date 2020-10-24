@@ -5,7 +5,7 @@
 import type { ZLogField, ZLogLine } from '../formats';
 
 /**
- * Creates a log message error field.
+ * Creates a log message error field, if present.
  *
  * @returns Log message error field.
  */

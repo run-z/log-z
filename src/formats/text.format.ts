@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
-import { zlofDecorator, zlofDetails, zlofError, zlofExtra, zlofLevel, zlofMessage } from '../fields';
+import { zlofDecorator, zlofDetails, zlofError, zlofExtra, zlofLevel, zlofMessage, zlofTimestamp } from '../fields';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
@@ -33,6 +33,8 @@ export interface TextZLogFormat {
  * @internal
  */
 const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
+  (/*#__PURE__*/ zlofTimestamp()),
+  ' ',
   (/*#__PURE__*/ zlofLevel()),
   ' ',
   (/*#__PURE__*/ zlofMessage()),
@@ -85,10 +87,8 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
         message = newMessage;
       }
 
-      write(value: string | undefined | null): void {
-        if (value != null) {
-          currentOutput.push([value]);
-        }
+      write(value: string): void {
+        currentOutput.push([value]);
       }
 
       format(field: ZLogField<this>, message: ZLogMessage = this.message): string | undefined {
@@ -140,6 +140,8 @@ function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | und
 
   let prefix: string | undefined;
   let hasFields = false;
+  let prevHasValue = true;
+  let fieldHasValue = false;
   let delimiter: string | undefined;
   let text: string | undefined;
 
@@ -158,8 +160,11 @@ function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | und
         if (value != null) {
           text ||= '';
           if (value) {
-            text += delimiter ? delimiter + value : value;
+            fieldHasValue = true;
+            text += prevHasValue && delimiter ? delimiter + value : value;
           }
+        } else {
+          prevHasValue = fieldHasValue;
         }
 
         delimiter = undefined;
