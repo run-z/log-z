@@ -19,7 +19,7 @@ export interface TextZLogFormat {
    * This is an array of:
    *
    * - {@link ZLogField log fields},
-   * - string delimiters between fields,
+   * - string delimiters between non-empty fields (prefixes and suffixes are always added),
    * - numeric values indicating the following fields order.
    *
    * Fields are applied in order of their presence. However, the written data can be reordered. For that, a numeric
@@ -33,9 +33,9 @@ export interface TextZLogFormat {
  * @internal
  */
 const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
-    zlofLevel(),
-    ' ',
-    zlofText(),
+  (/*#__PURE__*/ zlofLevel()),
+  ' ',
+  (/*#__PURE__*/ zlofText()),
 ];
 
 /**
@@ -48,11 +48,11 @@ const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
 export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
   return message => {
 
-    const fullOutput = new Map<number, string[]>();
+    const outputByOrder = new Map<number, Written[]>();
     let currentOrder = 0;
-    let currentOutput: string[] = [];
+    let currentOutput: Written[] = [];
 
-    fullOutput.set(currentOrder, currentOutput);
+    outputByOrder.set(currentOrder, currentOutput);
 
     class ZLogLine$ extends ZLogLine {
 
@@ -66,7 +66,7 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
 
       write(value: string | undefined | null): void {
         if (value != null) {
-          currentOutput.push(value);
+          currentOutput.push([value]);
         }
       }
 
@@ -77,36 +77,63 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
 
     for (const field of fields) {
       if (typeof field === 'function') {
-        // Apply field.
+        // Render field.
         field(formatted);
+        currentOutput.push([]);
       } else if (typeof field === 'string') {
-        // Add separator.
-        currentOutput.push(field);
+        // Add delimiter.
+        currentOutput.push([field, 1]);
       } else {
-        // Change the order of the following tokens.
+        // Change the order of the following fields.
         currentOrder = field;
 
-        const orderTokens = fullOutput.get(currentOrder);
+        const orderTokens = outputByOrder.get(currentOrder);
 
         if (orderTokens) {
           currentOutput = orderTokens;
         } else {
           currentOutput = [];
-          fullOutput.set(currentOrder, currentOutput);
+          outputByOrder.set(currentOrder, currentOutput);
         }
       }
     }
 
-    return zlogLineOutputToText(fullOutput);
+    return zlogLineOutputText(outputByOrder);
   };
 }
 
 /**
  * @internal
  */
-function zlogLineOutputToText(output: Map<number, string[]>): string {
-  return [...output]
-      .sort(([order1], [order2]) => order1 - order2)
-      .flatMap(([, list]) => list)
-      .join('');
+type Written = readonly [value?: string, isSeparator?: 1];
+
+/**
+ * @internal
+ */
+function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string {
+
+  const allWritten: [number, Written[]][] = [...outputByOrder].sort(([order1], [order2]) => order1 - order2);
+
+  let prefix: string | undefined;
+  let delimiter = '';
+  let text = '';
+
+  allWritten.forEach(([, output]) => {
+    output.forEach(([value, isDelimiter]) => {
+      if (isDelimiter) {
+        delimiter += value;
+      } else if (value) {
+        text += `${delimiter}${value}`;
+        delimiter = '';
+        prefix ||= '';
+      } else {
+        if (prefix == null) {
+          prefix = delimiter;
+        }
+        delimiter = '';
+      }
+    });
+  });
+
+  return (prefix || '') + text + delimiter; // First and last delimiters are always added
 }

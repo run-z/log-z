@@ -21,7 +21,7 @@ export abstract class ZLogLine {
   /**
    * Changes the message to format.
    *
-   * A token may decide to modify the message e.g. to exclude some of its fields from further processing.
+   * A field may decide to modify the message e.g. to exclude some of its properties from further formatting.
    *
    * @param newMessage  New message to format.
    */
