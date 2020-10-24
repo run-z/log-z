@@ -1,5 +1,5 @@
 import { ZLogLevel } from './log-level';
-import { zlogMessage } from './log-message';
+import { zlogDetails, zlogError, zlogExtra, zlogMessage } from './log-message';
 
 describe('zlogMessage', () => {
   it('treats the first textual argument as message text', () => {
@@ -23,6 +23,19 @@ describe('zlogMessage', () => {
       extra: [1, 2, error2],
     });
   });
+  it('treats the first `zlogError()` result as error', () => {
+
+    const error1 = new Error('error1');
+    const error2 = new Error('error2');
+
+    expect(zlogMessage(ZLogLevel.Error, 1, 2, zlogError(error1), zlogError(error2))).toEqual({
+      level: ZLogLevel.Error,
+      text: error1.message,
+      error: error1,
+      details: {},
+      extra: [1, 2, error2],
+    });
+  });
   it('does not override message text with error message', () => {
 
     const error = new Error('error');
@@ -30,7 +43,19 @@ describe('zlogMessage', () => {
     expect(zlogMessage(ZLogLevel.Error, 1, 2, 'text', error)).toEqual({
       level: ZLogLevel.Error,
       text: 'text',
-      error: error,
+      error,
+      details: {},
+      extra: [1, 2],
+    });
+  });
+  it('does not set message text with non-error `zlogError()` result', () => {
+
+    const error = 'error';
+
+    expect(zlogMessage(ZLogLevel.Error, 1, 2, zlogError(error))).toEqual({
+      level: ZLogLevel.Error,
+      text: '',
+      error,
       details: {},
       extra: [1, 2],
     });
@@ -47,8 +72,13 @@ describe('zlogMessage', () => {
       extra: [1, 2],
     });
   });
-  it('treats objects as message details', () => {
-    expect(zlogMessage(ZLogLevel.Debug, { test: 'value' }, { test2: 'value2' }, 'msg')).toEqual({
+  it('treats `zlogDetails()` result as message details', () => {
+    expect(zlogMessage(
+        ZLogLevel.Debug,
+        zlogDetails({ test: 'value' }),
+        zlogDetails({ test2: 'value2' }),
+        'msg',
+    )).toEqual({
       level: ZLogLevel.Debug,
       text: 'msg',
       details: {
@@ -58,8 +88,8 @@ describe('zlogMessage', () => {
       extra: [],
     });
   });
-  it('treats arrays as message extra', () => {
-    expect(zlogMessage(ZLogLevel.Error, ['text', 2])).toEqual({
+  it('treats `zlogExtra()` result as message extra', () => {
+    expect(zlogMessage(ZLogLevel.Error, zlogExtra('text', 2))).toEqual({
       level: ZLogLevel.Error,
       text: '',
       details: {},

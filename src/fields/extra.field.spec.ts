@@ -11,7 +11,7 @@ describe('zlofExtra', () => {
   });
 
   it('formats message extra', () => {
-    expect(format(zlogMessage(ZLogLevel.Error, 'Message', ['more', { to: 'report' }])))
+    expect(format(zlogMessage(ZLogLevel.Error, 'Message', 'more', { to: 'report' })))
         .toBe('[ERROR] Message ("more", { to: "report" })');
   });
   it('formats `null` parameter', () => {
@@ -23,11 +23,11 @@ describe('zlofExtra', () => {
         .toBe('[ERROR] Message (undefined)');
   });
   it('formats array parameter', () => {
-    expect(format(zlogMessage(ZLogLevel.Error, 'Message', [[1, 'or', 2]])))
+    expect(format(zlogMessage(ZLogLevel.Error, 'Message', [1, 'or', 2])))
         .toBe('[ERROR] Message ([1, "or", 2])');
   });
   it('formats empty array parameter', () => {
-    expect(format(zlogMessage(ZLogLevel.Error, 'Message', [[]])))
+    expect(format(zlogMessage(ZLogLevel.Error, 'Message', [])))
         .toBe('[ERROR] Message ([])');
   });
 });

@@ -1,5 +1,6 @@
 import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
+import { zlogDetails } from '../log-message';
 import type { ZLogger } from '../logger';
 import { logZToConsole } from './to-console.log';
 
@@ -68,7 +69,7 @@ describe('logZToConsole', () => {
     const error = new Error('!!!');
     const details = { details: 'many' };
 
-    logger.error(error, details, 'Error', [['extra']]);
+    logger.error(error, zlogDetails(details), 'Error', ['extra']);
     expect(errorSpy).toHaveBeenCalledWith('Error', ['extra'], details, error);
   });
 
@@ -133,7 +134,7 @@ describe('logZToConsole', () => {
       expect(debugSpy).toHaveBeenCalledWith('Error');
     });
     it('logs with `console.trace` with `stackTrace` set', () => {
-      logger.trace('Error', { stackTrace: true });
+      logger.trace('Error', zlogDetails({ stackTrace: true }));
       expect(traceSpy).toHaveBeenCalledWith('Error');
     });
     it('logs with `console.debug` with higher level', () => {
