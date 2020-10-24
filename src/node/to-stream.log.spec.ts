@@ -1,5 +1,6 @@
 import { Writable, WritableOptions } from 'stream';
-import { zlogFormatter } from '../formats';
+import { zlofLevel, zlofMessage } from '../fields';
+import { textZLogFormatter } from '../formats';
 import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
@@ -25,7 +26,7 @@ describe('logZToStream', () => {
     const logger = logZBy(logZToStream(
         out,
         {
-          format: { text: ({ text }) => `${text}.` },
+          format: { fields: [zlofLevel(), ' ', zlofMessage(), '!'] },
         },
     ));
 
@@ -34,7 +35,7 @@ describe('logZToStream', () => {
 
     expect(await logger.whenLogged()).toBe(true);
 
-    expect(out.chunks).toEqual(['[INFO ] TEST.', '[ERROR] ERROR.']);
+    expect(out.chunks).toEqual(['[INFO ] TEST!', '[ERROR] ERROR!']);
   });
   it('formats message by custom formatter', async () => {
 
@@ -42,7 +43,7 @@ describe('logZToStream', () => {
     const logger = logZBy(logZToStream(
         out,
         {
-          format: zlogFormatter({ text: ({ text }) => `${text}.` }),
+          format: textZLogFormatter({ fields: [zlofLevel(), ' ', zlofMessage(), '!'] }),
         },
     ));
 
@@ -51,7 +52,7 @@ describe('logZToStream', () => {
 
     expect(await logger.whenLogged()).toBe(true);
 
-    expect(out.chunks).toEqual(['[INFO ] TEST.', '[ERROR] ERROR.']);
+    expect(out.chunks).toEqual(['[INFO ] TEST!', '[ERROR] ERROR!']);
   });
   it('writes message as is in object mode', async () => {
 
