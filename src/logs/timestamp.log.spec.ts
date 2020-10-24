@@ -1,6 +1,6 @@
 import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
-import { zlogMessage } from '../log-message';
+import { zlogDetails, zlogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
 import { logZTimestamp } from './timestamp.log';
@@ -28,15 +28,15 @@ describe('logZTimestamp', () => {
     expect(target.record).toHaveBeenCalledWith(zlogMessage(
         ZLogLevel.Error,
         'Message',
-        { timestamp: expect.anything() },
+        zlogDetails({ timestamp: expect.anything() }),
     ));
   });
   it('does not override existing timestamp', () => {
-    logger.log(ZLogLevel.Error, 'Message', { timestamp: 'set' });
+    logger.log(ZLogLevel.Error, 'Message', zlogDetails({ timestamp: 'set' }));
     expect(target.record).toHaveBeenCalledWith(zlogMessage(
         ZLogLevel.Error,
         'Message',
-        { timestamp: 'set' },
+        zlogDetails({ timestamp: 'set' }),
     ));
   });
   it('records timestamp to custom details property', () => {
@@ -46,7 +46,7 @@ describe('logZTimestamp', () => {
     expect(target.record).toHaveBeenCalledWith(zlogMessage(
         ZLogLevel.Error,
         'Message',
-        { ts: expect.anything() },
+        zlogDetails({ ts: expect.anything() }),
     ));
   });
   it('generates timestamp by custom method', () => {
@@ -61,11 +61,11 @@ describe('logZTimestamp', () => {
       ),
     });
 
-    logger.log(ZLogLevel.Error, 'Message', { timestamp: 12 });
+    logger.log(ZLogLevel.Error, 'Message', zlogDetails({ timestamp: 12 }));
     expect(target.record).toHaveBeenCalledWith(zlogMessage(
         ZLogLevel.Error,
         'Message',
-        { timestamp: 12, ts: 13 },
+        zlogDetails({ timestamp: 12, ts: 13 }),
     ));
   });
 });

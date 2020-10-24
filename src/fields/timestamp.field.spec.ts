@@ -1,6 +1,6 @@
 import { textZLogFormatter, ZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
-import { zlogMessage } from '../log-message';
+import { zlogDetails, zlogMessage } from '../log-message';
 import { zlofTimestamp } from './timestamp.field';
 
 describe('zlofTimestamp', () => {
@@ -15,19 +15,28 @@ describe('zlofTimestamp', () => {
 
     const date = new Date();
 
-    expect(format(zlogMessage(ZLogLevel.Info, { timestamp: date }))).toBe(`${date.toISOString()} [INFO ]`);
+    expect(format(zlogMessage(
+        ZLogLevel.Info,
+        zlogDetails({ timestamp: date }),
+    ))).toBe(`${date.toISOString()} [INFO ]`);
   });
   it('recognizes `number` timestamp', () => {
 
     const date = new Date();
 
-    expect(format(zlogMessage(ZLogLevel.Info, { timestamp: date.getTime() }))).toBe(`${date.toISOString()} [INFO ]`);
+    expect(format(zlogMessage(
+        ZLogLevel.Info,
+        zlogDetails({ timestamp: date.getTime() }),
+    ))).toBe(`${date.toISOString()} [INFO ]`);
   });
   it('recognizes `string` timestamp', () => {
 
     const date = new Date().toUTCString();
 
-    expect(format(zlogMessage(ZLogLevel.Info, { timestamp: date }))).toBe(`${date} [INFO ]`);
+    expect(format(zlogMessage(
+        ZLogLevel.Info,
+        zlogDetails({ timestamp: date }),
+    ))).toBe(`${date} [INFO ]`);
   });
   it('does not write missing timestamp', () => {
     expect(format(zlogMessage(ZLogLevel.Info))).toBe(`[INFO ]`);
@@ -39,7 +48,10 @@ describe('zlofTimestamp', () => {
 
       const date = new Date();
 
-      expect(format(zlogMessage(ZLogLevel.Info, { timestamp: date }))).toBe(`${date.getTime()}`);
+      expect(format(zlogMessage(
+          ZLogLevel.Info,
+          zlogDetails({ timestamp: date }),
+      ))).toBe(`${date.getTime()}`);
     });
     it('accepts `Intl.DateTimeFormat` function', () => {
 
@@ -49,7 +61,10 @@ describe('zlofTimestamp', () => {
 
       const date = new Date();
 
-      expect(format(zlogMessage(ZLogLevel.Info, { timestamp: date }))).toBe(`${dtFormat.format(date)}`);
+      expect(format(zlogMessage(
+          ZLogLevel.Info,
+          zlogDetails({ timestamp: date }),
+      ))).toBe(`${dtFormat.format(date)}`);
     });
   });
 
@@ -59,7 +74,10 @@ describe('zlofTimestamp', () => {
 
       const date = new Date();
 
-      expect(format(zlogMessage(ZLogLevel.Info, { date }))).toBe(`${date.toISOString()}`);
+      expect(format(zlogMessage(
+          ZLogLevel.Info,
+          zlogDetails({ date }),
+      ))).toBe(`${date.toISOString()}`);
     });
   });
 });

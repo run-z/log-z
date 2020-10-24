@@ -1,7 +1,7 @@
 import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
-import { zlogMessage } from '../log-message';
+import { zlogDetails, zlogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
 import { logZUpdated } from './updated.log';
@@ -30,7 +30,7 @@ describe('logZUpdated', () => {
     update.mockImplementation(message => ({ ...message, details: { ...message.details, update: true } }));
 
     logger.error('Message');
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'Message', { update: true }));
+    expect(target.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ update: true })));
   });
 
   describe('whenLogged', () => {
