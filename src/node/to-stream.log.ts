@@ -3,8 +3,8 @@
  * @module @run-z/log-z/node
  */
 import type { Writable } from 'stream';
-import type { ZLogFormat, ZLogFormatter } from '../formats';
-import { zlogFormatter } from '../formats';
+import type { TextZLogFormat, ZLogFormatter } from '../formats';
+import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
@@ -30,9 +30,9 @@ export interface StreamZLogSpec {
    *
    * [object mode]: https://nodejs.org/dist/latest/docs/api/stream.html#stream_object_mode
    *
-   * @default {@link defaultZLogFormat Default log format}.
+   * @default {@link textZLogFormatter Text log format}.
    */
-  readonly format?: ZLogFormat | ZLogFormatter;
+  readonly format?: TextZLogFormat | ZLogFormatter;
 
 }
 
@@ -66,7 +66,7 @@ export namespace StreamZLogSpec {
      *
      * @default The same as {@link StreamZLogSpec.format output log format}.
      */
-    readonly format?: ZLogFormat | ZLogFormatter;
+    readonly format?: TextZLogFormat | ZLogFormatter;
 
   }
 
@@ -175,7 +175,7 @@ function logRecorderFor(
 
   const formatter = typeof format === 'function'
       ? format
-      : zlogFormatter(format);
+      : textZLogFormatter(format);
 
   let record: (message: ZLogMessage) => Promise<boolean>;
 
