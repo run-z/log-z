@@ -3,6 +3,7 @@
  * @module @run-z/log-z
  */
 import type { ZLogMessage } from '../log-message';
+import type { ZLogField } from './log-field';
 
 /**
  * Log line.
@@ -48,22 +49,21 @@ export abstract class ZLogLine {
   }
 
   /**
+   * Formats a log message by the given field.
+   *
+   * @param field  The field to format the message by.
+   * @param message  The message to format. {@link message Current message} by default.
+   *
+   * @returns Either a string written to log line, or `undefined` if nothing is written.
+   */
+  abstract format(field: ZLogField, message?: ZLogMessage): string | undefined;
+
+  /**
    * Writes raw string.
    *
    * @param value  Raw string to write.
    */
   abstract write(value: string): void;
-
-  /**
-   * Writes formatted string.
-   *
-   * Encloses the string in double quotes.
-   *
-   * @param value  A string to write.
-   */
-  writeString(value: string): void {
-    this.write(JSON.stringify(value));
-  }
 
   /**
    * Writes arbitrary value.
@@ -98,6 +98,17 @@ export abstract class ZLogLine {
       this.writeValue(error);
       this.write(']');
     }
+  }
+
+  /**
+   * Writes formatted string.
+   *
+   * Encloses the string in double quotes.
+   *
+   * @param value  A string to write.
+   */
+  writeString(value: string): void {
+    this.write(JSON.stringify(value));
   }
 
   /**

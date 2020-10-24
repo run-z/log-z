@@ -71,7 +71,11 @@ describe('textZLogFormatter', () => {
     });
   });
 
-  function format(spec: TextZLogFormat | undefined, level = ZLogLevel.Error, ...args: any[]): string {
+  function format(
+      spec: TextZLogFormat | undefined,
+      level = ZLogLevel.Error,
+      ...args: any[]
+  ): string | undefined {
     return textZLogFormatter(spec)(zlogMessage(level, ...args));
   }
 });

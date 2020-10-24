@@ -17,9 +17,9 @@ export type ZLogFormatter<TForm = string> =
 /**
  * @param message  Log message to format.
  *
- * @returns Formatted message form.
+ * @returns Formatted message form, or `undefined` if nothing formatted.
  */
-    (this: void, message: ZLogMessage) => TForm;
+    (this: void, message: ZLogMessage) => TForm | undefined;
 
 /**
  * Builds a log message formatter for the given format.

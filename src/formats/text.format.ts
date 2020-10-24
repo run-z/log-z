@@ -45,7 +45,10 @@ const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
  *
  * @returns A log formatter constructing a textual form of log messages.
  */
-export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
+export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter<string | undefined> {
+
+  const { fields = defaultTextZLogFields } = format;
+
   return message => {
 
     const outputByOrder = new Map<number, Written[]>();
@@ -70,10 +73,13 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
         }
       }
 
+      format(field: ZLogField, message: ZLogMessage = this.message): string | undefined {
+        return textZLogFormatter({ fields: [field] })(message);
+      }
+
     }
 
     const formatted = new ZLogLine$();
-    const { fields = defaultTextZLogFields } = format;
 
     for (const field of fields) {
       if (typeof field === 'function') {
@@ -110,30 +116,42 @@ type Written = readonly [value?: string, isSeparator?: 1];
 /**
  * @internal
  */
-function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string {
+function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | undefined {
 
   const allWritten: [number, Written[]][] = [...outputByOrder].sort(([order1], [order2]) => order1 - order2);
 
   let prefix: string | undefined;
-  let delimiter = '';
-  let text = '';
+  let hasFields = false;
+  let delimiter: string | undefined;
+  let text: string | undefined;
 
   allWritten.forEach(([, output]) => {
     output.forEach(([value, isDelimiter]) => {
       if (isDelimiter) {
-        delimiter += value;
-      } else if (value) {
-        text += `${delimiter}${value}`;
-        delimiter = '';
-        prefix ||= '';
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+        delimiter = delimiter ? delimiter + value : value;
       } else {
-        if (prefix == null) {
+        if (!hasFields) {
           prefix = delimiter;
+          hasFields = true;
+          delimiter = undefined;
         }
-        delimiter = '';
+
+        if (value != null) {
+          text ||= '';
+          if (value) {
+            text += delimiter ? delimiter + value : value;
+          }
+        }
+
+        delimiter = undefined;
       }
     });
   });
 
-  return (prefix || '') + text + delimiter; // First and last delimiters are always added
+  if (!hasFields) {
+    return delimiter;
+  }
+
+  return (prefix || '') + (text || '') + (delimiter || ''); // Prefix and suffix delimiters are always added
 }
