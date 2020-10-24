@@ -1,2 +1,2 @@
 export * from './level.field';
-export * from './text.field';
+export * from './message.field';

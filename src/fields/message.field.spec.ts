@@ -1,9 +1,9 @@
 import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
-import { zlofText } from './text.field';
+import { zlofMessage } from './message.field';
 
-describe('zlofText', () => {
+describe('zlofMessage', () => {
   it('writes message text by default', () => {
 
     const format = textZLogFormatter();
@@ -12,7 +12,7 @@ describe('zlofText', () => {
   });
   it('formats message text', () => {
 
-    const format = textZLogFormatter({ fields: [zlofText(text => text + '!')] });
+    const format = textZLogFormatter({ fields: [zlofMessage(text => text + '!')] });
 
     expect(format(zlogMessage(ZLogLevel.Info, 'Message'))).toBe('Message!');
   });

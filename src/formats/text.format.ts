@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
-import { zlofLevel, zlofText } from '../fields';
+import { zlofLevel, zlofMessage } from '../fields';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
@@ -35,7 +35,7 @@ export interface TextZLogFormat {
 const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
   (/*#__PURE__*/ zlofLevel()),
   ' ',
-  (/*#__PURE__*/ zlofText()),
+  (/*#__PURE__*/ zlofMessage()),
 ];
 
 /**
