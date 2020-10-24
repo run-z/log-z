@@ -2,131 +2,11 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
+import { zlofLevel, zlofText } from '../fields';
 import type { ZLogMessage } from '../log-message';
-import { lotzLevel, lotzText } from '../tokens';
+import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
 import { ZLogLine } from './log-line';
-import type { ZLogTokenizer } from './log-tokenizer';
-
-/**
- * Textual log line.
- *
- * This is the default log line expected by many {@link ZLogTokenizer tokenizers}.
- */
-export abstract class TextZLogLine extends ZLogLine {
-
-  formatValue(value: any): string | null | undefined {
-    if (typeof value === 'string') {
-      return this.formatString(value);
-    }
-    if (value != null && typeof value === 'object') {
-      return this.formatObject(value);
-    }
-
-    return this.formatByDefault(value);
-  }
-
-  formatError(error: any): string | null | undefined {
-    if (error == null) {
-      return;
-    }
-    if (error instanceof Error) {
-
-      const { stack } = error;
-
-      return stack ? `${String(error)} ${stack}` : String(error);
-    }
-
-    const str = this.formatValue(error);
-
-    return str != null ? `[Error: ${str}]` : str;
-  }
-
-  /**
-   * Formats arbitrary string.
-   *
-   * Encloses the string in double quotes by default.
-   *
-   * @param value  A string to format.
-   *
-   * @returns Either formatted string, or nothing.
-   */
-  formatString(value: string): string | null | undefined {
-    return JSON.stringify(value);
-  }
-
-  formatObject(value: object): string | null | undefined {
-    if (Array.isArray(value)) {
-
-      const elements = this.formatElements(value);
-
-      return elements != null ? `[${elements}]` : elements;
-    }
-
-    let out: string | undefined;
-
-    for (const key of Reflect.ownKeys(value)) {
-
-      const str = this.formatKeyAndValue(key as string | symbol, (value as any)[key]);
-
-      if (str != null) {
-        if (out) {
-          out += '; ';
-        } else {
-          out = '{ ';
-        }
-        out += str;
-      }
-    }
-
-    return out && out + ' }';
-  }
-
-  formatElements(value: Iterable<any>): string | null | undefined {
-
-    let out: string | undefined;
-
-    for (const param of value) {
-
-      const str = this.formatValue(param);
-
-      if (str != null) {
-        if (out) {
-          out += ', ';
-        } else {
-          out = '';
-        }
-        out += str;
-      }
-    }
-
-    return out;
-  }
-
-  formatKeyAndValue(key: PropertyKey, value: any): string | null | undefined {
-    if (typeof key === 'symbol' || value === undefined) {
-      return;
-    }
-
-    const str = this.formatValue(value);
-
-    return str != null ? `${key}: ${str}` : str;
-  }
-
-  /**
-   * Formats a value not formatted by {@link formatValue}.
-   *
-   * Returns a string representation of the value by default.
-   *
-   * @param value  A value to format.
-   *
-   * @returns Either formatted value, or nothing.
-   */
-  protected formatByDefault(value: any): string | null | undefined {
-    return String(value);
-  }
-
-}
 
 /**
  * Text log format.
@@ -134,27 +14,28 @@ export abstract class TextZLogLine extends ZLogLine {
 export interface TextZLogFormat {
 
   /**
-   * Tokens to write to textual log.
+   * Fields to write to each log line.
    *
    * This is an array of:
-   * - text tokenizers,
-   * - strings delimiters between tokens,
-   * - numeric values indicating the following tokens order.
    *
-   * Tokenizers are applied in order of their presence. However, the order of tokens they write can be changed.
-   * For that, a numeric order value can be used before tokenizer(s) or delimiters. By default, the order equals to `0`.
+   * - {@link ZLogField log fields},
+   * - string delimiters between fields,
+   * - numeric values indicating the following fields order.
+   *
+   * Fields are applied in order of their presence. However, the written data can be reordered. For that, a numeric
+   * order value can be used before fields or delimiters. By default, the order value is `0`.
    */
-  readonly tokens?: readonly (ZLogTokenizer<TextZLogLine> | number | string)[];
+  readonly fields?: readonly (ZLogField | number | string)[];
 
 }
 
 /**
  * @internal
  */
-const defaultTextZLogTokens: Exclude<TextZLogFormat['tokens'], undefined> = [
-    lotzLevel(),
+const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
+    zlofLevel(),
     ' ',
-    lotzText(),
+    zlofText(),
 ];
 
 /**
@@ -167,13 +48,13 @@ const defaultTextZLogTokens: Exclude<TextZLogFormat['tokens'], undefined> = [
 export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
   return message => {
 
-    const allTokens = new Map<number, string[]>();
+    const fullOutput = new Map<number, string[]>();
     let currentOrder = 0;
-    let currentTokens: string[] = [];
+    let currentOutput: string[] = [];
 
-    allTokens.set(currentOrder, currentTokens);
+    fullOutput.set(currentOrder, currentOutput);
 
-    class TextZLogLine$ extends TextZLogLine {
+    class ZLogLine$ extends ZLogLine {
 
       get message(): ZLogMessage {
         return message;
@@ -183,48 +64,48 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
         message = newMessage;
       }
 
-      write(token: string | undefined | null): void {
-        if (token != null) {
-          currentTokens.push(token);
+      write(value: string | undefined | null): void {
+        if (value != null) {
+          currentOutput.push(value);
         }
       }
 
     }
 
-    const formatted = new TextZLogLine$();
-    const { tokens = defaultTextZLogTokens } = format;
+    const formatted = new ZLogLine$();
+    const { fields = defaultTextZLogFields } = format;
 
-    for (const token of tokens) {
-      if (typeof token === 'function') {
-        // Apply tokenizer.
-        token(formatted);
-      } else if (typeof token === 'string') {
+    for (const field of fields) {
+      if (typeof field === 'function') {
+        // Apply field.
+        field(formatted);
+      } else if (typeof field === 'string') {
         // Add separator.
-        currentTokens.push(token);
+        currentOutput.push(field);
       } else {
         // Change the order of the following tokens.
-        currentOrder = token;
+        currentOrder = field;
 
-        const orderTokens = allTokens.get(currentOrder);
+        const orderTokens = fullOutput.get(currentOrder);
 
         if (orderTokens) {
-          currentTokens = orderTokens;
+          currentOutput = orderTokens;
         } else {
-          currentTokens = [];
-          allTokens.set(currentOrder, currentTokens);
+          currentOutput = [];
+          fullOutput.set(currentOrder, currentOutput);
         }
       }
     }
 
-    return zlogTokensToText(allTokens);
+    return zlogLineOutputToText(fullOutput);
   };
 }
 
 /**
  * @internal
  */
-function zlogTokensToText(tokens: Map<number, string[]>): string {
-  return [...tokens]
+function zlogLineOutputToText(output: Map<number, string[]>): string {
+  return [...output]
       .sort(([order1], [order2]) => order1 - order2)
       .flatMap(([, list]) => list)
       .join('');

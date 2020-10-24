@@ -1,3 +1,4 @@
+export * from './fields';
 export * from './formats';
 export * from './log';
 export * from './log-by';
@@ -6,4 +7,3 @@ export * from './log-message';
 export * from './log-recorder';
 export * from './logger';
 export * from './logs';
-export * from './tokens';

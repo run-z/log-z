@@ -7,30 +7,21 @@ import type { ZLogMessage } from '../log-message';
 /**
  * Log line.
  *
- * Represents formatted log message. Contains tokens written by {@link ZLogTokenizer tokenizers}.
+ * Represents formatted log message. Line contents are written by {@link ZLogField log fields}.
  *
- * The instance of this class can be reused for different messages and tokenizers.
- *
- * @typeParam TToken  A type of tokens this line consists of.
+ * The instance of this class can be reused by different messages and fields.
  */
-export abstract class ZLogLine<TToken = string> {
+export abstract class ZLogLine {
 
   /**
-   * The log message this line represents. I.e. the message to format by tokenizers.
+   * The log message this line represents. I.e. the message to format.
    */
   abstract readonly message: ZLogMessage;
 
   /**
-   * Writes formatted token to this line.
-   *
-   * @param token  Formatted message token, or `null`/`undefined` to write nothing.
-   */
-  abstract write(token: TToken | undefined | null): void;
-
-  /**
    * Changes the message to format.
    *
-   * A token may decide to modify the message e.g. to exclude some of its fields from formatting by other tokens.
+   * A token may decide to modify the message e.g. to exclude some of its fields from further processing.
    *
    * @param newMessage  New message to format.
    */
@@ -57,58 +48,139 @@ export abstract class ZLogLine<TToken = string> {
   }
 
   /**
-   * Formats arbitrary value.
+   * Writes raw string.
+   *
+   * @param value  Raw string to write.
+   */
+  abstract write(value: string): void;
+
+  /**
+   * Writes formatted string.
+   *
+   * Encloses the string in double quotes.
+   *
+   * @param value  A string to write.
+   */
+  writeString(value: string): void {
+    this.write(JSON.stringify(value));
+  }
+
+  /**
+   * Writes arbitrary value.
+   *
+   * @param value  A value to write.
+   */
+  writeValue(value: any): void {
+    if (typeof value === 'string') {
+      this.writeString(value);
+    } else if (value != null && typeof value === 'object') {
+      this.writeObject(value);
+    } else {
+      this.writeByDefault(value);
+    }
+  }
+
+  /**
+   * Writes an error.
+   *
+   * Writes a message and its stack trace.
+   *
+   * @param error  An error to write.
+   */
+  writeError(error: any): void {
+    if (error instanceof Error) {
+
+      const { stack } = error;
+
+      this.write(stack ? `${String(error)} ${stack}` : String(error));
+    } else {
+      this.write('[Error: ');
+      this.writeValue(error);
+      this.write(']');
+    }
+  }
+
+  /**
+   * Writes arbitrary object value.
+   *
+   * For array, writes its elements by {@link writeElements}, and encloses them into square brackets.
+   *
+   * Otherwise, writes own object properties by {@link writeKeyAndValue}, and encloses them into curly brackets.
+   *
+   * @param value  Object value to write.
+   */
+  writeObject(value: object): void {
+    if (Array.isArray(value)) {
+      this.write('[');
+      this.writeElements(value);
+      this.write(']');
+    } else {
+
+      let written = false;
+
+      for (const key of Reflect.ownKeys(value)) {
+        if (written) {
+          this.write(', ');
+        } else {
+          written = true;
+          this.write('{ ');
+        }
+        this.writeKeyAndValue(key as string | symbol, (value as any)[key]);
+      }
+
+      this.write(written ? ' }' : '{}');
+    }
+  }
+
+  /**
+   * Writes elements of arbitrary iterable.
+   *
+   * Writes each element by {@link writeValue}, and separates them with comma.
+   *
+   * @param value  An iterable of elements to write.
+   */
+  writeElements(value: Iterable<any>): void {
+
+    let written = false;
+
+    for (const param of value) {
+      if (written) {
+        this.write(', ');
+      } else {
+        written = true;
+      }
+      this.writeValue(param);
+    }
+  }
+
+  /**
+   * Writes arbitrary key/value pair.
+   *
+   * Ignores properties with undefined values.
+   *
+   * Writes values by {@link value} method. Separates key and value by colon.
+   *
+   * @param key  Property key to write.
+   * @param value  Property value to write.
+   */
+  writeKeyAndValue(key: PropertyKey, value: any): void {
+    if (value !== undefined) {
+      this.write(`${String(key)}: `);
+      this.writeValue(value);
+    }
+  }
+
+  /**
+   * Writes a value not recognized by {@link writeValue}.
+   *
+   * Writes a string representation of the value.
    *
    * @param value  A value to format.
    *
    * @returns Either formatted value, or nothing.
    */
-  abstract formatValue(value: any): TToken | null | undefined;
-
-  /**
-   * Formats arbitrary error.
-   *
-   * @param error  An error to format.
-   *
-   * @returns Either formatted error, or nothing.
-   */
-  abstract formatError(error: any): TToken | null | undefined;
-
-  /**
-   * Formats arbitrary object value.
-   *
-   * @param value  Object value to format.
-   *
-   * @returns Either formatted object value, or nothing.
-   */
-  abstract formatObject(value: object): TToken | null | undefined;
-
-  /**
-   * Formats elements of arbitrary iterable.
-   *
-   * @param value  An iterable of elements to format.
-   *
-   * @returns Either formatted elements, or nothing.
-   */
-  abstract formatElements(value: Iterable<any>): TToken | null | undefined;
-
-  /**
-   * Formats arbitrary key/value pair.
-   *
-   * @param key  Property key to format.
-   * @param value  Property value to format.
-   *
-   * @returns Either formatted key/value pair, or nothing.
-   */
-  abstract formatKeyAndValue(key: PropertyKey, value: any): TToken | null | undefined;
+  protected writeByDefault(value: any): void {
+    this.write(String(value));
+  }
 
 }
-
-/**
- * A type of tokens the log line consists of.
- *
- * @typeParam TLine  Log line type.
- */
-export type ZLogLineToken<TLine extends ZLogLine<unknown>> =
-    TLine extends ZLogLine<infer TToken> ? TToken : never;
-
