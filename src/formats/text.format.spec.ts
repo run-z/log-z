@@ -81,6 +81,14 @@ describe('textZLogFormatter', () => {
     });
   });
 
+  describe('ordering', () => {
+    it('changes order', () => {
+      expect(format({
+        fields: ['(prefix)', 1, '(foo)', 2, '(bar)', '(baz)', 0, '(field)'],
+      })).toBe('(prefix)(field)(foo)(bar)(baz)');
+    });
+  });
+
   function format(
       spec: TextZLogFormat | undefined,
       level = ZLogLevel.Error,
