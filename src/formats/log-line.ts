@@ -185,7 +185,7 @@ export abstract class ZLogLine {
    *
    * Ignores properties with undefined values.
    *
-   * Writes values by {@link value} method. Separates key and value by colon.
+   * Writes value by {@link writeValue} method. Separates key and value by colon.
    *
    * @param key  Property key to write.
    * @param value  Property value to write.
