@@ -2,10 +2,10 @@ import type { ZLogField } from '../formats';
 import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
-import type { DecoratorZLogFormat } from './decorator.field';
-import { zlofDecorator } from './decorator.field';
+import type { DecoratorZLogFieldFormat } from './decorator.field';
+import { decoratorZLogField } from './decorator.field';
 
-describe('zlofDecorator', () => {
+describe('decoratorZLogField', () => {
   it('prefixes non-empty field value', () => {
     expect(format({ prefix: '(' }, line => line.write('!'))).toBe('(!');
   });
@@ -22,7 +22,7 @@ describe('zlofDecorator', () => {
     expect(format({ prefix: '(', suffix: ')', empty: '-' }, () => void 0)).toBeUndefined();
   });
 
-  function format(format: DecoratorZLogFormat, field: ZLogField): string | undefined {
-    return textZLogFormatter({ fields: [zlofDecorator(format, field)] })(zlogMessage(ZLogLevel.Info));
+  function format(format: DecoratorZLogFieldFormat, field: ZLogField): string | undefined {
+    return textZLogFormatter({ fields: [decoratorZLogField(format, field)] })(zlogMessage(ZLogLevel.Info));
   }
 });

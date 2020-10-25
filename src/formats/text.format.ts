@@ -2,7 +2,15 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
-import { zlofDecorator, zlofDetails, zlofError, zlofExtra, zlofLevel, zlofMessage, zlofTimestamp } from '../fields';
+import {
+  decoratorZLogField,
+  detailsZLogField,
+  errorZLogField,
+  extraZLogField,
+  levelZLogField,
+  messageZLogField,
+  timestampZLogField,
+} from '../fields';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
@@ -24,39 +32,49 @@ export interface TextZLogFormat {
    *
    * Fields are applied in order of their presence. However, the written data can be reordered. For that, a numeric
    * order value can be used before fields or delimiters. By default, the order value is `0`.
+   *
+   * @default Built by {@link TextZLogFormat.defaultFields}.
    */
   readonly fields?: readonly (ZLogField | number | string)[];
 
 }
 
-/**
- * @internal
- */
-const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
-  (/*#__PURE__*/ zlofTimestamp()),
-  ' ',
-  (/*#__PURE__*/ zlofLevel()),
-  ' ',
-  (/*#__PURE__*/ zlofMessage()),
-  ' ',
-  (/*#__PURE__*/ zlofDecorator(
-      {
-        prefix: '(',
-        suffix: ')',
-      },
-      (/*#__PURE__*/ zlofExtra()),
-  )),
-  ' ',
-  (/*#__PURE__*/ zlofDecorator(
-      {
-        prefix: '{ ',
-        suffix: ' }',
-      },
-      (/*#__PURE__*/ zlofDetails()),
-  )),
-  ' ',
-  (/*#__PURE__*/ zlofError()),
-];
+export const TextZLogFormat = {
+
+  /**
+   * Builds log fields used by default by {@link textZLogFormatter text log format}.
+   *
+   * @returns Array of log fields and delimiters.
+   */
+  defaultFields(): Exclude<TextZLogFormat['fields'], undefined> {
+    return [
+      timestampZLogField(),
+      ' ',
+      levelZLogField(),
+      ' ',
+      messageZLogField(),
+      ' ',
+      decoratorZLogField(
+          {
+            prefix: '(',
+            suffix: ')',
+          },
+          extraZLogField(),
+      ),
+      ' ',
+      decoratorZLogField(
+          {
+            prefix: '{ ',
+            suffix: ' }',
+          },
+          detailsZLogField(),
+      ),
+      ' ',
+      errorZLogField(),
+    ];
+  },
+
+};
 
 /**
  * Creates a textual log formatter of the message.
@@ -67,7 +85,7 @@ const defaultTextZLogFields: Exclude<TextZLogFormat['fields'], undefined> = [
  */
 export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
 
-  const { fields = defaultTextZLogFields } = format;
+  const { fields = TextZLogFormat.defaultFields() } = format;
 
   return message => {
 

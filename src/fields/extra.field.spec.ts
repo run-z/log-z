@@ -2,7 +2,7 @@ import { textZLogFormatter, ZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
 
-describe('zlofExtra', () => {
+describe('extraZLogField', () => {
 
   let format: ZLogFormatter;
 

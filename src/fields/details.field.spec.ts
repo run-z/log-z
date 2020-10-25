@@ -2,7 +2,7 @@ import { textZLogFormatter, ZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogDetails, zlogMessage } from '../log-message';
 
-describe('zlofDetails', () => {
+describe('derailsZLogField', () => {
 
   let format: ZLogFormatter;
 

@@ -16,7 +16,7 @@ import { zlogLevelAbbr5 } from '../log-level';
  *
  * @returns Log level field.
  */
-export function zlofLevel(
+export function levelZLogField(
     format: (this: void, level: ZLogLevel) => string = defaultZLogLevelFormat,
 ): ZLogField {
   return line => line.write(format(line.message.level));

@@ -7,7 +7,7 @@ import type { ZLogField, ZLogLine } from '../formats';
 /**
  * Log field decorator format.
  */
-export interface DecoratorZLogFormat {
+export interface DecoratorZLogFieldFormat {
 
   /**
    * A prefix to add to field value.
@@ -44,8 +44,8 @@ export interface DecoratorZLogFormat {
  *
  * @returns
  */
-export function zlofDecorator<TLine extends ZLogLine>(
-    format: DecoratorZLogFormat,
+export function decoratorZLogField<TLine extends ZLogLine>(
+    format: DecoratorZLogFieldFormat,
     field: ZLogField<TLine>,
 ): ZLogField<TLine> {
   return line => {

@@ -1,9 +1,9 @@
 import { textZLogFormatter, ZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogDetails, zlogMessage } from '../log-message';
-import { zlofTimestamp } from './timestamp.field';
+import { timestampZLogField } from './timestamp.field';
 
-describe('zlofTimestamp', () => {
+describe('timestampZLogField', () => {
 
   let format: ZLogFormatter;
 
@@ -44,7 +44,7 @@ describe('zlofTimestamp', () => {
 
   describe('format', () => {
     it('accepts formatter function', () => {
-      format = textZLogFormatter({ fields: [zlofTimestamp({ format: n => String(n) })] });
+      format = textZLogFormatter({ fields: [timestampZLogField({ format: n => String(n) })] });
 
       const date = new Date();
 
@@ -57,7 +57,7 @@ describe('zlofTimestamp', () => {
 
       const dtFormat = new Intl.DateTimeFormat();
 
-      format = textZLogFormatter({ fields: [zlofTimestamp({ format: dtFormat })] });
+      format = textZLogFormatter({ fields: [timestampZLogField({ format: dtFormat })] });
 
       const date = new Date();
 
@@ -70,7 +70,7 @@ describe('zlofTimestamp', () => {
 
   describe('key', () => {
     it('extracts timestamp from custom property', () => {
-      format = textZLogFormatter({ fields: [zlofTimestamp({ key: 'date' })] });
+      format = textZLogFormatter({ fields: [timestampZLogField({ key: 'date' })] });
 
       const date = new Date();
 

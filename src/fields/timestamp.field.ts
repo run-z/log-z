@@ -7,7 +7,7 @@ import type { ZLogField } from '../formats';
 /**
  * Log message {@link logZTimestamp timestamp} format.
  */
-export interface TimestampZLogFormat {
+export interface TimestampZLogFieldFormat {
 
   /**
    * A key of {@link ZLogMessage.details log message details} property containing timestamp value.
@@ -40,8 +40,8 @@ export interface TimestampZLogFormat {
  *
  * @returns Message timestamp field.
  */
-export function zlofTimestamp(
-    format: TimestampZLogFormat = {},
+export function timestampZLogField(
+    format: TimestampZLogFieldFormat = {},
 ): ZLogField {
 
   const { format: tsFormat, key = 'timestamp' } = format;

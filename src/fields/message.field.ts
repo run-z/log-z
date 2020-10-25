@@ -13,7 +13,7 @@ import type { ZLogField } from '../formats';
  *
  * @returns Log level field.
  */
-export function zlofMessage(
+export function messageZLogField(
     format: (this: void, text: string) => string = (text: string) => text,
 ): ZLogField {
   return line => line.write(format(line.message.text));

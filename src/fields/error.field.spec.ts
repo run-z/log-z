@@ -3,7 +3,7 @@ import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
 
-describe('zlofError', () => {
+describe('errorZLogField', () => {
 
   let format: ZLogFormatter;
 

@@ -1,5 +1,5 @@
 import { Writable, WritableOptions } from 'stream';
-import { zlofLevel, zlofMessage } from '../fields';
+import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
 import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
@@ -26,7 +26,7 @@ describe('logZToStream', () => {
     const logger = logZBy(logZToStream(
         out,
         {
-          format: { fields: [zlofLevel(), ' ', zlofMessage(), '!'] },
+          format: { fields: [levelZLogField(), ' ', messageZLogField(), '!'] },
         },
     ));
 
@@ -43,7 +43,7 @@ describe('logZToStream', () => {
     const logger = logZBy(logZToStream(
         out,
         {
-          format: textZLogFormatter({ fields: [zlofLevel(), ' ', zlofMessage(), '!'] }),
+          format: textZLogFormatter({ fields: [levelZLogField(), ' ', messageZLogField(), '!'] }),
         },
     ));
 

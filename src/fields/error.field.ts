@@ -9,7 +9,7 @@ import type { ZLogField, ZLogLine } from '../formats';
  *
  * @returns Log message error field.
  */
-export function zlofError(): ZLogField {
+export function errorZLogField(): ZLogField {
   return formatZLogError;
 }
 

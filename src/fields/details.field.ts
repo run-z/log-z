@@ -9,7 +9,7 @@ import type { ZLogField, ZLogLine } from '../formats';
  *
  * @returns Log extra field.
  */
-export function zlofDetails(): ZLogField {
+export function detailsZLogField(): ZLogField {
   return formatZLogDetails;
 }
 
