@@ -1,10 +1,10 @@
 import * as os from 'os';
-import { Writable, WritableOptions } from 'stream';
 import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
 import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
+import { TestWritable } from '../spec';
 import { logZToStream } from './to-stream.log';
 
 describe('logZToStream', () => {
@@ -214,22 +214,3 @@ describe('logZToStream', () => {
   });
 
 });
-
-class TestWritable extends Writable {
-
-  readonly chunks: any[] = [];
-
-  constructor(opts: WritableOptions = {}) {
-    super({ decodeStrings: false, ...opts });
-  }
-
-  _write(
-      chunk: any,
-      _encoding: string,
-      callback: (error?: (Error | null)) => void,
-  ): void {
-    this.chunks.push(chunk);
-    callback();
-  }
-
-}
