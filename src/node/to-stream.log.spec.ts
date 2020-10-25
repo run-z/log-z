@@ -1,3 +1,4 @@
+import * as os from 'os';
 import { Writable, WritableOptions } from 'stream';
 import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
@@ -18,7 +19,7 @@ describe('logZToStream', () => {
 
     expect(await logger.whenLogged()).toBe(true);
 
-    expect(out.chunks).toEqual(['[INFO ] TEST', '[ERROR] ERROR']);
+    expect(out.chunks).toEqual([`[INFO ] TEST${os.EOL}`, `[ERROR] ERROR${os.EOL}`]);
   });
   it('formats message with custom format', async () => {
 
@@ -35,7 +36,7 @@ describe('logZToStream', () => {
 
     expect(await logger.whenLogged()).toBe(true);
 
-    expect(out.chunks).toEqual(['[INFO ] TEST!', '[ERROR] ERROR!']);
+    expect(out.chunks).toEqual([`[INFO ] TEST!${os.EOL}`, `[ERROR] ERROR!${os.EOL}`]);
   });
   it('formats message by custom formatter', async () => {
 
@@ -52,7 +53,40 @@ describe('logZToStream', () => {
 
     expect(await logger.whenLogged()).toBe(true);
 
-    expect(out.chunks).toEqual(['[INFO ] TEST!', '[ERROR] ERROR!']);
+    expect(out.chunks).toEqual([`[INFO ] TEST!${os.EOL}`, `[ERROR] ERROR!${os.EOL}`]);
+  });
+  it('discards message if formatter returned `undefined`', async () => {
+
+    const out = new TestWritable();
+    const logger = logZBy(logZToStream(
+        out,
+        {
+          format: () => void 0,
+        },
+    ));
+
+    logger.info('TEST');
+
+    expect(await logger.whenLogged()).toBe(false);
+
+    expect(out.chunks).toHaveLength(0);
+  });
+  it('separates log lines with specified EOL symbol', async () => {
+
+    const out = new TestWritable();
+    const logger = logZBy(logZToStream(
+        out,
+        {
+          eol: '!!!\n',
+        },
+    ));
+
+    logger.info('TEST');
+    logger.error('ERROR');
+
+    expect(await logger.whenLogged()).toBe(true);
+
+    expect(out.chunks).toEqual(['[INFO ] TEST!!!\n', '[ERROR] ERROR!!!\n']);
   });
   it('writes message as is in object mode', async () => {
 
@@ -102,7 +136,7 @@ describe('logZToStream', () => {
       zlogMessage(ZLogLevel.Info, 'TEST'),
     ]);
     expect(errors.chunks).toEqual([
-        'ERROR!',
+        `ERROR!${os.EOL}`,
     ]);
   });
   it('stops logging when stream finished', async () => {

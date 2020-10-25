@@ -2,6 +2,7 @@
  * @packageDocumentation
  * @module @run-z/log-z/node
  */
+import * as os from 'os';
 import type { Writable } from 'stream';
 import type { TextZLogFormat, ZLogFormatter } from '../formats';
 import { textZLogFormatter } from '../formats';
@@ -33,6 +34,13 @@ export interface StreamZLogSpec {
    * @default {@link textZLogFormatter Text log format}.
    */
   readonly format?: TextZLogFormat | ZLogFormatter;
+
+  /**
+   * The end of line symbol to separate log lines with.
+   *
+   * @default `os.EOL` - an OS-specific new line separator.
+   */
+  readonly eol?: string;
 
 }
 
@@ -90,10 +98,11 @@ export namespace StreamZLogSpec {
  */
 export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecorder {
 
+  const { eol = os.EOL } = spec;
   const errorsSpec = streamZLogErrorsSpec(to, spec);
   const { to: errors, atLeast: errorLevel = ZLogLevel.Error } = errorsSpec;
-  const recordMessage = logRecorderFor(to, spec);
-  const recordError = errors === to ? recordMessage : logRecorderFor(errors, errorsSpec);
+  const recordMessage = logRecorderFor(to, eol, spec);
+  const recordError = errors === to ? recordMessage : logRecorderFor(errors, eol, errorsSpec);
 
   let whenLogged = Promise.resolve<boolean>(true);
   let record = (message: ZLogMessage): Promise<boolean> => (message.level < errorLevel
@@ -167,6 +176,7 @@ function doNotLogZ(_message: ZLogMessage): Promise<false> {
  */
 function logRecorderFor(
     to: Writable,
+    eol: string,
     { format }: StreamZLogSpec | StreamZLogSpec.Errors,
 ): (message: ZLogMessage) => Promise<boolean> {
   if (to.writableEnded) {
@@ -186,7 +196,15 @@ function logRecorderFor(
     };
   } else {
     record = message => {
-      to.write(formatter(message));
+
+      const line = formatter(message);
+
+      if (line == null) {
+        return Promise.resolve(false);
+      }
+
+      to.write(line + eol);
+
       return Promise.resolve(true);
     };
   }
