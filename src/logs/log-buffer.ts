@@ -96,8 +96,10 @@ export const ZLogBuffer = {
 
     let pass: (entry: ZLogBuffer.Entry) => void = noop;
     let drainNext: () => void = noop;
+
+    const continueWhenLogged = (): void => drainNext();
     const doDrainNext = (): void => {
-      next().then(pass, noop);
+      next().then(entry => pass(entry), noop);
     };
 
     return target => {
@@ -105,8 +107,9 @@ export const ZLogBuffer = {
         drainNext = doDrainNext;
         pass = entry => {
           entry.recordTo(target);
-          entry.whenLogged().then(drainNext, drainNext);
+          entry.whenLogged().then(continueWhenLogged, continueWhenLogged);
         };
+        drainNext();
       } else {
         drainNext = noop;
         pass = noop;

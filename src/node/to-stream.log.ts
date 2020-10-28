@@ -9,8 +9,9 @@ import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
+import { alreadyLogged, notLogged } from '../log-recorder.impl';
 import type { WhenWritten } from './stream-writer.impl';
-import { alreadyWritten, notWritten, streamWriter } from './stream-writer.impl';
+import { streamWriter } from './stream-writer.impl';
 
 /**
  * A specification of how to log messages {@link logZToStream to Node.js stream}.
@@ -109,13 +110,13 @@ export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecor
   const recordMessage = logRecorderFor(to, eol, spec);
   const recordError = errors === to ? recordMessage : logRecorderFor(errors, eol, errorsSpec);
 
-  let whenLogged: WhenWritten = alreadyWritten;
+  let whenLogged: WhenWritten = alreadyLogged;
   let record = (message: ZLogMessage): WhenWritten => (message.level < errorLevel
       ? recordMessage
       : recordError)(message);
   let end = (): Promise<void> => {
     record = doNotLogZ;
-    whenLogged = notWritten;
+    whenLogged = notLogged;
 
     const whenOutputEnded = endLogging(to);
     const whenAllEnded = (to === errors
@@ -173,7 +174,7 @@ function isWritable(spec: StreamZLogSpec.Errors | Writable): spec is Writable {
  * @internal
  */
 function doNotLogZ(_message: ZLogMessage): WhenWritten {
-  return notWritten;
+  return notLogged;
 }
 
 /**
@@ -202,7 +203,7 @@ function logRecorderFor(
 
       const line = formatter(message);
 
-      return line == null ? notWritten : write(line + eol);
+      return line == null ? notLogged : write(line + eol);
     };
   }
 
