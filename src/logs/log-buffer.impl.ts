@@ -109,8 +109,8 @@ export class ZLogBuffer$ {
       if (this.head < this.tail) {
         this._clear(this.head, this.tail);
       } else {
-        this._clear(0, this.tail);
         this._clear(this.head, this.entries.length);
+        this._clear(0, this.tail);
       }
     }
   }
