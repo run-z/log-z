@@ -69,7 +69,9 @@ export function logZToBuffer(spec: ZLogBufferSpec = {}): ZLogBuffer {
     end = alreadyEnded;
     drainTo = noop;
 
-    return buffer.clear().then(noop);
+    buffer.clear();
+
+    return end();
   };
 
   return {

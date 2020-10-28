@@ -104,35 +104,26 @@ export class ZLogBuffer$ {
     return entry;
   }
 
-  clear(): Promise<unknown> {
-    if (!this.size) {
-      return Promise.resolve();
+  clear(): void {
+    if (this.size) {
+      if (this.head < this.tail) {
+        this._clear(this.head, this.tail);
+      } else {
+        this._clear(0, this.tail);
+        this._clear(this.head, this.entries.length);
+      }
     }
-    if (this.head < this.tail) {
-      return this._clear(this.head, this.tail);
-    }
-
-    return Promise.all([
-      this._clear(0, this.tail),
-      this._clear(this.head, this.entries.length),
-    ]);
   }
 
-  private _clear(from: number, to: number): Promise<unknown> {
-
-    const cleared: Promise<boolean>[] = [];
-
+  private _clear(from: number, to: number): void {
     for (let i = from; i < to; ++i) {
 
       const entry = this.entries[i];
 
       if (entry) {
         entry.drop();
-        cleared.push(entry.whenLogged());
       }
     }
-
-    return Promise.all(cleared);
   }
 
   private remove(entry: ZLogBuffer.Entry, index: number): void {
