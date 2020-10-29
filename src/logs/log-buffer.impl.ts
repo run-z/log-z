@@ -1,5 +1,6 @@
 import { isPresent, newPromiseResolver, noop } from '@proc7ts/primitives';
-import { filterIndexed, IndexedItemList, itsHead, PushIterable, PushIterator__symbol } from '@proc7ts/push-iterator';
+import type { PushIterable } from '@proc7ts/push-iterator';
+import { filterIndexed, IndexedItemList, itsEach, itsEvery, PushIterator__symbol } from '@proc7ts/push-iterator';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogBuffer } from './log-buffer';
@@ -8,9 +9,8 @@ import type { ZLogBufferSpec } from './to-buffer.log';
 /**
  * @internal
  */
-export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
+export class ZLogBuffer$ {
 
-  readonly contents: ZLogBuffer.Contents & PushIterable<ZLogBuffer.Entry>;
   length = 0;
   private entries: (ZLogBuffer.Entry | undefined)[] = [];
   private firstAdded: () => void = noop;
@@ -19,22 +19,6 @@ export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
 
   constructor(readonly limit: number) {
     this.entries.length = limit;
-
-    const all = filterIndexed(this, isPresent);
-
-    this.contents = {
-      [Symbol.iterator]: () => all[PushIterator__symbol](),
-      [PushIterator__symbol]: accept => all[PushIterator__symbol](accept),
-      fillRatio: () => this.length ? this.length / this.limit : 0,
-    };
-  }
-
-  item(index: number): ZLogBuffer.Entry | undefined {
-
-    const offset = index + this.head;
-    const overflow = offset - this.limit;
-
-    return this.entries[overflow >= 0 ? overflow : offset];
   }
 
   next(atOnce: number): Promise<[ZLogBuffer.Entry, ...ZLogBuffer.Entry[]]> {
@@ -48,21 +32,6 @@ export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
         this.firstAdded = noop;
       };
     });
-  }
-
-  private batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
-
-    const batch: ZLogBuffer.Entry[] = [];
-
-    itsHead(
-        this.contents,
-        entry => {
-          batch.push(entry);
-          return --size > 0 ? undefined : false;
-        },
-    );
-
-    return batch as [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]];
   }
 
   add(message: ZLogMessage, onRecord: Exclude<ZLogBufferSpec['onRecord'], undefined>): ZLogBuffer.Entry {
@@ -104,7 +73,7 @@ export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
 
     };
 
-    onRecord(entry, this.contents);
+    onRecord(entry, this.contents());
 
     if (drop !== noop) {
       // New entry is not dropped.
@@ -132,25 +101,52 @@ export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
   }
 
   clear(): void {
-    if (this.length) {
-      if (this.head < this.tail) {
-        this._clear(this.head, this.tail);
-      } else {
-        this._clear(this.head, this.entries.length);
-        this._clear(0, this.tail);
-      }
-    }
+    itsEach(this.contents(), entry => entry.drop());
   }
 
-  private _clear(from: number, to: number): void {
-    for (let i = from; i < to; ++i) {
+  private contents(): ZLogBuffer.Contents & PushIterable<ZLogBuffer.Entry> {
 
-      const entry = this.entries[i];
+    return {
 
-      if (entry) {
-        entry.drop();
-      }
-    }
+      [Symbol.iterator]() {
+        return this[PushIterator__symbol]();
+      },
+
+      [PushIterator__symbol]: accept => {
+
+        const head = this.head;
+        const list: IndexedItemList<ZLogBuffer.Entry> = {
+          length: this.length,
+          item: index => {
+
+            const offset = index + head;
+            const overflow = offset - this.limit;
+
+            return this.entries[overflow < 0 ? offset : overflow];
+          },
+        };
+
+        return filterIndexed(list, isPresent)[PushIterator__symbol](accept);
+      },
+
+      fillRatio: () => this.length ? this.length / this.limit : 0,
+    };
+
+  }
+
+  private batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
+
+    const batch: ZLogBuffer.Entry[] = [];
+
+    itsEvery(
+        this.contents(),
+        entry => {
+          batch.push(entry);
+          return --size > 0;
+        },
+    );
+
+    return batch as [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]];
   }
 
   private remove(entry: ZLogBuffer.Entry, index: number): void {
