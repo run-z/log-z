@@ -1,3 +1,4 @@
+import { itsElements, itsFirst } from '@proc7ts/push-iterator';
 import { ZLogLevel } from '../log-level';
 import { ZLogMessage, zlogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
@@ -32,15 +33,33 @@ describe('logZToBuffer', () => {
 
     expect(logged).toEqual([[0, false], [1, false]]);
   });
+  it('reports buffer contents', async () => {
+
+    const reported: string[][] = [];
+
+    buffer = logZToBuffer({
+      atMost: 3,
+      onRecord(_newEntry, contents) {
+        reported.push(itsElements(contents, ({ message: { text } }) => text));
+      },
+    });
+
+    logMessages(5);
+    await Promise.race(promises);
+    expect(logged).toEqual([[0, false], [1, false]]);
+    expect(reported).toEqual([
+        [],
+        ['0'],
+        ['0', '1'],
+        ['0', '1', '2'],
+        ['1', '2', '3'],
+    ]);
+  });
   it('handles the drop of new entry', async () => {
     buffer = logZToBuffer({
-      limit: 4,
-      onRecord(
-          newEntry,
-          _oldestEntry,
-          fillRatio,
-      ) {
-        if (fillRatio >= 0.5) {
+      atMost: 4,
+      onRecord(newEntry, contents) {
+        if (contents.fillRatio() >= 0.5) {
           newEntry.drop();
           newEntry.drop();
         }
@@ -56,15 +75,14 @@ describe('logZToBuffer', () => {
   });
   it('handles the drop of oldest entry', async () => {
     buffer = logZToBuffer({
-      limit: 4,
-      onRecord(
-          _newEntry,
-          oldestEntry,
-          fillRatio,
-      ) {
-        if (fillRatio >= 0.5) {
-          oldestEntry.drop();
-          oldestEntry.drop();
+      atMost: 4,
+      onRecord(_newEntry, contents) {
+        if (contents.fillRatio() >= 0.5) {
+
+          const oldestEntry = itsFirst(contents);
+
+          oldestEntry!.drop();
+          oldestEntry!.drop();
         }
       },
     });
@@ -76,14 +94,13 @@ describe('logZToBuffer', () => {
     await buffer.end();
     expect(logged).toEqual([[0, false], [1, false], [2, false], [3, false]]);
   });
-  it('handles entry drop in the middles', async () => {
-
-    const entries: ZLogBuffer.Entry[] = [];
-
+  it('handles entry drop in the middle', async () => {
     buffer = logZToBuffer({
-      limit: 4,
-      onRecord(newEntry) {
-        entries.push(newEntry);
+      atMost: 4,
+      onRecord(_newEntry, buffered) {
+
+        const entries = [...buffered];
+
         if (entries.length === 3) {
           entries[1].drop();
         }
@@ -127,9 +144,27 @@ describe('logZToBuffer', () => {
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
     });
+    it('drains new messages in smaller batches', async () => {
+      buffer.drainTo(target, 0);
+      logMessages(3);
+
+      await Promise.all(promises);
+
+      expect(logged).toEqual([[0, true], [1, true], [2, true]]);
+      expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
+    });
     it('drains buffered messages', async () => {
       logMessages(3);
       buffer.drainTo(target);
+
+      await Promise.all(promises);
+
+      expect(logged).toEqual([[0, true], [1, true], [2, true]]);
+      expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
+    });
+    it('drains buffered messages in smaller batches', async () => {
+      logMessages(3);
+      buffer.drainTo(target, -1);
 
       await Promise.all(promises);
 

@@ -32,7 +32,8 @@
     }
   },
   "dependencies": {
-    "@proc7ts/primitives": "^1.3.2"
+    "@proc7ts/primitives": "^1.3.2",
+    "@proc7ts/push-iterator": "^2.2.0"
   },
   "devDependencies": {
     "@proc7ts/eslint-config": "^2.0.5",

@@ -1,4 +1,5 @@
-import { newPromiseResolver, noop } from '@proc7ts/primitives';
+import { isPresent, newPromiseResolver, noop } from '@proc7ts/primitives';
+import { filterIndexed, IndexedItemList, itsHead, PushIterable, PushIterator__symbol } from '@proc7ts/push-iterator';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogBuffer } from './log-buffer';
@@ -7,32 +8,61 @@ import type { ZLogBufferSpec } from './to-buffer.log';
 /**
  * @internal
  */
-export class ZLogBuffer$ {
+export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
 
+  readonly contents: ZLogBuffer.Contents & PushIterable<ZLogBuffer.Entry>;
+  length = 0;
   private entries: (ZLogBuffer.Entry | undefined)[] = [];
-  private firstAdded: (entry: ZLogBuffer.Entry) => void = noop;
+  private firstAdded: () => void = noop;
   private head = 0;
   private tail = 0;
-  private size = 0;
 
   constructor(readonly limit: number) {
     this.entries.length = limit;
+
+    const all = filterIndexed(this, isPresent);
+
+    this.contents = {
+      [Symbol.iterator]: () => all[PushIterator__symbol](),
+      [PushIterator__symbol]: accept => all[PushIterator__symbol](accept),
+      fillRatio: () => this.length ? this.length / this.limit : 0,
+    };
   }
 
-  next(): Promise<ZLogBuffer.Entry> {
+  item(index: number): ZLogBuffer.Entry | undefined {
 
-    const first = this.entries[this.head];
+    const offset = index + this.head;
+    const overflow = offset - this.limit;
 
-    if (first) {
-      return Promise.resolve(first);
+    return this.entries[overflow >= 0 ? overflow : offset];
+  }
+
+  next(atOnce: number): Promise<[ZLogBuffer.Entry, ...ZLogBuffer.Entry[]]> {
+    if (this.length) {
+      return Promise.resolve(this.batch(atOnce));
     }
 
-    return new Promise<ZLogBuffer.Entry>(resolve => {
-      this.firstAdded = entry => {
-        resolve(entry);
+    return new Promise(resolve => {
+      this.firstAdded = () => {
+        resolve(this.batch(atOnce));
         this.firstAdded = noop;
       };
     });
+  }
+
+  private batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
+
+    const batch: ZLogBuffer.Entry[] = [];
+
+    itsHead(
+        this.contents,
+        entry => {
+          batch.push(entry);
+          return --size > 0 ? undefined : false;
+        },
+    );
+
+    return batch as [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]];
   }
 
   add(message: ZLogMessage, onRecord: Exclude<ZLogBufferSpec['onRecord'], undefined>): ZLogBuffer.Entry {
@@ -74,10 +104,7 @@ export class ZLogBuffer$ {
 
     };
 
-    const oldestEntry = this.entries[this.head] || entry;
-    const size = this.size;
-
-    onRecord(entry, oldestEntry, size ? size / this.limit : 0);
+    onRecord(entry, this.contents);
 
     if (drop !== noop) {
       // New entry is not dropped.
@@ -96,8 +123,8 @@ export class ZLogBuffer$ {
       }
 
       this.entries[index] = entry;
-      if (!this.size++) {
-        this.firstAdded(entry);
+      if (!this.length++) {
+        this.firstAdded();
       }
     }
 
@@ -105,7 +132,7 @@ export class ZLogBuffer$ {
   }
 
   clear(): void {
-    if (this.size) {
+    if (this.length) {
       if (this.head < this.tail) {
         this._clear(this.head, this.tail);
       } else {
@@ -139,12 +166,12 @@ export class ZLogBuffer$ {
     // The head should never be empty, unless the buffer is.
     do {
       if (index === this.head) {
-        --this.size;
+        --this.length;
         if (++this.head >= this.limit) {
           this.head = 0;
         }
       }
-    } while (this.size && this.entries[index]);
+    } while (this.length && this.entries[index]);
   }
 
 }
