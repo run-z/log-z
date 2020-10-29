@@ -32,7 +32,10 @@ export interface ZLogBuffer extends ZLogRecorder {
 export namespace ZLogBuffer {
 
   /**
-   * Buffered log message entry.
+   * Log buffer entry.
+   *
+   * Represents a buffered log message and allows to either {@link drop} it, or {@link recordTo record} to another
+   * log recorder.
    */
   export interface Entry {
 
@@ -66,6 +69,22 @@ export namespace ZLogBuffer {
      * @returns A promise resolved to `true` when the message is logged, or to `false` when it is discarded.
      */
     whenLogged(): Promise<boolean>;
+
+  }
+
+  /**
+   * The contents of log buffer.
+   *
+   * Allows to iterate over buffer entries from oldest to newest.
+   */
+  export interface Contents extends Iterable<Entry> {
+
+    /**
+     * Evaluates the fill ratio of the buffer.
+     *
+     * @returns The fill ratio, with `0` corresponding to empty buffer, and `1` corresponding to full one.
+     */
+    fillRatio(): number;
 
   }
 

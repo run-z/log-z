@@ -9,7 +9,7 @@ import { ZLogBuffer } from './log-buffer';
 import { ZLogBuffer$ } from './log-buffer.impl';
 
 /**
- * Log buffering specification.
+ * A specification of how to buffer log messages.
  */
 export interface ZLogBufferSpec {
 
@@ -25,17 +25,15 @@ export interface ZLogBufferSpec {
   /**
    * This is called whenever a log message is about to be buffered.
    *
-   * It may {@link ZLogBuffer.Entry drop} either the new message, or the oldest one to prevent buffer overflow.
+   * It may {@link ZLogBuffer.Entry drop} either the new message, or some of already buffered ones.
    *
-   * If the buffer is full (i.e. `fillRatio` is `1`), and this method did not drop any of the messages, then the oldest
-   * message will be dropped.
+   * If the buffer is full (i.e. its {@link ZLogBuffer.Contents.fillRatio fill ratio} is `1`), and this method did not
+   * drop any of the messages, then the oldest message will be dropped.
    *
    * @param newEntry  Log message entry about to be buffered.
-   * @param oldestEntry  The oldest log entry. The same as `newEntry` for empty buffer.
-   * @param fillRatio  The fill ratio of the buffer. `0` corresponds to empty buffer, while `1` corresponds to full
-   * one.
+   * @param contents  Current contents of the log buffer.
    */
-  onRecord?(newEntry: ZLogBuffer.Entry, oldestEntry: ZLogBuffer.Entry, fillRatio: number): void;
+  onRecord?(newEntry: ZLogBuffer.Entry, contents: ZLogBuffer.Contents): void;
 
 }
 
@@ -44,14 +42,14 @@ export interface ZLogBufferSpec {
  *
  * The buffer is expected to be {@link ZLogBuffer.drainTo drained} to some log recorder.
  *
- * @param spec  Log buffering specification.
+ * @param how  Log buffering specification.
  *
  * @returns New log buffer.
  */
-export function logZToBuffer(spec: ZLogBufferSpec = {}): ZLogBuffer {
+export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
 
-  const { limit = 256 } = spec;
-  const onRecord = spec.onRecord ? spec.onRecord.bind(spec) : noop;
+  const { limit = 256 } = how;
+  const onRecord = how.onRecord ? how.onRecord.bind(how) : noop;
 
   const buffer = new ZLogBuffer$(Math.max(1, limit));
 
