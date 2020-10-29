@@ -20,7 +20,7 @@ export interface ZLogBufferSpec {
    *
    * @default 256
    */
-  readonly limit?: number;
+  readonly atMost?: number;
 
   /**
    * This is called whenever a log message is about to be buffered.
@@ -48,10 +48,9 @@ export interface ZLogBufferSpec {
  */
 export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
 
-  const { limit = 256 } = how;
+  const { atMost = 256 } = how;
   const onRecord = how.onRecord ? how.onRecord.bind(how) : noop;
-
-  const buffer = new ZLogBuffer$(Math.max(1, limit));
+  const buffer = new ZLogBuffer$(Math.max(1, atMost));
 
   let whenLogged: () => Promise<boolean> = alreadyLogged;
   let record = (message: ZLogMessage): void => {
@@ -60,7 +59,7 @@ export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
 
     whenLogged = () => entry.whenLogged();
   };
-  let drainTo = ZLogBuffer.drainer(() => buffer.next());
+  let drainTo = ZLogBuffer.drainer(atOnce => buffer.next(atOnce));
   let end = (): Promise<void> => {
     record = noop;
     whenLogged = notLogged;
@@ -86,8 +85,8 @@ export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
       return end();
     },
 
-    drainTo(target) {
-      drainTo(target);
+    drainTo(target, atOnce) {
+      drainTo(target, atOnce);
     },
 
   };

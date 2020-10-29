@@ -38,7 +38,7 @@ describe('logZToBuffer', () => {
     const reported: string[][] = [];
 
     buffer = logZToBuffer({
-      limit: 3,
+      atMost: 3,
       onRecord(_newEntry, contents) {
         reported.push(itsElements(contents, ({ message: { text } }) => text));
       },
@@ -57,7 +57,7 @@ describe('logZToBuffer', () => {
   });
   it('handles the drop of new entry', async () => {
     buffer = logZToBuffer({
-      limit: 4,
+      atMost: 4,
       onRecord(newEntry, contents) {
         if (contents.fillRatio() >= 0.5) {
           newEntry.drop();
@@ -75,7 +75,7 @@ describe('logZToBuffer', () => {
   });
   it('handles the drop of oldest entry', async () => {
     buffer = logZToBuffer({
-      limit: 4,
+      atMost: 4,
       onRecord(_newEntry, contents) {
         if (contents.fillRatio() >= 0.5) {
 
@@ -96,7 +96,7 @@ describe('logZToBuffer', () => {
   });
   it('handles entry drop in the middle', async () => {
     buffer = logZToBuffer({
-      limit: 4,
+      atMost: 4,
       onRecord(_newEntry, buffered) {
 
         const entries = [...buffered];
@@ -144,9 +144,27 @@ describe('logZToBuffer', () => {
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
     });
+    it('drains new messages in smaller batches', async () => {
+      buffer.drainTo(target, 0);
+      logMessages(3);
+
+      await Promise.all(promises);
+
+      expect(logged).toEqual([[0, true], [1, true], [2, true]]);
+      expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
+    });
     it('drains buffered messages', async () => {
       logMessages(3);
       buffer.drainTo(target);
+
+      await Promise.all(promises);
+
+      expect(logged).toEqual([[0, true], [1, true], [2, true]]);
+      expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
+    });
+    it('drains buffered messages in smaller batches', async () => {
+      logMessages(3);
+      buffer.drainTo(target, -1);
 
       await Promise.all(promises);
 

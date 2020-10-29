@@ -1,5 +1,5 @@
 import { isPresent, newPromiseResolver, noop } from '@proc7ts/primitives';
-import { filterIndexed, IndexedItemList, PushIterable, PushIterator__symbol } from '@proc7ts/push-iterator';
+import { filterIndexed, IndexedItemList, itsHead, PushIterable, PushIterator__symbol } from '@proc7ts/push-iterator';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogBuffer } from './log-buffer';
@@ -13,7 +13,7 @@ export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
   readonly contents: ZLogBuffer.Contents & PushIterable<ZLogBuffer.Entry>;
   length = 0;
   private entries: (ZLogBuffer.Entry | undefined)[] = [];
-  private firstAdded: (entry: ZLogBuffer.Entry) => void = noop;
+  private firstAdded: () => void = noop;
   private head = 0;
   private tail = 0;
 
@@ -37,20 +37,32 @@ export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
     return this.entries[overflow >= 0 ? overflow : offset];
   }
 
-  next(): Promise<ZLogBuffer.Entry> {
-
-    const first = this.entries[this.head];
-
-    if (first) {
-      return Promise.resolve(first);
+  next(atOnce: number): Promise<[ZLogBuffer.Entry, ...ZLogBuffer.Entry[]]> {
+    if (this.length) {
+      return Promise.resolve(this.batch(atOnce));
     }
 
-    return new Promise<ZLogBuffer.Entry>(resolve => {
-      this.firstAdded = entry => {
-        resolve(entry);
+    return new Promise(resolve => {
+      this.firstAdded = () => {
+        resolve(this.batch(atOnce));
         this.firstAdded = noop;
       };
     });
+  }
+
+  private batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
+
+    const batch: ZLogBuffer.Entry[] = [];
+
+    itsHead(
+        this.contents,
+        entry => {
+          batch.push(entry);
+          return --size > 0 ? undefined : false;
+        },
+    );
+
+    return batch as [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]];
   }
 
   add(message: ZLogMessage, onRecord: Exclude<ZLogBufferSpec['onRecord'], undefined>): ZLogBuffer.Entry {
@@ -112,7 +124,7 @@ export class ZLogBuffer$ implements IndexedItemList<ZLogBuffer.Entry> {
 
       this.entries[index] = entry;
       if (!this.length++) {
-        this.firstAdded(entry);
+        this.firstAdded();
       }
     }
 
