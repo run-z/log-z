@@ -67,7 +67,7 @@ const defaultZLogLevelNames = ['Silly', 'Trace', 'Debug', 'Info', 'Warning', 'Er
  * @returns Log level name.
  */
 export function zlogLevelName(level: ZLogLevel): string {
-  return zlogLevelCustomName(level, defaultZLogLevelNames);
+  return zlogLevelMap(level, defaultZLogLevelNames);
 }
 
 /**
@@ -92,7 +92,7 @@ const defaultZLogLevelAbbrs = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR
  * @returns Log level abbreviation.
  */
 export function zlogLevelAbbr(level: ZLogLevel): string {
-  return zlogLevelCustomName(level, defaultZLogLevelAbbrs);
+  return zlogLevelMap(level, defaultZLogLevelAbbrs);
 }
 
 /**
@@ -117,20 +117,18 @@ const defaultZLogLevelAbbrs5 = ['SILLY', 'TRACE', 'DEBUG', 'INFO ', 'WARN ', 'ER
  * @returns Log level abbreviation.
  */
 export function zlogLevelAbbr5(level: ZLogLevel): string {
-  return zlogLevelCustomName(level, defaultZLogLevelAbbrs5);
+  return zlogLevelMap(level, defaultZLogLevelAbbrs5);
 }
 
 /**
- * Detects custom {@link ZLogMessage.level log level} name by its numeric value.
+ * Maps the {@link ZLogMessage.level log level} to other value.
  *
  * @param level  Log level value.
- * @param names  Array of log level names, from lowest (i.e. below {@link ZLogLevel.Trace}) to highest.
+ * @param values  Array of values corresponding to log levels, from lowest (i.e. below {@link ZLogLevel.Trace})
+ * to highest.
  *
- * @returns Custom log level name.
+ * @returns The value corresponding to the log level.
  */
-export function zlogLevelCustomName(
-    level: ZLogLevel,
-    names: readonly [string, string?, string?, string?, string?, string?, string?],
-): string {
-  return names[Math.max(0, Math.min(Math.floor(level / 10), names.length))] as string;
+export function zlogLevelMap<T>(level: ZLogLevel, values: readonly [T, ...T[]]): T {
+  return values[Math.max(0, Math.min(Math.floor(level / 10), values.length))];
 }

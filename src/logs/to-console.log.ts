@@ -2,9 +2,49 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
-import { ZLogLevel } from '../log-level';
+import { zlogLevelMap } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
+import { alreadyEnded, alreadyLogged } from '../log-recorder.impl';
+
+/**
+ * @internal
+ */
+type ConsoleZLogMethod = (this: void, console: Console, message: ZLogMessage) => void;
+
+/**
+ * @internal
+ */
+const consoleZLogMethods: [ConsoleZLogMethod, ...ConsoleZLogMethod[]] = [
+  // Below TRACE
+  (console, message) => console.debug(message.text, ...consoleZLogArgs(message)),
+  // TRACE
+  (console, message) => {
+
+    const { details } = message;
+    const debugDetails = { ...details };
+
+    delete debugDetails.stackTrace;
+
+    const args = consoleZLogArgs(message, debugDetails);
+
+    if (details.stackTrace) {
+      console.trace(message.text, ...args);
+    } else {
+      console.debug(message.text, ...args);
+    }
+  },
+  // DEBUG
+  (console, message) => console.log(message.text, ...consoleZLogArgs(message)),
+  // INFO
+  (console, message) => console.info(message.text, ...consoleZLogArgs(message)),
+  // WARN
+  (console, message) => console.warn(message.text, ...consoleZLogArgs(message)),
+  // ERROR
+  (console, message) => console.error(message.text, ...consoleZLogArgs(message)),
+  // FATAL
+  (console, message) => console.error(`FATAL! ${message.text}`, ...consoleZLogArgs(message)),
+];
 
 /**
  * Creates a log recorder that logs to global console.
@@ -17,45 +57,12 @@ export function logZToConsole(console = globalConsole()): ZLogRecorder {
   return {
 
     record(message: ZLogMessage): void {
-
-      const { level, text } = message;
-
-      if (level >= ZLogLevel.Fatal) {
-        console.error('FATAL! ' + text, ...consoleZLogArgs(message));
-      } else if (level >= ZLogLevel.Error) {
-        console.error(text, ...consoleZLogArgs(message));
-      } else if (level >= ZLogLevel.Warning) {
-        console.warn(text, ...consoleZLogArgs(message));
-      } else if (level >= ZLogLevel.Info) {
-        console.info(text, ...consoleZLogArgs(message));
-      } else if (level >= ZLogLevel.Debug) {
-        console.log(text, ...consoleZLogArgs(message));
-      } else if (level >= ZLogLevel.Trace) {
-
-        const { details } = message;
-        const debugDetails = { ...details };
-
-        delete debugDetails.stackTrace;
-
-        const args = consoleZLogArgs(message, debugDetails);
-
-        if (details.stackTrace) {
-          console.trace(text, ...args);
-        } else {
-          console.debug(text, ...args);
-        }
-      } else {
-        console.debug(text, ...consoleZLogArgs(message));
-      }
+      zlogLevelMap(message.level, consoleZLogMethods)(console, message);
     },
 
-    whenLogged(): Promise<boolean> {
-      return Promise.resolve(true);
-    },
+    whenLogged: alreadyLogged,
 
-    end(): Promise<void> {
-      return Promise.resolve();
-    },
+    end: alreadyEnded,
 
   };
 }
