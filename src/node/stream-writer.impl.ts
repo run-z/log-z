@@ -1,5 +1,6 @@
 import { lazyValue, noop, valueProvider } from '@proc7ts/primitives';
 import type { Writable } from 'stream';
+import { alreadyLogged } from '../log-recorder.impl';
 
 /**
  * @internal
@@ -47,25 +48,11 @@ export function streamWriter(to: Writable): (data: any) => WhenWritten {
         onWriteError(error);
       }
     })) {
-      setWhenWritten(alreadyWritten);
+      setWhenWritten(alreadyLogged);
     } else {
       setWhenWritten(valueProvider(whenDrained()));
     }
 
     return lazyValue(() => whenWritten()); // Always report the promise once reported
   };
-}
-
-/**
- * @internal
- */
-export function alreadyWritten(): Promise<true> {
-  return Promise.resolve(true);
-}
-
-/**
- * @internal
- */
-export function notWritten(): Promise<false> {
-  return Promise.resolve(false);
 }
