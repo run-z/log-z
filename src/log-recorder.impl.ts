@@ -1,14 +1,14 @@
 /**
  * @internal
  */
-export function alreadyLogged(): Promise<true> {
+export function alreadyLogged(): Promise<boolean> {
   return Promise.resolve(true);
 }
 
 /**
  * @internal
  */
-export function notLogged(): Promise<false> {
+export function notLogged(): Promise<boolean> {
   return Promise.resolve(false);
 }
 

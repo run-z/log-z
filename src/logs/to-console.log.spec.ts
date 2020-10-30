@@ -154,8 +154,11 @@ describe('logZToConsole', () => {
   });
 
   describe('end', () => {
-    it('does nothing', async () => {
+    it('stops logging', async () => {
       expect(await logger.end()).toBeUndefined();
+      logger.error('Error');
+      expect(await logger.whenLogged()).toBe(false);
+      expect(errorSpy).not.toHaveBeenCalled();
     });
   });
 

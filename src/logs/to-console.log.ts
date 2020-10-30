@@ -2,10 +2,11 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
+import { noop } from '@proc7ts/primitives';
 import { zlogLevelMap } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
-import { alreadyEnded, alreadyLogged } from '../log-recorder.impl';
+import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
 
 /**
  * @internal
@@ -54,15 +55,29 @@ const consoleZLogMethods: [ConsoleZLogMethod, ...ConsoleZLogMethod[]] = [
  * @returns New console log recorder.
  */
 export function logZToConsole(console = globalConsole()): ZLogRecorder {
+
+  let record = (message: ZLogMessage): void => zlogLevelMap(message.level, consoleZLogMethods)(console, message);
+  let whenLogged = alreadyLogged;
+  let end = (): Promise<void> => {
+    record = noop;
+    whenLogged = notLogged;
+    end = alreadyEnded;
+    return alreadyEnded();
+  };
+
   return {
 
     record(message: ZLogMessage): void {
-      zlogLevelMap(message.level, consoleZLogMethods)(console, message);
+      record(message);
     },
 
-    whenLogged: alreadyLogged,
+    whenLogged() {
+      return whenLogged();
+    },
 
-    end: alreadyEnded,
+    end() {
+      return end();
+    },
 
   };
 }
