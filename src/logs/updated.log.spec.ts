@@ -1,4 +1,4 @@
-import { logZ } from '../log';
+import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import { zlogDetails, zlogMessage } from '../log-message';
@@ -23,7 +23,7 @@ describe('logZUpdated', () => {
 
   beforeEach(() => {
     update = jest.fn(message => message);
-    logger = logZ({ atLeast: 0, by: logZUpdated(update, target) });
+    logger = logZBy(logZUpdated(update, target));
   });
 
   it('records updated message', () => {

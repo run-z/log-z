@@ -5,3 +5,4 @@ export * from './to-buffer.log';
 export * from './to-console.log';
 export * from './updated.log';
 export * from './when-level.log';
+export * from './with-details.log';
