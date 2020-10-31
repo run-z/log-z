@@ -18,7 +18,7 @@ export interface ZLogBufferSpec {
    *
    * The values less that `1` are treated as `1`.
    *
-   * @default 256
+   * @default 1024
    */
   readonly atMost?: number;
 
@@ -48,7 +48,7 @@ export interface ZLogBufferSpec {
  */
 export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
 
-  const { atMost = 256 } = how;
+  const { atMost = 1024 } = how;
   const onRecord = how.onRecord ? how.onRecord.bind(how) : noop;
   const buffer = new ZLogBuffer$(Math.max(1, atMost));
 

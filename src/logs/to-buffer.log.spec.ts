@@ -27,7 +27,7 @@ describe('logZToBuffer', () => {
   });
 
   it('discards oldest messages on buffer overflow', async () => {
-    logMessages(258);
+    logMessages(1026);
 
     await Promise.race(promises);
 
