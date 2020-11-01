@@ -52,12 +52,14 @@ export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
   const onRecord = how.onRecord ? how.onRecord.bind(how) : noop;
   const buffer = new ZLogBuffer$(Math.max(1, atMost));
 
-  let whenLogged: () => Promise<boolean> = alreadyLogged;
+  let whenLogged: (which?: 'all' | 'last') => Promise<boolean> = alreadyLogged;
   let record = (message: ZLogMessage): void => {
 
     const entry = buffer.add(message, onRecord);
 
-    whenLogged = () => entry.whenLogged();
+    whenLogged = which => which === 'all'
+        ? buffer.whenAllLogged().then(() => entry.whenLogged())
+        : entry.whenLogged();
   };
   let drainTo = ZLogBuffer.drainer(atOnce => buffer.next(atOnce));
   let end = (): Promise<void> => {
@@ -77,8 +79,8 @@ export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
       record(message);
     },
 
-    whenLogged(): Promise<boolean> {
-      return whenLogged();
+    whenLogged(which?: 'all' | 'last'): Promise<boolean> {
+      return whenLogged(which);
     },
 
     end() {

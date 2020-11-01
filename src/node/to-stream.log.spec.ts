@@ -112,7 +112,7 @@ describe('logZToStream', () => {
     logger.info('TEST');
     logger.error('ERROR');
 
-    expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
 
     expect(out.chunks).toEqual([
       zlogMessage(ZLogLevel.Info, 'TEST'),
@@ -165,7 +165,7 @@ describe('logZToStream', () => {
     expect(await logger.end()).toBeUndefined();
   });
 
-  describe('ends', () => {
+  describe('end', () => {
     it('stops logging', async () => {
 
       const out = new TestWritable({ objectMode: true });

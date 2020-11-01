@@ -94,7 +94,7 @@ export abstract class ZLogger implements ZLogRecorder {
 
   abstract record(message: ZLogMessage): void;
 
-  abstract whenLogged(): Promise<boolean>;
+  abstract whenLogged(which?: 'all' | 'last'): Promise<boolean>;
 
   abstract end(): Promise<void>;
 

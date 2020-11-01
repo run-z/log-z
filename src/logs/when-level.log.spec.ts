@@ -23,11 +23,13 @@ describe('logZWhenLevel', () => {
     logger.info('TEST');
     expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Info, 'TEST'));
     expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
   });
   it('does not log debug message by default', async () => {
     logger.debug('TEST');
     expect(recorder.record).not.toHaveBeenCalled();
     expect(await logger.whenLogged()).toBe(false);
+    expect(await logger.whenLogged('all')).toBe(false);
   });
   it('does not log debug message by default after info one', async () => {
     logger.info('INFO');
@@ -37,11 +39,13 @@ describe('logZWhenLevel', () => {
     logger.debug('DEBUG');
     expect(recorder.record).toHaveBeenCalledTimes(1);
     expect(await logger.whenLogged()).toBe(false);
+    expect(await logger.whenLogged('all')).toBe(false);
   });
   it('logs debug message when allowed', async () => {
     logger = logZBy(logZWhenLevel(ZLogLevel.Trace, recorder));
     logger.debug('TEST');
     expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Debug, 'TEST'));
     expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
   });
 });
