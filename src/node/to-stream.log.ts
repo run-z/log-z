@@ -84,7 +84,7 @@ export namespace StreamZLogSpec {
 }
 
 /**
- * Creates a recorder that writes messages to output stream.
+ * Creates a log recorder that writes messages to output stream.
  *
  * Logs messages as is when the stream is in [object mode], or {@link StreamZLogSpec.format formats them} otherwise.
  *
