@@ -103,42 +103,6 @@ describe('logZToStream', () => {
       zlogMessage(ZLogLevel.Error, 'ERROR'),
     ]);
   });
-  it('writes errors to dedicated stream', async () => {
-
-    const out = new TestWritable({ objectMode: true });
-    const errors = new TestWritable({ objectMode: true });
-    const logger = logZBy(logZToStream(out, { errors }));
-
-    logger.info('TEST');
-    logger.error('ERROR');
-
-    expect(await logger.whenLogged('all')).toBe(true);
-
-    expect(out.chunks).toEqual([
-      zlogMessage(ZLogLevel.Info, 'TEST'),
-    ]);
-    expect(errors.chunks).toEqual([
-      zlogMessage(ZLogLevel.Error, 'ERROR'),
-    ]);
-  });
-  it('writes errors to dedicated stream in specific format', async () => {
-
-    const out = new TestWritable({ objectMode: true });
-    const errors = new TestWritable({ objectMode: false });
-    const logger = logZBy(logZToStream(out, { errors: { to: errors, format: message => message.text + '!' } }));
-
-    logger.info('TEST');
-    logger.error('ERROR');
-
-    expect(await logger.whenLogged()).toBe(true);
-
-    expect(out.chunks).toEqual([
-      zlogMessage(ZLogLevel.Info, 'TEST'),
-    ]);
-    expect(errors.chunks).toEqual([
-        `ERROR!${os.EOL}`,
-    ]);
-  });
   it('stops logging when stream finished', async () => {
 
     const out = new TestWritable({ objectMode: true });
@@ -178,29 +142,6 @@ describe('logZToStream', () => {
       expect(await logger.whenLogged()).toBe(false);
       expect(out.chunks).toHaveLength(0);
       expect(out.writableFinished).toBe(true);
-    });
-    it('stops logging to errors', async () => {
-
-      const out = new TestWritable({ objectMode: true });
-      const errors = new TestWritable({ objectMode: false });
-      const logger = logZBy(logZToStream(out, { errors }));
-
-      await logger.end();
-
-      logger.info('TEST');
-
-      const whenInfoLogger = logger.whenLogged();
-
-      logger.error('ERROR');
-
-      const whenErrorLogged = logger.whenLogged();
-
-      expect(await whenInfoLogger).toBe(false);
-      expect(await whenErrorLogged).toBe(false);
-      expect(out.chunks).toHaveLength(0);
-      expect(errors.chunks).toHaveLength(0);
-      expect(out.writableFinished).toBe(true);
-      expect(errors.writableFinished).toBe(true);
     });
     it('does nothing after the second time', async () => {
 
