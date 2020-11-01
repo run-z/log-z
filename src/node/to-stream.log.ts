@@ -2,11 +2,11 @@
  * @packageDocumentation
  * @module @run-z/log-z/node
  */
+import { noop, valueProvider } from '@proc7ts/primitives';
 import * as os from 'os';
 import type { Writable } from 'stream';
 import type { TextZLogFormat, ZLogFormatter } from '../formats';
 import { textZLogFormatter } from '../formats';
-import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import { alreadyLogged, notLogged } from '../log-recorder.impl';
@@ -17,15 +17,6 @@ import { streamWriter } from './stream-writer.impl';
  * A specification of how to log messages {@link logZToStream to Node.js stream}.
  */
 export interface StreamZLogSpec {
-
-  /**
-   * A specification of how to log errors.
-   *
-   * Either a writable stream, or a {@link StreamZLogSpec.Errors more detailed} specification.
-   *
-   * @default The same as `output` stream.
-   */
-  readonly errors?: Writable | StreamZLogSpec.Errors;
 
   /**
    * Message format or formatter to use for text message logging.
@@ -47,48 +38,10 @@ export interface StreamZLogSpec {
 
 }
 
-export namespace StreamZLogSpec {
-
-  /**
-   * The detailed specification of how to log error messages.
-   */
-  export interface Errors {
-
-    /**
-     * The minimum log level of error messages.
-     *
-     * @default {@link ZLogLevel.Error Error}.
-     */
-    readonly atLeast?: ZLogLevel;
-
-    /**
-     * Writable stream to log errors to.
-     *
-     * @default The same as `output` stream.
-     */
-    readonly to: Writable;
-
-    /**
-     * Message format or formatter to use for text logging of error messages.
-     *
-     * Ignored for streams in [object mode].
-     *
-     * [object mode]: https://nodejs.org/dist/latest/docs/api/stream.html#stream_object_mode
-     *
-     * @default The same as {@link StreamZLogSpec.format output log format}.
-     */
-    readonly format?: TextZLogFormat | ZLogFormatter;
-
-  }
-
-}
-
 /**
  * Creates a log recorder that writes messages to output stream.
  *
  * Logs messages as is when the stream is in [object mode], or {@link StreamZLogSpec.format formats them} otherwise.
- *
- * Can log {@link StreamZLogSpec.errors errors} to separate stream.
  *
  * Reports logging complete immediately if `to.write()` returned `true`. Awaits for stream to [drain] otherwise.
  *
@@ -105,40 +58,21 @@ export namespace StreamZLogSpec {
 export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecorder {
 
   const { eol = os.EOL } = spec;
-  const errorsSpec = streamZLogErrorsSpec(to, spec);
-  const { to: errors, atLeast: errorLevel = ZLogLevel.Error } = errorsSpec;
   const recordMessage = logRecorderFor(to, eol, spec);
-  const recordError = errors === to ? recordMessage : logRecorderFor(errors, eol, errorsSpec);
 
-  let lastErr = false;
-  let whenLastLogged: WhenWritten = alreadyLogged;
-  let whenPrevLogged: WhenWritten = alreadyLogged;
+  let whenLogged: WhenWritten = alreadyLogged;
   let record = (message: ZLogMessage): void => {
-
-    const err = message.level >= errorLevel;
-
-    if (lastErr !== err) {
-      lastErr = err;
-      whenPrevLogged = whenLastLogged;
-    } else {
-      whenPrevLogged = alreadyLogged;
-    }
-
-    whenLastLogged = (err ? recordError : recordMessage)(message);
+    whenLogged = recordMessage(message);
   };
   let end = (): Promise<void> => {
     record = doNotLogZ;
-    whenLastLogged = whenPrevLogged = notLogged;
+    whenLogged = notLogged;
 
-    const whenOutputEnded = endLogging(to);
-    const whenAllEnded = (to === errors
-        ? whenOutputEnded
-        : Promise.all([whenOutputEnded, endLogging(errors)]))
-        .then(() => void 0);
+    const whenEnded = endLogging(to);
 
-    end = () => whenAllEnded;
+    end = valueProvider(whenEnded);
 
-    return whenAllEnded;
+    return whenEnded;
   };
 
   return {
@@ -147,8 +81,8 @@ export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecor
       record(message);
     },
 
-    whenLogged(which): Promise<boolean> {
-      return which === 'all' ? whenPrevLogged().then(whenLastLogged) : whenLastLogged();
+    whenLogged(): Promise<boolean> {
+      return whenLogged();
     },
 
     end(): Promise<void> {
@@ -156,30 +90,6 @@ export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecor
     },
 
   };
-}
-
-/**
- * @internal
- */
-function streamZLogErrorsSpec(to: Writable, spec: StreamZLogSpec): StreamZLogSpec.Errors {
-
-  const { errors, format } = spec;
-
-  if (!errors) {
-    return { to };
-  }
-  if (isWritable(errors)) {
-    return { to: errors, format };
-  }
-
-  return { format, ...errors };
-}
-
-/**
- * @internal
- */
-function isWritable(spec: StreamZLogSpec.Errors | Writable): spec is Writable {
-  return !!(spec as Writable).writable;
 }
 
 /**
@@ -195,7 +105,7 @@ function doNotLogZ(_message: ZLogMessage): WhenWritten {
 function logRecorderFor(
     to: Writable,
     eol: string,
-    { format }: StreamZLogSpec | StreamZLogSpec.Errors,
+    { format }: StreamZLogSpec,
 ): (message: ZLogMessage) => WhenWritten {
   if (to.writableEnded) {
     return doNotLogZ;
@@ -242,10 +152,10 @@ function whenLoggingStopped(to: Writable): Promise<void> {
 /**
  * @internal
  */
-function endLogging(to: Writable): Promise<unknown> {
+function endLogging(to: Writable): Promise<void> {
 
   const whenEnded = new Promise(resolve => to.end(resolve));
   const whenStopped = whenLoggingStopped(to);
 
-  return Promise.race([whenEnded, whenStopped]);
+  return Promise.race([whenEnded, whenStopped]).then(noop);
 }
