@@ -139,7 +139,7 @@ describe('logZToBuffer', () => {
       buffer.drainTo(target);
       logMessages(3);
 
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
@@ -148,7 +148,7 @@ describe('logZToBuffer', () => {
       buffer.drainTo(target, 0);
       logMessages(3);
 
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
@@ -157,7 +157,7 @@ describe('logZToBuffer', () => {
       logMessages(3);
       buffer.drainTo(target);
 
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
@@ -166,7 +166,7 @@ describe('logZToBuffer', () => {
       logMessages(3);
       buffer.drainTo(target, -1);
 
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
@@ -174,13 +174,13 @@ describe('logZToBuffer', () => {
     it('resumes draining when logging more messages', async () => {
       logMessages(2);
       buffer.drainTo(target);
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1)]);
 
       logMessages(1);
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
@@ -188,7 +188,7 @@ describe('logZToBuffer', () => {
     it('stops and resumes draining', async () => {
       logMessages(2);
       buffer.drainTo(target);
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1)]);
@@ -201,7 +201,7 @@ describe('logZToBuffer', () => {
       expect(drained).toEqual([testMessage(0), testMessage(1)]);
 
       buffer.drainTo(target);
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, true], [1, true], [2, true]]);
       expect(drained).toEqual([testMessage(0), testMessage(1), testMessage(2)]);
@@ -220,7 +220,7 @@ describe('logZToBuffer', () => {
       await buffer.end();
 
       logMessages(3);
-      await Promise.all(promises);
+      await buffer.whenLogged('all');
 
       expect(logged).toEqual([[0, false], [1, false], [2, false]]);
     });

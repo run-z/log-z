@@ -1,6 +1,6 @@
 import { isPresent, newPromiseResolver, noop } from '@proc7ts/primitives';
 import type { PushIterable } from '@proc7ts/push-iterator';
-import { filterIndexed, IndexedItemList, itsEach, itsEvery, PushIterator__symbol } from '@proc7ts/push-iterator';
+import { filterIndexed, IndexedItemList, itsEach, itsEvery, mapIt, PushIterator__symbol } from '@proc7ts/push-iterator';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogBuffer } from './log-buffer';
@@ -102,6 +102,10 @@ export class ZLogBuffer$ {
 
   clear(): void {
     itsEach(this.contents(), entry => entry.drop());
+  }
+
+  whenAllLogged(): Promise<unknown> {
+    return Promise.all(mapIt(this.contents(), entry => entry.whenLogged()));
   }
 
   private contents(): ZLogBuffer.Contents & PushIterable<ZLogBuffer.Entry> {

@@ -110,13 +110,25 @@ export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecor
   const recordMessage = logRecorderFor(to, eol, spec);
   const recordError = errors === to ? recordMessage : logRecorderFor(errors, eol, errorsSpec);
 
-  let whenLogged: WhenWritten = alreadyLogged;
-  let record = (message: ZLogMessage): WhenWritten => (message.level < errorLevel
-      ? recordMessage
-      : recordError)(message);
+  let lastErr = false;
+  let whenLastLogged: WhenWritten = alreadyLogged;
+  let whenPrevLogged: WhenWritten = alreadyLogged;
+  let record = (message: ZLogMessage): void => {
+
+    const err = message.level >= errorLevel;
+
+    if (lastErr !== err) {
+      lastErr = err;
+      whenPrevLogged = whenLastLogged;
+    } else {
+      whenPrevLogged = alreadyLogged;
+    }
+
+    whenLastLogged = (err ? recordError : recordMessage)(message);
+  };
   let end = (): Promise<void> => {
     record = doNotLogZ;
-    whenLogged = notLogged;
+    whenLastLogged = whenPrevLogged = notLogged;
 
     const whenOutputEnded = endLogging(to);
     const whenAllEnded = (to === errors
@@ -132,11 +144,11 @@ export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecor
   return {
 
     record(message) {
-      whenLogged = record(message);
+      record(message);
     },
 
-    whenLogged(): Promise<boolean> {
-      return whenLogged();
+    whenLogged(which): Promise<boolean> {
+      return which === 'all' ? whenPrevLogged().then(whenLastLogged) : whenLastLogged();
     },
 
     end(): Promise<void> {

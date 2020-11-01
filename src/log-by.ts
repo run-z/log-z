@@ -19,8 +19,8 @@ class DelegatingZLogger extends ZLogger {
     this._by.record(message);
   }
 
-  whenLogged(): Promise<boolean> {
-    return this._by.whenLogged();
+  whenLogged(which?: 'all' | 'last'): Promise<boolean> {
+    return this._by.whenLogged(which);
   }
 
   end(): Promise<void> {

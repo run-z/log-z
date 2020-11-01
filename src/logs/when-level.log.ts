@@ -31,25 +31,25 @@ export function logZWhenLevel(atLeastOrBy: ZLogLevel | ZLogRecorder, by?: ZLogRe
     atLeast = ZLogLevel.Info;
   }
 
-  let whenLogged: Promise<boolean> | undefined;
+  let lastDiscarded = false;
 
   return {
 
     record(message: ZLogMessage): void {
       if (message.level < atLeast) {
-        if (whenLogged) {
-          whenLogged = whenLogged.then(() => false);
-        } else {
-          whenLogged = Promise.resolve(false);
-        }
+        lastDiscarded = true;
       } else {
-        whenLogged = undefined;
+        lastDiscarded = false;
         recorder.record(message);
       }
     },
 
-    whenLogged(): Promise<boolean> {
-      return whenLogged || (whenLogged = recorder.whenLogged());
+    whenLogged(which?: 'all' | 'last'): Promise<boolean> {
+      return lastDiscarded
+          ? which === 'all'
+              ? recorder.whenLogged(which).then(() => false)
+              : Promise.resolve(false)
+          : recorder.whenLogged(which);
     },
 
     end(): Promise<void> {

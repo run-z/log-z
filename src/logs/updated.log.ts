@@ -25,8 +25,8 @@ export function logZUpdated(
       by.record(update(message));
     },
 
-    whenLogged() {
-      return by.whenLogged();
+    whenLogged(which?: 'all'| 'last') {
+      return by.whenLogged(which);
     },
 
     end() {
