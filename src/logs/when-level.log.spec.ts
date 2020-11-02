@@ -48,4 +48,16 @@ describe('logZWhenLevel', () => {
     expect(await logger.whenLogged()).toBe(true);
     expect(await logger.whenLogged('all')).toBe(true);
   });
+  it('logs messages with log level satisfying the condition', async () => {
+
+    logger = logZBy(logZWhenLevel(level => level < ZLogLevel.Error, recorder));
+
+    logger.debug('TEST');
+    logger.error('ERROR');
+
+    expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Debug, 'TEST'));
+    expect(recorder.record).not.toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'ERROR'));
+    expect(await logger.whenLogged()).toBe(false);
+    expect(await logger.whenLogged('all')).toBe(false);
+  });
 });

@@ -9,26 +9,41 @@ import type { ZLogRecorder } from '../log-recorder';
 /**
  * Creates a log recorder of messages with at least the required level. Messages with lower levels are discarded.
  *
- * @param atLeast  Required log level. {@link ZLogLevel.Info Info} by default.
+ * @param when  Either required log level, or arbitrary condition implemented by function accepting log level and
+ * returning `true` to log the message or `false` to discard it.
  * @param by  The recorder to log messages by.
  *
  * @returns New log recorder.
  */
-export function logZWhenLevel(atLeast: ZLogLevel, by: ZLogRecorder): ZLogRecorder;
+export function logZWhenLevel(
+    when: ZLogLevel | ((this: void, level: ZLogLevel) => boolean),
+    by: ZLogRecorder,
+): ZLogRecorder;
 
+/**
+ * Creates a log recorder of messages with at least {@link ZLogLevel.Info Info} log level. Messages with lower levels
+ * are discarded.
+ *
+ * @param by  The recorder to log messages by.
+ *
+ * @returns New log recorder.
+ */
 export function logZWhenLevel(by: ZLogRecorder): ZLogRecorder;
 
-export function logZWhenLevel(atLeastOrBy: ZLogLevel | ZLogRecorder, by?: ZLogRecorder): ZLogRecorder {
+export function logZWhenLevel(
+    whenOrBy: ZLogLevel | ((this: void, level: ZLogLevel) => boolean) | ZLogRecorder,
+    by?: ZLogRecorder,
+): ZLogRecorder {
 
   let recorder: ZLogRecorder;
-  let atLeast: ZLogLevel;
+  let when: ((this: void, level: ZLogLevel) => boolean);
 
   if (by) {
     recorder = by;
-    atLeast = atLeastOrBy as ZLogLevel;
+    when = typeof whenOrBy === 'function' ? whenOrBy : level => level >= (whenOrBy as ZLogLevel);
   } else {
-    recorder = atLeastOrBy as ZLogRecorder;
-    atLeast = ZLogLevel.Info;
+    recorder = whenOrBy as ZLogRecorder;
+    when = atLeastInfoZLevel;
   }
 
   let lastDiscarded = false;
@@ -36,11 +51,11 @@ export function logZWhenLevel(atLeastOrBy: ZLogLevel | ZLogRecorder, by?: ZLogRe
   return {
 
     record(message: ZLogMessage): void {
-      if (message.level < atLeast) {
-        lastDiscarded = true;
-      } else {
+      if (when(message.level)) {
         lastDiscarded = false;
         recorder.record(message);
+      } else {
+        lastDiscarded = true;
       }
     },
 
@@ -57,4 +72,11 @@ export function logZWhenLevel(atLeastOrBy: ZLogLevel | ZLogRecorder, by?: ZLogRe
     },
 
   };
+}
+
+/**
+ * @internal
+ */
+function atLeastInfoZLevel(level: ZLogLevel): boolean {
+  return level >= ZLogLevel.Info;
 }
