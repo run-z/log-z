@@ -1,3 +1,7 @@
+/**
+ * @packageDocumentation
+ * @module @run-z/log-z
+ */
 import { asis, noop } from '@proc7ts/primitives';
 import type { ZLogRecorder } from '../log-recorder';
 
