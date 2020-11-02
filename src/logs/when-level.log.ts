@@ -2,73 +2,95 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
+import { noop } from '@proc7ts/primitives';
 import { ZLogLevel } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
+import { neverLogZ } from './never.log';
 
 /**
- * Creates a log recorder of messages with at least the required level. Messages with lower levels are discarded.
+ * Creates a log recorder of messages with required level. Messages not satisfying the condition either logged
+ * by another recorder, or discarded.
  *
  * @param when  Either required log level, or arbitrary condition implemented by function accepting log level and
- * returning `true` to log the message or `false` to discard it.
- * @param by  The recorder to log messages by.
+ * returning `true` for satisfying level.
+ * @param by  The recorder to log messages satisfying log level condition.
+ * @param orBy  The recorder to log messages not satisfying log level condition. Such messages will be discarded when
+ * omitted.
  *
  * @returns New log recorder.
  */
 export function logZWhenLevel(
     when: ZLogLevel | ((this: void, level: ZLogLevel) => boolean),
     by: ZLogRecorder,
+    orBy?: ZLogRecorder,
 ): ZLogRecorder;
 
 /**
  * Creates a log recorder of messages with at least {@link ZLogLevel.Info Info} log level. Messages with lower levels
- * are discarded.
+ * either logged by another recorder, or discarded.
  *
- * @param by  The recorder to log messages by.
+ * @param by  The recorder to log messages satisfying log level condition.
+ * @param orBy  The recorder to log messages not satisfying log level condition. Such messages will be discarded when
+ * omitted.
  *
  * @returns New log recorder.
  */
-export function logZWhenLevel(by: ZLogRecorder): ZLogRecorder;
+export function logZWhenLevel(by: ZLogRecorder, orBy?: ZLogRecorder): ZLogRecorder;
 
 export function logZWhenLevel(
     whenOrBy: ZLogLevel | ((this: void, level: ZLogLevel) => boolean) | ZLogRecorder,
-    by?: ZLogRecorder,
+    by: ZLogRecorder = neverLogZ,
+    orBy: ZLogRecorder = neverLogZ,
 ): ZLogRecorder {
 
   let recorder: ZLogRecorder;
   let when: ((this: void, level: ZLogLevel) => boolean);
 
-  if (by) {
+  if (typeof whenOrBy === 'number') {
     recorder = by;
-    when = typeof whenOrBy === 'function' ? whenOrBy : level => level >= (whenOrBy as ZLogLevel);
+    when = level => level >= whenOrBy;
+  } else if (typeof whenOrBy === 'function') {
+    recorder = by;
+    when = whenOrBy;
   } else {
-    recorder = whenOrBy as ZLogRecorder;
+    recorder = whenOrBy;
     when = atLeastInfoZLevel;
+    orBy = by;
   }
 
-  let lastDiscarded = false;
+  let lastBy: ZLogRecorder = recorder;
 
   return {
 
     record(message: ZLogMessage): void {
       if (when(message.level)) {
-        lastDiscarded = false;
-        recorder.record(message);
+        lastBy = recorder;
       } else {
-        lastDiscarded = true;
+        lastBy = orBy;
       }
+
+      lastBy.record(message);
     },
 
     whenLogged(which?: 'all' | 'last'): Promise<boolean> {
-      return lastDiscarded
-          ? which === 'all'
-              ? recorder.whenLogged(which).then(() => false)
-              : Promise.resolve(false)
-          : recorder.whenLogged(which);
+      if (which === 'all') {
+
+        const index: 0 | 1 = lastBy === recorder ? 0 : 1;
+
+        return Promise.all([
+          recorder.whenLogged(which),
+          orBy.whenLogged(which),
+        ]).then(
+            results => results[index],
+        );
+      }
+
+      return lastBy.whenLogged(which);
     },
 
     end(): Promise<void> {
-      return recorder.end();
+      return Promise.resolve([recorder.end(), orBy.end()]).then(noop);
     },
 
   };

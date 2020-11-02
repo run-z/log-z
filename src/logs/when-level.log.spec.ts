@@ -60,4 +60,29 @@ describe('logZWhenLevel', () => {
     expect(await logger.whenLogged()).toBe(false);
     expect(await logger.whenLogged('all')).toBe(false);
   });
+  it('logs not matching messages by another recorder', async () => {
+
+    const other: jest.Mocked<ZLogRecorder> = {
+      record: jest.fn(),
+      whenLogged: jest.fn(() => Promise.resolve(true)),
+      end: jest.fn(() => Promise.resolve()),
+    };
+
+    logger = logZBy(logZWhenLevel(recorder, other));
+
+    logger.debug('TEST');
+    expect(other.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Debug, 'TEST'));
+    expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
+
+    logger.error('ERROR');
+    expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'ERROR'));
+    expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
+
+    await logger.end();
+
+    expect(recorder.end).toHaveBeenCalledWith();
+    expect(other.end).toHaveBeenCalledWith();
+  });
 });
