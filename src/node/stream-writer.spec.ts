@@ -44,31 +44,7 @@ describe('streamWriter', () => {
     expect(await promise2).toBe(true);
     expect(out.chunks).toEqual(['abc', 'def', '!']);
   });
-  it('reports immediate write error', async () => {
-
-    const error = new Error('Test');
-
-    class ErrorWritable extends Writable {
-
-      _write(_chunk: any, _encoding: string, callback: (error?: (Error | null)) => void): void {
-        callback(error);
-      }
-
-    }
-
-    const out = new ErrorWritable();
-    const onError = new Promise(resolve => {
-      out.once('error', resolve);
-    });
-
-    const writer = streamWriter(out);
-    const whenWritten = writer('abc');
-
-    await onError;
-
-    expect(await whenWritten().catch(e => e)).toBe(error);
-  });
-  it('reports delayed write error', async () => {
+  it('reports write error', async () => {
 
     const error = new Error('Test');
 

@@ -26,9 +26,6 @@ export function streamWriter(to: Writable): (data: any) => WhenWritten {
     }
     return drainPromise;
   };
-  let reportError: (error: any) => void = noop;
-
-  to.on('error', error => reportError(error));
 
   return data => {
 
@@ -38,14 +35,10 @@ export function streamWriter(to: Writable): (data: any) => WhenWritten {
     };
 
     // Global stream errors reported by the most recent write.
-    const onWriteError = reportError = error => {
-      setWhenWritten(() => Promise.reject(error));
-      setWhenWritten = noop; // Errors have higher priority.
-    };
-
     if (to.write(data, error => {
       if (error) {
-        onWriteError(error);
+        setWhenWritten(() => Promise.reject(error));
+        setWhenWritten = noop; // Errors have higher priority.
       }
     })) {
       setWhenWritten(alreadyLogged);

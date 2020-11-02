@@ -112,8 +112,6 @@ describe('logZToStream', () => {
       out.end(resolve);
     });
 
-    logger.info('TEST');
-    expect(await logger.whenLogged()).toBe(false);
     expect(await logger.end()).toBeUndefined();
   });
   it('does not log if the stream is ended already', async () => {

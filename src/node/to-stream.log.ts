@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module @run-z/log-z/node
  */
-import { noop, valueProvider } from '@proc7ts/primitives';
+import { valueProvider } from '@proc7ts/primitives';
 import * as os from 'os';
 import type { Writable } from 'stream';
 import type { TextZLogFormat, ZLogFormatter } from '../formats';
@@ -129,33 +129,18 @@ function logRecorderFor(
     };
   }
 
-  whenLoggingStopped(to).finally(() => record = doNotLogZ);
-
   return message => record(message);
 }
 
 /**
  * @internal
  */
-function whenLoggingStopped(to: Writable): Promise<void> {
-  return new Promise((resolve, reject) => {
+function endLogging(to: Writable): Promise<void> {
+  return new Promise(resolve => {
     if (to.writableFinished) {
       resolve();
     } else {
-      to.once('close', resolve);
-      to.once('finish', resolve);
-      to.once('error', reject);
+      to.end(resolve);
     }
   });
-}
-
-/**
- * @internal
- */
-function endLogging(to: Writable): Promise<void> {
-
-  const whenEnded = new Promise(resolve => to.end(resolve));
-  const whenStopped = whenLoggingStopped(to);
-
-  return Promise.race([whenEnded, whenStopped]).then(noop);
 }
