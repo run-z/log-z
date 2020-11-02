@@ -11,18 +11,44 @@ import type { ZLogBufferSpec } from './to-buffer.log';
  */
 export class ZLogBuffer$ {
 
-  length = 0;
-  private entries: (ZLogBuffer.Entry | undefined)[] = [];
-  private firstAdded: () => void = noop;
+  private readonly entries: (ZLogBuffer.Entry | undefined)[] = [];
   private head = 0;
   private tail = 0;
+  private size = 0;
+  private readonly contents: ZLogBuffer.Contents & PushIterable<ZLogBuffer.Entry>;
+  private firstAdded: () => void = noop;
 
-  constructor(readonly limit: number) {
+  constructor(private readonly limit: number) {
     this.entries.length = limit;
+    this.contents = {
+
+      [Symbol.iterator]() {
+        return this[PushIterator__symbol]();
+      },
+
+      [PushIterator__symbol]: accept => {
+
+        const head = this.head;
+        const list: IndexedItemList<ZLogBuffer.Entry> = {
+          length: this.size,
+          item: index => {
+
+            const offset = index + head;
+            const overflow = offset - this.limit;
+
+            return this.entries[overflow < 0 ? offset : overflow];
+          },
+        };
+
+        return filterIndexed(list, isPresent)[PushIterator__symbol](accept);
+      },
+
+      fillRatio: () => this.size ? this.size / this.limit : 0,
+    };
   }
 
   next(atOnce: number): Promise<[ZLogBuffer.Entry, ...ZLogBuffer.Entry[]]> {
-    if (this.length) {
+    if (this.size) {
       return Promise.resolve(this.batch(atOnce));
     }
 
@@ -73,7 +99,7 @@ export class ZLogBuffer$ {
 
     };
 
-    onRecord(entry, this.contents());
+    onRecord(entry, this.contents);
 
     if (drop !== noop) {
       // New entry is not dropped.
@@ -92,7 +118,7 @@ export class ZLogBuffer$ {
       }
 
       this.entries[index] = entry;
-      if (!this.length++) {
+      if (!this.size++) {
         this.firstAdded();
       }
     }
@@ -101,41 +127,11 @@ export class ZLogBuffer$ {
   }
 
   clear(): void {
-    itsEach(this.contents(), entry => entry.drop());
+    itsEach(this.contents, entry => entry.drop());
   }
 
   whenAllLogged(): Promise<unknown> {
-    return Promise.all(mapIt(this.contents(), entry => entry.whenLogged()));
-  }
-
-  private contents(): ZLogBuffer.Contents & PushIterable<ZLogBuffer.Entry> {
-
-    return {
-
-      [Symbol.iterator]() {
-        return this[PushIterator__symbol]();
-      },
-
-      [PushIterator__symbol]: accept => {
-
-        const head = this.head;
-        const list: IndexedItemList<ZLogBuffer.Entry> = {
-          length: this.length,
-          item: index => {
-
-            const offset = index + head;
-            const overflow = offset - this.limit;
-
-            return this.entries[overflow < 0 ? offset : overflow];
-          },
-        };
-
-        return filterIndexed(list, isPresent)[PushIterator__symbol](accept);
-      },
-
-      fillRatio: () => this.length ? this.length / this.limit : 0,
-    };
-
+    return Promise.all(mapIt(this.contents, entry => entry.whenLogged()));
   }
 
   private batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
@@ -143,7 +139,7 @@ export class ZLogBuffer$ {
     const batch: ZLogBuffer.Entry[] = [];
 
     itsEvery(
-        this.contents(),
+        this.contents,
         entry => {
           batch.push(entry);
           return --size > 0;
@@ -166,12 +162,12 @@ export class ZLogBuffer$ {
     // The head should never be empty, unless the buffer is.
     do {
       if (index === this.head) {
-        --this.length;
+        --this.size;
         if (++this.head >= this.limit) {
           this.head = 0;
         }
       }
-    } while (this.length && this.entries[index]);
+    } while (this.size && this.entries[index]);
   }
 
 }
