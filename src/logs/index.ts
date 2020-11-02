@@ -1,4 +1,5 @@
 export * from './by-all.log';
+export * from './by-any.log';
 export * from './log-buffer';
 export * from './never.log';
 export * from './timestamp.log';

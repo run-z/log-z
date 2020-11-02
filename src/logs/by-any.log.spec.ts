@@ -4,9 +4,9 @@ import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
-import { logZByAll } from './by-all.log';
+import { logZByAny } from './by-any.log';
 
-describe('logZByAll', () => {
+describe('logZByAny', () => {
 
   let target1: jest.Mocked<ZLogRecorder>;
   let target2: jest.Mocked<ZLogRecorder>;
@@ -27,7 +27,7 @@ describe('logZByAll', () => {
   let logger: ZLogger;
 
   beforeEach(() => {
-    logger = logZBy(logZByAll(target1, target2));
+    logger = logZBy(logZByAny(target1, target2));
   });
 
   describe('record', () => {
@@ -54,11 +54,27 @@ describe('logZByAll', () => {
 
       expect(await whenLogged).toBe(true);
     });
-    it('resolves to `false` if at least one logger did not log the message', async () => {
+    it('resolves to `true` if at least one logger log the message', async () => {
 
       const resolver = newPromiseResolver<boolean>();
 
       target1.whenLogged.mockImplementation(() => resolver.promise());
+
+      const whenLogged = logger.whenLogged('all');
+
+      expect(target1.whenLogged).toHaveBeenCalledWith('all');
+      expect(target2.whenLogged).toHaveBeenCalledWith('all');
+
+      resolver.resolve(false);
+
+      expect(await whenLogged).toBe(true);
+    });
+    it('resolves to `false` if none of the loggers log the message', async () => {
+
+      const resolver = newPromiseResolver<boolean>();
+
+      target1.whenLogged.mockImplementation(() => resolver.promise());
+      target2.whenLogged.mockImplementation(() => resolver.promise());
 
       const whenLogged = logger.whenLogged('all');
 
