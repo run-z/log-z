@@ -92,7 +92,7 @@ export abstract class ZLogLine {
 
       const { stack } = error;
 
-      this.write(stack ? `${String(error)} ${stack}` : String(error));
+      this.write(stack ? String(stack) : String(error));
     } else {
       this.write('[Error: ');
       this.writeValue(error);

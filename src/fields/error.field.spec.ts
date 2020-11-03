@@ -15,7 +15,7 @@ describe('errorZLogField', () => {
 
     const error = new Error();
 
-    expect(format(zlogMessage(ZLogLevel.Error, error))).toBe(`[ERROR] ${String(error)} ${error.stack}`);
+    expect(format(zlogMessage(ZLogLevel.Error, error))).toBe(`[ERROR] ${error.stack}`);
   });
   it('formats error without stack', () => {
 
