@@ -52,11 +52,11 @@ Node.js Support
 
 Log to file
 ```typescript
-import { logZ, ZLogLevel } from '@run-z/log-z';
+import { logZ, zlogDEBUG } from '@run-z/log-z';
 import { logZToFile } from '@run-z/log-z/node';
 
 // Create a file logger to `test.log`.
-const fileLogger = logZ({ atLeast: ZLogLevel.Debug, by: logZToFile('test.log') });
+const fileLogger = logZ({ atLeast: zlogDEBUG, by: logZToFile('test.log') });
 
 fileLogger.debug('Message');
 // [DEBUG] Message
@@ -74,11 +74,11 @@ const rollingLogger = logZ({
 
 Log to arbitrary stream
 ```typescript
-import { logZ, ZLogLevel } from '@run-z/log-z';
+import { logZ, zlogDEBUG } from '@run-z/log-z';
 import { logZToStream } from '@run-z/log-z/node';
 
 // Create a stdout logger.
-const streamLogger = logZ({ atLeast: ZLogLevel.Debug, by: logZToStream(process.stdout) });
+const streamLogger = logZ({ atLeast: zlogDEBUG, by: logZToStream(process.stdout) });
 
 streamLogger.info('Message');
 // [INFO ] Message
@@ -125,7 +125,8 @@ levels, like `info()` and `error()`, `warn()`, `trace()`, etc. Each of these met
 - Treats special values created by [zlogExtra] function as additional uninterpreted message parameters.
 - Treats anything else as uninterpreted message parameter.
 
-A [zlogMessage] function can be used to construct a log message.
+A [zlogMessage] function can be used to construct a log message, as well as level-specific ones, like `zlogDEBUG`
+or `zlogERROR`.
 
 [logger]: https://run-z.github.io/log-z/classes/@run-z_log-z.ZLogger.html
 [zlogDetails]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#zlogDetails

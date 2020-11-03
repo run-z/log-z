@@ -1,5 +1,6 @@
 export * from './fields';
 export * from './formats';
+export * from './levels';
 export * from './log';
 export * from './log-by';
 export * from './log-level';
