@@ -199,6 +199,62 @@ logger.info('Message', zlogDetails({ detail1: 'value', detail2: 2 }));
 // {"level":30,"text":"Message","details":{"detail1":"value","detail2":2},"extra":[]}
 ```
 
+
 Custom Loggers
 --------------
 
+Custom logger can be built by implementing a [ZLogRecorder] interface. The latter has three methods:
+
+- `record(message: ZLogMessage): void` - Records a log message.
+
+  The actual logging of the message can be asynchronous.
+
+- `whenLogged(which?: 'all' | 'last'): Promise<boolean>` - Awaits for the recorded message(s) to be either logged or
+  discarded.  
+
+  The optional `which` parrameter can be one of:
+  
+  - `"all"` to wait for all messages,
+  - `"last"` (the default) to wait for the last recorded message only.
+
+- `end(): Promise<void>` - Ends log recording and returns a promise resolved when recorder stopped.
+
+  All messages discarded after this method call. 
+
+
+The [logZ] and [logZBy] functions converts arbitrary [ZLogRecorder] to [logger]. The former accepts additional
+parameters, e.g. is able to filter out some debug messages.
+
+[logZ]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZ
+[logZBy]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZBy
+[ZLogRecorder]: https://run-z.github.io/log-z/interfaces/@run-z_log-z.ZLogRecorder.html
+
+
+Additional Log Recorders
+------------------------
+
+There are several additional log recorders that can combine or modify the behavior of other recorders:
+
+- [logZAtopOf] - Logs messages atop of the target log recorder.
+  When it ends logging, the target recorder still can record messages.
+  This, combined with [logZWithDetails], can be treated as "child" logger.
+- [logZByAll] - Logs messages by all the given recorders.
+- [logZByAny] - Logs messages by any of the given recorders.
+- [logZTimestamp] - Timestamp log recorder.
+  Adds a timestamp property to message details.
+- [logZToBuffer] - A log buffer that can be drained to another log recorder.   
+- [logZToConsole] - Logs to global console. This is the default recorder used by [logZ] function.
+- [logZUpdated] - Updates log messages.
+- [logZWhenLevel] - A log recorder of messages with required level.
+  Messages not satisfying the condition either logged by another recorder, or discarded.
+- [logZWithDetails] - Updates message details.     
+
+[logZAtopOf]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZAtopOf
+[logZByAll]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZByAll
+[logZByAny]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZByAny
+[logZTimestamp]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZTimestamp
+[logZToBuffer]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZToBuffer
+[logZToConsole]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZToConsole
+[logZUpdated]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZUpdated
+[logZWhenLevel]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZWhenLevel
+[logZWithDetails]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#logZWithDetails

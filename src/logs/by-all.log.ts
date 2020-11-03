@@ -6,7 +6,7 @@ import { asis, noop } from '@proc7ts/primitives';
 import type { ZLogRecorder } from '../log-recorder';
 
 /**
- * Creates a recorder that logs messages by all of the given recorders.
+ * Creates a recorder that logs messages by all the given recorders.
  *
  * @param by  Log recorders to log messages by.
  *

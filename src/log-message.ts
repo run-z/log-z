@@ -64,7 +64,7 @@ export type ZLogDetails = { readonly [key in string | symbol]?: any };
  * Treats special values created by {@link zlogExtra} function as additional {@link ZLogMessage.extra uninterpreted
  * message parameters}.
  *
- * Treats the rest of arguments as {@link ZLogMessage.extra message extra}.
+ * Treats anything else as {@link ZLogMessage.extra uninterpreted message parameter}.
  *
  * @param level  Log level.
  * @param args  Log message arguments.
