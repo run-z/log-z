@@ -18,7 +18,7 @@ type ConsoleZLogMethod = (this: void, console: Console, message: ZLogMessage) =>
  */
 const consoleZLogMethods: [ConsoleZLogMethod, ...ConsoleZLogMethod[]] = [
   // Below TRACE
-  (console, message) => console.debug(message.text, ...consoleZLogArgs(message)),
+  (console, message) => console.debug(...consoleZLogArgs(message)),
   // TRACE
   (console, message) => {
 
@@ -27,24 +27,24 @@ const consoleZLogMethods: [ConsoleZLogMethod, ...ConsoleZLogMethod[]] = [
 
     delete debugDetails.stackTrace;
 
-    const args = consoleZLogArgs(message, debugDetails);
+    const args = consoleZLogArgs(message, '', debugDetails);
 
     if (details.stackTrace) {
-      console.trace(message.text, ...args);
+      console.trace(...args);
     } else {
-      console.debug(message.text, ...args);
+      console.debug(...args);
     }
   },
   // DEBUG
-  (console, message) => console.log(message.text, ...consoleZLogArgs(message)),
+  (console, message) => console.log(...consoleZLogArgs(message)),
   // INFO
-  (console, message) => console.info(message.text, ...consoleZLogArgs(message)),
+  (console, message) => console.info(...consoleZLogArgs(message)),
   // WARN
-  (console, message) => console.warn(message.text, ...consoleZLogArgs(message)),
+  (console, message) => console.warn(...consoleZLogArgs(message)),
   // ERROR
-  (console, message) => console.error(message.text, ...consoleZLogArgs(message)),
+  (console, message) => console.error(...consoleZLogArgs(message)),
   // FATAL
-  (console, message) => console.error(`FATAL! ${message.text}`, ...consoleZLogArgs(message)),
+  (console, message) => console.error(...consoleZLogArgs(message, 'FATAL!')),
 ];
 
 /**
@@ -92,15 +92,32 @@ function globalConsole(): typeof console {
 /**
  * @internal
  */
-function consoleZLogArgs(message: ZLogMessage, details = message.details): string[] {
+function consoleZLogArgs(
+    message: ZLogMessage,
+    prefix = '',
+    details = message.details,
+): string[] {
 
-  const args: any[] = [...message.extra];
+  const { text, error } = message;
+  const args: any[] = [];
+
+  if (prefix) {
+    if (text) {
+      args.push(`${prefix} ${text}`);
+    } else {
+      args.push(prefix);
+    }
+  } else if (text) {
+    args.push(text);
+  }
+
+  args.push(...message.extra);
 
   if (Object.getOwnPropertyNames(details).length || Object.getOwnPropertySymbols(details).length) {
     args.push(details);
   }
-  if (message.error) {
-    args.push(message.error);
+  if (error) {
+    args.push(error);
   }
 
   return args;

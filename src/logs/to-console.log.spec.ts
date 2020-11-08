@@ -1,6 +1,6 @@
 import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
-import { zlogDetails } from '../log-message';
+import { zlogDetails, zlogExtra } from '../log-message';
 import type { ZLogger } from '../logger';
 import { logZToConsole } from './to-console.log';
 
@@ -55,16 +55,23 @@ describe('logZToConsole', () => {
     expect(errorSpy).toHaveBeenCalledWith(error.message, error);
   });
 
-  it('logs details', () => {
+  it('logs details before error', () => {
 
     const error = new Error('!!!');
     const details = { details: 'many' };
 
-    logger.error(error, details);
+    logger.error(error, zlogDetails(details));
     expect(errorSpy).toHaveBeenCalledWith(error.message, details, error);
   });
+  it('logs details without message text', () => {
 
-  it('logs extra', () => {
+    const details = { details: 'many' };
+
+    logger.error(zlogDetails(details));
+    expect(errorSpy).toHaveBeenCalledWith(details);
+  });
+
+  it('logs extra before details and error', () => {
 
     const error = new Error('!!!');
     const details = { details: 'many' };
@@ -72,11 +79,19 @@ describe('logZToConsole', () => {
     logger.error(error, zlogDetails(details), 'Error', ['extra']);
     expect(errorSpy).toHaveBeenCalledWith('Error', ['extra'], details, error);
   });
+  it('logs extra without message text', () => {
+    logger.error(zlogExtra('extra', 1, 2));
+    expect(errorSpy).toHaveBeenCalledWith('extra', 1, 2);
+  });
 
   describe('fatal', () => {
     it('logs with `console.error` and FATAL! prefix', () => {
       logger.fatal('Error');
       expect(errorSpy).toHaveBeenCalledWith('FATAL! Error');
+    });
+    it('logs FATAL! prefix only without message text', () => {
+      logger.fatal(zlogDetails({ fatal: true }));
+      expect(errorSpy).toHaveBeenCalledWith('FATAL!', { fatal: true });
     });
     it('logs with `console.error` and FATAL! prefix with higher level', () => {
       logger.log(ZLogLevel.Fatal + 1, 'Error');
