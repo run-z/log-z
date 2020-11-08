@@ -6,5 +6,6 @@ export * from './log-by';
 export * from './log-level';
 export * from './log-message';
 export * from './log-recorder';
+export * from './loggable';
 export * from './logger';
 export * from './logs';

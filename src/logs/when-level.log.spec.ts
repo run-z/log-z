@@ -48,6 +48,9 @@ describe('logZWhenLevel', () => {
     expect(await logger.whenLogged()).toBe(true);
     expect(await logger.whenLogged('all')).toBe(true);
   });
+  it('returns the target log when everything logged', () => {
+    expect(logZWhenLevel(0, recorder)).toBe(recorder);
+  });
   it('logs messages with log level satisfying the condition', async () => {
 
     logger = logZBy(logZWhenLevel(level => level < ZLogLevel.Error, recorder));
@@ -79,6 +82,32 @@ describe('logZWhenLevel', () => {
     expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'ERROR'));
     expect(await logger.whenLogged()).toBe(true);
     expect(await logger.whenLogged('all')).toBe(true);
+
+    await logger.end();
+
+    expect(recorder.end).toHaveBeenCalledWith();
+    expect(other.end).toHaveBeenCalledWith();
+  });
+  it('creates new logger if everything logged, but not matching messages directed to another logger', async () => {
+
+    const other: jest.Mocked<ZLogRecorder> = {
+      record: jest.fn(),
+      whenLogged: jest.fn(() => Promise.resolve(true)),
+      end: jest.fn(() => Promise.resolve()),
+    };
+
+    logger = logZBy(logZWhenLevel(0, recorder, other));
+
+    logger.debug('TEST');
+    logger.error('ERROR');
+
+    expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Debug, 'TEST'));
+    expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'ERROR'));
+    expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
+    expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
+    expect(other.record).not.toHaveBeenCalled();
 
     await logger.end();
 

@@ -3,7 +3,8 @@ import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
 import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
-import { zlogMessage } from '../log-message';
+import { zlogDetails, zlogMessage } from '../log-message';
+import { zlogDefer } from '../loggable';
 import { TestWritable } from '../spec';
 import { logZToStream } from './to-stream.log';
 
@@ -20,6 +21,21 @@ describe('logZToStream', () => {
     expect(await logger.whenLogged()).toBe(true);
 
     expect(out.chunks).toEqual([`[INFO ] TEST${os.EOL}`, `[ERROR] ERROR${os.EOL}`]);
+  });
+  it('expands message', async () => {
+
+    const out = new TestWritable();
+    const logger = logZBy(logZToStream(out));
+
+    logger.info(zlogDefer(() => ['TEST', zlogDetails({ expanded: true })]));
+    logger.error('ERROR');
+
+    expect(await logger.whenLogged()).toBe(true);
+
+    expect(out.chunks).toEqual([
+        `[INFO ] TEST { expanded: true }${os.EOL}`,
+        `[ERROR] ERROR${os.EOL}`,
+    ]);
   });
   it('formats message with custom format', async () => {
 

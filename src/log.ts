@@ -16,6 +16,8 @@ export interface ZLogSpec {
   /**
    * The minimum log level of logged messages. The messages with lower levels will be discarded.
    *
+   * Zero or negative value means to log everything.
+   *
    * @default {@link ZLogLevel.Info Info}.
    */
   readonly atLeast?: ZLogLevel;
