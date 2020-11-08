@@ -135,6 +135,25 @@ or `zlogERROR`.
 [zlogMessage]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#zlogMessage
 
 
+Loggable Values
+---------------
+
+A message error or any uninterpreted message parameter may be a loggable value. For that, it should implement
+a `toLog()` method that returns a loggable representation of the value. Such representation will be written to the log
+instead of original value. This can be used to log values in a special format.
+
+One possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
+This can be done with [zlogDefer] function:
+```typescript
+logger.debug('Debug info', zlogDefer(() => zlogDetails({ info: evaluateDebugInfo() })));
+// `evaluateDebugInfo()` will be called only if `DEBUG` log level enabled.
+// Note that this will happen right before writing to the log,
+// which may happen at a later time, or not happen at all.
+``` 
+
+[zlogDefer]: https://run-z.github.io/log-z/modules/@run-z_log-z.html#zlogDefer
+
+
 Log Formats
 -----------
 
