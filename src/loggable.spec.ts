@@ -1,5 +1,5 @@
 import { zlogINFO } from './levels';
-import { zlogDetails, zlogExtra } from './log-message';
+import { zlogDetails, zlogError, zlogExtra } from './log-message';
 import { zlogDefer, zlogExpand } from './loggable';
 
 describe('zlogExpand', () => {
@@ -38,5 +38,25 @@ describe('zlogExpand', () => {
   it('recursively expands deferred value', () => {
     expect(zlogExpand(zlogINFO('Message', 1, zlogDefer(() => zlogDefer(() => [2, 3])))))
         .toEqual(zlogINFO('Message', zlogExtra(1, 2, 3)));
+  });
+  it('preserves message error', () => {
+
+    const error = new Error('Test');
+
+    expect(zlogExpand(zlogINFO(error))).toEqual(zlogINFO(zlogError(error)));
+  });
+  it('expands message error', () => {
+
+    class TestError extends Error {
+
+      toLog(): unknown {
+        return zlogDetails({ error: this.message + '!' });
+      }
+
+    }
+
+    const error = new TestError('Test');
+
+    expect(zlogExpand(zlogINFO('Message', error))).toEqual(zlogINFO('Message', zlogDetails({ error: 'Test!' })));
   });
 });

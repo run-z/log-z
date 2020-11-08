@@ -42,11 +42,20 @@ class ZLogMessageExpander extends ZLogMessageBuilder {
 
   constructor(message: ZLogMessage) {
     super(message.level);
-    this.text = message.text;
-    this.hasText = !!this.text;
-    this.error = message.error;
-    this.hasError = !!this.error;
+
+    const { text, error } = message;
+
+    this.text = text;
+    this.hasText = !!text;
+
     this.details = { ...message.details };
+
+    if (isLoggable(error)) {
+      this.add(error);
+    } else {
+      this.error = error;
+      this.hasError = error != null;
+    }
   }
 
   add(param: any): void {
@@ -87,9 +96,10 @@ class ZLogMessageExpander extends ZLogMessageBuilder {
 }
 
 /**
- * Expands log message by interpreting {@link ZLogMessage.extra uninterpreted parameters}.
+ * Expands a log message by replacing its {@link ZLogMessage.error error} and {@link ZLogMessage.extra uninterpreted
+ * parameters} with their loggable representations.
  *
- * If parameter is a {@link ZLoggable loggable value}, then extracts its {@link ZLoggable.toLog loggable
+ * If error or parameter is a {@link ZLoggable loggable value}, then extracts its {@link ZLoggable.toLog loggable
  * representation}, and processes as following:
  *
  * 1. ignores `null` and `undefined`,
@@ -120,5 +130,5 @@ export function zlogExpand(message: ZLogMessage): ZLogMessage {
  * @internal
  */
 function isLoggable(value: any): value is ZLoggable {
-  return !!(value as Partial<ZLoggable>).toLog;
+  return !!value && typeof value === 'object' && typeof value.toLog === 'function';
 }
