@@ -163,6 +163,18 @@ streamLogger.info(<span class="hljs-string">&#x27;Message&#x27;</span>);
 				</ul>
 				<p>A <a href="https://run-z.github.io/log-z/modules/@run-z_log-z.html#zlogMessage">zlogMessage</a> function can be used to construct a log message, as well as level-specific ones, like <code>zlogDEBUG</code>
 				or <code>zlogERROR</code>.</p>
+				<a href="#loggable-values" id="loggable-values" style="color: inherit; text-decoration: none;">
+					<h2>Loggable Values</h2>
+				</a>
+				<p>A message error or any uninterpreted message parameter may be a loggable value. For that, it should implement
+					a <code>toLog()</code> method that returns a loggable representation of the value. Such representation will be written to the log
+				instead of original value. This can be used to log values in a special format.</p>
+				<p>One possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
+				This can be done with <a href="https://run-z.github.io/log-z/modules/@run-z_log-z.html#zlogDefer">zlogDefer</a> function:</p>
+				<pre><code class="language-typescript">logger.debug(<span class="hljs-string">&#x27;Debug info&#x27;</span>, zlogDefer(<span class="hljs-function">() =&gt;</span> zlogDetails({ <span class="hljs-attr">info</span>: evaluateDebugInfo() })));
+<span class="hljs-comment">// `evaluateDebugInfo()` will be called only if `DEBUG` log level enabled.</span>
+<span class="hljs-comment">// Note that this will happen right before writing to the log,</span>
+<span class="hljs-comment">// which may happen at a later time, or not happen at all.</span></code></pre>
 				<a href="#log-formats" id="log-formats" style="color: inherit; text-decoration: none;">
 					<h2>Log Formats</h2>
 				</a>
