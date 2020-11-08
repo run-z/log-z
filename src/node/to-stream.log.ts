@@ -10,6 +10,7 @@ import { textZLogFormatter } from '../formats';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import { alreadyLogged, notLogged } from '../log-recorder.impl';
+import { zlogExpand } from '../loggable';
 import type { WhenWritten } from './stream-writer.impl';
 import { streamWriter } from './stream-writer.impl';
 
@@ -123,7 +124,7 @@ function logRecorderFor(
   } else {
     record = message => {
 
-      const line = formatter(message);
+      const line = formatter(zlogExpand(message));
 
       return line == null ? notLogged : write(line + eol);
     };
