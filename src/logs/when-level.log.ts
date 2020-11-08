@@ -13,7 +13,7 @@ import { neverLogZ } from './never.log';
  * by another recorder, or discarded.
  *
  * @param when  Either required log level, or arbitrary condition implemented by function accepting log level and
- * returning `true` for satisfying level.
+ * returning `true` for satisfying level. Zero or negative value means to log everything.
  * @param by  The recorder to log messages satisfying log level condition.
  * @param orBy  The recorder to log messages not satisfying log level condition. Such messages will be discarded when
  * omitted.
@@ -48,6 +48,9 @@ export function logZWhenLevel(
   let when: ((this: void, level: ZLogLevel) => boolean);
 
   if (typeof whenOrBy === 'number') {
+    if (whenOrBy <= 0 && orBy === neverLogZ) {
+      return by;
+    }
     recorder = by;
     when = level => level >= whenOrBy;
   } else if (typeof whenOrBy === 'function') {
