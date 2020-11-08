@@ -3,7 +3,8 @@
  * @module @run-z/log-z
  */
 import type { ZLogLevel } from './log-level';
-import { isZLogMessageData, ZLogMessageData, ZLogMessageData__symbol } from './log-message-data.impl';
+import { ZLogMessageBuilder } from './log-message-builder.impl';
+import { ZLogMessageData__symbol } from './log-message-data.impl';
 
 /**
  * Log message.
@@ -71,69 +72,13 @@ export type ZLogDetails = { readonly [key in string | symbol]?: any };
  *
  * @returns Constructed log message.
  */
-export function zlogMessage(level: number, ...args: any[]): ZLogMessage {
+export function zlogMessage(level: ZLogLevel, ...args: any[]): ZLogMessage {
 
-  let text = '';
-  let hasText = false;
-  let error: any | undefined;
-  let hasError = false;
-  const details: Record<string | symbol, any> = {};
-  const extra = [];
+  const builder = new ZLogMessageBuilder(level);
 
-  const setError = (newError: any, newText?: string): void => {
-    if (hasError) {
-      extra.push(newError);
-      return;
-    }
+  builder.addAll(args);
 
-    hasError = true;
-    error = newError;
-
-    if (!hasText) {
-      if (newText !== undefined) {
-        text = newText;
-      } else if (newError instanceof Error) {
-        text = newError.message;
-      }
-    }
-  };
-
-  for (const arg of args) {
-    if (typeof arg === 'string') {
-      if (!hasText) {
-        text = arg;
-        hasText = true;
-        continue;
-      }
-    } else if (arg && typeof arg === 'object') {
-      if (isZLogMessageData(arg)) {
-        switch (arg[ZLogMessageData__symbol]) {
-        case 'error':
-          setError((arg as ZLogMessageData.Error).error);
-          continue;
-        case 'details':
-          Object.assign(details, (arg as ZLogMessageData.Details).details);
-          continue;
-        case 'extra':
-          extra.push(...(arg as ZLogMessageData.Extra).extra);
-          continue;
-        }
-      } else if (arg instanceof Error) {
-        setError(arg, arg.message);
-        continue;
-      }
-    }
-
-    extra.push(arg);
-  }
-
-  return {
-    level,
-    text,
-    error,
-    details,
-    extra,
-  };
+  return builder.message();
 }
 
 /**
@@ -171,7 +116,8 @@ export function zlogError(error: any): unknown {
 }
 
 /**
- * Builds a special value {@link zlogMessage treated} as a list of {@link ZLogMessage.extra uninterpreted parameters}.
+ * Builds a special value {@link zlogMessage treated} as a list of {@link ZLogMessage.extra uninterpreted log message
+ * parameters}.
  *
  * The resulting value can be passed to {@link zlogMessage} function or to {@link ZLogger.log logger method} to add
  * parameters of any type to logged message.
