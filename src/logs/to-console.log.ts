@@ -7,6 +7,7 @@ import { zlogLevelMap } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
+import { zlogExpand } from '../loggable';
 
 /**
  * @internal
@@ -56,7 +57,10 @@ const consoleZLogMethods: [ConsoleZLogMethod, ...ConsoleZLogMethod[]] = [
  */
 export function logZToConsole(console = globalConsole()): ZLogRecorder {
 
-  let record = (message: ZLogMessage): void => zlogLevelMap(message.level, consoleZLogMethods)(console, message);
+  let record = (message: ZLogMessage): void => zlogLevelMap(message.level, consoleZLogMethods)(
+      console,
+      zlogExpand(message),
+  );
   let whenLogged = alreadyLogged;
   let end = (): Promise<void> => {
     record = noop;

@@ -1,6 +1,7 @@
 import { logZ } from '../log';
 import { ZLogLevel } from '../log-level';
 import { zlogDetails, zlogExtra } from '../log-message';
+import { zlogDefer } from '../loggable';
 import type { ZLogger } from '../logger';
 import { logZToConsole } from './to-console.log';
 
@@ -82,6 +83,11 @@ describe('logZToConsole', () => {
   it('logs extra without message text', () => {
     logger.error(zlogExtra('extra', 1, 2));
     expect(errorSpy).toHaveBeenCalledWith('extra', 1, 2);
+  });
+
+  it('expands the message', () => {
+    logger.error(zlogDefer(() => 'Expanded'));
+    expect(errorSpy).toHaveBeenCalledWith('Expanded');
   });
 
   describe('fatal', () => {
