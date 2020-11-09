@@ -1,5 +1,8 @@
+import { detailsZLogField } from '../fields';
+import { zlogINFO } from '../levels';
 import { ZLogLevel } from '../log-level';
-import { zlogMessage } from '../log-message';
+import { zlogDetails, zlogMessage } from '../log-message';
+import type { ZLogField } from './log-field';
 import { TextZLogFormat, textZLogFormatter } from './text.format';
 
 describe('textZLogFormatter', () => {
@@ -78,6 +81,50 @@ describe('textZLogFormatter', () => {
     });
     it('adds prefix and suffix if all fields are empty', () => {
       expect(format({ fields: ['prefix-', line => line.write(''), '-suffix'] })).toBe('prefix--suffix');
+    });
+  });
+
+  describe('format', () => {
+    it('allows to change original message', () => {
+
+      const field: ZLogField = line => {
+        line.write(
+            line.format(l => {
+              l.write(`meta(${l.extractDetail('meta')})`);
+            }) || '',
+        );
+      };
+      const format = textZLogFormatter({
+        fields: [
+          field,
+          ' ',
+          detailsZLogField(),
+        ],
+      });
+
+      expect(format(zlogINFO(zlogDetails({ meta: 'test' })))).toEqual('meta(test)');
+    });
+    it('does not change original message when formats another one', () => {
+
+      const field: ZLogField = line => {
+        line.write(
+            line.format(
+                l => {
+                  l.write(`meta(${l.extractDetail('meta')})`);
+                },
+                { ...line.message },
+            ) || '',
+        );
+      };
+      const format = textZLogFormatter({
+        fields: [
+          field,
+          ' ',
+          detailsZLogField(),
+        ],
+      });
+
+      expect(format(zlogINFO(zlogDetails({ meta: 'test' })))).toEqual('meta(test) meta: "test"');
     });
   });
 

@@ -87,61 +87,69 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
 
   const { fields = TextZLogFormat.defaultFields() } = format;
 
-  return message => {
+  return message => zlogMessageText(fields, [message]);
+}
 
-    const outputByOrder = new Map<number, Written[]>();
-    let currentOrder = 0;
-    let currentOutput: Written[] = [];
+/**
+ * @internal
+ */
+function zlogMessageText(
+    fields: Exclude<TextZLogFormat['fields'], undefined>,
+    state: [message: ZLogMessage],
+): string | undefined {
 
-    outputByOrder.set(currentOrder, currentOutput);
+  const outputByOrder = new Map<number, Written[]>();
+  let currentOrder = 0;
+  let currentOutput: Written[] = [];
 
-    class ZLogLine$ extends ZLogLine {
+  outputByOrder.set(currentOrder, currentOutput);
 
-      get message(): ZLogMessage {
-        return message;
-      }
+  class ZLogLine$ extends ZLogLine {
 
-      changeMessage(newMessage: ZLogMessage): void {
-        message = newMessage;
-      }
-
-      write(value: string): void {
-        currentOutput.push([value]);
-      }
-
-      format(field: ZLogField<this>, message: ZLogMessage = this.message): string | undefined {
-        return textZLogFormatter({ fields: [field as ZLogField] })(message);
-      }
-
+    get message(): ZLogMessage {
+      return state[0];
     }
 
-    const formatted = new ZLogLine$();
+    changeMessage(newMessage: ZLogMessage): void {
+      state[0] = newMessage;
+    }
 
-    for (const field of fields) {
-      if (typeof field === 'function') {
-        // Render field.
-        field(formatted);
-        currentOutput.push([]);
-      } else if (typeof field === 'string') {
-        // Add delimiter.
-        currentOutput.push([field, 1]);
+    write(value: string): void {
+      currentOutput.push([value]);
+    }
+
+    format(field: ZLogField<this>, message?: ZLogMessage): string | undefined {
+      return zlogMessageText([field as ZLogField], message ? [message] : state);
+    }
+
+  }
+
+  const line = new ZLogLine$();
+
+  for (const field of fields) {
+    if (typeof field === 'function') {
+      // Render field.
+      field(line);
+      currentOutput.push([]);
+    } else if (typeof field === 'string') {
+      // Add delimiter.
+      currentOutput.push([field, 1]);
+    } else {
+      // Change the order of the following fields.
+      currentOrder = field;
+
+      const orderTokens = outputByOrder.get(currentOrder);
+
+      if (orderTokens) {
+        currentOutput = orderTokens;
       } else {
-        // Change the order of the following fields.
-        currentOrder = field;
-
-        const orderTokens = outputByOrder.get(currentOrder);
-
-        if (orderTokens) {
-          currentOutput = orderTokens;
-        } else {
-          currentOutput = [];
-          outputByOrder.set(currentOrder, currentOutput);
-        }
+        currentOutput = [];
+        outputByOrder.set(currentOrder, currentOutput);
       }
     }
+  }
 
-    return zlogLineOutputText(outputByOrder);
-  };
+  return zlogLineOutputText(outputByOrder);
 }
 
 /**
