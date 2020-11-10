@@ -1,6 +1,6 @@
 {
   "name": "@run-z/log-z",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Log that in browser or Node.js",
   "keywords": [
     "log",
