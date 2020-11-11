@@ -24,6 +24,14 @@ describe('zlogExpand', () => {
     expect(zlogExpand(zlogINFO('Message', zlogDetails({ test1: 1 }), zlogDefer(() => zlogDetails({ test2: 2 })))))
         .toEqual(zlogINFO('Message', zlogDetails({ test1: 1, test2: 2 })));
   });
+  it('expands message details in shorter form', () => {
+    expect(zlogExpand(zlogINFO('Message', zlogDetails({ test1: 1 }), zlogDetails(() => ({ test2: 2 })))))
+        .toEqual(zlogINFO('Message', zlogDetails({ test1: 1, test2: 2 })));
+  });
+  it('does not expand absent message details', () => {
+    expect(zlogExpand(zlogINFO('Message', zlogDetails({ test1: 1 }), zlogDetails(() => null))))
+        .toEqual(zlogINFO('Message', zlogDetails({ test1: 1 })));
+  });
   it('expands message extra', () => {
     expect(zlogExpand(zlogINFO('Message', 1, zlogDefer(() => 2))))
         .toEqual(zlogINFO('Message', zlogExtra(1, 2)));

@@ -31,7 +31,7 @@ export interface ZLoggable {
  *
  * @param toLog  Builds a loggable value representation.
  */
-export function zlogDefer(toLog: () => any): unknown {
+export function zlogDefer(toLog: (this: void) => any): unknown {
   return zlogExtra({ toLog });
 }
 
