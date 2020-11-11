@@ -101,6 +101,7 @@
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="@run-z_log-z.html#ZLogDetails" class="tsd-kind-icon">ZLog<wbr>Details</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="@run-z_log-z.html#ZLogField" class="tsd-kind-icon">ZLog<wbr>Field</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="@run-z_log-z.html#ZLogFormatter" class="tsd-kind-icon">ZLog<wbr>Formatter</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-kind-icon">ZLog<wbr>Level<wbr>Fn</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -146,6 +147,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="@run-z_log-z.html#zlogLevelAbbr5" class="tsd-kind-icon">zlog<wbr>Level<wbr>Abbr5</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="@run-z_log-z.html#zlogLevelMap" class="tsd-kind-icon">zlog<wbr>Level<wbr>Map</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="@run-z_log-z.html#zlogLevelName" class="tsd-kind-icon">zlog<wbr>Level<wbr>Name</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="@run-z_log-z.html#zlogLevelOf" class="tsd-kind-icon">zlog<wbr>Level<wbr>Of</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="@run-z_log-z.html#zlogMessage" class="tsd-kind-icon">zlog<wbr>Message</a></li>
 							</ul>
 						</section>
@@ -167,7 +169,7 @@
 					<div class="tsd-signature tsd-kind-icon">ZLog<wbr>Details<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-message.ts#L52">run-z/log-z/src/log-message.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-details.ts#L13">run-z/log-z/src/log-details.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +190,7 @@
 					<div class="tsd-signature tsd-kind-icon">ZLog<wbr>Field&lt;TLine&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, line<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TLine</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/formats/log-field.ts#L14">run-z/log-z/src/formats/log-field.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/formats/log-field.ts#L14">run-z/log-z/src/formats/log-field.ts:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -246,7 +248,7 @@
 					<div class="tsd-signature tsd-kind-icon">ZLog<wbr>Formatter&lt;TForm&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, message<span class="tsd-signature-symbol">: </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">TForm</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/formats/log-formatter.ts#L14">run-z/log-z/src/formats/log-formatter.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/formats/log-formatter.ts#L14">run-z/log-z/src/formats/log-formatter.ts:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -299,6 +301,28 @@
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="ZLogLevelFn" class="tsd-anchor"></a>
+					<h3>ZLog<wbr>Level<wbr>Fn</h3>
+					<div class="tsd-signature tsd-kind-icon">ZLog<wbr>Level<wbr>Fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>toJSON<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>toLogLevel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>valueOf<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html" class="tsd-signature-type">ZLogLevel</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/levels.ts#L19">run-z/log-z/src/levels.ts:19</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A function representing particular log level.</p>
+						</div>
+						<ul>
+							<li>Implements a <code>valueOf()</code> method returning a numeric log level value.</li>
+							<li>Implements a <code>toJSON()</code> method returning a numeric log level value.</li>
+							<li>Implements a <code>toLogLevel()</code> method returning a numeric log level value.</li>
+							<li>Implements a <code>toString()</code> method returning a <a href="@run-z_log-z.html#zlogLevelAbbr">short log level name</a>.</li>
+							<li>When called, returns a log message constructed by <a href="@run-z_log-z.html#zlogMessage">zlogMessage</a> with corresponding log level.</li>
+						</ul>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
@@ -308,7 +332,7 @@
 					<div class="tsd-signature tsd-kind-icon">never<wbr>LogZ<span class="tsd-signature-symbol">:</span> <a href="../classes/@run-z_log-z.ZLogger.html" class="tsd-signature-type">ZLogger</a><span class="tsd-signature-symbol"> = (/*#__PURE__*/ new DiscardingZLogger())</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/never.log.ts#L32">run-z/log-z/src/logs/never.log.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/never.log.ts#L32">run-z/log-z/src/logs/never.log.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -321,10 +345,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="zlogDEBUG" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> zlogDEBUG</h3>
-					<div class="tsd-signature tsd-kind-icon">zlogDEBUG<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Fatal" class="tsd-signature-type">Fatal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Warning" class="tsd-signature-type">Warning</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Info" class="tsd-signature-type">Info</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Debug" class="tsd-signature-type">Debug</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Trace" class="tsd-signature-type">Trace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Debug, &#x27;DEBUG&#x27;))</span></div>
+					<div class="tsd-signature tsd-kind-icon">zlogDEBUG<span class="tsd-signature-symbol">:</span> <a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-signature-type">ZLogLevelFn</a><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Debug, &#x27;DEBUG&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/levels.ts#L58">run-z/log-z/src/levels.ts:58</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/levels.ts#L74">run-z/log-z/src/levels.ts:74</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -337,10 +361,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="zlogERROR" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> zlogERROR</h3>
-					<div class="tsd-signature tsd-kind-icon">zlogERROR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Fatal" class="tsd-signature-type">Fatal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Warning" class="tsd-signature-type">Warning</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Info" class="tsd-signature-type">Info</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Debug" class="tsd-signature-type">Debug</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Trace" class="tsd-signature-type">Trace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Error, &#x27;ERROR&#x27;))</span></div>
+					<div class="tsd-signature tsd-kind-icon">zlogERROR<span class="tsd-signature-symbol">:</span> <a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-signature-type">ZLogLevelFn</a><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Error, &#x27;ERROR&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/levels.ts#L37">run-z/log-z/src/levels.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/levels.ts#L53">run-z/log-z/src/levels.ts:53</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -353,10 +377,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="zlogFATAL" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> zlogFATAL</h3>
-					<div class="tsd-signature tsd-kind-icon">zlogFATAL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Fatal" class="tsd-signature-type">Fatal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Warning" class="tsd-signature-type">Warning</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Info" class="tsd-signature-type">Info</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Debug" class="tsd-signature-type">Debug</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Trace" class="tsd-signature-type">Trace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Fatal, &#x27;FATAL&#x27;))</span></div>
+					<div class="tsd-signature tsd-kind-icon">zlogFATAL<span class="tsd-signature-symbol">:</span> <a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-signature-type">ZLogLevelFn</a><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Fatal, &#x27;FATAL&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/levels.ts#L30">run-z/log-z/src/levels.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/levels.ts#L46">run-z/log-z/src/levels.ts:46</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -369,10 +393,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="zlogINFO" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> zlogINFO</h3>
-					<div class="tsd-signature tsd-kind-icon">zlogINFO<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Fatal" class="tsd-signature-type">Fatal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Warning" class="tsd-signature-type">Warning</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Info" class="tsd-signature-type">Info</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Debug" class="tsd-signature-type">Debug</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Trace" class="tsd-signature-type">Trace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Info, &#x27;INFO&#x27;))</span></div>
+					<div class="tsd-signature tsd-kind-icon">zlogINFO<span class="tsd-signature-symbol">:</span> <a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-signature-type">ZLogLevelFn</a><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Info, &#x27;INFO&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/levels.ts#L51">run-z/log-z/src/levels.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/levels.ts#L67">run-z/log-z/src/levels.ts:67</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -385,10 +409,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="zlogTRACE" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> zlogTRACE</h3>
-					<div class="tsd-signature tsd-kind-icon">zlogTRACE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Fatal" class="tsd-signature-type">Fatal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Warning" class="tsd-signature-type">Warning</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Info" class="tsd-signature-type">Info</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Debug" class="tsd-signature-type">Debug</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Trace" class="tsd-signature-type">Trace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Trace, &#x27;TRACE&#x27;))</span></div>
+					<div class="tsd-signature tsd-kind-icon">zlogTRACE<span class="tsd-signature-symbol">:</span> <a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-signature-type">ZLogLevelFn</a><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Trace, &#x27;TRACE&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/levels.ts#L65">run-z/log-z/src/levels.ts:65</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/levels.ts#L81">run-z/log-z/src/levels.ts:81</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -401,10 +425,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="zlogWARN" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> zlogWARN</h3>
-					<div class="tsd-signature tsd-kind-icon">zlogWARN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Fatal" class="tsd-signature-type">Fatal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Warning" class="tsd-signature-type">Warning</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Info" class="tsd-signature-type">Info</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Debug" class="tsd-signature-type">Debug</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol"> &amp; </span><a href="../enums/@run-z_log-z.ZLogLevel.html#Trace" class="tsd-signature-type">Trace</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Warning, &#x27;WARN&#x27;))</span></div>
+					<div class="tsd-signature tsd-kind-icon">zlogWARN<span class="tsd-signature-symbol">:</span> <a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-signature-type">ZLogLevelFn</a><span class="tsd-signature-symbol"> = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Warning, &#x27;WARN&#x27;))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/levels.ts#L44">run-z/log-z/src/levels.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/levels.ts#L60">run-z/log-z/src/levels.ts:60</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -427,7 +451,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/fields/decorator.field.ts#L47">run-z/log-z/src/fields/decorator.field.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/fields/decorator.field.ts#L47">run-z/log-z/src/fields/decorator.field.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -471,7 +495,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/fields/details.field.ts#L12">run-z/log-z/src/fields/details.field.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/fields/details.field.ts#L12">run-z/log-z/src/fields/details.field.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -494,7 +518,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/fields/error.field.ts#L12">run-z/log-z/src/fields/error.field.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/fields/error.field.ts#L12">run-z/log-z/src/fields/error.field.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -517,7 +541,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/fields/extra.field.ts#L12">run-z/log-z/src/fields/extra.field.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/fields/extra.field.ts#L12">run-z/log-z/src/fields/extra.field.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -540,7 +564,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/fields/level.field.ts#L19">run-z/log-z/src/fields/level.field.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/fields/level.field.ts#L19">run-z/log-z/src/fields/level.field.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -594,7 +618,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log.ts#L41">run-z/log-z/src/log.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log.ts#L41">run-z/log-z/src/log.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -626,7 +650,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/atop-of.log.ts#L20">run-z/log-z/src/logs/atop-of.log.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/atop-of.log.ts#L20">run-z/log-z/src/logs/atop-of.log.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -660,7 +684,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-by.ts#L41">run-z/log-z/src/log-by.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-by.ts#L41">run-z/log-z/src/log-by.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -693,7 +717,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/by-all.log.ts#L15">run-z/log-z/src/logs/by-all.log.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/by-all.log.ts#L15">run-z/log-z/src/logs/by-all.log.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -725,7 +749,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/by-any.log.ts#L18">run-z/log-z/src/logs/by-any.log.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/by-any.log.ts#L18">run-z/log-z/src/logs/by-any.log.ts:18</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -760,7 +784,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/timestamp.log.ts#L44">run-z/log-z/src/logs/timestamp.log.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/timestamp.log.ts#L44">run-z/log-z/src/logs/timestamp.log.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -785,7 +809,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/timestamp.log.ts#L57">run-z/log-z/src/logs/timestamp.log.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/timestamp.log.ts#L57">run-z/log-z/src/logs/timestamp.log.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -825,7 +849,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/to-buffer.log.ts#L49">run-z/log-z/src/logs/to-buffer.log.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/to-buffer.log.ts#L49">run-z/log-z/src/logs/to-buffer.log.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -858,7 +882,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/to-console.log.ts#L58">run-z/log-z/src/logs/to-console.log.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/to-console.log.ts#L58">run-z/log-z/src/logs/to-console.log.ts:58</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -890,7 +914,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/updated.log.ts#L18">run-z/log-z/src/logs/updated.log.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/updated.log.ts#L18">run-z/log-z/src/logs/updated.log.ts:18</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -951,7 +975,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/when-level.log.ts#L23">run-z/log-z/src/logs/when-level.log.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/when-level.log.ts#L23">run-z/log-z/src/logs/when-level.log.ts:23</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -989,7 +1013,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/when-level.log.ts#L39">run-z/log-z/src/logs/when-level.log.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/when-level.log.ts#L39">run-z/log-z/src/logs/when-level.log.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1029,7 +1053,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/with-details.log.ts#L20">run-z/log-z/src/logs/with-details.log.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/with-details.log.ts#L20">run-z/log-z/src/logs/with-details.log.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1069,7 +1093,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/fields/message.field.ts#L16">run-z/log-z/src/fields/message.field.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/fields/message.field.ts#L16">run-z/log-z/src/fields/message.field.ts:16</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1123,7 +1147,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/formats/text.format.ts#L86">run-z/log-z/src/formats/text.format.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/formats/text.format.ts#L86">run-z/log-z/src/formats/text.format.ts:86</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1155,7 +1179,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/fields/timestamp.field.ts#L43">run-z/log-z/src/fields/timestamp.field.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/fields/timestamp.field.ts#L43">run-z/log-z/src/fields/timestamp.field.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1181,13 +1205,13 @@
 					<a name="zlogDefer" class="tsd-anchor"></a>
 					<h3>zlog<wbr>Defer</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Defer<span class="tsd-signature-symbol">(</span>toLog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></li>
+						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Defer<span class="tsd-signature-symbol">(</span>toLog<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/loggable.ts#L34">run-z/log-z/src/loggable.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/loggable.ts#L34">run-z/log-z/src/loggable.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1200,17 +1224,23 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>toLog: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></h5>
+									<h5>toLog: <span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Builds a loggable value representation.</p>
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>this: <span class="tsd-signature-type">void</span></h5>
+														</li>
+													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 												</li>
 											</ul>
@@ -1226,13 +1256,13 @@
 					<a name="zlogDetails" class="tsd-anchor"></a>
 					<h3>zlog<wbr>Details</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Details<span class="tsd-signature-symbol">(</span>details<span class="tsd-signature-symbol">: </span><a href="@run-z_log-z.html#ZLogDetails" class="tsd-signature-type">ZLogDetails</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></li>
+						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Details<span class="tsd-signature-symbol">(</span>details<span class="tsd-signature-symbol">: </span><a href="@run-z_log-z.html#ZLogDetails" class="tsd-signature-type">ZLogDetails</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="@run-z_log-z.html#ZLogDetails" class="tsd-signature-type">ZLogDetails</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-message.ts#L94">run-z/log-z/src/log-message.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-details.ts#L26">run-z/log-z/src/log-details.ts:26</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1245,9 +1275,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>details: <a href="@run-z_log-z.html#ZLogDetails" class="tsd-signature-type">ZLogDetails</a></h5>
+									<h5>details: <a href="@run-z_log-z.html#ZLogDetails" class="tsd-signature-type">ZLogDetails</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="@run-z_log-z.html#ZLogDetails" class="tsd-signature-type">ZLogDetails</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Log message details to add.</p>
+										<p>Either log message details to add, or a function constructing ones. The function will be called to
+										<a href="@run-z_log-z.html#zlogExpand">expand</a> the log message details. It may return <code>null</code>/<code>undefined</code> to expand to nothing.</p>
 									</div>
 								</li>
 							</ul>
@@ -1266,7 +1297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-message.ts#L111">run-z/log-z/src/log-message.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-message.ts#L88">run-z/log-z/src/log-message.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1300,7 +1331,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/loggable.ts#L120">run-z/log-z/src/loggable.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/loggable.ts#L120">run-z/log-z/src/loggable.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1345,7 +1376,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-message.ts#L129">run-z/log-z/src/log-message.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-message.ts#L106">run-z/log-z/src/log-message.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1373,13 +1404,13 @@
 					<a name="zlogLevelAbbr" class="tsd-anchor"></a>
 					<h3>zlog<wbr>Level<wbr>Abbr</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Level<wbr>Abbr<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">: </span><a href="../enums/@run-z_log-z.ZLogLevel.html" class="tsd-signature-type">ZLogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Level<wbr>Abbr<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">: </span><a href="../enums/@run-z_log-z.ZLogLevel.html" class="tsd-signature-type">ZLogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"FATAL"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ERROR"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"WARN"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"INFO"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"TRACE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"SILLY"</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-level.ts#L94">run-z/log-z/src/log-level.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-level.ts#L96">run-z/log-z/src/log-level.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1406,7 +1437,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">"FATAL"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ERROR"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"WARN"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"INFO"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"TRACE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"SILLY"</span></h4>
 							<p>Log level abbreviation.</p>
 						</li>
 					</ul>
@@ -1415,13 +1446,13 @@
 					<a name="zlogLevelAbbr5" class="tsd-anchor"></a>
 					<h3>zlog<wbr>Level<wbr>Abbr5</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Level<wbr>Abbr5<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">: </span><a href="../enums/@run-z_log-z.ZLogLevel.html" class="tsd-signature-type">ZLogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Level<wbr>Abbr5<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">: </span><a href="../enums/@run-z_log-z.ZLogLevel.html" class="tsd-signature-type">ZLogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"FATAL"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ERROR"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"WARN "</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"INFO "</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"TRACE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"SILLY"</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-level.ts#L119">run-z/log-z/src/log-level.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-level.ts#L123">run-z/log-z/src/log-level.ts:123</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1448,7 +1479,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">"FATAL"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ERROR"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"WARN "</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"INFO "</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"DEBUG"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"TRACE"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"SILLY"</span></h4>
 							<p>Log level abbreviation.</p>
 						</li>
 					</ul>
@@ -1463,7 +1494,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-level.ts#L132">run-z/log-z/src/log-level.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-level.ts#L138">run-z/log-z/src/log-level.ts:138</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1502,13 +1533,13 @@
 					<a name="zlogLevelName" class="tsd-anchor"></a>
 					<h3>zlog<wbr>Level<wbr>Name</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Level<wbr>Name<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">: </span><a href="../enums/@run-z_log-z.ZLogLevel.html" class="tsd-signature-type">ZLogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Level<wbr>Name<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">: </span><a href="../enums/@run-z_log-z.ZLogLevel.html" class="tsd-signature-type">ZLogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"Fatal"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Error"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Warning"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Info"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Debug"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Trace"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Silly"</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-level.ts#L69">run-z/log-z/src/log-level.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-level.ts#L69">run-z/log-z/src/log-level.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1535,8 +1566,45 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">"Fatal"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Error"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Warning"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Info"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Debug"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Trace"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"Silly"</span></h4>
 							<p>Log level name.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="zlogLevelOf" class="tsd-anchor"></a>
+					<h3>zlog<wbr>Level<wbr>Of</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">zlog<wbr>Level<wbr>Of<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-level.ts#L153">run-z/log-z/src/log-level.ts:153</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Extracts a log level represented by the given value.</p>
+								</div>
+								<ul>
+									<li>If the given value is numeric, then returns it.</li>
+									<li>If the given value is object or function, and has a <code>toLogLevel()</code> method, then returns this method call result
+									converted to number, unless it is a <code>NaN</code>.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A value to extract the number log level from.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+							<p>Either extracted log level value, or <code>undefined</code>.</p>
 						</li>
 					</ul>
 				</section>
@@ -1550,7 +1618,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-message.ts#L75">run-z/log-z/src/log-message.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-message.ts#L69">run-z/log-z/src/log-message.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1593,7 +1661,7 @@
 					<div class="tsd-signature tsd-kind-icon">TextZLog<wbr>Format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/formats/text.format.ts#L42">run-z/log-z/src/formats/text.format.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/formats/text.format.ts#L42">run-z/log-z/src/formats/text.format.ts:42</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
@@ -1606,7 +1674,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/formats/text.format.ts#L49">run-z/log-z/src/formats/text.format.ts:49</a></li>
+										<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/formats/text.format.ts#L49">run-z/log-z/src/formats/text.format.ts:49</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1626,9 +1694,9 @@
 					<div class="tsd-signature tsd-kind-icon">ZLog<wbr>Buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L16">run-z/log-z/src/logs/log-buffer.ts:16</a></li>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L33">run-z/log-z/src/logs/log-buffer.ts:33</a></li>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L107">run-z/log-z/src/logs/log-buffer.ts:107</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L16">run-z/log-z/src/logs/log-buffer.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L33">run-z/log-z/src/logs/log-buffer.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L107">run-z/log-z/src/logs/log-buffer.ts:107</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1644,7 +1712,7 @@
 						<div class="tsd-signature tsd-kind-icon">Contents<span class="tsd-signature-symbol">:</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L81">run-z/log-z/src/logs/log-buffer.ts:81</a></li>
+								<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L81">run-z/log-z/src/logs/log-buffer.ts:81</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1681,7 +1749,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L88">run-z/log-z/src/logs/log-buffer.ts:88</a></li>
+											<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L88">run-z/log-z/src/logs/log-buffer.ts:88</a></li>
 										</ul>
 									</aside>
 									<div class="tsd-comment tsd-typography">
@@ -1701,7 +1769,7 @@
 						<div class="tsd-signature tsd-kind-icon">Entry<span class="tsd-signature-symbol">:</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L41">run-z/log-z/src/logs/log-buffer.ts:41</a></li>
+								<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L41">run-z/log-z/src/logs/log-buffer.ts:41</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1717,7 +1785,7 @@
 							<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <a href="../interfaces/@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L46">run-z/log-z/src/logs/log-buffer.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L46">run-z/log-z/src/logs/log-buffer.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1736,7 +1804,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L56">run-z/log-z/src/logs/log-buffer.ts:56</a></li>
+											<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L56">run-z/log-z/src/logs/log-buffer.ts:56</a></li>
 										</ul>
 									</aside>
 									<div class="tsd-comment tsd-typography">
@@ -1761,7 +1829,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L65">run-z/log-z/src/logs/log-buffer.ts:65</a></li>
+											<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L65">run-z/log-z/src/logs/log-buffer.ts:65</a></li>
 										</ul>
 									</aside>
 									<div class="tsd-comment tsd-typography">
@@ -1791,7 +1859,7 @@
 								<li class="tsd-description">
 									<aside class="tsd-sources">
 										<ul>
-											<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L72">run-z/log-z/src/logs/log-buffer.ts:72</a></li>
+											<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L72">run-z/log-z/src/logs/log-buffer.ts:72</a></li>
 										</ul>
 									</aside>
 									<div class="tsd-comment tsd-typography">
@@ -1811,7 +1879,7 @@
 						<div class="tsd-signature tsd-kind-icon">Drainer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, target<span class="tsd-signature-symbol">: </span><a href="../interfaces/@run-z_log-z.ZLogRecorder.html" class="tsd-signature-type">ZLogRecorder</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, atOnce<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L98">run-z/log-z/src/logs/log-buffer.ts:98</a></li>
+								<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L98">run-z/log-z/src/logs/log-buffer.ts:98</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1871,7 +1939,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L117">run-z/log-z/src/logs/log-buffer.ts:117</a></li>
+										<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L117">run-z/log-z/src/logs/log-buffer.ts:117</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1925,7 +1993,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/logs/log-buffer.ts#L29">run-z/log-z/src/logs/log-buffer.ts:29</a></li>
+										<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/logs/log-buffer.ts#L29">run-z/log-z/src/logs/log-buffer.ts:29</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1966,7 +2034,7 @@
 								<aside class="tsd-sources">
 									<p>Inherited from <a href="../interfaces/@run-z_log-z.ZLogRecorder.html">ZLogRecorder</a>.<a href="../interfaces/@run-z_log-z.ZLogRecorder.html#end">end</a></p>
 									<ul>
-										<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-recorder.ts#L40">run-z/log-z/src/log-recorder.ts:40</a></li>
+										<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-recorder.ts#L40">run-z/log-z/src/log-recorder.ts:40</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -1991,7 +2059,7 @@
 								<aside class="tsd-sources">
 									<p>Inherited from <a href="../interfaces/@run-z_log-z.ZLogRecorder.html">ZLogRecorder</a>.<a href="../interfaces/@run-z_log-z.ZLogRecorder.html#record">record</a></p>
 									<ul>
-										<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-recorder.ts#L21">run-z/log-z/src/log-recorder.ts:21</a></li>
+										<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-recorder.ts#L21">run-z/log-z/src/log-recorder.ts:21</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -2024,7 +2092,7 @@
 								<aside class="tsd-sources">
 									<p>Inherited from <a href="../interfaces/@run-z_log-z.ZLogRecorder.html">ZLogRecorder</a>.<a href="../interfaces/@run-z_log-z.ZLogRecorder.html#whenLogged">whenLogged</a></p>
 									<ul>
-										<li>Defined in <a href="https://github.com/run-z/log-z/blob/d4a303c/src/log-recorder.ts#L31">run-z/log-z/src/log-recorder.ts:31</a></li>
+										<li>Defined in <a href="https://github.com/run-z/log-z/blob/941766f/src/log-recorder.ts#L31">run-z/log-z/src/log-recorder.ts:31</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -2110,6 +2178,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="@run-z_log-z.html#ZLogFormatter" class="tsd-kind-icon">ZLog<wbr>Formatter</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="@run-z_log-z.html#ZLogLevelFn" class="tsd-kind-icon">ZLog<wbr>Level<wbr>Fn</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="@run-z_log-z.html#neverLogZ" class="tsd-kind-icon">never<wbr>LogZ</a>
@@ -2215,6 +2286,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="@run-z_log-z.html#zlogLevelName" class="tsd-kind-icon">zlog<wbr>Level<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="@run-z_log-z.html#zlogLevelOf" class="tsd-kind-icon">zlog<wbr>Level<wbr>Of</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="@run-z_log-z.html#zlogMessage" class="tsd-kind-icon">zlog<wbr>Message</a>
