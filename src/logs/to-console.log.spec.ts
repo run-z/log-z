@@ -1,6 +1,7 @@
 import { logZ } from '../log';
+import { zlogDetails } from '../log-details';
 import { ZLogLevel } from '../log-level';
-import { zlogDetails, zlogExtra } from '../log-message';
+import { zlogExtra } from '../log-message';
 import { zlogDefer } from '../loggable';
 import type { ZLogger } from '../logger';
 import { logZToConsole } from './to-console.log';

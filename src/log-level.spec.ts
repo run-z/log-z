@@ -1,4 +1,5 @@
-import { ZLogLevel, zlogLevelAbbr, zlogLevelAbbr5, zlogLevelName } from './log-level';
+import { valueProvider } from '@proc7ts/primitives';
+import { ZLogLevel, zlogLevelAbbr, zlogLevelAbbr5, zlogLevelName, zlogLevelOf } from './log-level';
 
 describe('zlogLevelName', () => {
   it('detects level name', () => {
@@ -51,5 +52,29 @@ describe('zlogLevelAbbr5', () => {
     expect(zlogLevelAbbr5(ZLogLevel.Debug - 1)).toBe('TRACE');
     expect(zlogLevelAbbr5(ZLogLevel.Trace)).toBe('TRACE');
     expect(zlogLevelAbbr5(ZLogLevel.Trace - 1)).toBe('SILLY');
+  });
+});
+
+describe('zlogLevelOf', () => {
+  it('equals to numeric value', () => {
+    expect(zlogLevelOf(123)).toBe(123);
+  });
+  it('extracts the value from `toLogLevel()`', () => {
+    expect(zlogLevelOf({ toLogLevel: valueProvider(ZLogLevel.Info) })).toBe(ZLogLevel.Info);
+  });
+  it('converts the value from `toLogLevel()` to number', () => {
+    expect(zlogLevelOf({ toLogLevel: valueProvider(String(ZLogLevel.Info)) })).toBe(ZLogLevel.Info);
+  });
+  it('ignores NaN value from `toLogLevel()`', () => {
+    expect(zlogLevelOf({ toLogLevel: valueProvider('-') })).toBeUndefined();
+  });
+  it('returns `undefined` for string', () => {
+    expect(zlogLevelOf('WARN')).toBeUndefined();
+  });
+  it('returns `undefined` for object without `toLogLevel` property', () => {
+    expect(zlogLevelOf({})).toBeUndefined();
+  });
+  it('returns `undefined` for object without `toLogLevel()` method', () => {
+    expect(zlogLevelOf({ toLogLevel: ZLogLevel.Info })).toBeUndefined();
   });
 });

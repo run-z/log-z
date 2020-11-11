@@ -1,4 +1,4 @@
-import type { ZLogDetails } from './log-message';
+import type { ZLogDetails } from './log-details';
 
 /**
  * @internal

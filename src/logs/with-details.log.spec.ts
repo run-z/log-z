@@ -1,6 +1,7 @@
 import { logZBy } from '../log-by';
+import { zlogDetails } from '../log-details';
 import { ZLogLevel } from '../log-level';
-import { zlogDetails, zlogMessage } from '../log-message';
+import { zlogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
 import { logZWithDetails } from './with-details.log';

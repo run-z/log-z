@@ -1,7 +1,8 @@
 import { detailsZLogField } from '../fields';
 import { zlogINFO } from '../levels';
+import { zlogDetails } from '../log-details';
 import { ZLogLevel } from '../log-level';
-import { zlogDetails, zlogMessage } from '../log-message';
+import { zlogMessage } from '../log-message';
 import type { ZLogField } from './log-field';
 import { TextZLogFormat, textZLogFormatter } from './text.format';
 

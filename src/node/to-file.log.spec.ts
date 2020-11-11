@@ -1,8 +1,8 @@
 import { readFile, remove } from 'fs-extra';
 import * as path from 'path';
 import { logZBy } from '../log-by';
+import { zlogDetails } from '../log-details';
 import type { ZLogMessage } from '../log-message';
-import { zlogDetails } from '../log-message';
 import type { ZLogger } from '../logger';
 import { FileZLogSpec, logZToFile } from './to-file.log';
 

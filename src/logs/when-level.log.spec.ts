@@ -1,3 +1,4 @@
+import { zlogTRACE } from '../levels';
 import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
@@ -43,6 +44,13 @@ describe('logZWhenLevel', () => {
   });
   it('logs debug message when allowed', async () => {
     logger = logZBy(logZWhenLevel(ZLogLevel.Trace, recorder));
+    logger.debug('TEST');
+    expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Debug, 'TEST'));
+    expect(await logger.whenLogged()).toBe(true);
+    expect(await logger.whenLogged('all')).toBe(true);
+  });
+  it('logs debug message when allowed by log level representation', async () => {
+    logger = logZBy(logZWhenLevel(zlogTRACE, recorder));
     logger.debug('TEST');
     expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Debug, 'TEST'));
     expect(await logger.whenLogged()).toBe(true);

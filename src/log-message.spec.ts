@@ -1,5 +1,6 @@
+import { zlogDetails } from './log-details';
 import { ZLogLevel } from './log-level';
-import { zlogDetails, zlogError, zlogExtra, zlogMessage } from './log-message';
+import { zlogError, zlogExtra, zlogMessage } from './log-message';
 
 describe('zlogMessage', () => {
   it('treats the first textual argument as message text', () => {
