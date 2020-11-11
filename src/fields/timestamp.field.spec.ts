@@ -1,6 +1,7 @@
 import { textZLogFormatter, ZLogFormatter } from '../formats';
+import { zlogDetails } from '../log-details';
 import { ZLogLevel } from '../log-level';
-import { zlogDetails, zlogMessage } from '../log-message';
+import { zlogMessage } from '../log-message';
 import { timestampZLogField } from './timestamp.field';
 
 describe('timestampZLogField', () => {

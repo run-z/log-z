@@ -1,5 +1,6 @@
 import { zlogINFO } from './levels';
-import { zlogDetails, zlogError, zlogExtra } from './log-message';
+import { zlogDetails } from './log-details';
+import { zlogError, zlogExtra } from './log-message';
 import { zlogDefer, zlogExpand } from './loggable';
 
 describe('zlogExpand', () => {
