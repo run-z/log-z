@@ -2,24 +2,40 @@
  * @packageDocumentation
  * @module @run-z/log-z
  */
+import { valueProvider } from '@proc7ts/primitives';
 import { ZLogLevel } from './log-level';
 import type { ZLogMessage } from './log-message';
 import { zlogMessage } from './log-message';
 
 /**
+ * A function representing particular log level.
+ *
+ * - Implements a `valueOf()` method returning a numeric log level value.
+ * - Implements a `toJSON()` method returning a numeric log level value.
+ * - Implements a `toLogLevel()` method returning a numeric log level value.
+ * - Implements a `toString()` method returning a {@link zlogLevelAbbr short log level name}.
+ * - When called, returns a log message constructed by {@link zlogMessage} with corresponding log level.
+ */
+export type ZLogLevelFn =
+    & {
+      (this: void, ...args: any[]): ZLogMessage;
+      valueOf(): ZLogLevel;
+      toJSON(): ZLogLevel;
+      toLogLevel(): ZLogLevel;
+    }
+    & ZLogLevel;
+
+/**
  * @internal
  */
-function newZLogLevel(level: ZLogLevel, name: string): ((this: void, ...args: any[]) => ZLogMessage) & ZLogLevel {
+function newZLogLevel(level: ZLogLevel, name: string): ZLogLevelFn {
 
-  const makeMessage = ((...args: any[]) => zlogMessage(level, ...args)) as (
-      & ((this: void, ...args: any[]) => ZLogMessage)
-      & ZLogLevel
-  );
+  const levelFn = ((...args: any[]) => zlogMessage(level, ...args)) as ZLogLevelFn;
 
-  makeMessage.valueOf = () => level;
-  makeMessage.toString = () => name;
+  levelFn.toLogLevel = levelFn.toJSON = levelFn.valueOf = valueProvider(level);
+  levelFn.toString = valueProvider(name);
 
-  return makeMessage;
+  return levelFn;
 }
 
 /**
@@ -27,39 +43,39 @@ function newZLogLevel(level: ZLogLevel, name: string): ((this: void, ...args: an
  *
  * Can be used as a log level value.
  */
-export const zlogFATAL = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Fatal, 'FATAL'));
+export const zlogFATAL: ZLogLevelFn = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Fatal, 'FATAL'));
 
 /**
  * Builds a log message with {@link ZLogLevel.Error ERROR} level.
  *
  * Can be used as a log level value.
  */
-export const zlogERROR = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Error, 'ERROR'));
+export const zlogERROR: ZLogLevelFn = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Error, 'ERROR'));
 
 /**
  * Builds a log message with {@link ZLogLevel.Warning WARNING} level.
  *
  * Can be used as a log level value.
  */
-export const zlogWARN = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Warning, 'WARN'));
+export const zlogWARN: ZLogLevelFn = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Warning, 'WARN'));
 
 /**
  * Builds a log message with {@link ZLogLevel.Info INFO} level.
  *
  * Can be used as a log level value.
  */
-export const zlogINFO = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Info, 'INFO'));
+export const zlogINFO: ZLogLevelFn = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Info, 'INFO'));
 
 /**
  * Builds a log message with {@link ZLogLevel.Debug DEBUG} level.
  *
  * Can be used as a log level value.
  */
-export const zlogDEBUG = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Debug, 'DEBUG'));
+export const zlogDEBUG: ZLogLevelFn = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Debug, 'DEBUG'));
 
 /**
  * Builds a log message with {@link ZLogLevel.Trace TRACE} level.
  *
  * Can be used as a log level value.
  */
-export const zlogTRACE = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Trace, 'TRACE'));
+export const zlogTRACE: ZLogLevelFn = (/*#__PURE__*/ newZLogLevel(ZLogLevel.Trace, 'TRACE'));

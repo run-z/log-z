@@ -3,7 +3,7 @@
  * @module @run-z/log-z
  */
 import { noop } from '@proc7ts/primitives';
-import { ZLogLevel } from '../log-level';
+import { ZLogLevel, zlogLevelOf } from '../log-level';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import { neverLogZ } from './never.log';
@@ -47,17 +47,19 @@ export function logZWhenLevel(
   let recorder: ZLogRecorder;
   let when: ((this: void, level: ZLogLevel) => boolean);
 
-  if (typeof whenOrBy === 'number') {
-    if (whenOrBy <= 0 && orBy === neverLogZ) {
+  const atLeast = zlogLevelOf(whenOrBy);
+
+  if (atLeast != null) {
+    if (atLeast <= 0 && orBy === neverLogZ) {
       return by;
     }
     recorder = by;
-    when = level => level >= whenOrBy;
+    when = level => level >= atLeast;
   } else if (typeof whenOrBy === 'function') {
     recorder = by;
     when = whenOrBy;
   } else {
-    recorder = whenOrBy;
+    recorder = whenOrBy as ZLogRecorder;
     when = atLeastInfoZLevel;
     orBy = by;
   }

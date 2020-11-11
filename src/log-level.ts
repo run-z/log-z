@@ -66,7 +66,9 @@ const defaultZLogLevelNames = ['Silly', 'Trace', 'Debug', 'Info', 'Warning', 'Er
  *
  * @returns Log level name.
  */
-export function zlogLevelName(level: ZLogLevel): string {
+export function zlogLevelName(
+    level: ZLogLevel,
+): 'Fatal' | 'Error' | 'Warning' | 'Info' | 'Debug' | 'Trace' | 'Silly' {
   return zlogLevelMap(level, defaultZLogLevelNames);
 }
 
@@ -91,7 +93,9 @@ const defaultZLogLevelAbbrs = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR
  *
  * @returns Log level abbreviation.
  */
-export function zlogLevelAbbr(level: ZLogLevel): string {
+export function zlogLevelAbbr(
+    level: ZLogLevel,
+): 'FATAL' | 'ERROR' | 'WARN' | 'INFO' | 'DEBUG' | 'TRACE' | 'SILLY' {
   return zlogLevelMap(level, defaultZLogLevelAbbrs);
 }
 
@@ -116,7 +120,9 @@ const defaultZLogLevelAbbrs5 = ['SILLY', 'TRACE', 'DEBUG', 'INFO ', 'WARN ', 'ER
  *
  * @returns Log level abbreviation.
  */
-export function zlogLevelAbbr5(level: ZLogLevel): string {
+export function zlogLevelAbbr5(
+    level: ZLogLevel,
+): 'FATAL' | 'ERROR' | 'WARN ' | 'INFO ' | 'DEBUG' | 'TRACE' | 'SILLY' {
   return zlogLevelMap(level, defaultZLogLevelAbbrs5);
 }
 
@@ -131,4 +137,30 @@ export function zlogLevelAbbr5(level: ZLogLevel): string {
  */
 export function zlogLevelMap<T>(level: ZLogLevel, values: readonly [T, ...T[]]): T {
   return values[Math.max(0, Math.min(Math.floor(level / 10), values.length))];
+}
+
+/**
+ * Extracts a log level represented by the given value.
+ *
+ * - If the given value is numeric, then returns it.
+ * - If the given value is object or function, and has a `toLogLevel()` method, then returns this method call result
+ *   converted to number, unless it is a `NaN`.
+ *
+ * @param value  A value to extract the number log level from.
+ *
+ * @returns Either extracted log level value, or `undefined`.
+ */
+export function zlogLevelOf(value: any): number | undefined {
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  if (value && (typeof value === 'object' || typeof value === 'function') && typeof value.toLogLevel === 'function') {
+
+    const logLevel = +value.toLogLevel();
+
+    return Number.isNaN(logLevel) ? undefined : logLevel;
+  }
+
+  return;
 }
