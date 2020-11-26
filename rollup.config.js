@@ -48,7 +48,7 @@ export default {
       plugins: [
         flatDts({
           tsconfig: 'tsconfig.main.json',
-          lib: 'ES2018',
+          lib: true,
           entries: {
             node: {
               file: 'node/index.d.ts',
