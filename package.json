@@ -18,9 +18,9 @@
     "url": "https://github.com/run-z/log-z/issues"
   },
   "type": "module",
-  "main": "dist/log-z.cjs",
-  "module": "dist/log-z.js",
-  "types": "index.d.ts",
+  "main": "./dist/log-z.cjs",
+  "module": "./dist/log-z.js",
+  "types": "./index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/log-z.js",
@@ -38,6 +38,7 @@
   "devDependencies": {
     "@proc7ts/eslint-config": "^2.0.5",
     "@proc7ts/rollup-helpers": "^1.1.0",
+    "@proc7ts/rollup-plugin-flat-dts": "^1.0.0",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@types/fs-extra": "^9.0.4",
@@ -69,7 +70,7 @@
     "bootstrap": "rollup --config ./rollup.config.js",
     "build": "run-z +z bootstrap",
     "ci:all": "run-z all +test/--ci/--runInBand",
-    "clean": "run-z +z --then shx rm -rf d.ts dist target",
+    "clean": "run-z +z --then shx rm -rf index.d.ts '*/index.d.ts' dist target",
     "doc": "run-z +z --then typedoc",
     "doc:publish": "run-z doc --then gh-pages --dist target/typedoc --dotfiles",
     "lint": "run-z +z --then eslint .",
