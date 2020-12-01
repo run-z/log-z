@@ -155,7 +155,7 @@ export function zlogLevelOf(value: any): number | undefined {
     return value;
   }
 
-  if (value && (typeof value === 'object' || typeof value === 'function') && typeof value.toLogLevel === 'function') {
+  if (hasLogLevel(value)) {
 
     const logLevel = +value.toLogLevel();
 
@@ -163,4 +163,13 @@ export function zlogLevelOf(value: any): number | undefined {
   }
 
   return;
+}
+
+/**
+ * @internal
+ */
+function hasLogLevel(value: any): value is { toLogLevel(): ZLogLevel } {
+  return value
+      && (typeof value === 'object' || typeof value === 'function')
+      && typeof value.toLogLevel === 'function';
 }

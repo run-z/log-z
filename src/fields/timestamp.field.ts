@@ -53,7 +53,7 @@ export function timestampZLogField(
 
   return line => {
 
-    const timestamp = line.extractDetail(key);
+    const timestamp: number | string | Date = line.extractDetail(key);
 
     if (typeof timestamp === 'number') {
       line.write(doFormat(timestamp));
