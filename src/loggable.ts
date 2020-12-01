@@ -130,5 +130,5 @@ export function zlogExpand(message: ZLogMessage): ZLogMessage {
  * @internal
  */
 function isLoggable(value: any): value is ZLoggable {
-  return !!value && typeof value === 'object' && typeof value.toLog === 'function';
+  return !!value && typeof value === 'object' && typeof (value as { toLog?: unknown }).toLog === 'function';
 }

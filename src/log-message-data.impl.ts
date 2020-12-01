@@ -39,5 +39,5 @@ export namespace ZLogMessageData {
  * @internal
  */
 export function isZLogMessageData(value: any): value is ZLogMessageData {
-  return !!value[ZLogMessageData__symbol];
+  return !!(value as { [ZLogMessageData__symbol]?: ZLogMessageData })[ZLogMessageData__symbol];
 }

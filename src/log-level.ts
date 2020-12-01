@@ -171,5 +171,5 @@ export function zlogLevelOf(value: any): number | undefined {
 function hasLogLevel(value: any): value is { toLogLevel(): ZLogLevel } {
   return value
       && (typeof value === 'object' || typeof value === 'function')
-      && typeof value.toLogLevel === 'function';
+      && typeof (value as { toLogLevel?: unknown }).toLogLevel === 'function';
 }

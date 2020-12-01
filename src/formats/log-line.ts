@@ -146,7 +146,10 @@ export abstract class ZLogLine {
 
     for (const key of Reflect.ownKeys(value)) {
 
-      const formatted = this.format(line => line.writeKeyAndValue(key as string | symbol, (value as any)[key]));
+      const formatted = this.format(line => line.writeKeyAndValue(
+          key as string | symbol,
+          (value as Record<PropertyKey, any>)[key as string],
+      ));
 
       if (formatted != null) {
         if (written) {
