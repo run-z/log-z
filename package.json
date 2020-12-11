@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@proc7ts/primitives": "^1.6.0",
-    "@proc7ts/push-iterator": "^2.4.1"
+    "@proc7ts/push-iterator": "^2.5.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
