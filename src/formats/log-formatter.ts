@@ -9,7 +9,7 @@ import type { ZLogMessage } from '../log-message';
  *
  * Formats the message and represents it in another form.
  *
- * @typeParam TForm  A type of formatted message form.
+ * @typeParam TForm - A type of formatted message form.
  */
 export type ZLogFormatter<TForm = string> =
 /**

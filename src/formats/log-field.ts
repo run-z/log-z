@@ -9,7 +9,7 @@ import type { ZLogLine } from './log-line';
  *
  * Writes field data extracted from {@link ZLogLine.message log message} to provided {@link ZLogLine.write log line}.
  *
- * @typeParam TLine  Log line type.
+ * @typeParam TLine - Log line type.
  */
 export type ZLogField<TLine extends ZLogLine = ZLogLine> =
 /**
