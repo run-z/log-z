@@ -30,8 +30,8 @@ export interface ZLogBufferSpec {
    * If the buffer is full (i.e. its {@link ZLogBuffer.Contents.fillRatio fill ratio} is `1`), and this method did not
    * drop any of the messages, then the oldest message will be dropped.
    *
-   * @param newEntry  Log message entry about to be buffered.
-   * @param contents  Current contents of the log buffer.
+   * @param newEntry - Log message entry about to be buffered.
+   * @param contents - Current contents of the log buffer.
    */
   onRecord?(newEntry: ZLogBuffer.Entry, contents: ZLogBuffer.Contents): void;
 
@@ -42,7 +42,7 @@ export interface ZLogBufferSpec {
  *
  * The buffer is expected to be {@link ZLogBuffer.drainTo drained} to some log recorder.
  *
- * @param how  Log buffering specification.
+ * @param how - Log buffering specification.
  *
  * @returns New log buffer.
  */

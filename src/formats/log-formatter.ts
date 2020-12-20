@@ -13,7 +13,7 @@ import type { ZLogMessage } from '../log-message';
  */
 export type ZLogFormatter<TForm = string> =
 /**
- * @param message  Log message to format.
+ * @param message - Log message to format.
  *
  * @returns Formatted message form, or `undefined` if nothing formatted.
  */

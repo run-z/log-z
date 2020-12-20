@@ -31,9 +31,9 @@ export interface FileZLogSpec extends StreamZLogSpec {
 /**
  * Creates a log recorder that writes messages to a file.
  *
- * @param to  The log file to write messages to. Either a string containing a file path, or a function accepting log
+ * @param to - The log file to write messages to. Either a string containing a file path, or a function accepting log
  * message and returning a file path.
- * @param how  A specification of how to log messages to file.
+ * @param how - A specification of how to log messages to file.
  *
  * @returns New log recorder.
  */

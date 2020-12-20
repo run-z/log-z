@@ -62,7 +62,7 @@ const defaultZLogLevelNames = ['Silly', 'Trace', 'Debug', 'Info', 'Warning', 'Er
  * - `'Trace'`,
  * - `'Silly'` (for values below {@link ZLogLevel.Trace Trace}.
  *
- * @param level  Log level value.
+ * @param level - Log level value.
  *
  * @returns Log level name.
  */
@@ -89,7 +89,7 @@ const defaultZLogLevelAbbrs = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR
  * - `'TRACE'`,
  * - `'SILLY'` (for values below {@link ZLogLevel.Trace Trace}.
  *
- * @param level  Log level value.
+ * @param level - Log level value.
  *
  * @returns Log level abbreviation.
  */
@@ -116,7 +116,7 @@ const defaultZLogLevelAbbrs5 = ['SILLY', 'TRACE', 'DEBUG', 'INFO ', 'WARN ', 'ER
  * - `'TRACE'`,
  * - `'SILLY'` (for values below {@link ZLogLevel.Trace Trace}.
  *
- * @param level  Log level value.
+ * @param level - Log level value.
  *
  * @returns Log level abbreviation.
  */
@@ -129,8 +129,8 @@ export function zlogLevelAbbr5(
 /**
  * Maps the {@link ZLogMessage.level log level} to other value.
  *
- * @param level  Log level value.
- * @param values  Array of values corresponding to log levels, from lowest (i.e. below {@link ZLogLevel.Trace})
+ * @param level - Log level value.
+ * @param values - Array of values corresponding to log levels, from lowest (i.e. below {@link ZLogLevel.Trace})
  * to highest.
  *
  * @returns The value corresponding to the log level.
@@ -146,7 +146,7 @@ export function zlogLevelMap<T>(level: ZLogLevel, values: readonly [T, ...T[]]):
  * - If the given value is object or function, and has a `toLogLevel()` method, then returns this method call result
  *   converted to number, unless it is a `NaN`.
  *
- * @param value  A value to extract the number log level from.
+ * @param value - A value to extract the number log level from.
  *
  * @returns Either extracted log level value, or `undefined`.
  */

@@ -9,7 +9,7 @@ import type { ZLogField } from '../formats';
  *
  * By default, writes message text as is.
  *
- * @param format  Message text format. A function accepting message text and returning it formatted.
+ * @param format - Message text format. A function accepting message text and returning it formatted.
  *
  * @returns Log level field.
  */

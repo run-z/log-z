@@ -39,8 +39,8 @@ export interface DecoratorZLogFieldFormat {
  *
  * Decoration is not applied if target field did not write any value.
  *
- * @param format  Decoration format.
- * @param field  Log field to decorate.
+ * @param format - Decoration format.
+ * @param field - Log field to decorate.
  *
  * @returns
  */

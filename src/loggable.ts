@@ -29,7 +29,7 @@ export interface ZLoggable {
  * The resulting value can be passed to {@link zlogMessage} function or to {@link ZLogger.log logger method} to add
  * it to logged message. It will be {@link zlogExpand expanded} only when the message is actually logged.
  *
- * @param toLog  Builds a loggable value representation.
+ * @param toLog - Builds a loggable value representation.
  */
 export function zlogDefer(toLog: (this: void) => any): unknown {
   return zlogExtra({ toLog });
@@ -113,7 +113,7 @@ class ZLogMessageExpander extends ZLogMessageBuilder {
  * 7. processes each array element recursively,
  * 8. treats everything else as {@link ZLogMessage.extra uninterpreted parameter}.
  *
- * @param message  A message to expand.
+ * @param message - A message to expand.
  *
  * @returns Expanded log message.
  */

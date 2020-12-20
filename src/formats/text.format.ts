@@ -79,7 +79,7 @@ export const TextZLogFormat = {
 /**
  * Creates a textual log formatter of the message.
  *
- * @param format  Custom text log format.
+ * @param format - Custom text log format.
  *
  * @returns A log formatter constructing a textual form of log messages.
  */

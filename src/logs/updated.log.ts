@@ -10,8 +10,8 @@ import type { ZLogRecorder } from '../log-recorder';
  *
  * Updates log messages and records them by another recorder.
  *
- * @param update  Log message update function. Accepts original message and returns updated one.
- * @param by  The log recorder to log updated messages by.
+ * @param update - Log message update function. Accepts original message and returns updated one.
+ * @param by - The log recorder to log updated messages by.
  *
  * @returns Updating log recorder.
  */

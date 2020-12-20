@@ -51,7 +51,7 @@ const consoleZLogMethods: [ConsoleZLogMethod, ...ConsoleZLogMethod[]] = [
 /**
  * Creates a log recorder that logs to global console.
  *
- * @param console  Console instance to log messages to. Global `console` by default.
+ * @param console - Console instance to log messages to. Global `console` by default.
  *
  * @returns New console log recorder.
  */

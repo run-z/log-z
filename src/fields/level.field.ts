@@ -12,7 +12,7 @@ import { zlogLevelAbbr5 } from '../log-level';
  * By default, log level is written as `[LEVEL]`, where `LEVEL` is an {@link zlogLevelAbbr5 upper-case abbreviation
  * and padded to 5 letters}.
  *
- * @param format  Log level format. A function accepting log level and returning its string representation.
+ * @param format - Log level format. A function accepting log level and returning its string representation.
  *
  * @returns Log level field.
  */

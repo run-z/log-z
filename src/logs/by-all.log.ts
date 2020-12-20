@@ -8,7 +8,7 @@ import type { ZLogRecorder } from '../log-recorder';
 /**
  * Creates a recorder that logs messages by all the given recorders.
  *
- * @param by  Log recorders to log messages by.
+ * @param by - Log recorders to log messages by.
  *
  * @returns New multiple log recorder.
  */

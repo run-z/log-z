@@ -21,7 +21,7 @@ export interface TimestampZLogSpec {
   /**
    * Gets timestamp for the message.
    *
-   * @param message  The message to generate timestamp for.
+   * @param message - The message to generate timestamp for.
    *
    * @returns Timestamp value. Could be either Date, number (i.e. epoch milliseconds), or string.
    *
@@ -37,7 +37,7 @@ export interface TimestampZLogSpec {
  * Timestamp recorder appends timestamp to log messages and records them by another recorder. Timestamps are not
  * overridden if already present.
  *
- * @param by  The recorder to log timestamped messages by.
+ * @param by - The recorder to log timestamped messages by.
  *
  * @returns Timestamped log recorder.
  */
@@ -49,8 +49,8 @@ export function logZTimestamp(by: ZLogRecorder): ZLogRecorder;
  * Timestamp recorder appends timestamp to log messages and records them with `target` recorder. Timestamps are not
  * overridden if present.
  *
- * @param how  A specification of how to add timestamp to log message.
- * @param by  The recorder to log timestamped messages by.
+ * @param how - A specification of how to add timestamp to log message.
+ * @param by - The recorder to log timestamped messages by.
  *
  * @returns Timestamped log recorder.
  */

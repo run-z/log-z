@@ -24,7 +24,7 @@ export abstract class ZLogLine {
    *
    * A field may decide to modify the message e.g. to exclude some of its properties from further formatting.
    *
-   * @param newMessage  New message to format.
+   * @param newMessage - New message to format.
    */
   abstract changeMessage(newMessage: ZLogMessage): void;
 
@@ -32,7 +32,7 @@ export abstract class ZLogLine {
    * Extracts a property from {@link ZLogMessage.details message details}, then {@link changeMessage changes}
    * the message to format by excluding the extracted property from it.
    *
-   * @param key  A key of the property to extract.
+   * @param key - A key of the property to extract.
    *
    * @returns Extracted property value.
    */
@@ -51,8 +51,8 @@ export abstract class ZLogLine {
   /**
    * Formats a log message by the given field.
    *
-   * @param field  The field to format the message by.
-   * @param message  The message to format. {@link message Current message} by default.
+   * @param field - The field to format the message by.
+   * @param message - The message to format. {@link message Current message} by default.
    *
    * @returns Either a string written to log line, or `undefined` if nothing is written.
    */
@@ -61,14 +61,14 @@ export abstract class ZLogLine {
   /**
    * Writes raw string.
    *
-   * @param value  Raw string to write.
+   * @param value - Raw string to write.
    */
   abstract write(value: string): void;
 
   /**
    * Writes arbitrary value.
    *
-   * @param value  A value to write.
+   * @param value - A value to write.
    */
   writeValue(value: any): void {
     if (typeof value === 'string') {
@@ -85,7 +85,7 @@ export abstract class ZLogLine {
    *
    * Writes a message and its stack trace.
    *
-   * @param error  An error to write.
+   * @param error - An error to write.
    */
   writeError(error: any): void {
     if (error instanceof Error) {
@@ -105,7 +105,7 @@ export abstract class ZLogLine {
    *
    * Encloses the string in double quotes.
    *
-   * @param value  A string to write.
+   * @param value - A string to write.
    */
   writeString(value: string): void {
     this.write(JSON.stringify(value));
@@ -118,7 +118,7 @@ export abstract class ZLogLine {
    *
    * For anything else, writes object properties by {@link writeProperties}, and encloses them into curly brackets.
    *
-   * @param value  Object value to write.
+   * @param value - Object value to write.
    */
   writeObject(value: object): void {
     if (Array.isArray(value)) {
@@ -138,7 +138,7 @@ export abstract class ZLogLine {
    *
    * Writes own object properties by {@link writeKeyAndValue}.
    *
-   * @param value  Object value to write.
+   * @param value - Object value to write.
    */
   writeProperties(value: object): void {
 
@@ -167,7 +167,7 @@ export abstract class ZLogLine {
    *
    * Writes each element by {@link writeValue}, and separates them with comma.
    *
-   * @param value  An iterable of elements to write.
+   * @param value - An iterable of elements to write.
    */
   writeElements(value: Iterable<any>): void {
 
@@ -190,8 +190,8 @@ export abstract class ZLogLine {
    *
    * Writes value by {@link writeValue} method. Separates key and value by colon.
    *
-   * @param key  Property key to write.
-   * @param value  Property value to write.
+   * @param key - Property key to write.
+   * @param value - Property value to write.
    */
   writeKeyAndValue(key: PropertyKey, value: any): void {
     if (value !== undefined) {
@@ -205,7 +205,7 @@ export abstract class ZLogLine {
    *
    * Writes a string representation of the value.
    *
-   * @param value  A value to format.
+   * @param value - A value to format.
    *
    * @returns Either formatted value, or nothing.
    */

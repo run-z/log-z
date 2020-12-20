@@ -13,6 +13,6 @@ import type { ZLogLine } from './log-line';
  */
 export type ZLogField<TLine extends ZLogLine = ZLogLine> =
 /**
- * @param line  Log line to write field data to.
+ * @param line - Log line to write field data to.
  */
     (this: void, line: TLine) => void;

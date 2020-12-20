@@ -18,7 +18,7 @@ export type ZLogDetails = { readonly [key in string | symbol]?: any };
  * The resulting value can be passed to {@link zlogMessage} function or to {@link ZLogger.log logger method} to add
  * details to logged message.
  *
- * @param details  Either log message details to add, or a function constructing ones. The function will be called to
+ * @param details - Either log message details to add, or a function constructing ones. The function will be called to
  * {@link zlogExpand expand} the log message details. It may return `null`/`undefined` to expand to nothing.
  *
  * @returns A special value.

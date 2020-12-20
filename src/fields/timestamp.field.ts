@@ -36,7 +36,7 @@ export interface TimestampZLogFieldFormat {
 /**
  * Creates a log field of {@link logZTimestamp message timestamp}, if present.
  *
- * @param format  Log message {@link logZTimestamp timestamp} format.
+ * @param format - Log message {@link logZTimestamp timestamp} format.
  *
  * @returns Message timestamp field.
  */

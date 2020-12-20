@@ -34,7 +34,7 @@ export interface ZLogSpec {
 /**
  * Creates a logger that records messages by the given log recorder.
  *
- * @param how  A specification of how to log.
+ * @param how - A specification of how to log.
  *
  * @returns New message logger.
  */

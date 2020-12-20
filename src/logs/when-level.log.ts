@@ -12,10 +12,10 @@ import { neverLogZ } from './never.log';
  * Creates a log recorder of messages with required level. Messages not satisfying the condition either logged
  * by another recorder, or discarded.
  *
- * @param when  Either required log level, or arbitrary condition implemented by function accepting log level and
+ * @param when - Either required log level, or arbitrary condition implemented by function accepting log level and
  * returning `true` for satisfying level. Zero or negative value means to log everything.
- * @param by  The recorder to log messages satisfying log level condition.
- * @param orBy  The recorder to log messages not satisfying log level condition. Such messages will be discarded when
+ * @param by - The recorder to log messages satisfying log level condition.
+ * @param orBy - The recorder to log messages not satisfying log level condition. Such messages will be discarded when
  * omitted.
  *
  * @returns New log recorder.
@@ -30,8 +30,8 @@ export function logZWhenLevel(
  * Creates a log recorder of messages with at least {@link ZLogLevel.Info Info} log level. Messages with lower levels
  * either logged by another recorder, or discarded.
  *
- * @param by  The recorder to log messages satisfying log level condition.
- * @param orBy  The recorder to log messages not satisfying log level condition. Such messages will be discarded when
+ * @param by - The recorder to log messages satisfying log level condition.
+ * @param orBy - The recorder to log messages not satisfying log level condition. Such messages will be discarded when
  * omitted.
  *
  * @returns New log recorder.

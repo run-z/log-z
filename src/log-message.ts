@@ -61,8 +61,8 @@ export interface ZLogMessage {
  *
  * Treats anything else as {@link ZLogMessage.extra uninterpreted message parameter}.
  *
- * @param level  Log level.
- * @param args  Log message arguments.
+ * @param level - Log level.
+ * @param args - Log message arguments.
  *
  * @returns Constructed log message.
  */
@@ -81,7 +81,7 @@ export function zlogMessage(level: ZLogLevel, ...args: any[]): ZLogMessage {
  * The resulting value can be passed to {@link zlogMessage} function or to {@link ZLogger.log logger method} to set an
  * error of logged message.
  *
- * @param error  Error to report.
+ * @param error - Error to report.
  *
  * @returns A special value.
  */
@@ -99,7 +99,7 @@ export function zlogError(error: any): unknown {
  * The resulting value can be passed to {@link zlogMessage} function or to {@link ZLogger.log logger method} to add
  * parameters of any type to logged message.
  *
- * @param extra  Log message parameters.
+ * @param extra - Log message parameters.
  *
  * @returns A special value.
  */

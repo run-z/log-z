@@ -19,8 +19,8 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * {@link zlogMessage Builds} a log message and {@link record records it}.
    *
-   * @param level  The log level of the message.
-   * @param args  Log message arguments.
+   * @param level - The log level of the message.
+   * @param args - Log message arguments.
    */
   log(level: number, ...args: any[]): void {
     this.record(zlogMessage(level, ...args));
@@ -31,7 +31,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * Calling this method is the same as calling {@link log log(ZLogMessage.Fatal, ...args)}.
    *
-   * @param args  Log message arguments.
+   * @param args - Log message arguments.
    */
   fatal(...args: any[]): void {
     this.log(ZLogLevel.Fatal, ...args);
@@ -42,7 +42,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * Calling this method is the same as calling {@link log log(ZLogMessage.Error, ...args)}.
    *
-   * @param args  Log message arguments.
+   * @param args - Log message arguments.
    */
   error(...args: any[]): void {
     this.log(ZLogLevel.Error, ...args);
@@ -53,7 +53,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * Calling this method is the same as calling {@link log log(ZLogMessage.Warning, ...args)}.
    *
-   * @param args  Log message arguments.
+   * @param args - Log message arguments.
    */
   warn(...args: any[]): void {
     this.log(ZLogLevel.Warning, ...args);
@@ -64,7 +64,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * Calling this method is the same as calling {@link log log(ZLogMessage.Info, ...args)}.
    *
-   * @param args  Log message arguments.
+   * @param args - Log message arguments.
    */
   info(...args: any[]): void {
     this.log(ZLogLevel.Info, ...args);
@@ -75,7 +75,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * Calling this method is the same as calling {@link log log(ZLogMessage.Debug, ...args)}.
    *
-   * @param args  Log message arguments.
+   * @param args - Log message arguments.
    */
   debug(...args: any[]): void {
     this.log(ZLogLevel.Debug, ...args);
@@ -86,7 +86,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * Calling this method is the same as calling {@link log log(ZLogMessage.Trace, ...args)}.
    *
-   * @param args  Log message arguments.
+   * @param args - Log message arguments.
    */
   trace(...args: any[]): void {
     this.log(ZLogLevel.Trace, ...args);

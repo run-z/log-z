@@ -34,7 +34,7 @@ class DelegatingZLogger extends ZLogger {
  *
  * Unlike {@link logZ} this function does not process messages in any way prior to record them.
  *
- * @param by  The recorder to log messages by.
+ * @param by - The recorder to log messages by.
  *
  * @returns New message logger.
  */

@@ -16,14 +16,14 @@ export interface ZLogRecorder {
    *
    * The actual logging of the message can be asynchronous.
    *
-   * @param message  A message to record.
+   * @param message - A message to record.
    */
   record(message: ZLogMessage): void;
 
   /**
    * Awaits for the recorded message(s) to be either logged or discarded.
    *
-   * @param which  Which message to wait for. Either `"all"` to wait for all messages or `"last"` to wait for the last
+   * @param which - Which message to wait for. Either `"all"` to wait for all messages or `"last"` to wait for the last
    * message only. The default is `"last"`
    *
    * @returns A promise resolved to `true` if the last recorded message is logged, or to `false` if it is discarded.

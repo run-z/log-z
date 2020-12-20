@@ -11,7 +11,7 @@ import type { ZLogRecorder } from '../log-recorder';
  * In contrast to the log recorder created by {@link logZByAll}, the {@link ZLogRecorder.whenLogged whenLogged} of
  * recorder created by this one resolves to `true` if any of the underlying recorders logged the message.
  *
- * @param by  Log recorders to log messages by.
+ * @param by - Log recorders to log messages by.
  *
  * @returns New multiple log recorder.
  */

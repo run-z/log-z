@@ -13,7 +13,7 @@ import { notLogged } from '../log-recorder.impl';
  * The created recorder logs messages to `target`. When it {@link ZLogRecorder.end ends logging}, the target recorder
  * still can record messages.
  *
- * @param target  The target log recorder to log messages by.
+ * @param target - The target log recorder to log messages by.
  *
  * @returns New log recorder.
  */

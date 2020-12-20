@@ -23,8 +23,8 @@ export interface ZLogBuffer extends ZLogRecorder {
    *
    * Calling this method again changes the target.
    *
-   * @param target  Target log recorder to drain buffered messages to, or `null`/`undefined` to stop draining.
-   * @param atOnce  The maximum number of buffered messages to drain at once. `32` by default.
+   * @param target - Target log recorder to drain buffered messages to, or `null`/`undefined` to stop draining.
+   * @param atOnce - The maximum number of buffered messages to drain at once. `32` by default.
    */
   drainTo(target: ZLogRecorder | null | undefined, atOnce?: number): void;
 
@@ -97,8 +97,8 @@ export namespace ZLogBuffer {
    */
   export type Drainer =
   /**
-   * @param target  Target log recorder to drain buffered messages to, or `null`/`undefined` to stop draining.
-   * @param atOnce  The maximum number of entries to drain at once. `32` by default.
+   * @param target - Target log recorder to drain buffered messages to, or `null`/`undefined` to stop draining.
+   * @param atOnce - The maximum number of entries to drain at once. `32` by default.
    */
       (this: void, target: ZLogRecorder | null | undefined, atOnce?: number) => void;
 
@@ -109,7 +109,7 @@ export const ZLogBuffer = {
   /**
    * Builds a log buffer drainer function.
    *
-   * @param next  A function retrieving the next buffer entries to drain. Accepts the number of entries to train as
+   * @param next - A function retrieving the next buffer entries to drain. Accepts the number of entries to train as
    * its only parameter, and returns a promise resolving to non-empty array of entries to drain.
    *
    * @returns A promise resolved to the next buffer entry. I.e. to the oldest buffered message entry.

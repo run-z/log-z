@@ -48,8 +48,8 @@ export interface StreamZLogSpec {
  *
  * Ends underlying stream(s) on {@link ZLogRecorder.end .end()} method call.
  *
- * @param to  Writable stream to log messages to.
- * @param spec  A specification of how to log messages to Node.js stream.
+ * @param to - Writable stream to log messages to.
+ * @param spec - A specification of how to log messages to Node.js stream.
  *
  * @returns New log recorder.
  *
