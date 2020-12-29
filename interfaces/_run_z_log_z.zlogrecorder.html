@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -51,13 +52,13 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/@run-z_log-z.html">@run-z/log-z</a>
+					<a href="../modules/_run_z_log_z.html">@run-z/log-z</a>
 				</li>
 				<li>
-					<a href="@run-z_log-z.ZLogRecorder.html">ZLogRecorder</a>
+					<a href="_run_z_log_z.zlogrecorder.html">ZLogRecorder</a>
 				</li>
 			</ul>
 			<h1>Interface ZLogRecorder</h1>
@@ -80,13 +81,18 @@
 				<ul class="tsd-hierarchy">
 					<li>
 						<span class="target">ZLogRecorder</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="_run_z_log_z.zlogbuffer-1.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogBuffer</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/@run-z_log-z.ZLogger.html" class="tsd-signature-type">ZLogger</a></li>
+					<li><a href="../classes/_run_z_log_z.zlogger.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogger</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -96,9 +102,9 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="@run-z_log-z.ZLogRecorder.html#end" class="tsd-kind-icon">end</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="@run-z_log-z.ZLogRecorder.html#record" class="tsd-kind-icon">record</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="@run-z_log-z.ZLogRecorder.html#whenLogged" class="tsd-kind-icon">when<wbr>Logged</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_run_z_log_z.zlogrecorder.html#end" class="tsd-kind-icon">end</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_run_z_log_z.zlogrecorder.html#record" class="tsd-kind-icon">record</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_run_z_log_z.zlogrecorder.html#whenlogged" class="tsd-kind-icon">when<wbr>Logged</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,7 +122,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/6e01546/src/log-recorder.ts#L40">run-z/log-z/src/log-recorder.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cd8707e/src/log-recorder.ts#L40">run-z/log-z/src/log-recorder.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -134,13 +140,13 @@
 					<a name="record" class="tsd-anchor"></a>
 					<h3>record</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">record<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">record<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="_run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/6e01546/src/log-recorder.ts#L21">run-z/log-z/src/log-recorder.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cd8707e/src/log-recorder.ts#L21">run-z/log-z/src/log-recorder.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -152,7 +158,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>message: <a href="@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a></h5>
+									<h5>message: <a href="_run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A message to record.</p>
 									</div>
@@ -163,16 +169,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="whenLogged" class="tsd-anchor"></a>
+					<a name="whenlogged" class="tsd-anchor"></a>
 					<h3>when<wbr>Logged</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">when<wbr>Logged<span class="tsd-signature-symbol">(</span>which<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">"all"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"last"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">when<wbr>Logged<span class="tsd-signature-symbol">(</span>which<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;last&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/6e01546/src/log-recorder.ts#L31">run-z/log-z/src/log-recorder.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cd8707e/src/log-recorder.ts#L31">run-z/log-z/src/log-recorder.ts:31</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -183,7 +189,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> which: <span class="tsd-signature-type">"all"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"last"</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> which: <span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;last&quot;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Which message to wait for. Either <code>&quot;all&quot;</code> to wait for all messages or <code>&quot;last&quot;</code> to wait for the last
 										message only. The default is <code>&quot;last&quot;</code></p>
@@ -200,14 +206,14 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/@run-z_log-z.html">@run-<wbr>z/log-<wbr>z</a>
+						<a href="../modules/_run_z_log_z.html">@run-<wbr>z/log-<wbr>z</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/@run-z_log-z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/_run_z_log_z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
@@ -216,16 +222,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="@run-z_log-z.ZLogRecorder.html" class="tsd-kind-icon">ZLog<wbr>Recorder</a>
+						<a href="_run_z_log_z.zlogrecorder.html" class="tsd-kind-icon">ZLog<wbr>Recorder</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="@run-z_log-z.ZLogRecorder.html#end" class="tsd-kind-icon">end</a>
+								<a href="_run_z_log_z.zlogrecorder.html#end" class="tsd-kind-icon">end</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="@run-z_log-z.ZLogRecorder.html#record" class="tsd-kind-icon">record</a>
+								<a href="_run_z_log_z.zlogrecorder.html#record" class="tsd-kind-icon">record</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="@run-z_log-z.ZLogRecorder.html#whenLogged" class="tsd-kind-icon">when<wbr>Logged</a>
+								<a href="_run_z_log_z.zlogrecorder.html#whenlogged" class="tsd-kind-icon">when<wbr>Logged</a>
 							</li>
 						</ul>
 					</li>
@@ -241,7 +247,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>

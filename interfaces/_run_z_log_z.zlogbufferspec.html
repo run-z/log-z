@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TimestampZLogSpec | Log Z</title>
+	<title>ZLogBufferSpec | Log Z</title>
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -51,16 +52,16 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/@run-z_log-z.html">@run-z/log-z</a>
+					<a href="../modules/_run_z_log_z.html">@run-z/log-z</a>
 				</li>
 				<li>
-					<a href="@run-z_log-z.TimestampZLogSpec.html">TimestampZLogSpec</a>
+					<a href="_run_z_log_z.zlogbufferspec.html">ZLogBufferSpec</a>
 				</li>
 			</ul>
-			<h1>Interface TimestampZLogSpec</h1>
+			<h1>Interface ZLogBufferSpec</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A specification of how to add <a href="../modules/@run-z_log-z.html#logZTimestamp">timestamp</a> to log message.</p>
+						<p>A specification of how to buffer log messages.</p>
 					</div>
 				</div>
 			</section>
@@ -78,7 +79,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">TimestampZLogSpec</span>
+						<span class="target">ZLogBufferSpec</span>
 					</li>
 				</ul>
 			</section>
@@ -89,13 +90,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="@run-z_log-z.TimestampZLogSpec.html#to" class="tsd-kind-icon">to</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_run_z_log_z.zlogbufferspec.html#atmost" class="tsd-kind-icon">at<wbr>Most</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="@run-z_log-z.TimestampZLogSpec.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_run_z_log_z.zlogbufferspec.html#onrecord" class="tsd-kind-icon">on<wbr>Record</a></li>
 							</ul>
 						</section>
 					</div>
@@ -104,21 +105,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="to" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> to</h3>
-					<div class="tsd-signature tsd-kind-icon">to<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></div>
+					<a name="atmost" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> at<wbr>Most</h3>
+					<div class="tsd-signature tsd-kind-icon">at<wbr>Most<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/6e01546/src/logs/timestamp.log.ts#L19">run-z/log-z/src/logs/timestamp.log.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cd8707e/src/logs/to-buffer.log.ts#L23">run-z/log-z/src/logs/to-buffer.log.ts:23</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A key of <a href="@run-z_log-z.ZLogMessage.html#details">message details</a> property to record timestamp to.</p>
+							<p>Buffer limit. I.e. the maximum number of log messages to store in buffer.</p>
 						</div>
+						<p>The values less that <code>1</code> are treated as <code>1</code>.</p>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
-							<dd><p><code>&quot;timestamp&quot;</code>.</p>
+							<dd><p>1024</p>
 							</dd>
 						</dl>
 					</div>
@@ -127,55 +129,25 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="get" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> get</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/6e01546/src/logs/timestamp.log.ts#L30">run-z/log-z/src/logs/timestamp.log.ts:30</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets timestamp for the message.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>default</dt>
-									<dd><p><code>Date.now()</code></p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>message: <a href="@run-z_log-z.ZLogMessage.html" class="tsd-signature-type">ZLogMessage</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The message to generate timestamp for.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
-							<p>Timestamp value. Could be either Date, number (i.e. epoch milliseconds), or string.</p>
-						</li>
-					</ul>
+					<a name="onrecord" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Record</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Record<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+					</aside>
 				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/@run-z_log-z.html">@run-<wbr>z/log-<wbr>z</a>
+						<a href="../modules/_run_z_log_z.html">@run-<wbr>z/log-<wbr>z</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/@run-z_log-z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/_run_z_log_z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
@@ -184,13 +156,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="@run-z_log-z.TimestampZLogSpec.html" class="tsd-kind-icon">TimestampZLog<wbr>Spec</a>
+						<a href="_run_z_log_z.zlogbufferspec.html" class="tsd-kind-icon">ZLog<wbr>Buffer<wbr>Spec</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="@run-z_log-z.TimestampZLogSpec.html#to" class="tsd-kind-icon">to</a>
+								<a href="_run_z_log_z.zlogbufferspec.html#atmost" class="tsd-kind-icon">at<wbr>Most</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="@run-z_log-z.TimestampZLogSpec.html#get" class="tsd-kind-icon">get</a>
+								<a href="_run_z_log_z.zlogbufferspec.html#onrecord" class="tsd-kind-icon">on<wbr>Record</a>
 							</li>
 						</ul>
 					</li>
@@ -206,7 +178,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>

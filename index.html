@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -49,11 +50,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>Log Z</h1>
 		</div>
 	</div>
@@ -75,53 +71,57 @@
 					<h2>Examples</h2>
 				</a>
 				<p>Default logger:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { logZ } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z&#x27;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZ</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-keyword">const</span> logger = logZ();  <span class="hljs-comment">// Create default logger to `console`.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">();  </span><span style="color: #008000">// Create default logger to `console`.</span>
 
-logger.info(<span class="hljs-string">&#x27;Message&#x27;</span>); <span class="hljs-comment">// Logs with `console.info()`.</span>
-logger.error(<span class="hljs-string">&#x27;Error&#x27;</span>);  <span class="hljs-comment">// Logs with `console.error()`.</span>
-logger.debug(<span class="hljs-string">&#x27;Debug&#x27;</span>);  <span class="hljs-comment">// Messages below &quot;Warning&quot; discarded by default.</span></code></pre>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Message&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// Logs with `console.info()`.</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Error&#039;</span><span style="color: #000000">);  </span><span style="color: #008000">// Logs with `console.error()`.</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Debug&#039;</span><span style="color: #000000">);  </span><span style="color: #008000">// Messages below &quot;Warning&quot; discarded by default.</span>
+</code></pre>
 				<p>Logger that logs all messages, including debug and trace.</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { logZ, zlogDetails } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z&#x27;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZ</span><span style="color: #000000">, </span><span style="color: #001080">zlogDetails</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// Create default logger to `console` that logs all messages.</span>
-<span class="hljs-keyword">const</span> logger = logZ({ <span class="hljs-attr">atLeast</span>: <span class="hljs-number">0</span> });
+<span style="color: #008000">// Create default logger to `console` that logs all messages.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">({ </span><span style="color: #001080">atLeast:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000"> });</span>
 
-logger.debug(<span class="hljs-string">&#x27;Debug&#x27;</span>);  <span class="hljs-comment">// Logs with `console.log()`.</span>
-logger.trace(<span class="hljs-string">&#x27;Without stack trace&#x27;</span>); <span class="hljs-comment">// Logs with `console.debug()`.</span>
-logger.trace(<span class="hljs-string">&#x27;With stack trace&#x27;</span>, zlogDetails({ <span class="hljs-attr">stackTrace</span>: <span class="hljs-literal">true</span> })); <span class="hljs-comment">// Logs with `console.trace()`.</span></code></pre>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Debug&#039;</span><span style="color: #000000">);  </span><span style="color: #008000">// Logs with `console.log()`.</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">trace</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Without stack trace&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// Logs with `console.debug()`.</span>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">trace</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;With stack trace&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">zlogDetails</span><span style="color: #000000">({ </span><span style="color: #001080">stackTrace:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> })); </span><span style="color: #008000">// Logs with `console.trace()`.</span>
+</code></pre>
 				<a href="#nodejs-support" id="nodejs-support" style="color: inherit; text-decoration: none;">
 					<h2>Node.js Support</h2>
 				</a>
 				<p>Log to file</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { logZ, zlogDEBUG } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z&#x27;</span>;
-<span class="hljs-keyword">import</span> { logZToFile } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z/node&#x27;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZ</span><span style="color: #000000">, </span><span style="color: #001080">zlogDEBUG</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZToFile</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z/node&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// Create a file logger to `test.log`.</span>
-<span class="hljs-keyword">const</span> fileLogger = logZ({ <span class="hljs-attr">atLeast</span>: zlogDEBUG, <span class="hljs-attr">by</span>: logZToFile(<span class="hljs-string">&#x27;test.log&#x27;</span>) });
+<span style="color: #008000">// Create a file logger to `test.log`.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fileLogger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">({ </span><span style="color: #001080">atLeast:</span><span style="color: #000000"> </span><span style="color: #001080">zlogDEBUG</span><span style="color: #000000">, </span><span style="color: #001080">by:</span><span style="color: #000000"> </span><span style="color: #795E26">logZToFile</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;test.log&#039;</span><span style="color: #000000">) });</span>
 
-fileLogger.debug(<span class="hljs-string">&#x27;Message&#x27;</span>);
-<span class="hljs-comment">// [DEBUG] Message</span>
+<span style="color: #001080">fileLogger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Message&#039;</span><span style="color: #000000">);</span>
+<span style="color: #008000">// [DEBUG] Message</span>
 
-<span class="hljs-comment">// Create a daily rolling file logger.</span>
-<span class="hljs-keyword">const</span> rollingLogger = logZ({
-  <span class="hljs-attr">by</span>: logZToFile(<span class="hljs-function">() =&gt;</span> {
+<span style="color: #008000">// Create a daily rolling file logger.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">rollingLogger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">by:</span><span style="color: #000000"> </span><span style="color: #795E26">logZToFile</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
 
-    <span class="hljs-keyword">const</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">now</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">();</span>
 
-    <span class="hljs-keyword">return</span> <span class="hljs-string">`test.<span class="hljs-subst">${now.getFullYear()}</span>-<span class="hljs-subst">${now.getMonth() + <span class="hljs-number">1</span>}</span>-<span class="hljs-subst">${now.getDate()}</span>.log`</span>;
-  }),
-})</code></pre>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #A31515">`test.</span><span style="color: #0000FF">${</span><span style="color: #001080">now</span><span style="color: #000000FF">.</span><span style="color: #795E26">getFullYear</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span><span style="color: #A31515">-</span><span style="color: #0000FF">${</span><span style="color: #001080">now</span><span style="color: #000000FF">.</span><span style="color: #795E26">getMonth</span><span style="color: #000000FF">() </span><span style="color: #000000">+</span><span style="color: #000000FF"> </span><span style="color: #098658">1</span><span style="color: #0000FF">}</span><span style="color: #A31515">-</span><span style="color: #0000FF">${</span><span style="color: #001080">now</span><span style="color: #000000FF">.</span><span style="color: #795E26">getDate</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span><span style="color: #A31515">.log`</span><span style="color: #000000">;</span>
+<span style="color: #000000">  }),</span>
+<span style="color: #000000">})</span>
+</code></pre>
 				<p>Log to arbitrary stream</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { logZ, zlogDEBUG } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z&#x27;</span>;
-<span class="hljs-keyword">import</span> { logZToStream } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z/node&#x27;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZ</span><span style="color: #000000">, </span><span style="color: #001080">zlogDEBUG</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZToStream</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z/node&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// Create a stdout logger.</span>
-<span class="hljs-keyword">const</span> streamLogger = logZ({ <span class="hljs-attr">atLeast</span>: zlogDEBUG, <span class="hljs-attr">by</span>: logZToStream(process.stdout) });
+<span style="color: #008000">// Create a stdout logger.</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">streamLogger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">({ </span><span style="color: #001080">atLeast:</span><span style="color: #000000"> </span><span style="color: #001080">zlogDEBUG</span><span style="color: #000000">, </span><span style="color: #001080">by:</span><span style="color: #000000"> </span><span style="color: #795E26">logZToStream</span><span style="color: #000000">(</span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">stdout</span><span style="color: #000000">) });</span>
 
-streamLogger.info(<span class="hljs-string">&#x27;Message&#x27;</span>);
-<span class="hljs-comment">// [INFO ] Message</span></code></pre>
+<span style="color: #001080">streamLogger</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Message&#039;</span><span style="color: #000000">);</span>
+<span style="color: #008000">// [INFO ] Message</span>
+</code></pre>
 				<a href="#log-messages" id="log-messages" style="color: inherit; text-decoration: none;">
 					<h2>Log Messages</h2>
 				</a>
@@ -171,66 +171,70 @@ streamLogger.info(<span class="hljs-string">&#x27;Message&#x27;</span>);
 				instead of original value. This can be used to log values in a special format.</p>
 				<p>One possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
 				This can be done with <a href="https://run-z.github.io/log-z/modules/@run-z_log-z.html#zlogDefer">zlogDefer</a> function:</p>
-				<pre><code class="language-typescript">logger.debug(<span class="hljs-string">&#x27;Debug info&#x27;</span>, zlogDefer(<span class="hljs-function">() =&gt;</span> zlogDetails({ <span class="hljs-attr">info</span>: evaluateDebugInfo() })));
-<span class="hljs-comment">// `evaluateDebugInfo()` will be called only if `DEBUG` log level enabled.</span>
-<span class="hljs-comment">// Note that this will happen right before writing to the log,</span>
-<span class="hljs-comment">// which may happen at a later time, or not happen at all.</span></code></pre>
+				<pre><code class="language-typescript"><span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">debug</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Debug info&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">zlogDefer</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">zlogDetails</span><span style="color: #000000">({ </span><span style="color: #001080">info:</span><span style="color: #000000"> </span><span style="color: #795E26">evaluateDebugInfo</span><span style="color: #000000">() })));</span>
+<span style="color: #008000">// `evaluateDebugInfo()` will be called only if `DEBUG` log level enabled.</span>
+<span style="color: #008000">// Note that this will happen right before writing to the log,</span>
+<span style="color: #008000">// which may happen at a later time, or not happen at all.</span>
+</code></pre>
 				<a href="#log-formats" id="log-formats" style="color: inherit; text-decoration: none;">
 					<h2>Log Formats</h2>
 				</a>
 				<p>The Node.js loggers write messages in predefined format by default:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { logZ } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z&#x27;</span>;
-<span class="hljs-keyword">import</span> { logZToStream } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z/node&#x27;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZ</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZToStream</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z/node&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-keyword">const</span> logger = logZ({ <span class="hljs-attr">by</span>: logZToStream(process.stdout) });
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">({ </span><span style="color: #001080">by:</span><span style="color: #000000"> </span><span style="color: #795E26">logZToStream</span><span style="color: #000000">(</span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">stdout</span><span style="color: #000000">) });</span>
 
-logger.info(<span class="hljs-string">&#x27;Message&#x27;</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Failed&#x27;</span>), zlogDetails({ <span class="hljs-attr">detail1</span>: <span class="hljs-string">&#x27;value&#x27;</span>, <span class="hljs-attr">detail2</span>: <span class="hljs-number">2</span> }), <span class="hljs-string">&#x27;Extra 1&#x27;</span>, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
-<span class="hljs-comment">// [INFO ] Message (&quot;Extra 1&quot;, [2, 3]) { detail1: &quot;value&quot;; detail2: 2 } Error: Failed</span>
-<span class="hljs-comment">//    at file:///.../example.mjs:6:24</span>
-<span class="hljs-comment">//    at ModuleJob.run (internal/modules/esm/module_job.js:146:37)</span>
-<span class="hljs-comment">//    at async Loader.import (internal/modules/esm/loader.js:182:24)</span>
-<span class="hljs-comment">//    at async Object.loadESM (internal/process/esm_loader.js:84:5)</span></code></pre>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Message&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Error</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Failed&#039;</span><span style="color: #000000">), </span><span style="color: #795E26">zlogDetails</span><span style="color: #000000">({ </span><span style="color: #001080">detail1:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;value&#039;</span><span style="color: #000000">, </span><span style="color: #001080">detail2:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> }), </span><span style="color: #A31515">&#039;Extra 1&#039;</span><span style="color: #000000">, [</span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">])</span>
+<span style="color: #008000">// [INFO ] Message (&quot;Extra 1&quot;, [2, 3]) { detail1: &quot;value&quot;; detail2: 2 } Error: Failed</span>
+<span style="color: #008000">//    at file:///.../example.mjs:6:24</span>
+<span style="color: #008000">//    at ModuleJob.run (internal/modules/esm/module_job.js:146:37)</span>
+<span style="color: #008000">//    at async Loader.import (internal/modules/esm/loader.js:182:24)</span>
+<span style="color: #008000">//    at async Object.loadESM (internal/process/esm_loader.js:84:5)</span>
+</code></pre>
 				<p>This format can be customized:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { levelZLogField, logZ, messageZLogField, zlogDetails, zlogLevelName } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z&#x27;</span>;
-<span class="hljs-keyword">import</span> { logZToStream } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z/node&#x27;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">levelZLogField</span><span style="color: #000000">, </span><span style="color: #001080">logZ</span><span style="color: #000000">, </span><span style="color: #001080">messageZLogField</span><span style="color: #000000">, </span><span style="color: #001080">zlogDetails</span><span style="color: #000000">, </span><span style="color: #001080">zlogLevelName</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZToStream</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z/node&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-keyword">const</span> logger = logZ({
-  <span class="hljs-attr">by</span>: logZToStream(
-    process.stdout,
-    {
-      <span class="hljs-attr">format</span>: {
-        <span class="hljs-attr">fields</span>: [
-          <span class="hljs-string">&#x27;&gt;&gt;&gt; &#x27;</span>,
-          levelZLogField(zlogLevelName),
-          <span class="hljs-string">&#x27; &quot;&#x27;</span>,
-          messageZLogField(),
-          <span class="hljs-string">&#x27;&quot; &#x27;</span>,
-          <span class="hljs-function"><span class="hljs-params">line</span> =&gt;</span> {
-            line.write(<span class="hljs-built_in">JSON</span>.stringify(line.message.details));
-          },
-        ],
-      },
-    },
-  ),
-});
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">by:</span><span style="color: #000000"> </span><span style="color: #795E26">logZToStream</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">stdout</span><span style="color: #000000">,</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #001080">format:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">fields:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&#039;&gt;&gt;&gt; &#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #795E26">levelZLogField</span><span style="color: #000000">(</span><span style="color: #001080">zlogLevelName</span><span style="color: #000000">),</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&#039; &quot;&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #795E26">messageZLogField</span><span style="color: #000000">(),</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&#039;&quot; &#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">          </span><span style="color: #001080">line</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #001080">line</span><span style="color: #000000">.</span><span style="color: #795E26">write</span><span style="color: #000000">(</span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">(</span><span style="color: #001080">line</span><span style="color: #000000">.</span><span style="color: #001080">message</span><span style="color: #000000">.</span><span style="color: #001080">details</span><span style="color: #000000">));</span>
+<span style="color: #000000">          },</span>
+<span style="color: #000000">        ],</span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  ),</span>
+<span style="color: #000000">});</span>
 
-logger.info(<span class="hljs-string">&#x27;Message&#x27;</span>, zlogDetails({ <span class="hljs-attr">detail1</span>: <span class="hljs-string">&#x27;value&#x27;</span>, <span class="hljs-attr">detail2</span>: <span class="hljs-number">2</span> }));
-<span class="hljs-comment">// &gt;&gt;&gt; Info &quot;Message&quot; {&quot;detail1&quot;:&quot;value&quot;,&quot;detail2&quot;:2}</span></code></pre>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Message&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">zlogDetails</span><span style="color: #000000">({ </span><span style="color: #001080">detail1:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;value&#039;</span><span style="color: #000000">, </span><span style="color: #001080">detail2:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> }));</span>
+<span style="color: #008000">// &gt;&gt;&gt; Info &quot;Message&quot; {&quot;detail1&quot;:&quot;value&quot;,&quot;detail2&quot;:2}</span>
+</code></pre>
 				<p>Or completely replaced:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { logZ, zlogDetails } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z&#x27;</span>;
-<span class="hljs-keyword">import</span> { logZToStream } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@run-z/log-z/node&#x27;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZ</span><span style="color: #000000">, </span><span style="color: #001080">zlogDetails</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logZToStream</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@run-z/log-z/node&#039;</span><span style="color: #000000">;</span>
 
-<span class="hljs-keyword">const</span> logger = logZ({
-  <span class="hljs-attr">by</span>: logZToStream(
-    process.stdout,
-    {
-      <span class="hljs-attr">format</span>: <span class="hljs-built_in">JSON</span>.stringify,
-    },
-  ),
-});
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">logger</span><span style="color: #000000"> = </span><span style="color: #795E26">logZ</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">by:</span><span style="color: #000000"> </span><span style="color: #795E26">logZToStream</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #001080">process</span><span style="color: #000000">.</span><span style="color: #001080">stdout</span><span style="color: #000000">,</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #001080">format:</span><span style="color: #000000"> </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  ),</span>
+<span style="color: #000000">});</span>
 
-logger.info(<span class="hljs-string">&#x27;Message&#x27;</span>, zlogDetails({ <span class="hljs-attr">detail1</span>: <span class="hljs-string">&#x27;value&#x27;</span>, <span class="hljs-attr">detail2</span>: <span class="hljs-number">2</span> }));
-<span class="hljs-comment">// {&quot;level&quot;:30,&quot;text&quot;:&quot;Message&quot;,&quot;details&quot;:{&quot;detail1&quot;:&quot;value&quot;,&quot;detail2&quot;:2},&quot;extra&quot;:[]}</span></code></pre>
+<span style="color: #001080">logger</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Message&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">zlogDetails</span><span style="color: #000000">({ </span><span style="color: #001080">detail1:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;value&#039;</span><span style="color: #000000">, </span><span style="color: #001080">detail2:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000"> }));</span>
+<span style="color: #008000">// {&quot;level&quot;:30,&quot;text&quot;:&quot;Message&quot;,&quot;details&quot;:{&quot;detail1&quot;:&quot;value&quot;,&quot;detail2&quot;:2},&quot;extra&quot;:[]}</span>
+</code></pre>
 				<a href="#custom-loggers" id="custom-loggers" style="color: inherit; text-decoration: none;">
 					<h2>Custom Loggers</h2>
 				</a>
@@ -277,14 +281,14 @@ logger.info(<span class="hljs-string">&#x27;Message&#x27;</span>, zlogDetails({ 
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/@run-z_log-z.html">@run-<wbr>z/log-<wbr>z</a>
+						<a href="modules/_run_z_log_z.html">@run-<wbr>z/log-<wbr>z</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/@run-z_log-z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
+						<a href="modules/_run_z_log_z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
@@ -300,7 +304,7 @@ logger.info(<span class="hljs-string">&#x27;Message&#x27;</span>, zlogDetails({ 
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>

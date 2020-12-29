@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>StreamZLogSpec | Log Z</title>
+	<title>TimestampZLogSpec | Log Z</title>
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -51,16 +52,16 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/@run-z_log-z_node.html">@run-z/log-z/node</a>
+					<a href="../modules/_run_z_log_z.html">@run-z/log-z</a>
 				</li>
 				<li>
-					<a href="@run-z_log-z_node.StreamZLogSpec.html">StreamZLogSpec</a>
+					<a href="_run_z_log_z.timestampzlogspec.html">TimestampZLogSpec</a>
 				</li>
 			</ul>
-			<h1>Interface StreamZLogSpec</h1>
+			<h1>Interface TimestampZLogSpec</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A specification of how to log messages <a href="../modules/@run-z_log-z_node.html#logZToStream">to Node.js stream</a>.</p>
+						<p>A specification of how to add <a href="../modules/_run_z_log_z.html#logztimestamp">timestamp</a> to log message.</p>
 					</div>
 				</div>
 			</section>
@@ -78,12 +79,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">StreamZLogSpec</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="@run-z_log-z_node.FileZLogSpec.html" class="tsd-signature-type">FileZLogSpec</a>
-							</li>
-						</ul>
+						<span class="target">TimestampZLogSpec</span>
 					</li>
 				</ul>
 			</section>
@@ -94,8 +90,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="@run-z_log-z_node.StreamZLogSpec.html#eol" class="tsd-kind-icon">eol</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="@run-z_log-z_node.StreamZLogSpec.html#format" class="tsd-kind-icon">format</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_run_z_log_z.timestampzlogspec.html#to" class="tsd-kind-icon">to</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_run_z_log_z.timestampzlogspec.html#get" class="tsd-kind-icon">get</a></li>
 							</ul>
 						</section>
 					</div>
@@ -104,88 +105,68 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="eol" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> eol</h3>
-					<div class="tsd-signature tsd-kind-icon">eol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="to" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> to</h3>
+					<div class="tsd-signature tsd-kind-icon">to<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/6e01546/src/node/to-stream.log.ts#L38">run-z/log-z/src/node/to-stream.log.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cd8707e/src/logs/timestamp.log.ts#L19">run-z/log-z/src/logs/timestamp.log.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The end of line symbol to separate log lines with.</p>
+							<p>A key of <a href="_run_z_log_z.zlogmessage.html#details">message details</a> property to record timestamp to.</p>
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
-							<dd><p><code>os.EOL</code> - an OS-specific new line separator.</p>
+							<dd><p><code>&quot;timestamp&quot;</code>.</p>
 							</dd>
 						</dl>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="format" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> format</h3>
-					<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <a href="@run-z_log-z.TextZLogFormat.html" class="tsd-signature-type">TextZLogFormat</a><span class="tsd-signature-symbol"> | </span><a href="../modules/@run-z_log-z.html#ZLogFormatter" class="tsd-signature-type">ZLogFormatter</a></div>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="get" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> get</h3>
+					<div class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">:</span></div>
 					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/6e01546/src/node/to-stream.log.ts#L31">run-z/log-z/src/node/to-stream.log.ts:31</a></li>
-						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Message format or formatter to use for text message logging.</p>
-						</div>
-						<p>Ignored for streams in <a href="https://nodejs.org/dist/latest/docs/api/stream.html#stream_object_mode">object mode</a>.</p>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p><a href="../modules/@run-z_log-z.html#textZLogFormatter">Text log format</a>.</p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/@run-z_log-z.html">@run-<wbr>z/log-<wbr>z</a>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/@run-z_log-z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/_run_z_log_z.html">@run-<wbr>z/log-<wbr>z</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_run_z_log_z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="@run-z_log-z_node.FileZLogSpec.html" class="tsd-kind-icon">FileZLog<wbr>Spec</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="@run-z_log-z_node.StreamZLogSpec.html" class="tsd-kind-icon">StreamZLog<wbr>Spec</a>
+						<a href="_run_z_log_z.timestampzlogspec.html" class="tsd-kind-icon">TimestampZLog<wbr>Spec</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="@run-z_log-z_node.StreamZLogSpec.html#eol" class="tsd-kind-icon">eol</a>
+								<a href="_run_z_log_z.timestampzlogspec.html#to" class="tsd-kind-icon">to</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="@run-z_log-z_node.StreamZLogSpec.html#format" class="tsd-kind-icon">format</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_run_z_log_z.timestampzlogspec.html#get" class="tsd-kind-icon">get</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/@run-z_log-z_node.html#logZToFile" class="tsd-kind-icon">logZTo<wbr>File</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/@run-z_log-z_node.html#logZToStream" class="tsd-kind-icon">logZTo<wbr>Stream</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -196,7 +177,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
@@ -206,6 +187,7 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
