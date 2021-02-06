@@ -55,10 +55,10 @@
 					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/_run_z_log_z.html">@run-z/log-z</a>
+					<a href="../modules/module__run_z_log_z.html">Module @run-z/log-z</a>
 				</li>
 				<li>
-					<a href="_run_z_log_z.timestampzlogfieldformat.html">TimestampZLogFieldFormat</a>
+					<a href="module__run_z_log_z.timestampzlogfieldformat.html">TimestampZLogFieldFormat</a>
 				</li>
 			</ul>
 			<h1>Interface TimestampZLogFieldFormat</h1>
@@ -71,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Log message <a href="../modules/_run_z_log_z.html#logztimestamp">timestamp</a> format.</p>
+						<p>Log message <a href="../modules/module__run_z_log_z.html#logztimestamp">timestamp</a> format.</p>
 					</div>
 				</div>
 			</section>
@@ -90,8 +90,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_run_z_log_z.timestampzlogfieldformat.html#format" class="tsd-kind-icon">format</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_run_z_log_z.timestampzlogfieldformat.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.timestampzlogfieldformat.html#format" class="tsd-kind-icon">format</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.timestampzlogfieldformat.html#key" class="tsd-kind-icon">key</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,10 +102,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="format" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> format</h3>
-					<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Intl.DateTimeFormat</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span>, timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></div>
+					<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DateTimeFormat</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cd8707e/src/fields/timestamp.field.ts#L32">run-z/log-z/src/fields/timestamp.field.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/aa9ca1c/src/fields/timestamp.field.ts#L28">run-z/log-z/src/fields/timestamp.field.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -120,15 +120,15 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="key" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cd8707e/src/fields/timestamp.field.ts#L18">run-z/log-z/src/fields/timestamp.field.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/aa9ca1c/src/fields/timestamp.field.ts#L14">run-z/log-z/src/fields/timestamp.field.ts:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A key of <a href="_run_z_log_z.zlogmessage.html#details">log message details</a> property containing timestamp value.</p>
+							<p>A key of <a href="module__run_z_log_z.zlogmessage.html#details">log message details</a> property containing timestamp value.</p>
 						</div>
 						<p>Timestamp value is expected to be either a Date, a number (i.e. epoch milliseconds), or preformatted string.
 						In the latter case no further formatting would be applied.</p>
@@ -143,10 +143,10 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/_run_z_log_z.html">@run-<wbr>z/log-<wbr>z</a>
+						<a href="../modules/module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/_run_z_log_z_node.html">@run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
@@ -155,13 +155,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="_run_z_log_z.timestampzlogfieldformat.html" class="tsd-kind-icon">TimestampZLog<wbr>Field<wbr>Format</a>
+						<a href="module__run_z_log_z.timestampzlogfieldformat.html" class="tsd-kind-icon">TimestampZLog<wbr>Field<wbr>Format</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_run_z_log_z.timestampzlogfieldformat.html#format" class="tsd-kind-icon">format</a>
+								<a href="module__run_z_log_z.timestampzlogfieldformat.html#format" class="tsd-kind-icon">format</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_run_z_log_z.timestampzlogfieldformat.html#key" class="tsd-kind-icon">key</a>
+								<a href="module__run_z_log_z.timestampzlogfieldformat.html#key" class="tsd-kind-icon">key</a>
 							</li>
 						</ul>
 					</li>
