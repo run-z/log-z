@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import { logZBy } from './log-by';
 import { ZLogLevel } from './log-level';
 import type { ZLogRecorder } from './log-recorder';

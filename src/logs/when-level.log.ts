@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import { noop } from '@proc7ts/primitives';
 import { ZLogLevel, zlogLevelOf } from '../log-level';
 import type { ZLogMessage } from '../log-message';

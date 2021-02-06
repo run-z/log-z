@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import {
   decoratorZLogField,
   detailsZLogField,

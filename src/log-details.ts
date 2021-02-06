@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import { ZLogMessageData__symbol } from './log-message-data.impl';
 import { zlogDefer } from './loggable';
 

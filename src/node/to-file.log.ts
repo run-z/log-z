@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z/node
- */
 import { noop, valueProvider } from '@proc7ts/primitives';
 import * as fs from 'fs';
 import { promises as fsPromises } from 'fs';

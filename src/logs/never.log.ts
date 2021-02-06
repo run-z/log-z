@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import type { ZLogMessage } from '../log-message';
 import { ZLogger } from '../logger';
 

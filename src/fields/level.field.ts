@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import type { ZLogField } from '../formats';
 import type { ZLogLevel } from '../log-level';
 import { zlogLevelAbbr5 } from '../log-level';

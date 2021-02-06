@@ -1,9 +1,4 @@
 /**
- * @packageDocumentation
- * @module @run-z/log-z
- */
-
-/**
  * Default log level values.
  *
  * The same as [Bunyan log levels].

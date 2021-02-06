@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z/node
- */
 import { valueProvider } from '@proc7ts/primitives';
 import * as os from 'os';
 import type { Writable } from 'stream';

@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import type { ZLogDetails } from '../log-details';
 import type { ZLogRecorder } from '../log-recorder';
 import { logZUpdated } from './updated.log';

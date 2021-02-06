@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * @module @run-z/log-z
+ * @module Module @run-z/log-z
  */
 export * from './fields';
 export * from './formats';

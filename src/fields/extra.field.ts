@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import type { ZLogField, ZLogLine } from '../formats';
 
 /**

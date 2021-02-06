@@ -1,7 +1,3 @@
-/**
- * @packageDocumentation
- * @module @run-z/log-z
- */
 import { valueProvider } from '@proc7ts/primitives';
 import { ZLogLevel } from './log-level';
 import type { ZLogMessage } from './log-message';
