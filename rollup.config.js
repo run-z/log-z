@@ -49,6 +49,9 @@ export default {
         flatDts({
           tsconfig: 'tsconfig.main.json',
           lib: true,
+          compilerOptions: {
+            declarationMap: true,
+          },
           entries: {
             node: {
               file: 'node/index.d.ts',
