@@ -60,7 +60,7 @@
     "strip-ansi": "^6.0.0",
     "ts-jest": "^26.5.5",
     "tslib": "^2.2.0",
-    "typedoc": "^0.20.35",
+    "typedoc": "^0.20.36",
     "typescript": "^4.2.4"
   },
   "scripts": {
