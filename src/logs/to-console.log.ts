@@ -113,7 +113,7 @@ function consoleZLogArgs(
 
   args.push(...message.extra);
 
-  if (Object.getOwnPropertyNames(details).length || Object.getOwnPropertySymbols(details).length) {
+  if (Reflect.ownKeys(details).length) {
     args.push(details);
   }
   if (error) {
