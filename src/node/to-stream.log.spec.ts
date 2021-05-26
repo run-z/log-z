@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import * as os from 'os';
 import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
@@ -163,9 +164,9 @@ describe('logZToStream', () => {
       const out = new TestWritable({ objectMode: true });
       const logger = logZBy(logZToStream(out));
       const whenEnded = logger.end();
+      const ended = expect(logger.end()).toBe(whenEnded);
 
-      expect(logger.end()).toBe(whenEnded);
-      expect(await whenEnded).toBeUndefined();
+      expect(await ended).toBeUndefined();
     });
   });
 

@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import type { ZLogField } from '../formats';
 import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../log-level';

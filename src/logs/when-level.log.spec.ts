@@ -1,22 +1,20 @@
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { zlogTRACE } from '../levels';
 import { logZBy } from '../log-by';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
-import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
+import type { MockZLogRecorder } from '../spec';
+import { logZToMock } from '../spec';
 import { logZWhenLevel } from './when-level.log';
 
 describe('logZWhenLevel', () => {
 
   let logger: ZLogger;
-  let recorder: jest.Mocked<ZLogRecorder>;
+  let recorder: MockZLogRecorder;
 
   beforeEach(() => {
-    recorder = {
-      record: jest.fn(),
-      whenLogged: jest.fn(() => Promise.resolve(true)),
-      end: jest.fn(() => Promise.resolve()),
-    };
+    recorder = logZToMock();
     logger = logZBy(logZWhenLevel(recorder));
   });
 
@@ -73,11 +71,7 @@ describe('logZWhenLevel', () => {
   });
   it('logs not matching messages by another recorder', async () => {
 
-    const other: jest.Mocked<ZLogRecorder> = {
-      record: jest.fn(),
-      whenLogged: jest.fn(() => Promise.resolve(true)),
-      end: jest.fn(() => Promise.resolve()),
-    };
+    const other = logZToMock();
 
     logger = logZBy(logZWhenLevel(recorder, other));
 
@@ -98,11 +92,7 @@ describe('logZWhenLevel', () => {
   });
   it('creates new logger if everything logged, but not matching messages directed to another logger', async () => {
 
-    const other: jest.Mocked<ZLogRecorder> = {
-      record: jest.fn(),
-      whenLogged: jest.fn(() => Promise.resolve(true)),
-      end: jest.fn(() => Promise.resolve()),
-    };
+    const other = logZToMock();
 
     logger = logZBy(logZWhenLevel(0, recorder, other));
 

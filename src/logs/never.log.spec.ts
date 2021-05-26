@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import type { ZLogger } from '../logger';
 import { neverLogZ } from './never.log';
 

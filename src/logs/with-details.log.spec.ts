@@ -1,21 +1,19 @@
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { logZBy } from '../log-by';
 import { zlogDetails } from '../log-details';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
-import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogger } from '../logger';
+import type { MockZLogRecorder } from '../spec';
+import { logZToMock } from '../spec';
 import { logZWithDetails } from './with-details.log';
 
 describe('logZWithDetails', () => {
 
-  let target: jest.Mocked<ZLogRecorder>;
+  let target: MockZLogRecorder;
 
   beforeEach(() => {
-    target = {
-      record: jest.fn(),
-      whenLogged: jest.fn(() => Promise.resolve(true)),
-      end: jest.fn(() => Promise.resolve()),
-    };
+    target = logZToMock();
   });
 
   let logger: ZLogger;

@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { detailsZLogField } from '../fields';
 import { zlogINFO } from '../levels';
 import { zlogDetails } from '../log-details';

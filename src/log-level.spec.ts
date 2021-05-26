@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { valueProvider } from '@proc7ts/primitives';
 import { ZLogLevel, zlogLevelAbbr, zlogLevelAbbr5, zlogLevelName, zlogLevelOf } from './log-level';
 

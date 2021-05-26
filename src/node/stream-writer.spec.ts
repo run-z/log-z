@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { Writable } from 'stream';
 import { TestWritable } from '../spec';
 import { streamWriter } from './stream-writer.impl';

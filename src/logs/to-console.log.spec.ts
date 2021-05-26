@@ -1,3 +1,5 @@
+import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals';
+import type { SpyInstance } from 'jest-mock';
 import { logZ } from '../log';
 import { zlogDetails } from '../log-details';
 import { ZLogLevel } from '../log-level';
@@ -9,12 +11,12 @@ import { logZToConsole } from './to-console.log';
 describe('logZToConsole', () => {
 
   let testConsole: Console;
-  let errorSpy: jest.SpyInstance;
-  let warnSpy: jest.SpyInstance;
-  let infoSpy: jest.SpyInstance;
-  let logSpy: jest.SpyInstance;
-  let debugSpy: jest.SpyInstance;
-  let traceSpy: jest.SpyInstance;
+  let errorSpy: SpyInstance<void, any[]>;
+  let warnSpy: SpyInstance<void, any[]>;
+  let infoSpy: SpyInstance<void, any[]>;
+  let logSpy: SpyInstance<void, any[]>;
+  let debugSpy: SpyInstance<void, any[]>;
+  let traceSpy: SpyInstance<void, any[]>;
 
   beforeEach(() => {
     testConsole = {

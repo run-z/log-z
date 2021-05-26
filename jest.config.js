@@ -1,5 +1,5 @@
-module.exports = {
-  preset: 'ts-jest',
+export default {
+  preset: 'ts-jest/presets/default-esm',
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.ts',
@@ -19,12 +19,13 @@ module.exports = {
       lines: 100,
     },
   },
+  extensionsToTreatAsEsm: ['.ts'],
   reporters: [
     'default',
     [
       'jest-junit',
       {
-        suiteName: 'Log Z',
+        suiteName: '@run-z/log-z',
         outputDirectory: './target/test-results',
         classNameTemplate: '{classname}: {title}',
         titleTemplate: '{classname}: {title}',
@@ -37,6 +38,7 @@ module.exports = {
   globals: {
     'ts-jest': {
       tsconfig: 'tsconfig.spec.json',
+      useESM: true,
     },
   },
 };

@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { zlogDEBUG, zlogERROR, zlogFATAL, zlogINFO, ZLogLevelFn, zlogTRACE, zlogWARN } from './levels';
 import { ZLogLevel, zlogLevelOf } from './log-level';
 import { zlogMessage } from './log-message';

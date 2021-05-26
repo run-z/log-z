@@ -1,4 +1,5 @@
-import { readFile, remove } from 'fs-extra';
+import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
+import { promises as fs } from 'fs';
 import * as path from 'path';
 import { logZBy } from '../log-by';
 import { zlogDetails } from '../log-details';
@@ -18,7 +19,7 @@ describe('logZToFile', () => {
     logFile = path.join(logDir, 'test.log');
   });
   afterEach(async () => {
-    await remove(testRootDir);
+    await fs.rmdir(testRootDir, { recursive: true });
   });
 
   it('logs to file', async () => {
@@ -32,7 +33,7 @@ describe('logZToFile', () => {
 
     await logger.end();
 
-    const log = (await readFile(logFile)).toString();
+    const log = (await fs.readFile(logFile)).toString();
 
     expect(log).toContain('[INFO ] Message 1');
     expect(log).toContain('[INFO ] Message 2');
@@ -51,8 +52,8 @@ describe('logZToFile', () => {
 
     await logger.end();
 
-    const log1 = (await readFile(path.join(logDir, '1.log'))).toString();
-    const log2 = (await readFile(path.join(logDir, '2.log'))).toString();
+    const log1 = (await fs.readFile(path.join(logDir, '1.log'))).toString();
+    const log2 = (await fs.readFile(path.join(logDir, '2.log'))).toString();
 
     expect(log1).toContain('[INFO ] Message 1');
     expect(log2).toContain('[INFO ] Message 2');
@@ -68,7 +69,7 @@ describe('logZToFile', () => {
 
     await logger.end();
 
-    const log = (await readFile(path.join(logDir, '2.log'))).toString();
+    const log = (await fs.readFile(path.join(logDir, '2.log'))).toString();
 
     expect(log).toContain('[INFO ] Message 1');
     expect(log).toContain('[INFO ] Message 2');
