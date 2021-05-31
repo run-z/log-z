@@ -116,20 +116,20 @@ The [logger] also has more convenient methods accepting arbitrary parameters and
 level, like `info()` and `error()`, `warn()`, `trace()`, etc. Each of these methods treats arguments as following:
 
 - Treats the first textual argument as a message text.
-- Treats the first special value created by [zlogError] function or the first `Error` instance as an error.
+- Treats the first special value created by [zlogError()] function or the first `Error` instance as an error.
 - Treats error message as a message text, unless there is another textual argument.
-- Treats special values created by [zlogDetails] function as additional message details.
-- Treats special values created by [zlogExtra] function as additional uninterpreted message parameters.
+- Treats special values created by [zlogDetails()] function as additional message details.
+- Treats special values created by [zlogExtra()] function as additional uninterpreted message parameters.
 - Treats anything else as uninterpreted message parameter.
 
-A [zlogMessage] function can be used to construct a log message. A level-specific messages can be constructed by
+A [zlogMessage()] function can be used to construct a log message. A level-specific messages can be constructed by
 dedicated functions like [zlogDEBUG] or [zlogERROR].
 
 [logger]: https://run-z.github.io/log-z/classes/module__run_z_log_z.zlogger.html
-[zlogDetails]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdetails-1
-[zlogError]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogerror-1
-[zlogExtra]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogextra
-[zlogMessage]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogmessage-1
+[zlogDetails()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdetails-1
+[zlogError()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogerror-1
+[zlogExtra()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogextra
+[zlogMessage()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogmessage-1
 [zlogDEBUG]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdebug
 [zlogERROR]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogerror
 
