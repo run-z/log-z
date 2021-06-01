@@ -3,6 +3,8 @@ Log That
 
 [![NPM][npm-image]][npm-url]
 [![Build Status][build-status-img]][build-status-link]
+[![Code Quality][quality-img]][quality-link]
+[![Coverage][coverage-img]][coverage-link]
 [![GitHub Project][github-image]][github-url]
 [![API Documentation][api-docs-image]][API documentation]
 
@@ -11,7 +13,11 @@ Logging library for browsers and Node.js.
 [npm-image]: https://img.shields.io/npm/v/@run-z/log-z.svg?logo=npm
 [npm-url]: https://www.npmjs.com/package/@run-z/log-z
 [build-status-img]: https://github.com/run-z/log-z/workflows/Build/badge.svg
-[build-status-link]: https://github.com/run-z/log-z/actions?query=workflow%3ABuild
+[build-status-link]: https://github.com/run-z/log-z/actions?query=workflow:Build
+[quality-img]: https://app.codacy.com/project/badge/Grade/17c8d581b0254f379875ec1355dcdce4
+[quality-link]: https://www.codacy.com/gh/run-z/log-z/dashboard?utm_source=github.com&utm_medium=referral&utm_content=run-z/log-z&utm_campaign=Badge_Grade
+[coverage-img]: https://app.codacy.com/project/badge/Coverage/17c8d581b0254f379875ec1355dcdce4
+[coverage-link]: https://www.codacy.com/gh/run-z/log-z/dashboard?utm_source=github.com&utm_medium=referral&utm_content=run-z/log-z&utm_campaign=Badge_Coverage
 [github-image]: https://img.shields.io/static/v1?logo=github&label=GitHub&message=project&color=informational
 [github-url]: https://github.com/run-z/log-z
 [api-docs-image]: https://img.shields.io/static/v1?logo=typescript&label=API&message=docs&color=informational
