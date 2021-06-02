@@ -5,14 +5,8 @@ import type { ZLogRecorder } from '../log-recorder';
 import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
 import { zlogExpand } from '../loggable';
 
-/**
- * @internal
- */
 type ConsoleZLogMethod = (this: void, console: Console, message: ZLogMessage) => void;
 
-/**
- * @internal
- */
 const consoleZLogMethods: [ConsoleZLogMethod, ...ConsoleZLogMethod[]] = [
   // Below TRACE
   (console, message) => console.debug(...consoleZLogArgs(message)),
@@ -82,16 +76,10 @@ export function logZToConsole(console = globalConsole()): ZLogRecorder {
   };
 }
 
-/**
- * @internal
- */
 function globalConsole(): typeof console {
   return console;
 }
 
-/**
- * @internal
- */
 function consoleZLogArgs(
     message: ZLogMessage,
     prefix = '',
@@ -120,9 +108,9 @@ function consoleZLogArgs(
     args.push(error);
   }
 
-  if (args.length) {
-    // Prevent message formatting
-    args.unshift('%O');
+  if (args.length && typeof args[0] === 'string') {
+    // Prevent message formatting.
+    args.unshift('%s');
   }
 
   return args;
