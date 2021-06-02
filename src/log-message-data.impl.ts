@@ -25,12 +25,12 @@ export namespace ZLogMessageData {
 
   export interface Error {
     readonly [ZLogMessageData__symbol]: 'error';
-    readonly error: any;
+    readonly error: unknown;
   }
 
   export interface Extra {
     readonly [ZLogMessageData__symbol]: 'extra';
-    readonly extra: any[];
+    readonly extra: unknown[];
   }
 
 }
@@ -38,6 +38,6 @@ export namespace ZLogMessageData {
 /**
  * @internal
  */
-export function isZLogMessageData(value: any): value is ZLogMessageData {
+export function isZLogMessageData(value: unknown): value is ZLogMessageData {
   return !!(value as { [ZLogMessageData__symbol]?: ZLogMessageData })[ZLogMessageData__symbol];
 }

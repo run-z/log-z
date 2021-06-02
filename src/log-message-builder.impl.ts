@@ -9,15 +9,15 @@ export class ZLogMessageBuilder {
 
   protected text = '';
   protected hasText = false;
-  protected error: any | undefined;
+  protected error: unknown | undefined;
   protected hasError = false;
   protected details: Record<string | symbol, any> = {};
-  protected readonly extra: any[] = [];
+  protected readonly extra: unknown[] = [];
 
   constructor(private readonly level: ZLogLevel) {
   }
 
-  setError(newError: any, newText?: string): void {
+  setError(newError: unknown, newText?: string): void {
     if (this.hasError) {
       this.extra.push(newError);
       return;
@@ -35,11 +35,11 @@ export class ZLogMessageBuilder {
     }
   }
 
-  addAll(args: readonly any[]): void {
+  addAll(args: readonly unknown[]): void {
     args.forEach(arg => this.add(arg));
   }
 
-  add(param: any): void {
+  add(param: unknown): void {
     if (typeof param === 'string') {
       if (!this.hasText) {
         this.text = param;
@@ -78,11 +78,11 @@ export class ZLogMessageBuilder {
     this.extra.push(param);
   }
 
-  protected addExtra(extra: any[]): void {
+  protected addExtra(extra: unknown[]): void {
     this.extra.push(...extra);
   }
 
-  protected addOther(_param: any): boolean {
+  protected addOther(_param: unknown): boolean {
     return false;
   }
 

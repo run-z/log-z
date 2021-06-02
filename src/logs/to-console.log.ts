@@ -96,10 +96,10 @@ function consoleZLogArgs(
     message: ZLogMessage,
     prefix = '',
     details = message.details,
-): string[] {
+): unknown[] {
 
   const { text, error } = message;
-  const args: any[] = [];
+  const args: unknown[] = [];
 
   if (prefix) {
     if (text) {
@@ -118,6 +118,11 @@ function consoleZLogArgs(
   }
   if (error) {
     args.push(error);
+  }
+
+  if (args.length) {
+    // Prevent message formatting
+    args.unshift('%O');
   }
 
   return args;

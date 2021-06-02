@@ -15,7 +15,7 @@ export interface ZLoggable {
    *
    * @returns Loggable value representation.
    */
-  toLog(): any;
+  toLog(): unknown;
 
 }
 
@@ -54,7 +54,7 @@ class ZLogMessageExpander extends ZLogMessageBuilder {
     }
   }
 
-  add(param: any): void {
+  add(param: unknown): void {
     if (isLoggable(param)) {
       this.addLoggable(param);
     } else {
@@ -71,11 +71,11 @@ class ZLogMessageExpander extends ZLogMessageBuilder {
     }
   }
 
-  protected addExtra(extra: any[]): void {
+  protected addExtra(extra: unknown[]): void {
     extra.forEach(e => this.add(e));
   }
 
-  protected addOther(param: any): boolean {
+  protected addOther(param: unknown): boolean {
     if (isLoggable(param)) {
       this.addLoggable(param);
       return true;
@@ -125,6 +125,6 @@ export function zlogExpand(message: ZLogMessage): ZLogMessage {
 /**
  * @internal
  */
-function isLoggable(value: any): value is ZLoggable {
+function isLoggable(value: unknown): value is ZLoggable {
   return !!value && typeof value === 'object' && typeof (value as { toLog?: unknown }).toLog === 'function';
 }

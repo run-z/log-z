@@ -40,7 +40,7 @@ describe('logZToFile', () => {
   });
   it('logs to dedicated file', async () => {
 
-    const logger = newLogger(({ details: { log } }) => path.join(logDir, log));
+    const logger = newLogger(({ details: { log } }) => path.join(logDir, log as string));
 
     logger.info('Message 1', zlogDetails({ log: '1.log' }));
 
@@ -60,7 +60,7 @@ describe('logZToFile', () => {
   });
   it('logs to latest file', async () => {
 
-    const logger = newLogger(({ details: { log } }) => path.join(logDir, log));
+    const logger = newLogger(({ details: { log } }) => path.join(logDir, log as string));
 
     logger.info('Message 1', zlogDetails({ log: '1.log' }));
     logger.info('Message 2', zlogDetails({ log: '2.log' }));

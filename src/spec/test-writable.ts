@@ -2,14 +2,14 @@ import { Writable, WritableOptions } from 'stream';
 
 export class TestWritable extends Writable {
 
-  readonly chunks: any[] = [];
+  readonly chunks: unknown[] = [];
 
   constructor(opts: WritableOptions = {}) {
     super({ decodeStrings: false, ...opts });
   }
 
   _write(
-      chunk: any,
+      chunk: unknown,
       _encoding: string,
       callback: (error?: (Error | null)) => void,
   ): void {

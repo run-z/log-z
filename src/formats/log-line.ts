@@ -32,7 +32,7 @@ export abstract class ZLogLine {
    *
    * @returns Extracted property value.
    */
-  extractDetail(key: string | symbol): any {
+  extractDetail(key: string | symbol): unknown {
 
     const message = this.message;
     const value = message.details[key as string]; // See BUG: https://github.com/microsoft/TypeScript/issues/1863
@@ -66,11 +66,11 @@ export abstract class ZLogLine {
    *
    * @param value - A value to write.
    */
-  writeValue(value: any): void {
+  writeValue(value: unknown): void {
     if (typeof value === 'string') {
       this.writeString(value);
     } else if (value != null && typeof value === 'object') {
-      this.writeObject(value);
+      this.writeObject(value as object);
     } else {
       this.writeByDefault(value);
     }
@@ -83,7 +83,7 @@ export abstract class ZLogLine {
    *
    * @param error - An error to write.
    */
-  writeError(error: any): void {
+  writeError(error: unknown): void {
     if (error instanceof Error) {
 
       const { stack } = error;
@@ -189,7 +189,7 @@ export abstract class ZLogLine {
    * @param key - Property key to write.
    * @param value - Property value to write.
    */
-  writeKeyAndValue(key: PropertyKey, value: any): void {
+  writeKeyAndValue(key: PropertyKey, value: unknown): void {
     if (value !== undefined) {
       this.write(`${String(key)}: `);
       this.writeValue(value);
@@ -205,7 +205,7 @@ export abstract class ZLogLine {
    *
    * @returns Either formatted value, or nothing.
    */
-  protected writeByDefault(value: any): void {
+  protected writeByDefault(value: unknown): void {
     this.write(String(value));
   }
 

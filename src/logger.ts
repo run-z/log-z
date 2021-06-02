@@ -18,7 +18,7 @@ export abstract class ZLogger implements ZLogRecorder {
    * @param level - The log level of the message.
    * @param args - Log message arguments.
    */
-  log(level: number, ...args: any[]): void {
+  log(level: number, ...args: unknown[]): void {
     this.record(zlogMessage(level, ...args));
   }
 
@@ -29,7 +29,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * @param args - Log message arguments.
    */
-  fatal(...args: any[]): void {
+  fatal(...args: unknown[]): void {
     this.log(ZLogLevel.Fatal, ...args);
   }
 
@@ -40,7 +40,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * @param args - Log message arguments.
    */
-  error(...args: any[]): void {
+  error(...args: unknown[]): void {
     this.log(ZLogLevel.Error, ...args);
   }
 
@@ -51,7 +51,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * @param args - Log message arguments.
    */
-  warn(...args: any[]): void {
+  warn(...args: unknown[]): void {
     this.log(ZLogLevel.Warning, ...args);
   }
 
@@ -62,7 +62,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * @param args - Log message arguments.
    */
-  info(...args: any[]): void {
+  info(...args: unknown[]): void {
     this.log(ZLogLevel.Info, ...args);
   }
 
@@ -73,7 +73,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * @param args - Log message arguments.
    */
-  debug(...args: any[]): void {
+  debug(...args: unknown[]): void {
     this.log(ZLogLevel.Debug, ...args);
   }
 
@@ -84,7 +84,7 @@ export abstract class ZLogger implements ZLogRecorder {
    *
    * @param args - Log message arguments.
    */
-  trace(...args: any[]): void {
+  trace(...args: unknown[]): void {
     this.log(ZLogLevel.Trace, ...args);
   }
 

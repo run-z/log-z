@@ -54,7 +54,7 @@ describe('logZTimestamp', () => {
       by: logZTimestamp(
           {
             to: 'ts',
-            get: ({ details: { timestamp } }) => +timestamp + 1,
+            get: ({ details: { timestamp } }) => +(timestamp as number | string) + 1,
           },
           target,
       ),

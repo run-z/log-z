@@ -6,7 +6,7 @@ import { zlogDefer } from './loggable';
  *
  * The keys of this map are specific to application or log recorder implementation.
  */
-export type ZLogDetails = { readonly [key in string | symbol]?: any };
+export type ZLogDetails = { readonly [key in string | symbol]?: unknown };
 
 /**
  * Builds a special value {@link zlogMessage treated} as additional {@link ZLogMessage.details message details}.

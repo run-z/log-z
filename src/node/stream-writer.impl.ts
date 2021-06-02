@@ -10,7 +10,7 @@ export type WhenWritten = () => Promise<boolean>;
 /**
  * @internal
  */
-export function streamWriter(to: Writable): (data: any) => WhenWritten {
+export function streamWriter(to: Writable): (data: unknown) => WhenWritten {
 
   let drainPromise: Promise<boolean> | undefined;
   const whenDrained: WhenWritten = () => {

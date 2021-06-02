@@ -25,7 +25,7 @@ export interface ZLogMessage {
   /**
    * An error to log, if any.
    */
-  readonly error?: any;
+  readonly error?: unknown;
 
   /**
    * Message details map.
@@ -37,7 +37,7 @@ export interface ZLogMessage {
   /**
    * Extra uninterpreted parameters of this message passed to the logging method.
    */
-  readonly extra: readonly any[];
+  readonly extra: readonly unknown[];
 
 }
 
@@ -62,7 +62,7 @@ export interface ZLogMessage {
  *
  * @returns Constructed log message.
  */
-export function zlogMessage(level: ZLogLevel, ...args: any[]): ZLogMessage {
+export function zlogMessage(level: ZLogLevel, ...args: unknown[]): ZLogMessage {
 
   const builder = new ZLogMessageBuilder(level);
 
@@ -81,7 +81,7 @@ export function zlogMessage(level: ZLogLevel, ...args: any[]): ZLogMessage {
  *
  * @returns A special value.
  */
-export function zlogError(error: any): unknown {
+export function zlogError(error: unknown): unknown {
   return {
     [ZLogMessageData__symbol]: 'error',
     error,
@@ -99,7 +99,7 @@ export function zlogError(error: any): unknown {
  *
  * @returns A special value.
  */
-export function zlogExtra(...extra: any[]): unknown {
+export function zlogExtra(...extra: unknown[]): unknown {
   return {
     [ZLogMessageData__symbol]: 'extra',
     extra,
