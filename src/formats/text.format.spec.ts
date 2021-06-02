@@ -141,7 +141,7 @@ describe('textZLogFormatter', () => {
   function format(
       spec: TextZLogFormat | undefined,
       level = ZLogLevel.Error,
-      ...args: any[]
+      ...args: unknown[]
   ): string | undefined {
     return textZLogFormatter(spec)(zlogMessage(level, ...args));
   }

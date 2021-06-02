@@ -11,12 +11,12 @@ import { logZToConsole } from './to-console.log';
 describe('logZToConsole', () => {
 
   let testConsole: Console;
-  let errorSpy: SpyInstance<void, any[]>;
-  let warnSpy: SpyInstance<void, any[]>;
-  let infoSpy: SpyInstance<void, any[]>;
-  let logSpy: SpyInstance<void, any[]>;
-  let debugSpy: SpyInstance<void, any[]>;
-  let traceSpy: SpyInstance<void, any[]>;
+  let errorSpy: SpyInstance<void, unknown[]>;
+  let warnSpy: SpyInstance<void, unknown[]>;
+  let infoSpy: SpyInstance<void, unknown[]>;
+  let logSpy: SpyInstance<void, unknown[]>;
+  let debugSpy: SpyInstance<void, unknown[]>;
+  let traceSpy: SpyInstance<void, unknown[]>;
 
   beforeEach(() => {
     testConsole = {
@@ -48,7 +48,12 @@ describe('logZToConsole', () => {
     spyOnConsole(console);
     logger = logZ();
     logger.error('Test');
-    expect(errorSpy).toHaveBeenCalledWith('Test');
+    expect(errorSpy).toHaveBeenCalledWith('%O', 'Test');
+  });
+
+  it('logs empty message', () => {
+    logger.error();
+    expect(errorSpy).toHaveBeenCalledWith();
   });
 
   it('logs error', () => {
@@ -56,7 +61,7 @@ describe('logZToConsole', () => {
     const error = new Error('!!!');
 
     logger.error(error);
-    expect(errorSpy).toHaveBeenCalledWith(error.message, error);
+    expect(errorSpy).toHaveBeenCalledWith('%O', error.message, error);
   });
 
   it('logs details before error', () => {
@@ -65,14 +70,14 @@ describe('logZToConsole', () => {
     const details = { details: 'many' };
 
     logger.error(error, zlogDetails(details));
-    expect(errorSpy).toHaveBeenCalledWith(error.message, details, error);
+    expect(errorSpy).toHaveBeenCalledWith('%O', error.message, details, error);
   });
   it('logs details without message text', () => {
 
     const details = { details: 'many' };
 
     logger.error(zlogDetails(details));
-    expect(errorSpy).toHaveBeenCalledWith(details);
+    expect(errorSpy).toHaveBeenCalledWith('%O', details);
   });
 
   it('logs extra before details and error', () => {
@@ -81,93 +86,93 @@ describe('logZToConsole', () => {
     const details = { details: 'many' };
 
     logger.error(error, zlogDetails(details), 'Error', ['extra']);
-    expect(errorSpy).toHaveBeenCalledWith('Error', ['extra'], details, error);
+    expect(errorSpy).toHaveBeenCalledWith('%O', 'Error', ['extra'], details, error);
   });
   it('logs extra without message text', () => {
     logger.error(zlogExtra('extra', 1, 2));
-    expect(errorSpy).toHaveBeenCalledWith('extra', 1, 2);
+    expect(errorSpy).toHaveBeenCalledWith('%O', 'extra', 1, 2);
   });
 
   it('expands the message', () => {
     logger.error(zlogDefer(() => 'Expanded'));
-    expect(errorSpy).toHaveBeenCalledWith('Expanded');
+    expect(errorSpy).toHaveBeenCalledWith('%O', 'Expanded');
   });
 
   describe('fatal', () => {
     it('logs with `console.error` and FATAL! prefix', () => {
       logger.fatal('Error');
-      expect(errorSpy).toHaveBeenCalledWith('FATAL! Error');
+      expect(errorSpy).toHaveBeenCalledWith('%O', 'FATAL! Error');
     });
     it('logs FATAL! prefix only without message text', () => {
       logger.fatal(zlogDetails({ fatal: true }));
-      expect(errorSpy).toHaveBeenCalledWith('FATAL!', { fatal: true });
+      expect(errorSpy).toHaveBeenCalledWith('%O', 'FATAL!', { fatal: true });
     });
     it('logs with `console.error` and FATAL! prefix with higher level', () => {
       logger.log(ZLogLevel.Fatal + 1, 'Error');
-      expect(errorSpy).toHaveBeenCalledWith('FATAL! Error');
+      expect(errorSpy).toHaveBeenCalledWith('%O', 'FATAL! Error');
     });
   });
 
   describe('error', () => {
     it('logs with `console.error`', () => {
       logger.error('Error');
-      expect(errorSpy).toHaveBeenCalledWith('Error');
+      expect(errorSpy).toHaveBeenCalledWith('%O', 'Error');
     });
     it('logs with `console.error` with higher level', () => {
       logger.log(ZLogLevel.Fatal - 1, 'Error');
-      expect(errorSpy).toHaveBeenCalledWith('Error');
+      expect(errorSpy).toHaveBeenCalledWith('%O', 'Error');
     });
   });
 
   describe('warn', () => {
     it('logs with `console.warn`', () => {
       logger.warn('Error');
-      expect(warnSpy).toHaveBeenCalledWith('Error');
+      expect(warnSpy).toHaveBeenCalledWith('%O', 'Error');
     });
     it('logs with `console.warn` with higher level', () => {
       logger.log(ZLogLevel.Error - 1, 'Error');
-      expect(warnSpy).toHaveBeenCalledWith('Error');
+      expect(warnSpy).toHaveBeenCalledWith('%O', 'Error');
     });
   });
 
   describe('info', () => {
     it('logs with `console.info`', () => {
       logger.info('Error');
-      expect(infoSpy).toHaveBeenCalledWith('Error');
+      expect(infoSpy).toHaveBeenCalledWith('%O', 'Error');
     });
     it('logs with `console.info` with higher level', () => {
       logger.log(ZLogLevel.Warning - 1, 'Error');
-      expect(infoSpy).toHaveBeenCalledWith('Error');
+      expect(infoSpy).toHaveBeenCalledWith('%O', 'Error');
     });
   });
 
   describe('debug', () => {
     it('logs with `console.log`', () => {
       logger.debug('Error');
-      expect(logSpy).toHaveBeenCalledWith('Error');
+      expect(logSpy).toHaveBeenCalledWith('%O', 'Error');
     });
     it('logs with `console.log` with higher level', () => {
       logger.log(ZLogLevel.Info - 1, 'Error');
-      expect(logSpy).toHaveBeenCalledWith('Error');
+      expect(logSpy).toHaveBeenCalledWith('%O', 'Error');
     });
   });
 
   describe('trace', () => {
     it('logs with `console.debug` without `stackTrace` set', () => {
       logger.trace('Error');
-      expect(debugSpy).toHaveBeenCalledWith('Error');
+      expect(debugSpy).toHaveBeenCalledWith('%O', 'Error');
     });
     it('logs with `console.trace` with `stackTrace` set', () => {
       logger.trace('Error', zlogDetails({ stackTrace: true }));
-      expect(traceSpy).toHaveBeenCalledWith('Error');
+      expect(traceSpy).toHaveBeenCalledWith('%O', 'Error');
     });
     it('logs with `console.debug` with higher level', () => {
       logger.log(ZLogLevel.Debug - 1, 'Error');
-      expect(debugSpy).toHaveBeenCalledWith('Error');
+      expect(debugSpy).toHaveBeenCalledWith('%O', 'Error');
     });
     it('logs with `console.debug` with lower level', () => {
       logger.log(ZLogLevel.Trace - 1, 'Error');
-      expect(debugSpy).toHaveBeenCalledWith('Error');
+      expect(debugSpy).toHaveBeenCalledWith('%O', 'Error');
     });
   });
 

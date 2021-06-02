@@ -22,7 +22,7 @@ describe('streamWriter', () => {
 
     class DelayedWritable extends TestWritable {
 
-      _write(chunk: any, encoding: string, callback: (error?: (Error | null)) => void): void {
+      _write(chunk: unknown, encoding: string, callback: (error?: (Error | null)) => void): void {
         // eslint-disable-next-line jest/valid-expect-in-promise
         super._write(chunk, encoding, () => void 0);
         whenWritten.then(() => callback()).catch(callback);
@@ -51,7 +51,7 @@ describe('streamWriter', () => {
 
     class ErrorWritable extends Writable {
 
-      _write(_chunk: any, _encoding: string, callback: (error?: (Error | null)) => void): void {
+      _write(_chunk: unknown, _encoding: string, callback: (error?: (Error | null)) => void): void {
         Promise.reject(error).catch(callback);
       }
 

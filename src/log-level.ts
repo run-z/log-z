@@ -145,7 +145,7 @@ export function zlogLevelMap<T>(level: ZLogLevel, values: readonly [T, ...T[]]):
  *
  * @returns Either extracted log level value, or `undefined`.
  */
-export function zlogLevelOf(value: any): number | undefined {
+export function zlogLevelOf(value: unknown): number | undefined {
   if (typeof value === 'number') {
     return value;
   }
@@ -163,8 +163,8 @@ export function zlogLevelOf(value: any): number | undefined {
 /**
  * @internal
  */
-function hasLogLevel(value: any): value is { toLogLevel(): ZLogLevel } {
-  return value
+function hasLogLevel(value: unknown): value is { toLogLevel(): ZLogLevel } {
+  return !!value
       && (typeof value === 'object' || typeof value === 'function')
       && typeof (value as { toLogLevel?: unknown }).toLogLevel === 'function';
 }

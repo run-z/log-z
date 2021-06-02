@@ -14,7 +14,7 @@ import { zlogMessage } from './log-message';
  */
 export type ZLogLevelFn =
     & {
-      (this: void, ...args: any[]): ZLogMessage;
+      (this: void, ...args: unknown[]): ZLogMessage;
       valueOf(): ZLogLevel;
       toJSON(): ZLogLevel;
       toLogLevel(): ZLogLevel;
@@ -26,7 +26,7 @@ export type ZLogLevelFn =
  */
 function newZLogLevel(level: ZLogLevel, name: string): ZLogLevelFn {
 
-  const levelFn = ((...args: any[]) => zlogMessage(level, ...args)) as ZLogLevelFn;
+  const levelFn = ((...args: unknown[]) => zlogMessage(level, ...args)) as ZLogLevelFn;
 
   levelFn.toLogLevel = levelFn.toJSON = levelFn.valueOf = valueProvider(level);
   levelFn.toString = valueProvider(name);
