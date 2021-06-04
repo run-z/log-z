@@ -13,9 +13,9 @@ export function detailsZLogField(): ZLogField;
 export function detailsZLogField(line: ZLogLine): void;
 
 export function detailsZLogField(line?: ZLogLine): ZLogField | void {
-  if (line) {
-    line.writeProperties(line.message.details);
-  } else {
+  if (!line) {
     return detailsZLogField;
   }
+
+  line.writeProperties(line.message.details);
 }
