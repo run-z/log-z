@@ -133,10 +133,10 @@ describe('detailZLogField', () => {
       const format = textZLogFormatter({
         fields: [
           detailZLogField(
+              'some',
               (line, { first, second }: { first: string; second: string }) => {
                 line.write(`${first}-${second}`);
               },
-              'some',
           ),
           ' ',
           decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField()),
