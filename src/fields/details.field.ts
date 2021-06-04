@@ -3,15 +3,12 @@ import type { ZLogField, ZLogLine } from '../formats';
 /**
  * Creates a log field for {@link ZLogMessage.details message details}.
  *
- * @returns Log extra field.
+ * @returns Log details field.
  */
 export function detailsZLogField(): ZLogField {
-  return formatZLogDetails;
+  return detailsZLogField$write;
 }
 
-/**
- * @internal
- */
-function formatZLogDetails(line: ZLogLine): void {
+function detailsZLogField$write(line: ZLogLine): void {
   line.writeProperties(line.message.details);
 }

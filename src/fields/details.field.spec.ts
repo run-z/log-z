@@ -4,7 +4,7 @@ import { zlogDetails } from '../log-details';
 import { ZLogLevel } from '../log-level';
 import { zlogMessage } from '../log-message';
 
-describe('derailsZLogField', () => {
+describe('detailsZLogField', () => {
 
   let format: ZLogFormatter;
 
@@ -18,7 +18,7 @@ describe('derailsZLogField', () => {
   });
   it('formats object within message details', () => {
     expect(format(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ some: { index: 2, value: 1 } }))))
-        .toBe('[ERROR] Message { some: { index: 2; value: 1 } }');
+        .toBe('[ERROR] Message { some: { index: 2, value: 1 } }');
   });
   it('formats empty object within message details', () => {
     expect(format(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ some: {} }))))

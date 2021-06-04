@@ -149,7 +149,7 @@ export abstract class ZLogLine {
 
       if (formatted != null) {
         if (written) {
-          this.write('; ');
+          this.write(', ');
         } else {
           written = true;
         }
