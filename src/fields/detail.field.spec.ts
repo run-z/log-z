@@ -14,7 +14,7 @@ describe('detailZLogField', () => {
         fields: [
           detailZLogField(),
           ' ',
-          decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField()),
+          decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField),
         ],
       });
 
@@ -27,7 +27,7 @@ describe('detailZLogField', () => {
         fields: [
           detailZLogField(),
           ' ',
-          decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField()),
+          decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField),
         ],
       });
 
@@ -41,7 +41,7 @@ describe('detailZLogField', () => {
             line.write(`${first}-${second}`);
           }),
           ' ',
-          decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField()),
+          decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField),
         ],
       });
 
