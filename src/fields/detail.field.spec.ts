@@ -90,6 +90,19 @@ describe('detailZLogField', () => {
       expect(format(zlogERROR(zlogDetails({ some: { path: 2, value: 1 } }))))
           .toBe('2 { some: { value: 1 } }');
     });
+    it('extracts the only nested detail', () => {
+
+      const format = textZLogFormatter({
+        fields: [
+          detailZLogField('some', 'path'),
+          ' ',
+          decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField()),
+        ],
+      });
+
+      expect(format(zlogERROR(zlogDetails({ some: { path: 2 }, other: {} }))))
+          .toBe('2 { other: {} }');
+    });
     it('does not log missing nested detail', () => {
 
       const format = textZLogFormatter({

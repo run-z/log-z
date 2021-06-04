@@ -73,6 +73,7 @@ export abstract class ZLogLine {
 
       if (i === last) {
         delete updatedDetails[key];
+        ZLogLine$compactDetails(detailsReplacement, path, 0);
         this.changeMessage({ ...message, details: detailsReplacement });
         return value;
       }
@@ -251,4 +252,20 @@ export abstract class ZLogLine {
     this.write(String(value));
   }
 
+}
+
+function ZLogLine$compactDetails(
+    details: Record<keyof ZLogDetails, any>,
+    path: (keyof ZLogDetails)[],
+    index: number,
+): boolean {
+
+  const key = path[index] as string;
+  const nested = details[key];
+
+  if (nested && ZLogLine$compactDetails(nested, path, index + 1)) {
+    delete details[key];
+  }
+
+  return !Reflect.ownKeys(details).length;
 }
