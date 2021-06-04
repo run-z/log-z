@@ -1,3 +1,4 @@
+import type { ZLogDetails } from '../log-details';
 import type { ZLogMessage } from '../log-message';
 import type { ZLogField } from './log-field';
 
@@ -25,23 +26,65 @@ export abstract class ZLogLine {
   abstract changeMessage(newMessage: ZLogMessage): void;
 
   /**
+   * Extracts {@link ZLogMessage.details message details}, then {@link changeMessage changes} the message to format by
+   * excluding the extracted details from it.
+   *
+   * @returns Extracted message details.
+   */
+  extractDetail(): ZLogDetails;
+
+  /**
    * Extracts a property from {@link ZLogMessage.details message details}, then {@link changeMessage changes}
    * the message to format by excluding the extracted property from it.
    *
-   * @param key - A key of the property to extract.
+   * @param path - A path to details property to extract. Empty path means extracting of all details.
    *
-   * @returns Extracted property value.
+   * @returns Extracted message detail, or `undefined` if there is no such detail.
    */
-  extractDetail(key: string | symbol): unknown {
+  extractDetail(...path: (keyof ZLogDetails)[]): unknown;
 
-    const message = this.message;
-    const value = message.details[key as string]; // See BUG: https://github.com/microsoft/TypeScript/issues/1863
+  extractDetail(...path: (keyof ZLogDetails)[]): unknown {
 
-    if (value !== undefined) {
-      this.changeMessage({ ...message, details: { ...message.details, [key as string]: undefined } });
+    const { message } = this;
+    const last = path.length - 1;
+    let { details } = message;
+
+    if (last < 0) {
+      // Empty path - extracting all details.
+      this.changeMessage({ ...message, details: {} });
+
+      return details;
     }
 
-    return value;
+    let detailsReplacement!: Record<keyof ZLogDetails, unknown>;
+    let updatedDetails: Record<keyof ZLogDetails, unknown> = {};
+
+    for (let i = 0; ; ++i) {
+
+      const key = path[i] as string;
+      const value = details[key];
+
+      if (value === undefined) {
+        return;
+      }
+      if (!i) {
+        detailsReplacement = updatedDetails = { ...details };
+      }
+
+      if (i === last) {
+        delete updatedDetails[key];
+        ZLogLine$compactDetails(detailsReplacement, path, 0);
+        this.changeMessage({ ...message, details: detailsReplacement });
+        return value;
+      }
+
+      if (value == null || typeof value !== 'object') {
+        return; // No such detail.
+      }
+
+      updatedDetails = updatedDetails[key] = { ...value };
+      details = value as ZLogDetails;
+    }
   }
 
   /**
@@ -149,7 +192,7 @@ export abstract class ZLogLine {
 
       if (formatted != null) {
         if (written) {
-          this.write('; ');
+          this.write(', ');
         } else {
           written = true;
         }
@@ -209,4 +252,20 @@ export abstract class ZLogLine {
     this.write(String(value));
   }
 
+}
+
+function ZLogLine$compactDetails(
+    details: Record<keyof ZLogDetails, any>,
+    path: (keyof ZLogDetails)[],
+    index: number,
+): boolean {
+
+  const key = path[index] as string;
+  const nested = details[key];
+
+  if (nested && ZLogLine$compactDetails(nested, path, index + 1)) {
+    delete details[key];
+  }
+
+  return !Reflect.ownKeys(details).length;
 }

@@ -1,17 +1,21 @@
 import type { ZLogField, ZLogLine } from '../formats';
 
 /**
- * Creates a log field for {@link ZLogMessage.details message details}.
- *
- * @returns Log extra field.
+ * A field for {@link ZLogMessage.details message details}.
  */
-export function detailsZLogField(): ZLogField {
-  return formatZLogDetails;
-}
+export function detailsZLogField(): ZLogField;
 
 /**
- * @internal
+ * Creates a field for {@link ZLogMessage.details message details}.
+ *
+ * @returns Itself for the convenience.
  */
-function formatZLogDetails(line: ZLogLine): void {
+export function detailsZLogField(line: ZLogLine): void;
+
+export function detailsZLogField(line?: ZLogLine): ZLogField | void {
+  if (!line) {
+    return detailsZLogField;
+  }
+
   line.writeProperties(line.message.details);
 }
