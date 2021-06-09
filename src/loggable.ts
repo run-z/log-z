@@ -98,16 +98,16 @@ class ZLogMessageExpander extends ZLogMessageBuilder {
  * If error or parameter is a {@link ZLoggable loggable value}, then extracts its {@link ZLoggable.toLog loggable
  * representation}, and processes as following:
  *
- * 1. ignores `null` and `undefined`,
- * 2. ignores a string equal to the {@link ZLogMessage.text message text},
- * 3. treats a special value created by one of {@link zlogDetails}, {@link zlogError}, or {@link zlogExtra} accordingly,
- * 4. processed {@link ZLoggable loggable value} recursively,
- * 5. treats a string as a {@link ZLogMessage.text message text}, unless the message has it already, in which case it
- *    is treated as {@link ZLogMessage.extra uninterpreted parameter},
- * 6. treats an `Error` instance as a {@link ZLogMessage.error message error}, unless the message has it already,
- *    in which case it is treated as {@link ZLogMessage.extra uninterpreted parameter},
- * 7. processes each array element recursively,
- * 8. treats everything else as {@link ZLogMessage.extra uninterpreted parameter}.
+ * 1. Ignores `null` and `undefined`.
+ * 2. Ignores a string equal to the {@link ZLogMessage.text message text}.
+ * 3. Treats a special value created by one of {@link zlogDetails}, {@link zlogError}, or {@link zlogExtra} accordingly.
+ * 4. Processes a {@link ZLoggable loggable value} recursively.
+ * 5. Treats a string as a {@link ZLogMessage.text message text}, unless the message has it already, in which case it
+ *    is treated as {@link ZLogMessage.extra uninterpreted parameter}.
+ * 6. Treats an `Error` instance as a {@link ZLogMessage.error message error}, unless the message has it already,
+ *    in which case it is treated as {@link ZLogMessage.extra uninterpreted parameter}.
+ * 7. Processes each array element recursively.
+ * 8. Treats everything else as {@link ZLogMessage.extra uninterpreted parameter}.
  *
  * @param message - A message to expand.
  *
