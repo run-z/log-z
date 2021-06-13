@@ -120,9 +120,9 @@ function logRecorderFor(
   } else {
     record = message => {
 
-      const line = formatter(zlogExpand(message));
+      const formatted = formatter(zlogExpand(message));
 
-      return line == null ? notLogged : write(line + eol);
+      return formatted == null ? notLogged : write(formatted + eol);
     };
   }
 

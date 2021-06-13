@@ -1,4 +1,4 @@
-import type { ZLogField, ZLogLine } from '../formats';
+import type { ZLogField, ZLogWriter } from '../formats';
 
 /**
  * Creates a log message error field, if present.
@@ -12,7 +12,7 @@ export function errorZLogField(): ZLogField {
   return formatZLogError;
 }
 
-function formatZLogError(text: ZLogLine): void {
+function formatZLogError(text: ZLogWriter): void {
 
   let error = text.extractDetail('error');
 

@@ -1,10 +1,10 @@
-import type { ZLogField, ZLogLine } from '../formats';
+import type { ZLogField, ZLogWriter } from '../formats';
 import type { ZLogDetails } from '../message';
 
 /**
- * Creates a log field for {@link ZLogLine.extractDetail extracted} message detail.
+ * Creates a log field for {@link ZLogWriter.extractDetail extracted} message detail.
  *
- * Writes the value with {@link ZLogLine.writeValue} method. Writes nothing if the target detail is undefined.
+ * Writes the value with {@link ZLogWriter.writeValue} method. Writes nothing if the target detail is undefined.
  *
  * @param path - A path to details property to extract. Empty path means extracting of all details.
  *
@@ -13,9 +13,9 @@ import type { ZLogDetails } from '../message';
 export function detailZLogField(...path: (keyof ZLogDetails)[]): ZLogField;
 
 /**
- * Creates a log field for {@link ZLogLine.extractDetail extracted} message detail in specific format.
+ * Creates a log field for {@link ZLogWriter.extractDetail extracted} message detail in specific format.
  *
- * Writes the value with {@link ZLogLine.writeValue} method. Writes nothing if the target detail is undefined.
+ * Writes the value with {@link ZLogWriter.writeValue} method. Writes nothing if the target detail is undefined.
  *
  * @param pathAndWrite - A path to details property to extract and value writer function. Empty path means extracting
  * of all details.
@@ -24,16 +24,16 @@ export function detailZLogField(...path: (keyof ZLogDetails)[]): ZLogField;
  */
 export function detailZLogField<T>(...pathAndWrite: [
   ...path: (keyof ZLogDetails)[],
-  write: (this: void, line: ZLogLine, value: T) => void,
+  write: (this: void, writer: ZLogWriter, value: T) => void,
 ]): ZLogField;
 
 export function detailZLogField<T>(...pathAndWrite: [
   ...path: (keyof ZLogDetails)[],
-  ...write: [((this: void, line: ZLogLine, value: T) => void)?],
+  ...write: [((this: void, writer: ZLogWriter, value: T) => void)?],
 ]): ZLogField {
 
   let path: (keyof ZLogDetails)[];
-  let write: (this: void, line: ZLogLine, value: T) => void;
+  let write: (this: void, writer: ZLogWriter, value: T) => void;
   const writeOrKey = pathAndWrite[pathAndWrite.length - 1];
 
   if (typeof writeOrKey === 'function') {
@@ -44,16 +44,16 @@ export function detailZLogField<T>(...pathAndWrite: [
     write = detailZLogField$write;
   }
 
-  return line => {
+  return writer => {
 
-    const value = line.extractDetail(...path);
+    const value = writer.extractDetail(...path);
 
     if (value !== undefined) {
-      write(line, value as T);
+      write(writer, value as T);
     }
   };
 }
 
-function detailZLogField$write(line: ZLogLine, value: unknown): void {
-  line.writeValue(value);
+function detailZLogField$write(writer: ZLogWriter, value: unknown): void {
+  writer.writeValue(value);
 }

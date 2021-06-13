@@ -1,4 +1,4 @@
-import type { ZLogField, ZLogLine } from '../formats';
+import type { ZLogField, ZLogWriter } from '../formats';
 
 /**
  * Log field decorator format.
@@ -40,31 +40,31 @@ export interface DecoratorZLogFieldFormat {
  *
  * @returns
  */
-export function decoratorZLogField<TLine extends ZLogLine>(
+export function decoratorZLogField<TLine extends ZLogWriter>(
     format: DecoratorZLogFieldFormat,
     field: ZLogField<TLine>,
 ): ZLogField<TLine> {
-  return line => {
+  return writer => {
 
-    const value = line.format(field);
+    const value = writer.format(field);
 
     if (value) {
 
       const { prefix, suffix } = format;
 
       if (prefix) {
-        line.write(prefix);
+        writer.write(prefix);
       }
-      line.write(value);
+      writer.write(value);
       if (suffix) {
-        line.write(suffix);
+        writer.write(suffix);
       }
     } else if (value != null) {
 
       const { empty } = format;
 
       if (empty) {
-        line.write(empty);
+        writer.write(empty);
       }
     }
   };

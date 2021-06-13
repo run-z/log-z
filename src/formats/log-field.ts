@@ -1,14 +1,15 @@
-import type { ZLogLine } from './log-line';
+import type { ZLogWriter } from './log-writer';
 
 /**
  * Log field signature.
  *
- * Writes field data extracted from {@link ZLogLine.message log message} to provided {@link ZLogLine.write log line}.
+ * Formats and writes the field data extracted from {@link ZLogWriter.message log message} using provided
+ * {@link ZLogWriter.write log writer}.
  *
- * @typeParam TLine - Log line type.
+ * @typeParam TWriter - Log writer type.
  */
-export type ZLogField<TLine extends ZLogLine = ZLogLine> =
+export type ZLogField<TWriter extends ZLogWriter = ZLogWriter> =
 /**
- * @param line - Log line to write field data to.
+ * @param writer - A writer to write the field with.
  */
-    (this: void, line: TLine) => void;
+    (this: void, writer: TWriter) => void;

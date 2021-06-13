@@ -9,7 +9,7 @@ import {
 import type { ZLogMessage } from '../message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
-import { ZLogLine } from './log-line';
+import { ZLogWriter } from './log-writer';
 
 /**
  * Text log format.
@@ -17,7 +17,7 @@ import { ZLogLine } from './log-line';
 export interface TextZLogFormat {
 
   /**
-   * Fields to write to each log line.
+   * Fields to write.
    *
    * This is an array of:
    *
@@ -90,7 +90,7 @@ function zlogMessageText(
 
   outputByOrder.set(currentOrder, currentOutput);
 
-  class ZLogLine$ extends ZLogLine {
+  class ZLogWriter$ extends ZLogWriter {
 
     get message(): ZLogMessage {
       return state[0];
@@ -110,12 +110,12 @@ function zlogMessageText(
 
   }
 
-  const line = new ZLogLine$();
+  const writer = new ZLogWriter$();
 
   for (const field of fields) {
     if (typeof field === 'function') {
       // Render field.
-      field(line);
+      field(writer);
       currentOutput.push([]);
     } else if (typeof field === 'string') {
       // Add delimiter.
