@@ -1,5 +1,5 @@
-import type { ZLogMessage } from '../log-message';
 import { ZLogger } from '../logger';
+import type { ZLogMessage } from '../message';
 
 /**
  * @internal

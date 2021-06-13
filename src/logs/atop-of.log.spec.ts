@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
+import { ZLogLevel } from '../level';
 import { logZBy } from '../log-by';
-import { ZLogLevel } from '../log-level';
-import { zlogMessage } from '../log-message';
 import type { ZLogger } from '../logger';
+import { zlogMessage } from '../message';
 import { logZToMock, MockZLogRecorder } from '../spec';
 import { logZAtopOf } from './atop-of.log';
 

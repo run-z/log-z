@@ -2,9 +2,9 @@ import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { logZBy } from '../log-by';
-import { zlogDetails } from '../log-details';
-import type { ZLogMessage } from '../log-message';
 import type { ZLogger } from '../logger';
+import type { ZLogMessage } from '../message';
+import { zlogDetails } from '../message';
 import { FileZLogSpec, logZToFile } from './to-file.log';
 
 describe('logZToFile', () => {

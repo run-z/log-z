@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { textZLogFormatter } from '../formats';
-import { zlogERROR } from '../levels';
-import { zlogDetails } from '../log-details';
+import { zlogERROR } from '../level';
+import { zlogDetails } from '../message';
 import { decoratorZLogField } from './decorator.field';
 import { detailZLogField } from './detail.field';
 import { detailsZLogField } from './details.field';

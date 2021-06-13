@@ -1,11 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals';
 import type { SpyInstance } from 'jest-mock';
+import { ZLogLevel } from '../level';
 import { logZ } from '../log';
-import { zlogDetails } from '../log-details';
-import { ZLogLevel } from '../log-level';
-import { zlogExtra } from '../log-message';
-import { zlogDefer } from '../loggable';
 import type { ZLogger } from '../logger';
+import { zlogDefer, zlogDetails, zlogExtra } from '../message';
 import { logZToConsole } from './to-console.log';
 
 describe('logZToConsole', () => {

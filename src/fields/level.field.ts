@@ -1,6 +1,6 @@
 import type { ZLogField } from '../formats';
-import type { ZLogLevel } from '../log-level';
-import { zlogLevelAbbr5 } from '../log-level';
+import type { ZLogLevel } from '../level';
+import { zlogLevelAbbr5 } from '../level';
 
 /**
  * Creates a log level field.

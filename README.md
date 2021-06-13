@@ -126,12 +126,14 @@ level, like `info()` and `error()`, `warn()`, `trace()`, etc. Each of these meth
 - Treats error message as a message text, unless there is another textual argument.
 - Treats special values created by [zlogDetails()] function as additional message details.
 - Treats special values created by [zlogExtra()] function as additional uninterpreted message parameters.
+- Processes [loggable] values.  
 - Treats anything else as uninterpreted message parameter.
 
 A [zlogMessage()] function can be used to construct a log message. A level-specific messages can be constructed by
 dedicated functions like [zlogDEBUG] or [zlogERROR].
 
 [logger]: https://run-z.github.io/log-z/classes/module__run_z_log_z.zlogger.html
+[loggable]: https://run-z.github.io/log-z/classes/module__run_z_log_z.zloggable.html
 [zlogDetails()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdetails-1
 [zlogError()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogerror-1
 [zlogExtra()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogextra

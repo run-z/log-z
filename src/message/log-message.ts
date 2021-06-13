@@ -1,10 +1,11 @@
+import type { ZLogLevel } from '../level';
+import { dueLogZ } from './due-log';
 import type { ZLogDetails } from './log-details';
-import type { ZLogLevel } from './log-level';
-import { ZLogMessageBuilder } from './log-message-builder.impl';
-import { ZLogMessageData__symbol } from './log-message-data.impl';
 
 /**
  * Log message.
+ *
+ * Can be constructed by {@link zlogMessage} function.
  */
 export interface ZLogMessage {
 
@@ -55,53 +56,25 @@ export interface ZLogMessage {
  * Treats special values created by {@link zlogExtra} function as additional {@link ZLogMessage.extra uninterpreted
  * message parameters}.
  *
+ * Processes {@link ZLoggable loggable} values.
+ *
  * Treats anything else as {@link ZLogMessage.extra uninterpreted message parameter}.
+ *
+ * Processes log messages with {@link dueLogZ} in `in` stage.
  *
  * @param level - Log level.
  * @param args - Log message arguments.
  *
  * @returns Constructed log message.
  */
-export function zlogMessage(level: ZLogLevel, ...args: unknown[]): ZLogMessage {
-
-  const builder = new ZLogMessageBuilder(level);
-
-  builder.addAll(args);
-
-  return builder.message();
-}
-
-/**
- * Builds a special value {@link zlogMessage treated} as {@link ZLogMessage.error logged error}.
- *
- * The resulting value can be passed to {@link zlogMessage} function or to {@link ZLogger.log logger method} to set an
- * error of logged message.
- *
- * @param error - Error to report.
- *
- * @returns A special value.
- */
-export function zlogError(error: unknown): unknown {
-  return {
-    [ZLogMessageData__symbol]: 'error',
-    error,
-  };
-}
-
-/**
- * Builds a special value {@link zlogMessage treated} as a list of {@link ZLogMessage.extra uninterpreted log message
- * parameters}.
- *
- * The resulting value can be passed to {@link zlogMessage} function or to {@link ZLogger.log logger method} to add
- * parameters of any type to logged message.
- *
- * @param extra - Log message parameters.
- *
- * @returns A special value.
- */
-export function zlogExtra(...extra: unknown[]): unknown {
-  return {
-    [ZLogMessageData__symbol]: 'extra',
-    extra,
-  };
+export function zlogMessage(level: ZLogLevel, ...args: readonly unknown[]): ZLogMessage {
+  return dueLogZ({
+    on: 'in',
+    zMessage: {
+      level,
+      text: '',
+      details: {},
+      extra: args,
+    },
+  }).zMessage;
 }

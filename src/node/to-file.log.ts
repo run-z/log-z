@@ -2,11 +2,11 @@ import { noop, valueProvider } from '@proc7ts/primitives';
 import * as fs from 'fs';
 import { promises as fsPromises } from 'fs';
 import * as path from 'path';
-import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import { notLogged } from '../log-recorder.impl';
 import type { ZLogBuffer } from '../logs';
 import { logZToBuffer } from '../logs';
+import type { ZLogMessage } from '../message';
 import { logZToStream, StreamZLogSpec } from './to-stream.log';
 
 /**

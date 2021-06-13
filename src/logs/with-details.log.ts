@@ -1,5 +1,5 @@
-import type { ZLogDetails } from '../log-details';
 import type { ZLogRecorder } from '../log-recorder';
+import type { ZLogDetails } from '../message';
 import { logZUpdated } from './updated.log';
 
 /**

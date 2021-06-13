@@ -1,7 +1,7 @@
-import { ZLogLevel } from './log-level';
-import type { ZLogMessage } from './log-message';
-import { zlogMessage } from './log-message';
+import { ZLogLevel } from './level';
 import type { ZLogRecorder } from './log-recorder';
+import type { ZLogMessage } from './message';
+import { zlogMessage } from './message';
 
 /**
  * Abstract message logger.

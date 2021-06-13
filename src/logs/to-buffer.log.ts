@@ -1,6 +1,6 @@
 import { noop } from '@proc7ts/primitives';
-import type { ZLogMessage } from '../log-message';
 import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
+import type { ZLogMessage } from '../message';
 import { ZLogBuffer } from './log-buffer';
 import { ZLogBuffer$ } from './log-buffer.impl';
 

@@ -3,10 +3,10 @@ import * as os from 'os';
 import type { Writable } from 'stream';
 import type { TextZLogFormat, ZLogFormatter } from '../formats';
 import { textZLogFormatter } from '../formats';
-import type { ZLogMessage } from '../log-message';
 import type { ZLogRecorder } from '../log-recorder';
 import { alreadyLogged, notLogged } from '../log-recorder.impl';
-import { zlogExpand } from '../loggable';
+import type { ZLogMessage } from '../message';
+import { zlogExpand } from '../message';
 import type { WhenWritten } from './stream-writer.impl';
 import { streamWriter } from './stream-writer.impl';
 
