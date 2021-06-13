@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
+import { ZLogLevel } from './level';
 import { logZ } from './log';
-import { ZLogLevel } from './log-level';
-import { zlogMessage } from './log-message';
 import type { ZLogRecorder } from './log-recorder';
 import type { ZLogger } from './logger';
+import { zlogMessage } from './message';
 import { logZToMock } from './spec';
 
 describe('logZ', () => {

@@ -1,11 +1,10 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import type { Mock } from 'jest-mock';
+import { ZLogLevel } from '../level';
 import { logZBy } from '../log-by';
-import { zlogDetails } from '../log-details';
-import { ZLogLevel } from '../log-level';
-import type { ZLogMessage } from '../log-message';
-import { zlogMessage } from '../log-message';
 import type { ZLogger } from '../logger';
+import type { ZLogMessage } from '../message';
+import { zlogDetails, zlogMessage } from '../message';
 import type { MockZLogRecorder } from '../spec';
 import { logZToMock } from '../spec';
 import { logZUpdated } from './updated.log';

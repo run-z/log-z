@@ -7,7 +7,7 @@ import {
   messageZLogField,
   timestampZLogField,
 } from '../fields';
-import type { ZLogMessage } from '../log-message';
+import type { ZLogMessage } from '../message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
 import { ZLogLine } from './log-line';

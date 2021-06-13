@@ -1,7 +1,7 @@
 import { noop } from '@proc7ts/primitives';
-import { ZLogLevel, zlogLevelOf } from '../log-level';
-import type { ZLogMessage } from '../log-message';
+import { ZLogLevel, zlogLevelOf } from '../level';
 import type { ZLogRecorder } from '../log-recorder';
+import type { ZLogMessage } from '../message';
 import { neverLogZ } from './never.log';
 
 /**

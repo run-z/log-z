@@ -1,5 +1,5 @@
-import { ZLogMessageData__symbol } from './log-message-data.impl';
-import { zlogDefer } from './loggable';
+import type { DueLogZ } from './due-log';
+import { zlogDefer } from './log-defer';
 
 /**
  * Log message details map.
@@ -21,21 +21,28 @@ export type ZLogDetails = { readonly [key in string | symbol]?: unknown };
  */
 export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails | null | undefined)): unknown {
   if (typeof details === 'function') {
-    return zlogDefer(() => {
+    return zlogDefer(() => ({
+      toLog(_target: DueLogZ) {
 
-      const expanded = details();
+        const expanded = details();
 
-      return expanded != null
-          ? {
-            [ZLogMessageData__symbol]: 'details',
-            details: expanded,
-          }
-          : expanded;
-    });
+        return expanded ? zlogDetails(expanded) : [];
+      },
+    }));
   }
 
   return {
-    [ZLogMessageData__symbol]: 'details',
-    details,
+    toLog(target: DueLogZ) {
+
+      const { zMessage } = target;
+
+      if (!zMessage) {
+        return details;
+      }
+
+      target.zMessage = { ...zMessage, details: { ...zMessage.details, ...details } };
+
+      return [];
+    },
   };
 }

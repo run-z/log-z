@@ -2,11 +2,9 @@ import { describe, expect, it } from '@jest/globals';
 import * as os from 'os';
 import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
+import { ZLogLevel } from '../level';
 import { logZBy } from '../log-by';
-import { zlogDetails } from '../log-details';
-import { ZLogLevel } from '../log-level';
-import { zlogMessage } from '../log-message';
-import { zlogDefer } from '../loggable';
+import { zlogDefer, zlogDetails, zlogMessage } from '../message';
 import { TestWritable } from '../spec';
 import { logZToStream } from './to-stream.log';
 

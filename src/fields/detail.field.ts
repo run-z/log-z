@@ -1,5 +1,5 @@
 import type { ZLogField, ZLogLine } from '../formats';
-import type { ZLogDetails } from '../log-details';
+import type { ZLogDetails } from '../message';
 
 /**
  * Creates a log field for {@link ZLogLine.extractDetail extracted} message detail.

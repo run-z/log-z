@@ -1,5 +1,4 @@
-import type { ZLogDetails } from '../log-details';
-import type { ZLogMessage } from '../log-message';
+import type { ZLogDetails, ZLogMessage } from '../message';
 import type { ZLogField } from './log-field';
 
 /**

@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { textZLogFormatter, ZLogFormatter } from '../formats';
-import { zlogDetails } from '../log-details';
-import { ZLogLevel } from '../log-level';
-import { zlogMessage } from '../log-message';
+import { ZLogLevel } from '../level';
+import { zlogDetails, zlogMessage } from '../message';
 
 describe('detailsZLogField', () => {
 

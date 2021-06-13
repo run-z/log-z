@@ -1,9 +1,9 @@
 import { noop } from '@proc7ts/primitives';
-import { zlogLevelMap } from '../log-level';
-import type { ZLogMessage } from '../log-message';
+import { zlogLevelMap } from '../level';
 import type { ZLogRecorder } from '../log-recorder';
 import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
-import { zlogExpand } from '../loggable';
+import type { ZLogMessage } from '../message';
+import { zlogExpand } from '../message';
 
 type ConsoleZLogMethod = (this: void, console: Console, message: ZLogMessage) => void;
 

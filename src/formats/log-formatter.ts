@@ -1,4 +1,4 @@
-import type { ZLogMessage } from '../log-message';
+import type { ZLogMessage } from '../message';
 
 /**
  * Log message formatter signature.

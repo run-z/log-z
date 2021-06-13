@@ -1,8 +1,10 @@
 import { describe, expect, it } from '@jest/globals';
-import { zlogINFO } from './levels';
+import { zlogINFO } from '../level';
+import { zlogDefer } from './log-defer';
 import { zlogDetails } from './log-details';
-import { zlogError, zlogExtra } from './log-message';
-import { zlogDefer, zlogExpand } from './loggable';
+import { zlogError } from './log-error';
+import { zlogExpand } from './log-expand';
+import { zlogExtra } from './log-extra';
 
 describe('zlogExpand', () => {
   it('expands message text', () => {
@@ -13,12 +15,8 @@ describe('zlogExpand', () => {
     expect(zlogExpand(zlogINFO('Message', zlogDefer(() => 'Extra'))))
         .toEqual(zlogINFO('Message', zlogExtra('Extra')));
   });
-  it('ignores expanded string equal to message text', () => {
-    expect(zlogExpand(zlogINFO('Message', zlogDefer(() => 'Message'))))
-        .toEqual(zlogINFO('Message'));
-  });
-  it('ignores expanded `null`', () => {
-    expect(zlogExpand(zlogINFO('Message', zlogDefer(() => null))))
+  it('ignores expanded empty array', () => {
+    expect(zlogExpand(zlogINFO('Message', zlogDefer(() => []))))
         .toEqual(zlogINFO('Message'));
   });
   it('expands message details', () => {

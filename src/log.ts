@@ -1,5 +1,5 @@
+import { ZLogLevel } from './level';
 import { logZBy } from './log-by';
-import { ZLogLevel } from './log-level';
 import type { ZLogRecorder } from './log-recorder';
 import type { ZLogger } from './logger';
 import { logZToConsole, logZWhenLevel } from './logs';
