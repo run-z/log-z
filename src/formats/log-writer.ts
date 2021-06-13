@@ -2,21 +2,21 @@ import type { ZLogDetails, ZLogMessage } from '../message';
 import type { ZLogField } from './log-field';
 
 /**
- * Log line.
+ * Log message writer.
  *
- * Represents formatted log message. Line contents are written by {@link ZLogField log fields}.
+ * The {@link ZLogField log fields} format and write log message contents using this writer.
  *
  * The instance of this class can be reused by different messages and fields.
  */
-export abstract class ZLogLine {
+export abstract class ZLogWriter {
 
   /**
-   * The log message this line represents. I.e. the message to format.
+   * The log message to format and write.
    */
   abstract readonly message: ZLogMessage;
 
   /**
-   * Changes the message to format.
+   * Changes the message to write.
    *
    * A field may decide to modify the message e.g. to exclude some of its properties from further formatting.
    *
@@ -25,8 +25,8 @@ export abstract class ZLogLine {
   abstract changeMessage(newMessage: ZLogMessage): void;
 
   /**
-   * Extracts {@link ZLogMessage.details message details}, then {@link changeMessage changes} the message to format by
-   * excluding the extracted details from it.
+   * Extracts {@link ZLogMessage.details message details}, then {@link changeMessage changes} the message to write
+   * by excluding the extracted details from it.
    *
    * @returns Extracted message details.
    */
@@ -34,7 +34,7 @@ export abstract class ZLogLine {
 
   /**
    * Extracts a property from {@link ZLogMessage.details message details}, then {@link changeMessage changes}
-   * the message to format by excluding the extracted property from it.
+   * the message to write by excluding the extracted property from it.
    *
    * @param path - A path to details property to extract. Empty path means extracting of all details.
    *
@@ -92,7 +92,7 @@ export abstract class ZLogLine {
    * @param field - The field to format the message by.
    * @param message - The message to format. {@link message Current message} by default.
    *
-   * @returns Either a string written to log line, or `undefined` if nothing is written.
+   * @returns Either a formatted field string, or `undefined` if nothing to format.
    */
   abstract format(field: ZLogField<this>, message?: ZLogMessage): string | undefined;
 
@@ -121,7 +121,7 @@ export abstract class ZLogLine {
   /**
    * Writes an error.
    *
-   * Writes a message and its stack trace.
+   * Writes a message and its stack trace if present.
    *
    * @param error - An error to write.
    */
@@ -165,7 +165,7 @@ export abstract class ZLogLine {
       this.write(']');
     } else {
 
-      const formatted = this.format(line => line.writeProperties(value));
+      const formatted = this.format(writer => writer.writeProperties(value));
 
       this.write(formatted ? `{ ${formatted} }` : '{}');
     }
@@ -184,7 +184,7 @@ export abstract class ZLogLine {
 
     for (const key of Reflect.ownKeys(value)) {
 
-      const formatted = this.format(line => line.writeKeyAndValue(
+      const formatted = this.format(writer => writer.writeKeyAndValue(
           key,
           (value as Record<PropertyKey, any>)[key as string],
       ));
@@ -244,8 +244,6 @@ export abstract class ZLogLine {
    * Writes a string representation of the value.
    *
    * @param value - A value to format.
-   *
-   * @returns Either formatted value, or nothing.
    */
   protected writeByDefault(value: unknown): void {
     this.write(String(value));

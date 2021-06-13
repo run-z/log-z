@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import type { ZLogFormatter } from '../formats';
 import { textZLogFormatter } from '../formats';
-import { ZLogLevel } from '../level';
-import { zlogMessage } from '../message';
+import { zlogERROR } from '../level';
+import { zlogDetails } from '../message';
 
 describe('errorZLogField', () => {
 
@@ -16,7 +16,7 @@ describe('errorZLogField', () => {
 
     const error = new Error();
 
-    expect(format(zlogMessage(ZLogLevel.Error, error))).toBe(`[ERROR] ${error.stack}`);
+    expect(format(zlogERROR('Message', error))).toBe(`[ERROR] Message ${error.stack}`);
   });
   it('formats error without stack', () => {
 
@@ -24,15 +24,9 @@ describe('errorZLogField', () => {
 
     error.stack = undefined;
 
-    expect(format(zlogMessage(ZLogLevel.Error, error))).toBe(`[ERROR] ${String(error)}`);
+    expect(format(zlogERROR('Message', error))).toBe(`[ERROR] Message ${String(error)}`);
   });
-  it('formats error value', () => {
-    expect(format({
-      level: ZLogLevel.Error,
-      text: '',
-      error: 'Error!',
-      details: {},
-      extra: [],
-    })).toBe(`[ERROR] [Error: "Error!"]`);
+  it('formats `error` detail', () => {
+    expect(format(zlogERROR(zlogDetails({ error: 'Error!' }), 'Message'))).toBe(`[ERROR] Message [Error: "Error!"]`);
   });
 });

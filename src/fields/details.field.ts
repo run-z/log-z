@@ -1,4 +1,4 @@
-import type { ZLogField, ZLogLine } from '../formats';
+import type { ZLogField, ZLogWriter } from '../formats';
 
 /**
  * A field for {@link ZLogMessage.details message details}.
@@ -10,12 +10,12 @@ export function detailsZLogField(): ZLogField;
  *
  * @returns Itself for the convenience.
  */
-export function detailsZLogField(line: ZLogLine): void;
+export function detailsZLogField(writer: ZLogWriter): void;
 
-export function detailsZLogField(line?: ZLogLine): ZLogField | void {
-  if (!line) {
+export function detailsZLogField(writer?: ZLogWriter): ZLogField | void {
+  if (!writer) {
     return detailsZLogField;
   }
 
-  line.writeProperties(line.message.details);
+  writer.writeProperties(writer.message.details);
 }

@@ -17,16 +17,12 @@ export interface ZLogMessage {
   readonly level: ZLogLevel;
 
   /**
-   * Human-readable message text.
+   * Log line containing arbitrary values to log.
    *
-   * May be empty when unspecified.
+   * This is originally populated with the values passed to any {@link ZLogger.log logging method} or
+   * {@link zlogMessage} function.
    */
-  readonly text: string;
-
-  /**
-   * An error to log, if any.
-   */
-  readonly error?: unknown;
+  readonly line: readonly unknown[];
 
   /**
    * Message details map.
@@ -35,46 +31,28 @@ export interface ZLogMessage {
    */
   readonly details: ZLogDetails;
 
-  /**
-   * Extra uninterpreted parameters of this message passed to the logging method.
-   */
-  readonly extra: readonly unknown[];
-
 }
 
 /**
  * Builds a log message.
  *
- * Treats the first textual argument as {@link ZLogMessage.text message text}.
- *
- * Treats the first special value created by {@link zlogError} function or the first `Error` instance as an error.
- * Treats error message as a {@link ZLogMessage.text message text}, unless there is another textual argument.
- *
- * Treats special values created by {@link zlogDetails} function as additional {@link ZLogMessage.details message
- * details}.
- *
- * Treats special values created by {@link zlogExtra} function as additional {@link ZLogMessage.extra uninterpreted
- * message parameters}.
- *
- * Processes {@link ZLoggable loggable} values.
- *
- * Treats anything else as {@link ZLogMessage.extra uninterpreted message parameter}.
- *
  * Processes log messages with {@link dueLogZ} in `in` stage.
+ *
+ * Processes {@link ZLoggable loggable} values. E.g. treats a loggable value created by {@link zlogDetails}
+ * function as additional {@link ZLogMessage.details message details}.
+ *
+ * Treats everything else as {@link ZLogMessage.line message line}.
  *
  * @param level - Log level.
  * @param args - Log message arguments.
  *
  * @returns Constructed log message.
  */
-export function zlogMessage(level: ZLogLevel, ...args: readonly unknown[]): ZLogMessage {
+export function zlogMessage(level: ZLogLevel, ...args: unknown[]): ZLogMessage {
   return dueLogZ({
     on: 'in',
-    zMessage: {
-      level,
-      text: '',
-      details: {},
-      extra: args,
-    },
+    line: args,
+    zLevel: level,
+    zDetails: {},
   }).zMessage;
 }

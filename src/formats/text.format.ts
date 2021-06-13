@@ -2,7 +2,6 @@ import {
   decoratorZLogField,
   detailsZLogField,
   errorZLogField,
-  extraZLogField,
   levelZLogField,
   messageZLogField,
   timestampZLogField,
@@ -10,7 +9,7 @@ import {
 import type { ZLogMessage } from '../message';
 import type { ZLogField } from './log-field';
 import type { ZLogFormatter } from './log-formatter';
-import { ZLogLine } from './log-line';
+import { ZLogWriter } from './log-writer';
 
 /**
  * Text log format.
@@ -18,7 +17,7 @@ import { ZLogLine } from './log-line';
 export interface TextZLogFormat {
 
   /**
-   * Fields to write to each log line.
+   * Fields to write.
    *
    * This is an array of:
    *
@@ -44,6 +43,10 @@ export const TextZLogFormat = {
    */
   defaultFields(): Exclude<TextZLogFormat['fields'], undefined> {
     return [
+      1,
+      ' ',
+      errorZLogField(),
+      0,
       timestampZLogField(),
       ' ',
       levelZLogField(),
@@ -52,21 +55,11 @@ export const TextZLogFormat = {
       ' ',
       decoratorZLogField(
           {
-            prefix: '(',
-            suffix: ')',
-          },
-          extraZLogField(),
-      ),
-      ' ',
-      decoratorZLogField(
-          {
             prefix: '{ ',
             suffix: ' }',
           },
           detailsZLogField(),
       ),
-      ' ',
-      errorZLogField(),
     ];
   },
 
@@ -86,9 +79,6 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
   return message => zlogMessageText(fields, [message]);
 }
 
-/**
- * @internal
- */
 function zlogMessageText(
     fields: Exclude<TextZLogFormat['fields'], undefined>,
     state: [message: ZLogMessage],
@@ -100,7 +90,7 @@ function zlogMessageText(
 
   outputByOrder.set(currentOrder, currentOutput);
 
-  class ZLogLine$ extends ZLogLine {
+  class ZLogWriter$ extends ZLogWriter {
 
     get message(): ZLogMessage {
       return state[0];
@@ -120,12 +110,12 @@ function zlogMessageText(
 
   }
 
-  const line = new ZLogLine$();
+  const writer = new ZLogWriter$();
 
   for (const field of fields) {
     if (typeof field === 'function') {
       // Render field.
-      field(line);
+      field(writer);
       currentOutput.push([]);
     } else if (typeof field === 'string') {
       // Add delimiter.
@@ -148,14 +138,8 @@ function zlogMessageText(
   return zlogLineOutputText(outputByOrder);
 }
 
-/**
- * @internal
- */
 type Written = readonly [value?: string, isSeparator?: 1];
 
-/**
- * @internal
- */
 function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | undefined {
 
   const allWritten: [number, Written[]][] = [...outputByOrder].sort(([order1], [order2]) => order1 - order2);

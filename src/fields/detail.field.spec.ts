@@ -37,8 +37,8 @@ describe('detailZLogField', () => {
     it('applies custom format', () => {
       const format = textZLogFormatter({
         fields: [
-          detailZLogField((line, { first, second }: { first: string; second: string }) => {
-            line.write(`${first}-${second}`);
+          detailZLogField((writer, { first, second }: { first: string; second: string }) => {
+            writer.write(`${first}-${second}`);
           }),
           ' ',
           decoratorZLogField({ prefix: '{ ', suffix: ' }' }, detailsZLogField),
@@ -147,8 +147,8 @@ describe('detailZLogField', () => {
         fields: [
           detailZLogField(
               'some',
-              (line, { first, second }: { first: string; second: string }) => {
-                line.write(`${first}-${second}`);
+              (writer, { first, second }: { first: string; second: string }) => {
+                writer.write(`${first}-${second}`);
               },
           ),
           ' ',

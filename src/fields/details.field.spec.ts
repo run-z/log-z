@@ -39,4 +39,8 @@ describe('detailsZLogField', () => {
     expect(format(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ 'skip it': undefined }))))
         .toBe('[ERROR] Message');
   });
+  it('does not format nested properties with `undefined` values', () => {
+    expect(format(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ value: { 'skip it': undefined } }))))
+        .toBe('[ERROR] Message { value: {} }');
+  });
 });

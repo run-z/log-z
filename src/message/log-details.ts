@@ -9,6 +9,15 @@ import type { ZLoggable } from './loggable';
  */
 export type ZLogDetails = { readonly [key in string | symbol]?: unknown };
 
+export namespace ZLogDetails {
+
+  /**
+   * Mutable log message details map.
+   */
+  export type Mutable = { [key in string | symbol]?: unknown };
+
+}
+
 /**
  * Creates a {@link ZLoggable loggable} value {@link zlogMessage treated} as additional {@link ZLogMessage.details
  * message details}.
@@ -36,15 +45,72 @@ export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails 
   return {
     toLog(target: DueLogZ) {
 
-      const { zMessage } = target;
+      const { zDetails } = target;
 
-      if (!zMessage) {
+      if (!zDetails) {
         return details;
       }
 
-      target.zMessage = { ...zMessage, details: { ...zMessage.details, ...details } };
+      assignZLogDetails(zDetails, details);
 
       return [];
     },
   };
+}
+
+/**
+ * Creates a deep clone of log message details.
+ *
+ * @param details - Log message details to clone.
+ *
+ * @returns Mutable `details` clone.
+ */
+export function cloneZLogDetails(details: ZLogDetails): ZLogDetails.Mutable {
+
+  const clone: ZLogDetails.Mutable = {};
+
+  for (const key of Reflect.ownKeys(details)) {
+
+    const value = details[key as string];
+
+    if (value !== undefined) {
+      if (isZLogDetails(value)) {
+        clone[key as string] = cloneZLogDetails(value);
+      } else {
+        clone[key as string] = value;
+      }
+    }
+  }
+
+  return clone;
+}
+
+/**
+ * Assigns log message details to `target` ones.
+ *
+ * @param target - Mutable map to assign `details` to.
+ * @param details - Log message details to assign.
+ *
+ * @returns `target` details instance.
+ */
+export function assignZLogDetails(target: ZLogDetails.Mutable, details: ZLogDetails): ZLogDetails.Mutable {
+  for (const key of Reflect.ownKeys(details)) {
+
+    const oldValue = target[key as string];
+    const newValue = details[key as string];
+
+    if (newValue !== undefined) {
+      if (!isZLogDetails(newValue) || !isZLogDetails(oldValue)) {
+        target[key as string] = newValue;
+      } else {
+        assignZLogDetails(oldValue, newValue);
+      }
+    }
+  }
+
+  return target;
+}
+
+function isZLogDetails(value: unknown): value is ZLogDetails {
+  return typeof value === 'object' && !!value && !Array.isArray(value);
 }

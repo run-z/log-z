@@ -13,7 +13,7 @@ describe('messageZLogField', () => {
   });
   it('formats message text', () => {
 
-    const format = textZLogFormatter({ fields: [messageZLogField(text => text + '!')] });
+    const format = textZLogFormatter({ fields: [messageZLogField(line => line.join(' ') + '!')] });
 
     expect(format(zlogMessage(ZLogLevel.Info, 'Message'))).toBe('Message!');
   });

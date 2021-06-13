@@ -8,16 +8,16 @@ import { decoratorZLogField } from './decorator.field';
 
 describe('decoratorZLogField', () => {
   it('prefixes non-empty field value', () => {
-    expect(format({ prefix: '(' }, line => line.write('!'))).toBe('(!');
+    expect(format({ prefix: '(' }, writer => writer.write('!'))).toBe('(!');
   });
   it('appends suffix to non-empty field value', () => {
-    expect(format({ suffix: ')' }, line => line.write('!'))).toBe('!)');
+    expect(format({ suffix: ')' }, writer => writer.write('!'))).toBe('!)');
   });
   it('does not write empty field value', () => {
-    expect(format({ prefix: '(', suffix: ')' }, line => line.write(''))).toBeUndefined();
+    expect(format({ prefix: '(', suffix: ')' }, writer => writer.write(''))).toBeUndefined();
   });
   it('replaces empty field value', () => {
-    expect(format({ prefix: '(', suffix: ')', empty: '-' }, line => line.write(''))).toBe('-');
+    expect(format({ prefix: '(', suffix: ')', empty: '-' }, writer => writer.write(''))).toBe('-');
   });
   it('does not replace absent field value', () => {
     expect(format({ prefix: '(', suffix: ')', empty: '-' }, () => void 0)).toBeUndefined();

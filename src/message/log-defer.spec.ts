@@ -10,9 +10,8 @@ describe('zlogDefer', () => {
 
     expect(zlogERROR(deferred)).toEqual({
       level: ZLogLevel.Error,
-      text: '',
+      line: [deferred],
       details: {},
-      extra: [deferred],
     });
   });
   it('is expanded outside `log-z` in undefined stage', () => {

@@ -47,16 +47,16 @@ export function timestampZLogField(
           ? (timestamp: number) => tsFormat.format(timestamp)
           : formatZLogTimestamp);
 
-  return line => {
+  return writer => {
 
-    const timestamp = line.extractDetail(key) as number | string | Date;
+    const timestamp = writer.extractDetail(key) as number | string | Date;
 
     if (typeof timestamp === 'number') {
-      line.write(doFormat(timestamp));
+      writer.write(doFormat(timestamp));
     } else if (typeof timestamp === 'string') {
-      line.write(timestamp);
+      writer.write(timestamp);
     } else if (timestamp && typeof timestamp === 'object') {
-      line.write(doFormat(timestamp.getTime()));
+      writer.write(doFormat(timestamp.getTime()));
     }
   };
 
