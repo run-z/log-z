@@ -282,7 +282,7 @@ There are several additional log recorders that can combine or modify the behavi
 [logZByAny]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzbyany
 [logZTimestamp]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logztimestamp
 [logZToBuffer]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logztobuffer
-[logZToConsole]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logztoconsole
+[logZToLogger]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logztologger
 [logZUpdated]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzupdated
 [logZWhenLevel]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzwhenlevel
 [logZWithDetails]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzwithdetails
