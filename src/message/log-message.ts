@@ -4,6 +4,8 @@ import type { ZLogDetails } from './log-details';
 
 /**
  * Log message.
+ *
+ * Can be constructed by {@link zlogMessage} function.
  */
 export interface ZLogMessage {
 
@@ -54,7 +56,11 @@ export interface ZLogMessage {
  * Treats special values created by {@link zlogExtra} function as additional {@link ZLogMessage.extra uninterpreted
  * message parameters}.
  *
+ * Processes {@link ZLoggable loggable} values.
+ *
  * Treats anything else as {@link ZLogMessage.extra uninterpreted message parameter}.
+ *
+ * Processes log messages with {@link dueLogZ} in `in` stage.
  *
  * @param level - Log level.
  * @param args - Log message arguments.
