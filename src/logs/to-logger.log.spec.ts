@@ -6,7 +6,7 @@ import type { SpyInstance } from 'jest-mock';
 import { ZLogLevel } from '../level';
 import { logZ } from '../log';
 import type { ZLogger } from '../logger';
-import { zlogDefer, zlogDetails, zlogExtra } from '../message';
+import { zlogDefer, zlogDetails } from '../message';
 import { logZToLogger } from './to-logger.log';
 
 describe('logZToLogger', () => {
@@ -59,16 +59,16 @@ describe('logZToLogger', () => {
     const error = new Error('!!!');
 
     logger.error(error);
-    expect(errorSpy).toHaveBeenCalledWith(error.message, error);
+    expect(errorSpy).toHaveBeenCalledWith(error);
   });
 
-  it('logs details before error', () => {
+  it('logs details after error', () => {
 
     const error = new Error('!!!');
     const details = { details: 'many' };
 
     logger.error(error, zlogDetails(details));
-    expect(errorSpy).toHaveBeenCalledWith(error.message, details, error);
+    expect(errorSpy).toHaveBeenCalledWith(error, details);
   });
   it('logs details without message text', () => {
 
@@ -77,20 +77,6 @@ describe('logZToLogger', () => {
     logger.error(zlogDetails(details));
     expect(errorSpy).toHaveBeenCalledWith(details);
   });
-
-  it('logs extra before details and error', () => {
-
-    const error = new Error('!!!');
-    const details = { details: 'many' };
-
-    logger.error(error, zlogDetails(details), 'Error', ['extra']);
-    expect(errorSpy).toHaveBeenCalledWith('Error', ['extra'], details, error);
-  });
-  it('logs extra without message text', () => {
-    logger.error(zlogExtra('extra', 1, 2));
-    expect(errorSpy).toHaveBeenCalledWith('extra', 1, 2);
-  });
-
   it('expands the message', () => {
     logger.error(zlogDefer(() => 'Expanded'));
     expect(errorSpy).toHaveBeenCalledWith('Expanded');

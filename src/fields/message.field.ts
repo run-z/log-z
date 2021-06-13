@@ -1,16 +1,20 @@
 import type { ZLogField } from '../formats';
 
 /**
- * Creates a log field containing a {@link ZLogMessage.text log message text}.
+ * Creates a log field containing a {@link ZLogMessage.text log line}.
  *
- * By default, writes message text as is.
+ * By default, writes message line as space-separated string representations of values.
  *
- * @param format - Message text format. A function accepting message text and returning it formatted.
+ * @param format - Message text format. A function accepting message line and returning it formatted.
  *
- * @returns Log level field.
+ * @returns Log line field.
  */
 export function messageZLogField(
-    format: (this: void, text: string) => string = (text: string) => text,
+    format: (this: void, line: readonly unknown[]) => string = messageZLogField$default,
 ): ZLogField {
-  return line => line.write(format(line.message.text));
+  return line => line.write(format(line.message.line));
+}
+
+function messageZLogField$default(line: readonly unknown[]): string {
+  return line.join(' ');
 }

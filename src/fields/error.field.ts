@@ -3,20 +3,30 @@ import type { ZLogField, ZLogLine } from '../formats';
 /**
  * Creates a log message error field, if present.
  *
+ * An error is either the value of the `error` {@link ZLogMessage.details message details}, or the last element
+ * of {@link ZLogMessage.line log line} if it is an `Error` instance.
+ *
  * @returns Log message error field.
  */
 export function errorZLogField(): ZLogField {
   return formatZLogError;
 }
 
-/**
- * @internal
- */
-function formatZLogError(line: ZLogLine): void {
+function formatZLogError(text: ZLogLine): void {
 
-  const error = line.message.error;
+  let error = text.extractDetail('error');
 
-  if (error !== undefined) {
-    line.writeError(error);
+  if (error === undefined) {
+
+    const { line } = text.message;
+    const last = line[line.length - 1];
+
+    if (!(last instanceof Error)) {
+      return;
+    }
+    error = last;
+    text.changeMessage({ ...text.message, line: line.slice(0, -1) });
   }
+
+  text.writeError(error);
 }

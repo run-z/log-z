@@ -1,7 +1,8 @@
 import type { DueLog } from '@proc7ts/logger';
 import { dueLog } from '@proc7ts/logger';
+import type { ZLogLevel } from '../level';
+import type { ZLogDetails } from './log-details';
 import type { ZLogMessage } from './log-message';
-import { zlogMessage$hasText } from './log-message.impl';
 
 /**
  * A message about to be logged by {@link ZLogger}.
@@ -13,20 +14,26 @@ export interface DueLogZ extends DueLog {
   /**
    * Log line to process and log.
    *
-   * This is the same instance as `zMessage.extra`. It can be modified or replaced to change the latter.
+   * Can be modified or replaced to change the final {@link ZLogMessage.line log line}.
    */
   line: unknown[];
 
   /**
-   * Log message to process and log.
+   * Log level to process and log.
    *
-   * Can be replaced to change athe message to log. Replaces the {@link line} with {@link ZLogMessage.extra} in this
-   * case.
+   * Can be modified to change the final {@link ZLogMessage.level log level}.
+   */
+  zLevel?: ZLogLevel;
+
+  /**
+   * Log message details to process and log.
+   *
+   * Can be modified or replaced to change the final {@link ZLogMessage.details message details}.
    *
    * When missing, the message is not processed by `log-z`. A {@link ZLoggable} instance should not perform any `log-z`-
    * specific processing in this case.
    */
-  zMessage?: ZLogMessage;
+  zDetails?: ZLogDetails.Mutable;
 
 }
 
@@ -38,7 +45,7 @@ export namespace DueLogZ {
    * Has the same structure as {@link DueLogZ} but some properties may be initially omitted. They will be fulfilled
    * by {@link dueLogZ} before returned.
    */
-  export interface Target {
+  export interface Target extends DueLog.Target {
 
     /**
      * A hint indicating the logging stage.
@@ -50,18 +57,29 @@ export namespace DueLogZ {
     /**
      * Log line to process.
      *
-     * Ignored initially. Will be populated with `zMessage.extra`.
+     * Populated with {@link ZLogMessage.line log line} initially.
      *
      * @see DueLogZ.line
      */
-    line?: unknown[];
+    line: unknown[];
 
     /**
-     * Log message to process.
+     * Log level to process.
      *
-     * @see DueLogZ.zMessage
+     * Populated with message {@link ZLogMessage.level log level} initially.
+     *
+     * @see DueLogZ.zLevel
      */
-    zMessage: ZLogMessage;
+    zLevel: ZLogLevel;
+
+    /**
+     * Log message details to process.
+     *
+     * Populated with message {@link ZLogMessage.details details} initially.
+     *
+     * @see DueLogZ.zDetails
+     */
+    zDetails: ZLogDetails.Mutable;
 
     /**
      * An index of the first element of the log {@link line} to process.
@@ -80,58 +98,18 @@ export namespace DueLogZ {
   /**
    * Fully {@link dueLogZ processed} message about to be logged by {@link ZLogger}.
    */
-  export interface Processed extends DueLogZ {
+  export interface Processed extends DueLogZ.Target, DueLog {
+
+    index: number;
 
     /**
      * Processed log message.
-     *
-     * @see DueLogZ.zMessage
      */
-    zMessage: ZLogMessage;
+    readonly zMessage: ZLogMessage;
 
   }
 
 }
-
-const dueLogZ$handlers: DueLog.Handlers<DueLogZ.Processed> = {
-  onRaw(target, value) {
-    if (typeof value === 'string') {
-      if (!zlogMessage$hasText(target.zMessage)) {
-        target.zMessage = { ...target.zMessage, text: value };
-        return [];
-      }
-    } else if (!target.zMessage.error) {
-      if (value instanceof Error) {
-        target.zMessage = {
-          ...target.zMessage,
-          error: value,
-          text: target.zMessage.text || value.message,
-        };
-        return [];
-      }
-    }
-    return;
-  },
-  onLoggable(target, value) {
-
-    const { line, zMessage } = target;
-    const toLog = value.toLog(target);
-
-    if (zMessage !== target.zMessage) {
-      if (target.zMessage.extra !== line) {
-
-        const extra = target.zMessage.extra.slice();
-
-        target.zMessage = { ...target.zMessage, extra };
-        target.line = extra;
-      }
-    } else if (target.line !== line) {
-      target.zMessage = { ...zMessage, extra: target.line };
-    }
-
-    return toLog;
-  },
-};
 
 /**
  * Processes the target log message for {@link ZLogger}.
@@ -147,17 +125,13 @@ export function dueLogZ<TTarget extends DueLogZ.Target>(
     target: TTarget,
 ): TTarget & DueLogZ.Processed {
 
-  const { index = 0 } = target;
-  const extra = target.zMessage.extra.slice();
-  const zMessage: ZLogMessage = { ...target.zMessage, extra };
+  const processed = dueLog<DueLogZ.Target>(target) as TTarget & DueLogZ.Processed;
 
-  target.line = extra;
-  target.index = Math.min(Math.max(index, 0), target.line.length);
-  target.zMessage = zMessage;
+  (processed as { zMessage: ZLogMessage }).zMessage = {
+    level: processed.zLevel,
+    line: processed.line,
+    details: processed.zDetails,
+  };
 
-  const t = target as TTarget & DueLogZ.Processed;
-
-  dueLog(t, dueLogZ$handlers);
-
-  return t;
+  return processed;
 }

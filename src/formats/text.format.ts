@@ -2,7 +2,6 @@ import {
   decoratorZLogField,
   detailsZLogField,
   errorZLogField,
-  extraZLogField,
   levelZLogField,
   messageZLogField,
   timestampZLogField,
@@ -44,6 +43,10 @@ export const TextZLogFormat = {
    */
   defaultFields(): Exclude<TextZLogFormat['fields'], undefined> {
     return [
+      1,
+      ' ',
+      errorZLogField(),
+      0,
       timestampZLogField(),
       ' ',
       levelZLogField(),
@@ -52,21 +55,11 @@ export const TextZLogFormat = {
       ' ',
       decoratorZLogField(
           {
-            prefix: '(',
-            suffix: ')',
-          },
-          extraZLogField(),
-      ),
-      ' ',
-      decoratorZLogField(
-          {
             prefix: '{ ',
             suffix: ' }',
           },
           detailsZLogField(),
       ),
-      ' ',
-      errorZLogField(),
     ];
   },
 
@@ -86,9 +79,6 @@ export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
   return message => zlogMessageText(fields, [message]);
 }
 
-/**
- * @internal
- */
 function zlogMessageText(
     fields: Exclude<TextZLogFormat['fields'], undefined>,
     state: [message: ZLogMessage],
@@ -148,14 +138,8 @@ function zlogMessageText(
   return zlogLineOutputText(outputByOrder);
 }
 
-/**
- * @internal
- */
 type Written = readonly [value?: string, isSeparator?: 1];
 
-/**
- * @internal
- */
 function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | undefined {
 
   const allWritten: [number, Written[]][] = [...outputByOrder].sort(([order1], [order2]) => order1 - order2);

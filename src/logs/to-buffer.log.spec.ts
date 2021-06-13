@@ -41,7 +41,7 @@ describe('logZToBuffer', () => {
     buffer = logZToBuffer({
       atMost: 3,
       onRecord(_newEntry, contents) {
-        reported.push(itsElements(contents, ({ message: { text } }) => text));
+        reported.push(itsElements(contents, ({ message: { line } }) => line.join(', ')));
       },
     });
 

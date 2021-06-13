@@ -70,23 +70,12 @@ function LogZToLogger$args(
     details = message.details,
 ): unknown[] {
 
-  const { text, error } = message;
-  const args: unknown[] = [];
-
-  if (prefix) {
-    args.push(prefix);
-  }
-  if (text) {
-    args.push(text);
-  }
-
-  args.push(...message.extra);
+  const args: unknown[] = prefix
+      ? [prefix, ...message.line]
+      : message.line.slice();
 
   if (Reflect.ownKeys(details).length) {
     args.push(details);
-  }
-  if (error) {
-    args.push(error);
   }
 
   return args;
