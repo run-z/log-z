@@ -1,3 +1,4 @@
+import { consoleLogger } from '@proc7ts/logger';
 import { noop, valueProvider } from '@proc7ts/primitives';
 import * as fs from 'fs';
 import { promises as fsPromises } from 'fs';
@@ -74,7 +75,7 @@ export function logZToFile(
           .then(([newRecorder]) => setLog([newFile, newRecorder]))
           .catch(
               /* istanbul ignore next */
-              error => console.error('Failed to open log file (', newFile, '):', error),
+              error => consoleLogger.error('Failed to open log file (', newFile, '):', error),
           );
     }
 
@@ -166,6 +167,6 @@ function closeFileZLog(log: FileZLog | undefined): Promise<unknown> {
       .then(end, end)
       .catch(
           /* istanbul ignore next */
-          error => console.error('Error closing log file (', file, '):', error),
+          error => consoleLogger.error('Error closing log file (', file, '):', error),
       );
 }

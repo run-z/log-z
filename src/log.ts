@@ -2,7 +2,7 @@ import { ZLogLevel } from './level';
 import { logZBy } from './log-by';
 import type { ZLogRecorder } from './log-recorder';
 import type { ZLogger } from './logger';
-import { logZToConsole, logZWhenLevel } from './logs';
+import { logZToLogger, logZWhenLevel } from './logs';
 
 /**
  * A specification of how to {@link logZ log}.
@@ -21,7 +21,7 @@ export interface ZLogSpec {
   /**
    * The log recorder to record messages by.
    *
-   * @default {@link logZToConsole console log recorder}.
+   * @default {@link logZToLogger console log recorder}.
    */
   readonly by?: ZLogRecorder;
 
@@ -38,7 +38,7 @@ export function logZ(how: ZLogSpec = {}): ZLogger {
 
   const {
     atLeast = ZLogLevel.Info,
-    by = logZToConsole(),
+    by = logZToLogger(),
   } = how;
 
   return logZBy(logZWhenLevel(atLeast, by));

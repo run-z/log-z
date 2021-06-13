@@ -270,7 +270,8 @@ There are several additional log recorders that can combine or modify the behavi
 - [logZTimestamp] - Timestamp log recorder.
   Adds a timestamp property to message details.
 - [logZToBuffer] - A log buffer that can be drained to another log recorder.   
-- [logZToConsole] - Logs to global console. This is the default recorder used by [logZ] function.
+- [logZToLogger] - Logs to another `Logger`. To `consoleLogger` by default. This is the default recorder used by [logZ]
+  function.
 - [logZUpdated] - Updates log messages.
 - [logZWhenLevel] - A log recorder of messages with required level.
   Messages not satisfying the condition either logged by another recorder, or discarded.
