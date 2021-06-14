@@ -103,40 +103,24 @@ A log message is an object with the following properties:
   - `Debug` - Anything else, i.e. too verbose to be included in "info" level.     
   - `Trace` - Logging from external libraries used by your app or very detailed application logging.
 
-- `text` - Human-readable message text.
-
-  May be empty when unspecified.
-
-- `error` - An error to log, if any.
+- `line` - Log line containing arbitrary values to log.
 
 - `details` - Message details map.
 
   The keys of this map are specific to application or log recorder implementation.
-  
-- `extra` - Array of extra uninterpreted parameters of passed to the logging method.   
 
 
 The `record()` method of the [logger] logs such messages.
 
 The [logger] also has more convenient methods accepting arbitrary parameters and corresponding to each predefined log
-level, like `info()` and `error()`, `warn()`, `trace()`, etc. Each of these methods treats arguments as following:
-
-- Treats the first textual argument as a message text.
-- Treats the first special value created by [zlogError()] function or the first `Error` instance as an error.
-- Treats error message as a message text, unless there is another textual argument.
-- Treats special values created by [zlogDetails()] function as additional message details.
-- Treats special values created by [zlogExtra()] function as additional uninterpreted message parameters.
-- Processes [loggable] values.  
-- Treats anything else as uninterpreted message parameter.
+level, like `info()` and `error()`, `warn()`, `trace()`, etc. Each of these methods processes `Loggable` values. E.g.
+the one created by [zlogDetails()].
 
 A [zlogMessage()] function can be used to construct a log message. A level-specific messages can be constructed by
 dedicated functions like [zlogDEBUG] or [zlogERROR].
 
 [logger]: https://run-z.github.io/log-z/classes/module__run_z_log_z.zlogger.html
-[loggable]: https://run-z.github.io/log-z/classes/module__run_z_log_z.zloggable.html
 [zlogDetails()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdetails-1
-[zlogError()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogerror-1
-[zlogExtra()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogextra
 [zlogMessage()]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogmessage-1
 [zlogDEBUG]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdebug
 [zlogERROR]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogerror
@@ -145,11 +129,12 @@ dedicated functions like [zlogDEBUG] or [zlogERROR].
 Loggable Values
 ---------------
 
-A message error or any uninterpreted message parameter may be a loggable value. For that, it should implement
-a `toLog()` method that returns a loggable representation of the value. Such representation will be written to the log
-instead of the original value. This can be used to log values in a special format.
+A message error or any message parameter can customize how it is logged by implementing `Loggable` or `ZLoggable`
+interface. I.e. it should implement `toLog()` method. See the [@proc7ts/logger] for the details.
 
-One possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
+For example, a [zlogDetails()] creates a loggable value that adjusts the details of the logged message.
+
+Another possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
 This can be done with `logDefer()` function:
 ```typescript
 import { logDefer } from '@proc7ts/logger';
@@ -159,6 +144,8 @@ logger.debug('Debug info', logDefer(() => zlogDetails({ info: evaluateDebugInfo(
 // Note that this will happen right before writing to the log,
 // which may happen at a later time, or not happen at all.
 ``` 
+
+[@proc7ts/logger]: https://www.npmjs.com/package/@proc7ts/logger
 
 
 Log Formats
