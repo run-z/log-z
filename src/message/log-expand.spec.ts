@@ -1,20 +1,20 @@
 import { describe, expect, it } from '@jest/globals';
+import { logDefer } from '@proc7ts/logger';
 import { zlogINFO } from '../level';
-import { zlogDefer } from './log-defer';
 import { zlogDetails } from './log-details';
 import { zlogExpand } from './log-expand';
 
 describe('zlogExpand', () => {
   it('expands message text', () => {
-    expect(zlogExpand(zlogINFO(zlogDefer(() => 'Message'))))
+    expect(zlogExpand(zlogINFO(logDefer(() => 'Message'))))
         .toEqual(zlogINFO('Message'));
   });
   it('ignores expanded empty array', () => {
-    expect(zlogExpand(zlogINFO('Message', zlogDefer(() => []))))
+    expect(zlogExpand(zlogINFO('Message', logDefer(() => []))))
         .toEqual(zlogINFO('Message'));
   });
   it('expands message details', () => {
-    expect(zlogExpand(zlogINFO('Message', zlogDetails({ test1: 1 }), zlogDefer(() => zlogDetails({ test2: 2 })))))
+    expect(zlogExpand(zlogINFO('Message', zlogDetails({ test1: 1 }), logDefer(() => zlogDetails({ test2: 2 })))))
         .toEqual(zlogINFO('Message', zlogDetails({ test1: 1, test2: 2 })));
   });
   it('expands message details in shorter form', () => {
@@ -26,11 +26,11 @@ describe('zlogExpand', () => {
         .toEqual(zlogINFO('Message', zlogDetails({ test1: 1 })));
   });
   it('recursively expands loggable', () => {
-    expect(zlogExpand(zlogINFO('Message', 1, zlogDefer(() => ({ toLog: () => [2, 3] })))))
+    expect(zlogExpand(zlogINFO('Message', 1, logDefer(() => ({ toLog: () => [2, 3] })))))
         .toEqual(zlogINFO('Message', 1, 2, 3));
   });
   it('recursively expands deferred value', () => {
-    expect(zlogExpand(zlogINFO('Message', 1, zlogDefer(() => zlogDefer(() => [2, 3])))))
+    expect(zlogExpand(zlogINFO('Message', 1, logDefer(() => logDefer(() => [2, 3])))))
         .toEqual(zlogINFO('Message', 1, 2, 3));
   });
   it('preserves message error', () => {

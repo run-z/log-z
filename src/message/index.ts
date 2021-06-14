@@ -1,5 +1,4 @@
 export * from './due-log';
-export * from './log-defer';
 export * from './log-details';
 export * from './log-expand';
 export * from './log-message';

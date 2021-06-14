@@ -150,15 +150,15 @@ a `toLog()` method that returns a loggable representation of the value. Such rep
 instead of the original value. This can be used to log values in a special format.
 
 One possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
-This can be done with [zlogDefer] function:
+This can be done with `logDefer()` function:
 ```typescript
-logger.debug('Debug info', zlogDefer(() => zlogDetails({ info: evaluateDebugInfo() })));
+import { logDefer } from '@proc7ts/logger';
+
+logger.debug('Debug info', logDefer(() => zlogDetails({ info: evaluateDebugInfo() })));
 // `evaluateDebugInfo()` will be called only if `DEBUG` log level enabled.
 // Note that this will happen right before writing to the log,
 // which may happen at a later time, or not happen at all.
 ``` 
-
-[zlogDefer]: https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdefer
 
 
 Log Formats

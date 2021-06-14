@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals';
 import type { Logger } from '@proc7ts/logger';
-import { consoleLogger } from '@proc7ts/logger';
+import { consoleLogger, logDefer } from '@proc7ts/logger';
 import { noop } from '@proc7ts/primitives';
 import type { SpyInstance } from 'jest-mock';
 import { ZLogLevel } from '../level';
 import { logZ } from '../log';
 import type { ZLogger } from '../logger';
-import { zlogDefer, zlogDetails } from '../message';
+import { zlogDetails } from '../message';
 import { logZToLogger } from './to-logger.log';
 
 describe('logZToLogger', () => {
@@ -78,7 +78,7 @@ describe('logZToLogger', () => {
     expect(errorSpy).toHaveBeenCalledWith(details);
   });
   it('expands the message', () => {
-    logger.error(zlogDefer(() => 'Expanded'));
+    logger.error(logDefer(() => 'Expanded'));
     expect(errorSpy).toHaveBeenCalledWith('Expanded');
   });
 

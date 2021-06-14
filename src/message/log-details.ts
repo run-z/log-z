@@ -1,5 +1,5 @@
+import { logDefer } from '@proc7ts/logger';
 import type { DueLogZ } from './due-log';
-import { zlogDefer } from './log-defer';
 import type { ZLoggable } from './loggable';
 
 /**
@@ -32,7 +32,7 @@ export namespace ZLogDetails {
  */
 export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails | null | undefined)): ZLoggable {
   if (typeof details === 'function') {
-    return zlogDefer(() => ({
+    return logDefer(() => ({
       toLog(_target: DueLogZ) {
 
         const expanded = details();

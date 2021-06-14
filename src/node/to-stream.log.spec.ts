@@ -1,10 +1,11 @@
 import { describe, expect, it } from '@jest/globals';
+import { logDefer } from '@proc7ts/logger';
 import * as os from 'os';
 import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../level';
 import { logZBy } from '../log-by';
-import { zlogDefer, zlogDetails, zlogMessage } from '../message';
+import { zlogDetails, zlogMessage } from '../message';
 import { TestWritable } from '../spec';
 import { logZToStream } from './to-stream.log';
 
@@ -27,7 +28,7 @@ describe('logZToStream', () => {
     const out = new TestWritable();
     const logger = logZBy(logZToStream(out));
 
-    logger.info(zlogDefer(() => ['TEST', zlogDetails({ expanded: true })]));
+    logger.info(logDefer(() => ['TEST', zlogDetails({ expanded: true })]));
     logger.error('ERROR');
 
     expect(await logger.whenLogged()).toBe(true);
