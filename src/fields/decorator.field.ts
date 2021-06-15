@@ -40,10 +40,10 @@ export interface DecoratorZLogFieldFormat {
  *
  * @returns
  */
-export function decoratorZLogField<TLine extends ZLogWriter>(
+export function decoratorZLogField<TWriter extends ZLogWriter>(
     format: DecoratorZLogFieldFormat,
-    field: ZLogField<TLine>,
-): ZLogField<TLine> {
+    field: ZLogField<TWriter>,
+): ZLogField<TWriter> {
   return writer => {
 
     const value = writer.format(field);
