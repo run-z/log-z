@@ -112,5 +112,5 @@ export function assignZLogDetails(target: ZLogDetails.Mutable, details: ZLogDeta
 }
 
 function isZLogDetails(value: unknown): value is ZLogDetails {
-  return typeof value === 'object' && !!value && !Array.isArray(value);
+  return typeof value === 'object' && !!value && (value.constructor === Object || value.constructor == null);
 }

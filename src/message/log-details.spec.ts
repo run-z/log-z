@@ -97,4 +97,14 @@ describe('assignZLogDetails', () => {
 
     expect(assignZLogDetails(target, { a: { b: 1 } })).toEqual({ a: { b: 1 } });
   });
+  it('overrides plain objects with non-plain objects', () => {
+
+    const target: ZLogDetails.Mutable = {
+      a: {
+        b: 1,
+      },
+    };
+
+    expect(assignZLogDetails(target, { a: { b: [1, 2, 3] } })).toEqual({ a: { b: [1, 2, 3] } });
+  });
 });
