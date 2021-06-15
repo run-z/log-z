@@ -10,6 +10,8 @@ Log That
 
 Logging library for browsers and Node.js.
 
+This is a reference implementation of the logging API defined by [@proc7ts/logger] package.
+
 [npm-image]: https://img.shields.io/npm/v/@run-z/log-z.svg?logo=npm
 [npm-url]: https://www.npmjs.com/package/@run-z/log-z
 [build-status-img]: https://github.com/run-z/log-z/workflows/Build/badge.svg
@@ -21,7 +23,8 @@ Logging library for browsers and Node.js.
 [github-image]: https://img.shields.io/static/v1?logo=github&label=GitHub&message=project&color=informational
 [github-url]: https://github.com/run-z/log-z
 [api-docs-image]: https://img.shields.io/static/v1?logo=typescript&label=API&message=docs&color=informational
-[API documentation]: https://run-z.github.io/log-z/ 
+[API documentation]: https://run-z.github.io/log-z/
+[@proc7ts/logger]: https://www.npmjs.com/package/@proc7ts/logger
 
 
 Examples
@@ -144,8 +147,6 @@ logger.debug('Debug info', logDefer(() => zlogDetails({ info: evaluateDebugInfo(
 // Note that this will happen right before writing to the log,
 // which may happen at a later time, or not happen at all.
 ``` 
-
-[@proc7ts/logger]: https://www.npmjs.com/package/@proc7ts/logger
 
 
 Log Formats
