@@ -25,6 +25,10 @@ export namespace ZLogDetails {
  * The resulting value can be passed to {@link zlogMessage} function or to any {@link ZLogger.log logger method} to add
  * details to logged message.
  *
+ * When processed outside the `log-z` in the output or default logging stage, the details object is expanded as is,
+ * unless the details map is empty. Additionally, if the details value is the last one of the log line, an `error`
+ * detail is extracted from the details map, and logged as the last element of the final log line.
+ *
  * @param details - Either log message details to add, or a function constructing ones. The function will be called to
  * {@link zlogExpand expand} the log message details. It may return `null`/`undefined` to expand to nothing.
  *
@@ -45,10 +49,34 @@ export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails 
   return {
     toLog(target: DueLogZ) {
 
-      const { zDetails } = target;
+      const { on = 'out', line, index, zDetails } = target;
 
       if (!zDetails) {
-        return details;
+        if (on !== 'out') {
+          return;
+        }
+
+        if (index + 1 === line.length) {
+
+          const { error, ...restDetails } = details;
+
+          if (error !== undefined) {
+            if (Reflect.ownKeys(restDetails).length) {
+              line[index] = restDetails;
+              line.push(error);
+              ++target.index;
+              return;
+            }
+
+            return error;
+          }
+        }
+
+        if (Reflect.ownKeys(details).length) {
+          return details;
+        }
+
+        return [];
       }
 
       assignZLogDetails(zDetails, details);
