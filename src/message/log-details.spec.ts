@@ -4,9 +4,6 @@ import { zlogDEBUG, ZLogLevel } from '../level';
 import { assignZLogDetails, cloneZLogDetails, ZLogDetails, zlogDetails } from './log-details';
 
 describe('zlogDetails', () => {
-  it('logged as details object outside `log-z`', () => {
-    expect(dueLog({ line: [zlogDetails({ foo: 'bar' })] }).line).toEqual([{ foo: 'bar' }]);
-  });
   it('treated as message details', () => {
     expect(zlogDEBUG(
         zlogDetails({ test: 'value' }),
@@ -32,6 +29,45 @@ describe('zlogDetails', () => {
         test: 'value',
         test2: 'value2',
       },
+    });
+  });
+
+  describe('outside `log-z`', () => {
+    it('does nothing in input stage', () => {
+
+      const details = zlogDetails({ foo: 'bar' });
+
+      expect(dueLog({ on: 'in', line: ['a', details, 'b'] }).line).toEqual(['a', details, 'b']);
+    });
+    it('logs an object', () => {
+      expect(dueLog({ line: ['a', zlogDetails({ foo: 'bar' }), 'b'] }).line).toEqual(['a', { foo: 'bar' }, 'b']);
+    });
+    it('logs an object if the last in the line', () => {
+      expect(dueLog({ line: ['a', zlogDetails({ foo: 'bar' })] }).line).toEqual(['a', { foo: 'bar' }]);
+    });
+    it('logs nothing if empty', () => {
+      expect(dueLog({ line: ['a', zlogDetails({}), 'b'] }).line).toEqual(['a', 'b']);
+    });
+
+    describe('with `error`', () => {
+      it('logs an object if not the last in the line', () => {
+
+        const error = new Error();
+
+        expect(dueLog({ line: ['a', zlogDetails({ error }), 'b'] }).line).toEqual(['a', { error }, 'b']);
+      });
+      it('logs an error if the last in the line', () => {
+
+        const error = new Error();
+
+        expect(dueLog({ line: ['a', zlogDetails({ error })] }).line).toEqual(['a', error]);
+      });
+      it('logs non-empty object and error if the last in the line', () => {
+
+        const error = new Error();
+
+        expect(dueLog({ line: ['a', zlogDetails({ error, foo: 'bar' })] }).line).toEqual(['a', { foo: 'bar' }, error]);
+      });
     });
   });
 });
