@@ -25,7 +25,7 @@
     "./node": "./dist/log-z.node.js"
   },
   "dependencies": {
-    "@proc7ts/logger": "^1.2.0-dev.2",
+    "@proc7ts/logger": "^1.2.0",
     "@proc7ts/primitives": "^3.0.0",
     "@proc7ts/push-iterator": "^2.6.0"
   },
