@@ -5,7 +5,7 @@ import { zlogLevelMap } from '../level';
 import type { ZLogRecorder } from '../log-recorder';
 import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
 import type { ZLogMessage } from '../message';
-import { zlogExpand } from '../message';
+import { zlogDetails, zlogExpand } from '../message';
 
 type LogZToLogger$Method = (this: void, logger: Logger, message: ZLogMessage) => void;
 
@@ -75,7 +75,7 @@ function LogZToLogger$args(
       : message.line.slice();
 
   if (Reflect.ownKeys(details).length) {
-    args.push(details);
+    args.push(zlogDetails(details));
   }
 
   return args;

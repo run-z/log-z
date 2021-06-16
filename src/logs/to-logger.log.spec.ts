@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals';
 import type { Logger } from '@proc7ts/logger';
-import { consoleLogger, logDefer } from '@proc7ts/logger';
+import { consoleLogger, logDefer, processingLogger } from '@proc7ts/logger';
 import { noop } from '@proc7ts/primitives';
 import type { SpyInstance } from 'jest-mock';
 import { ZLogLevel } from '../level';
@@ -39,7 +39,7 @@ describe('logZToLogger', () => {
   let logger: ZLogger;
 
   beforeEach(() => {
-    logger = logZ({ atLeast: 0, by: logZToLogger(testLogger) });
+    logger = logZ({ atLeast: 0, by: logZToLogger(processingLogger(testLogger)) });
   });
 
   it('logs to `consoleLogger` by default', () => {
