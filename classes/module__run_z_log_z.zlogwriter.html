@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ZLogLine | Log Z</title>
+	<title>ZLogWriter | Log Z</title>
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/module__run_z_log_z.html">Module @run-z/log-z</a>
 				</li>
 				<li>
-					<a href="module__run_z_log_z.zlogline.html">ZLogLine</a>
+					<a href="module__run_z_log_z.zlogwriter.html">ZLogWriter</a>
 				</li>
 			</ul>
-			<h1>Class ZLogLine</h1>
+			<h1>Class ZLogWriter</h1>
 		</div>
 	</div>
 </header>
@@ -71,9 +71,9 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Log line.</p>
+						<p>Log message writer.</p>
 					</div>
-					<p>Represents formatted log message. Line contents are written by <a href="../modules/module__run_z_log_z.html#zlogfield">log fields</a>.</p>
+					<p>The <a href="../modules/module__run_z_log_z.html#zlogfield">log fields</a> format and write log message contents using this writer.</p>
 					<p>The instance of this class can be reused by different messages and fields.</p>
 				</div>
 			</section>
@@ -81,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ZLogLine</span>
+						<span class="target">ZLogWriter</span>
 					</li>
 				</ul>
 			</section>
@@ -92,30 +92,30 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#message" class="tsd-kind-icon">message</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#changemessage" class="tsd-kind-icon">change<wbr>Message</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#extractdetail" class="tsd-kind-icon">extract<wbr>Detail</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#format" class="tsd-kind-icon">format</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#write" class="tsd-kind-icon">write</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="module__run_z_log_z.zlogline.html#writebydefault" class="tsd-kind-icon">write<wbr>ByDefault</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#writeelements" class="tsd-kind-icon">write<wbr>Elements</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#writeerror" class="tsd-kind-icon">write<wbr>Error</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#writekeyandvalue" class="tsd-kind-icon">write<wbr>Key<wbr>And<wbr>Value</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#writeobject" class="tsd-kind-icon">write<wbr>Object</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#writeproperties" class="tsd-kind-icon">write<wbr>Properties</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#writestring" class="tsd-kind-icon">write<wbr>String</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogline.html#writevalue" class="tsd-kind-icon">write<wbr>Value</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#changemessage" class="tsd-kind-icon">change<wbr>Message</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#extractdetail" class="tsd-kind-icon">extract<wbr>Detail</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#format" class="tsd-kind-icon">format</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#write" class="tsd-kind-icon">write</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="module__run_z_log_z.zlogwriter.html#writebydefault" class="tsd-kind-icon">write<wbr>ByDefault</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#writeelements" class="tsd-kind-icon">write<wbr>Elements</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#writeerror" class="tsd-kind-icon">write<wbr>Error</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#writekeyandvalue" class="tsd-kind-icon">write<wbr>Key<wbr>And<wbr>Value</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#writeobject" class="tsd-kind-icon">write<wbr>Object</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#writeproperties" class="tsd-kind-icon">write<wbr>Properties</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#writestring" class="tsd-kind-icon">write<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="module__run_z_log_z.zlogwriter.html#writevalue" class="tsd-kind-icon">write<wbr>Value</a></li>
 							</ul>
 						</section>
 					</div>
@@ -127,13 +127,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new ZLog<wbr>Line<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="module__run_z_log_z.zlogline.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogLine</a></li>
+						<li class="tsd-signature tsd-kind-icon">new ZLog<wbr>Writer<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="module__run_z_log_z.zlogwriter.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogWriter</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="module__run_z_log_z.zlogline.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogLine</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="module__run_z_log_z.zlogwriter.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogWriter</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -146,12 +146,12 @@
 					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <a href="../interfaces/module__run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L16">run-z/log-z/src/formats/log-line.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L16">run-z/log-z/src/formats/log-writer.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The log message this line represents. I.e. the message to format.</p>
+							<p>The log message to format and write.</p>
 						</div>
 					</div>
 				</section>
@@ -168,12 +168,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L25">run-z/log-z/src/formats/log-line.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L25">run-z/log-z/src/formats/log-writer.ts:25</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Changes the message to format.</p>
+									<p>Changes the message to write.</p>
 								</div>
 								<p>A field may decide to modify the message e.g. to exclude some of its properties from further formatting.</p>
 							</div>
@@ -194,32 +194,48 @@
 					<a name="extractdetail" class="tsd-anchor"></a>
 					<h3>extract<wbr>Detail</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">extract<wbr>Detail<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">extract<wbr>Detail<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/module__run_z_log_z.zlogdetails.html" class="tsd-signature-type" data-tsd-kind="Namespace">ZLogDetails</a></li>
+						<li class="tsd-signature tsd-kind-icon">extract<wbr>Detail<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L35">run-z/log-z/src/formats/log-line.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L33">run-z/log-z/src/formats/log-writer.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Extracts a property from <a href="../interfaces/module__run_z_log_z.zlogmessage.html#details">message details</a>, then <a href="module__run_z_log_z.zlogline.html#changemessage">changes</a>
-									the message to format by excluding the extracted property from it.</p>
+									<p>Extracts <a href="../interfaces/module__run_z_log_z.zlogmessage.html#details">message details</a>, then <a href="module__run_z_log_z.zlogwriter.html#changemessage">changes</a> the message to write
+									by excluding the extracted details from it.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/module__run_z_log_z.zlogdetails.html" class="tsd-signature-type" data-tsd-kind="Namespace">ZLogDetails</a></h4>
+							<p>Extracted message details.</p>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L43">run-z/log-z/src/formats/log-writer.ts:43</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Extracts a property from <a href="../interfaces/module__run_z_log_z.zlogmessage.html#details">message details</a>, then <a href="module__run_z_log_z.zlogwriter.html#changemessage">changes</a>
+									the message to write by excluding the extracted property from it.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>path: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>A key of the property to extract.</p>
+										<p>A path to details property to extract. Empty path means extracting of all details.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-							<p>Extracted property value.</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">unknown</span></h4>
+							<p>Extracted message detail, or <code>undefined</code> if there is no such detail.</p>
 						</li>
 					</ul>
 				</section>
@@ -227,13 +243,13 @@
 					<a name="format" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> format</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">(</span>field<span class="tsd-signature-symbol">: </span><a href="../modules/module__run_z_log_z.html#zlogfield" class="tsd-signature-type" data-tsd-kind="Type alias">ZLogField</a><span class="tsd-signature-symbol">&lt;</span><a href="module__run_z_log_z.zlogline.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogLine</a><span class="tsd-signature-symbol">&gt;</span>, message<span class="tsd-signature-symbol">?: </span><a href="../interfaces/module__run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">(</span>field<span class="tsd-signature-symbol">: </span><a href="../modules/module__run_z_log_z.html#zlogfield" class="tsd-signature-type" data-tsd-kind="Type alias">ZLogField</a><span class="tsd-signature-symbol">&lt;</span><a href="module__run_z_log_z.zlogwriter.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogWriter</a><span class="tsd-signature-symbol">&gt;</span>, message<span class="tsd-signature-symbol">?: </span><a href="../interfaces/module__run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L55">run-z/log-z/src/formats/log-line.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L97">run-z/log-z/src/formats/log-writer.ts:97</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -244,7 +260,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>field: <a href="../modules/module__run_z_log_z.html#zlogfield" class="tsd-signature-type" data-tsd-kind="Type alias">ZLogField</a><span class="tsd-signature-symbol">&lt;</span><a href="module__run_z_log_z.zlogline.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogLine</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>field: <a href="../modules/module__run_z_log_z.html#zlogfield" class="tsd-signature-type" data-tsd-kind="Type alias">ZLogField</a><span class="tsd-signature-symbol">&lt;</span><a href="module__run_z_log_z.zlogwriter.html" class="tsd-signature-type" data-tsd-kind="Class">ZLogWriter</a><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The field to format the message by.</p>
 									</div>
@@ -252,12 +268,12 @@
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> message: <a href="../interfaces/module__run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The message to format. <a href="module__run_z_log_z.zlogline.html#message">Current message</a> by default.</p>
+										<p>The message to format. <a href="module__run_z_log_z.zlogwriter.html#message">Current message</a> by default.</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
-							<p>Either a string written to log line, or <code>undefined</code> if nothing is written.</p>
+							<p>Either a formatted field string, or <code>undefined</code> if nothing to format.</p>
 						</li>
 					</ul>
 				</section>
@@ -271,7 +287,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L62">run-z/log-z/src/formats/log-line.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L104">run-z/log-z/src/formats/log-writer.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -296,32 +312,31 @@
 					<a name="writebydefault" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> write<wbr>ByDefault</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">write<wbr>ByDefault<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">write<wbr>ByDefault<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L208">run-z/log-z/src/formats/log-line.ts:208</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L248">run-z/log-z/src/formats/log-writer.ts:248</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Writes a value not recognized by <a href="module__run_z_log_z.zlogline.html#writevalue">writeValue</a>.</p>
+									<p>Writes a value not recognized by <a href="module__run_z_log_z.zlogwriter.html#writevalue">writeValue</a>.</p>
 								</div>
 								<p>Writes a string representation of the value.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<h5>value: <span class="tsd-signature-type">unknown</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A value to format.</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-							<p>Either formatted value, or nothing.</p>
 						</li>
 					</ul>
 				</section>
@@ -335,14 +350,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L168">run-z/log-z/src/formats/log-line.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L210">run-z/log-z/src/formats/log-writer.ts:210</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Writes elements of arbitrary iterable.</p>
 								</div>
-								<p>Writes each element by <a href="module__run_z_log_z.zlogline.html#writevalue">writeValue</a>, and separates them with comma.</p>
+								<p>Writes each element by <a href="module__run_z_log_z.zlogwriter.html#writevalue">writeValue</a>, and separates them with comma.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -361,25 +376,25 @@
 					<a name="writeerror" class="tsd-anchor"></a>
 					<h3>write<wbr>Error</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">write<wbr>Error<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Error<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L86">run-z/log-z/src/formats/log-line.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L128">run-z/log-z/src/formats/log-writer.ts:128</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Writes an error.</p>
 								</div>
-								<p>Writes a message and its stack trace.</p>
+								<p>Writes a message and its stack trace if present.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>error: <span class="tsd-signature-type">any</span></h5>
+									<h5>error: <span class="tsd-signature-type">unknown</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>An error to write.</p>
 									</div>
@@ -393,13 +408,13 @@
 					<a name="writekeyandvalue" class="tsd-anchor"></a>
 					<h3>write<wbr>Key<wbr>And<wbr>Value</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">write<wbr>Key<wbr>And<wbr>Value<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PropertyKey</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Key<wbr>And<wbr>Value<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PropertyKey</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L192">run-z/log-z/src/formats/log-line.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L234">run-z/log-z/src/formats/log-writer.ts:234</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -407,7 +422,7 @@
 									<p>Writes arbitrary key/value pair.</p>
 								</div>
 								<p>Ignores properties with undefined values.</p>
-								<p>Writes value by <a href="module__run_z_log_z.zlogline.html#writevalue">writeValue</a> method. Separates key and value by colon.</p>
+								<p>Writes value by <a href="module__run_z_log_z.zlogwriter.html#writevalue">writeValue</a> method. Separates key and value by colon.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -418,7 +433,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<h5>value: <span class="tsd-signature-type">unknown</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Property value to write.</p>
 									</div>
@@ -438,15 +453,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L119">run-z/log-z/src/formats/log-line.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L161">run-z/log-z/src/formats/log-writer.ts:161</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Writes arbitrary object value.</p>
 								</div>
-								<p>For array, writes its elements by <a href="module__run_z_log_z.zlogline.html#writeelements">writeElements</a>, and encloses them into square brackets.</p>
-								<p>For anything else, writes object properties by <a href="module__run_z_log_z.zlogline.html#writeproperties">writeProperties</a>, and encloses them into curly brackets.</p>
+								<p>For array, writes its elements by <a href="module__run_z_log_z.zlogwriter.html#writeelements">writeElements</a>, and encloses them into square brackets.</p>
+								<p>For anything else, writes object properties by <a href="module__run_z_log_z.zlogwriter.html#writeproperties">writeProperties</a>, and encloses them into curly brackets.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -471,14 +486,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L139">run-z/log-z/src/formats/log-line.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L181">run-z/log-z/src/formats/log-writer.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Writes object properties.</p>
 								</div>
-								<p>Writes own object properties by <a href="module__run_z_log_z.zlogline.html#writekeyandvalue">writeKeyAndValue</a>.</p>
+								<p>Writes own object properties by <a href="module__run_z_log_z.zlogwriter.html#writekeyandvalue">writeKeyAndValue</a>.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -503,7 +518,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L106">run-z/log-z/src/formats/log-line.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L148">run-z/log-z/src/formats/log-writer.ts:148</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,13 +544,13 @@
 					<a name="writevalue" class="tsd-anchor"></a>
 					<h3>write<wbr>Value</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/8af0053/src/formats/log-line.ts#L69">run-z/log-z/src/formats/log-line.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/formats/log-writer.ts#L111">run-z/log-z/src/formats/log-writer.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -546,7 +561,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<h5>value: <span class="tsd-signature-type">unknown</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A value to write.</p>
 									</div>
@@ -577,49 +592,49 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="module__run_z_log_z.zlogline.html" class="tsd-kind-icon">ZLog<wbr>Line</a>
+						<a href="module__run_z_log_z.zlogwriter.html" class="tsd-kind-icon">ZLog<wbr>Writer</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="module__run_z_log_z.zlogwriter.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#message" class="tsd-kind-icon">message</a>
+								<a href="module__run_z_log_z.zlogwriter.html#message" class="tsd-kind-icon">message</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#changemessage" class="tsd-kind-icon">change<wbr>Message</a>
+								<a href="module__run_z_log_z.zlogwriter.html#changemessage" class="tsd-kind-icon">change<wbr>Message</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#extractdetail" class="tsd-kind-icon">extract<wbr>Detail</a>
+								<a href="module__run_z_log_z.zlogwriter.html#extractdetail" class="tsd-kind-icon">extract<wbr>Detail</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#format" class="tsd-kind-icon">format</a>
+								<a href="module__run_z_log_z.zlogwriter.html#format" class="tsd-kind-icon">format</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#write" class="tsd-kind-icon">write</a>
+								<a href="module__run_z_log_z.zlogwriter.html#write" class="tsd-kind-icon">write</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-								<a href="module__run_z_log_z.zlogline.html#writebydefault" class="tsd-kind-icon">write<wbr>ByDefault</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writebydefault" class="tsd-kind-icon">write<wbr>ByDefault</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#writeelements" class="tsd-kind-icon">write<wbr>Elements</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writeelements" class="tsd-kind-icon">write<wbr>Elements</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#writeerror" class="tsd-kind-icon">write<wbr>Error</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writeerror" class="tsd-kind-icon">write<wbr>Error</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#writekeyandvalue" class="tsd-kind-icon">write<wbr>Key<wbr>And<wbr>Value</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writekeyandvalue" class="tsd-kind-icon">write<wbr>Key<wbr>And<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#writeobject" class="tsd-kind-icon">write<wbr>Object</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writeobject" class="tsd-kind-icon">write<wbr>Object</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#writeproperties" class="tsd-kind-icon">write<wbr>Properties</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writeproperties" class="tsd-kind-icon">write<wbr>Properties</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#writestring" class="tsd-kind-icon">write<wbr>String</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writestring" class="tsd-kind-icon">write<wbr>String</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="module__run_z_log_z.zlogline.html#writevalue" class="tsd-kind-icon">write<wbr>Value</a>
+								<a href="module__run_z_log_z.zlogwriter.html#writevalue" class="tsd-kind-icon">write<wbr>Value</a>
 							</li>
 						</ul>
 					</li>
@@ -649,10 +664,11 @@
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
