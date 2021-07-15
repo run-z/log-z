@@ -27,7 +27,7 @@
   "dependencies": {
     "@proc7ts/logger": "^1.2.0",
     "@proc7ts/primitives": "^3.0.2",
-    "@proc7ts/push-iterator": "^2.6.0"
+    "@proc7ts/push-iterator": "^3.0.0"
   },
   "devDependencies": {
     "@jest/globals": "^27.0.6",
