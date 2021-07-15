@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ZLogMessage | Log Z</title>
+	<title>TimestampZLogFieldFormat | Log Z</title>
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/module__run_z_log_z.html">Module @run-z/log-z</a>
+					<a href="../modules/Module__run_z_log_z.html">Module @run-z/log-z</a>
 				</li>
 				<li>
-					<a href="module__run_z_log_z.zlogmessage.html">ZLogMessage</a>
+					<a href="Module__run_z_log_z.TimestampZLogFieldFormat.html">TimestampZLogFieldFormat</a>
 				</li>
 			</ul>
-			<h1>Interface ZLogMessage</h1>
+			<h1>Interface TimestampZLogFieldFormat</h1>
 		</div>
 	</div>
 </header>
@@ -71,16 +71,15 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Log message.</p>
+						<p>Log message <a href="../modules/Module__run_z_log_z.html#logZTimestamp">timestamp</a> format.</p>
 					</div>
-					<p>Can be constructed by <a href="../modules/module__run_z_log_z.html#zlogmessage-1">zlogMessage</a> function.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ZLogMessage</span>
+						<span class="target">TimestampZLogFieldFormat</span>
 					</li>
 				</ul>
 			</section>
@@ -91,9 +90,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.zlogmessage.html#details" class="tsd-kind-icon">details</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.zlogmessage.html#level" class="tsd-kind-icon">level</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.zlogmessage.html#line" class="tsd-kind-icon">line</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Module__run_z_log_z.TimestampZLogFieldFormat.html#format" class="tsd-kind-icon">format</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Module__run_z_log_z.TimestampZLogFieldFormat.html#key" class="tsd-kind-icon">key</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,52 +100,38 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="details" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> details</h3>
-					<div class="tsd-signature tsd-kind-icon">details<span class="tsd-signature-symbol">:</span> <a href="../modules/module__run_z_log_z.zlogdetails.html" class="tsd-signature-type" data-tsd-kind="Namespace">ZLogDetails</a></div>
+					<a name="format" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> format</h3>
+					<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DateTimeFormat</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/log-message.ts#L32">run-z/log-z/src/message/log-message.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/fields/timestamp.field.ts#L28">run-z/log-z/src/fields/timestamp.field.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Message details map.</p>
+							<p>Timestamp value format.</p>
 						</div>
-						<p>The keys of this map are specific to application or log recorder implementation.</p>
+						<p>Either formatting function accepting timestamp in epoch milliseconds and returning its string representation,
+						or an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">Intl.DateTimeFormat</a> instance.</p>
+						<p>By default, formats as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString">ISO 8601</a> string.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="level" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> level</h3>
-					<div class="tsd-signature tsd-kind-icon">level<span class="tsd-signature-symbol">:</span> <a href="../enums/module__run_z_log_z.zloglevel.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ZLogLevel</a></div>
+					<a name="key" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/log-message.ts#L17">run-z/log-z/src/message/log-message.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/fields/timestamp.field.ts#L14">run-z/log-z/src/fields/timestamp.field.ts:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The log level of this message.</p>
+							<p>A key of <a href="Module__run_z_log_z.ZLogMessage.html#details">log message details</a> property containing timestamp value.</p>
 						</div>
-						<p>The higher value means higher priority.</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="line" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> line</h3>
-					<div class="tsd-signature tsd-kind-icon">line<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/log-message.ts#L25">run-z/log-z/src/message/log-message.ts:25</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Log line containing arbitrary values to log.</p>
-						</div>
-						<p>This is originally populated with the values passed to any <a href="../classes/module__run_z_log_z.zlogger.html#log">logging method</a> or
-						<a href="../modules/module__run_z_log_z.html#zlogmessage-1">zlogMessage</a> function.</p>
+						<p>Timestamp value is expected to be either a Date, a number (i.e. epoch milliseconds), or preformatted string.
+						In the latter case no further formatting would be applied.</p>
 					</div>
 				</section>
 			</section>
@@ -159,10 +143,10 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
+						<a href="../modules/Module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/Module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
@@ -171,16 +155,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="module__run_z_log_z.zlogmessage.html" class="tsd-kind-icon">ZLog<wbr>Message</a>
+						<a href="Module__run_z_log_z.TimestampZLogFieldFormat.html" class="tsd-kind-icon">TimestampZLog<wbr>Field<wbr>Format</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.zlogmessage.html#details" class="tsd-kind-icon">details</a>
+								<a href="Module__run_z_log_z.TimestampZLogFieldFormat.html#format" class="tsd-kind-icon">format</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.zlogmessage.html#level" class="tsd-kind-icon">level</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.zlogmessage.html#line" class="tsd-kind-icon">line</a>
+								<a href="Module__run_z_log_z.TimestampZLogFieldFormat.html#key" class="tsd-kind-icon">key</a>
 							</li>
 						</ul>
 					</li>

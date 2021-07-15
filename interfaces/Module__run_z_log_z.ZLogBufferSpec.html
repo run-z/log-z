@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DecoratorZLogFieldFormat | Log Z</title>
+	<title>ZLogBufferSpec | Log Z</title>
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/module__run_z_log_z.html">Module @run-z/log-z</a>
+					<a href="../modules/Module__run_z_log_z.html">Module @run-z/log-z</a>
 				</li>
 				<li>
-					<a href="module__run_z_log_z.decoratorzlogfieldformat.html">DecoratorZLogFieldFormat</a>
+					<a href="Module__run_z_log_z.ZLogBufferSpec.html">ZLogBufferSpec</a>
 				</li>
 			</ul>
-			<h1>Interface DecoratorZLogFieldFormat</h1>
+			<h1>Interface ZLogBufferSpec</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Log field decorator format.</p>
+						<p>A specification of how to buffer log messages.</p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +79,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DecoratorZLogFieldFormat</span>
+						<span class="target">ZLogBufferSpec</span>
 					</li>
 				</ul>
 			</section>
@@ -90,9 +90,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.decoratorzlogfieldformat.html#empty" class="tsd-kind-icon">empty</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.decoratorzlogfieldformat.html#prefix" class="tsd-kind-icon">prefix</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.decoratorzlogfieldformat.html#suffix" class="tsd-kind-icon">suffix</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Module__run_z_log_z.ZLogBufferSpec.html#atMost" class="tsd-kind-icon">at<wbr>Most</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="Module__run_z_log_z.ZLogBufferSpec.html#onRecord" class="tsd-kind-icon">on<wbr>Record</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,53 +105,68 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="empty" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> empty</h3>
-					<div class="tsd-signature tsd-kind-icon">empty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="atMost" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> at<wbr>Most</h3>
+					<div class="tsd-signature tsd-kind-icon">at<wbr>Most<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/fields/decorator.field.ts#L29">run-z/log-z/src/fields/decorator.field.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/logs/to-buffer.log.ts#L19">run-z/log-z/src/logs/to-buffer.log.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Empty value placeholder.</p>
+							<p>Buffer limit. I.e. the maximum number of log messages to store in buffer.</p>
 						</div>
-						<p>It is written instead of empty value.</p>
-						<p>Nothing is written instead of empty value by default.</p>
+						<p>The values less that <code>1</code> are treated as <code>1</code>.</p>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>1024</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="prefix" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> prefix</h3>
-					<div class="tsd-signature tsd-kind-icon">prefix<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/fields/decorator.field.ts#L13">run-z/log-z/src/fields/decorator.field.ts:13</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A prefix to add to field value.</p>
-						</div>
-						<p>Applied only when non-empty field value is written.</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="suffix" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> suffix</h3>
-					<div class="tsd-signature tsd-kind-icon">suffix<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/fields/decorator.field.ts#L20">run-z/log-z/src/fields/decorator.field.ts:20</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A suffix to add to field value.</p>
-						</div>
-						<p>Applied only when non-empty field value is written.</p>
-					</div>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="onRecord" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Record</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Record<span class="tsd-signature-symbol">(</span>newEntry<span class="tsd-signature-symbol">: </span><a href="Module__run_z_log_z.ZLogBuffer.Entry.html" class="tsd-signature-type" data-tsd-kind="Interface">Entry</a>, contents<span class="tsd-signature-symbol">: </span><a href="Module__run_z_log_z.ZLogBuffer.Contents.html" class="tsd-signature-type" data-tsd-kind="Interface">Contents</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/logs/to-buffer.log.ts#L32">run-z/log-z/src/logs/to-buffer.log.ts:32</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This is called whenever a log message is about to be buffered.</p>
+								</div>
+								<p>It may <a href="Module__run_z_log_z.ZLogBuffer.Entry.html">drop</a> either the new message, or some of already buffered ones.</p>
+								<p>If the buffer is full (i.e. its <a href="Module__run_z_log_z.ZLogBuffer.Contents.html#fillRatio">fill ratio</a> is <code>1</code>), and this method did not
+								drop any of the messages, then the oldest message will be dropped.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>newEntry: <a href="Module__run_z_log_z.ZLogBuffer.Entry.html" class="tsd-signature-type" data-tsd-kind="Interface">Entry</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Log message entry about to be buffered.</p>
+									</div>
+								</li>
+								<li>
+									<h5>contents: <a href="Module__run_z_log_z.ZLogBuffer.Contents.html" class="tsd-signature-type" data-tsd-kind="Interface">Contents</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Current contents of the log buffer.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -158,10 +177,10 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
+						<a href="../modules/Module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/Module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
@@ -170,16 +189,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="module__run_z_log_z.decoratorzlogfieldformat.html" class="tsd-kind-icon">DecoratorZLog<wbr>Field<wbr>Format</a>
+						<a href="Module__run_z_log_z.ZLogBufferSpec.html" class="tsd-kind-icon">ZLog<wbr>Buffer<wbr>Spec</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.decoratorzlogfieldformat.html#empty" class="tsd-kind-icon">empty</a>
+								<a href="Module__run_z_log_z.ZLogBufferSpec.html#atMost" class="tsd-kind-icon">at<wbr>Most</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.decoratorzlogfieldformat.html#prefix" class="tsd-kind-icon">prefix</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.decoratorzlogfieldformat.html#suffix" class="tsd-kind-icon">suffix</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="Module__run_z_log_z.ZLogBufferSpec.html#onRecord" class="tsd-kind-icon">on<wbr>Record</a>
 							</li>
 						</ul>
 					</li>
@@ -206,6 +222,7 @@
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

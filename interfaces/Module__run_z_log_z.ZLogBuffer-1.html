@@ -55,10 +55,10 @@
 					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/module__run_z_log_z.html">Module @run-z/log-z</a>
+					<a href="../modules/Module__run_z_log_z.html">Module @run-z/log-z</a>
 				</li>
 				<li>
-					<a href="module__run_z_log_z.zlogbuffer-1.html">ZLogBuffer</a>
+					<a href="Module__run_z_log_z.ZLogBuffer-1.html">ZLogBuffer</a>
 				</li>
 			</ul>
 			<h1>Interface ZLogBuffer</h1>
@@ -73,7 +73,7 @@
 					<div class="lead">
 						<p>Log buffer.</p>
 					</div>
-					<p>A log recorder that buffers messages and is able to <a href="module__run_z_log_z.zlogbuffer-1.html#drainto">drain</a> them to another recorder.</p>
+					<p>A log recorder that buffers messages and is able to <a href="Module__run_z_log_z.ZLogBuffer-1.html#drainTo">drain</a> them to another recorder.</p>
 					<p>The buffered messages are not</p>
 				</div>
 			</section>
@@ -81,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="module__run_z_log_z.zlogrecorder.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogRecorder</a>
+						<a href="Module__run_z_log_z.ZLogRecorder.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogRecorder</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">ZLogBuffer</span>
@@ -97,10 +97,10 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="module__run_z_log_z.zlogbuffer-1.html#drainto" class="tsd-kind-icon">drain<wbr>To</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="module__run_z_log_z.zlogbuffer-1.html#end" class="tsd-kind-icon">end</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="module__run_z_log_z.zlogbuffer-1.html#record" class="tsd-kind-icon">record</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="module__run_z_log_z.zlogbuffer-1.html#whenlogged" class="tsd-kind-icon">when<wbr>Logged</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="Module__run_z_log_z.ZLogBuffer-1.html#drainTo" class="tsd-kind-icon">drain<wbr>To</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="Module__run_z_log_z.ZLogBuffer-1.html#end" class="tsd-kind-icon">end</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="Module__run_z_log_z.ZLogBuffer-1.html#record" class="tsd-kind-icon">record</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="Module__run_z_log_z.ZLogBuffer-1.html#whenLogged" class="tsd-kind-icon">when<wbr>Logged</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,16 +109,16 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="drainto" class="tsd-anchor"></a>
+					<a name="drainTo" class="tsd-anchor"></a>
 					<h3>drain<wbr>To</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">drain<wbr>To<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="module__run_z_log_z.zlogrecorder.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogRecorder</a>, atOnce<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">drain<wbr>To<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="Module__run_z_log_z.ZLogRecorder.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogRecorder</a>, atOnce<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/logs/log-buffer.ts#L25">run-z/log-z/src/logs/log-buffer.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/logs/log-buffer.ts#L25">run-z/log-z/src/logs/log-buffer.ts:25</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -126,13 +126,13 @@
 									<p>Drains buffered messages to target log recorder.</p>
 								</div>
 								<p>Messages are drained one at a time. The next message is recorded to target only when the previous one
-								<a href="module__run_z_log_z.zlogrecorder.html#whenlogged">either logged or discarded</a>.</p>
+								<a href="Module__run_z_log_z.ZLogRecorder.html#whenLogged">either logged or discarded</a>.</p>
 								<p>Calling this method again changes the target.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>target: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="module__run_z_log_z.zlogrecorder.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogRecorder</a></h5>
+									<h5>target: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="Module__run_z_log_z.ZLogRecorder.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogRecorder</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Target log recorder to drain buffered messages to, or <code>null</code>/<code>undefined</code> to stop draining.</p>
 									</div>
@@ -157,9 +157,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="module__run_z_log_z.zlogrecorder.html">ZLogRecorder</a>.<a href="module__run_z_log_z.zlogrecorder.html#end">end</a></p>
+								<p>Inherited from <a href="Module__run_z_log_z.ZLogRecorder.html">ZLogRecorder</a>.<a href="Module__run_z_log_z.ZLogRecorder.html#end">end</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/log-recorder.ts#L36">run-z/log-z/src/log-recorder.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/log-recorder.ts#L36">run-z/log-z/src/log-recorder.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -177,14 +177,14 @@
 					<a name="record" class="tsd-anchor"></a>
 					<h3>record</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">record<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="module__run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">record<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="Module__run_z_log_z.ZLogMessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="module__run_z_log_z.zlogrecorder.html">ZLogRecorder</a>.<a href="module__run_z_log_z.zlogrecorder.html#record">record</a></p>
+								<p>Inherited from <a href="Module__run_z_log_z.ZLogRecorder.html">ZLogRecorder</a>.<a href="Module__run_z_log_z.ZLogRecorder.html#record">record</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/log-recorder.ts#L17">run-z/log-z/src/log-recorder.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/log-recorder.ts#L17">run-z/log-z/src/log-recorder.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -196,7 +196,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>message: <a href="module__run_z_log_z.zlogmessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a></h5>
+									<h5>message: <a href="Module__run_z_log_z.ZLogMessage.html" class="tsd-signature-type" data-tsd-kind="Interface">ZLogMessage</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A message to record.</p>
 									</div>
@@ -207,7 +207,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-					<a name="whenlogged" class="tsd-anchor"></a>
+					<a name="whenLogged" class="tsd-anchor"></a>
 					<h3>when<wbr>Logged</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">when<wbr>Logged<span class="tsd-signature-symbol">(</span>which<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;last&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
@@ -215,9 +215,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="module__run_z_log_z.zlogrecorder.html">ZLogRecorder</a>.<a href="module__run_z_log_z.zlogrecorder.html#whenlogged">whenLogged</a></p>
+								<p>Inherited from <a href="Module__run_z_log_z.ZLogRecorder.html">ZLogRecorder</a>.<a href="Module__run_z_log_z.ZLogRecorder.html#whenLogged">whenLogged</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/log-recorder.ts#L27">run-z/log-z/src/log-recorder.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/log-recorder.ts#L27">run-z/log-z/src/log-recorder.ts:27</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -249,10 +249,10 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
+						<a href="../modules/Module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/Module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
@@ -261,19 +261,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="module__run_z_log_z.zlogbuffer-1.html" class="tsd-kind-icon">ZLog<wbr>Buffer</a>
+						<a href="Module__run_z_log_z.ZLogBuffer-1.html" class="tsd-kind-icon">ZLog<wbr>Buffer</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.zlogbuffer-1.html#drainto" class="tsd-kind-icon">drain<wbr>To</a>
+								<a href="Module__run_z_log_z.ZLogBuffer-1.html#drainTo" class="tsd-kind-icon">drain<wbr>To</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-								<a href="module__run_z_log_z.zlogbuffer-1.html#end" class="tsd-kind-icon">end</a>
+								<a href="Module__run_z_log_z.ZLogBuffer-1.html#end" class="tsd-kind-icon">end</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-								<a href="module__run_z_log_z.zlogbuffer-1.html#record" class="tsd-kind-icon">record</a>
+								<a href="Module__run_z_log_z.ZLogBuffer-1.html#record" class="tsd-kind-icon">record</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-								<a href="module__run_z_log_z.zlogbuffer-1.html#whenlogged" class="tsd-kind-icon">when<wbr>Logged</a>
+								<a href="Module__run_z_log_z.ZLogBuffer-1.html#whenLogged" class="tsd-kind-icon">when<wbr>Logged</a>
 							</li>
 						</ul>
 					</li>

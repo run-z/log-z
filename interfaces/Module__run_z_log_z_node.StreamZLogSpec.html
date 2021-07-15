@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ZLoggable | Log Z</title>
+	<title>StreamZLogSpec | Log Z</title>
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/module__run_z_log_z.html">Module @run-z/log-z</a>
+					<a href="../modules/Module__run_z_log_z_node.html">Module @run-z/log-z/node</a>
 				</li>
 				<li>
-					<a href="module__run_z_log_z.zloggable.html">ZLoggable</a>
+					<a href="Module__run_z_log_z_node.StreamZLogSpec.html">StreamZLogSpec</a>
 				</li>
 			</ul>
-			<h1>Interface ZLoggable&lt;TTarget&gt;</h1>
+			<h1>Interface StreamZLogSpec</h1>
 		</div>
 	</div>
 </header>
@@ -71,27 +71,18 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A value that may be logged by <code>log-z</code> in a custom way.</p>
+						<p>A specification of how to log messages <a href="../modules/Module__run_z_log_z_node.html#logZToStream">to Node.js stream</a>.</p>
 					</div>
-					<p>Can be passed to <a href="../modules/module__run_z_log_z.html#zlogmessage-1">zlogMessage</a> function or to any <a href="../classes/module__run_z_log_z.zlogger.html#log">logger method</a> to be processed.</p>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>TTarget<span class="tsd-signature-symbol">: </span><a href="module__run_z_log_z.duelogz-1.html" class="tsd-signature-type" data-tsd-kind="Interface">DueLogZ</a> = <a href="module__run_z_log_z.duelogz-1.html" class="tsd-signature-type" data-tsd-kind="Interface">DueLogZ</a></h4>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">Loggable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TTarget</span><span class="tsd-signature-symbol">&gt;</span>
+						<span class="target">StreamZLogSpec</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">ZLoggable</span>
+								<a href="Module__run_z_log_z_node.FileZLogSpec.html" class="tsd-signature-type" data-tsd-kind="Interface">FileZLogSpec</a>
 							</li>
 						</ul>
 					</li>
@@ -102,39 +93,57 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite"><a href="module__run_z_log_z.zloggable.html#tolog" class="tsd-kind-icon">to<wbr>Log</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Module__run_z_log_z_node.StreamZLogSpec.html#eol" class="tsd-kind-icon">eol</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Module__run_z_log_z_node.StreamZLogSpec.html#format" class="tsd-kind-icon">format</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite">
-					<a name="tolog" class="tsd-anchor"></a>
-					<h3>to<wbr>Log</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>Log<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TTarget</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Overrides Loggable.toLog</p>
-								<ul>
-									<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/loggable.ts#L11">run-z/log-z/src/message/loggable.ts:11</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>target: <span class="tsd-signature-type">TTarget</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">unknown</span></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="eol" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> eol</h3>
+					<div class="tsd-signature tsd-kind-icon">eol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/node/to-stream.log.ts#L34">run-z/log-z/src/node/to-stream.log.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The end of line symbol to separate log lines with.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p><code>os.EOL</code> - an OS-specific new line separator.</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="format" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> format</h3>
+					<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <a href="../modules/Module__run_z_log_z.html#TextZLogFormat-1" class="tsd-signature-type" data-tsd-kind="Variable">TextZLogFormat</a><span class="tsd-signature-symbol"> | </span><a href="../modules/Module__run_z_log_z.html#ZLogFormatter" class="tsd-signature-type" data-tsd-kind="Type alias">ZLogFormatter</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/node/to-stream.log.ts#L27">run-z/log-z/src/node/to-stream.log.ts:27</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Message format or formatter to use for text message logging.</p>
+						</div>
+						<p>Ignored for streams in <a href="https://nodejs.org/dist/latest/docs/api/stream.html#stream_object_mode">object mode</a>.</p>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p><a href="../modules/Module__run_z_log_z.html#textZLogFormatter">Text log format</a>.</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -144,28 +153,40 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
-					<li class="current tsd-kind-module">
-						<a href="../modules/module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
-					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
+						<a href="../modules/Module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/Module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="Module__run_z_log_z_node.FileZLogSpec.html" class="tsd-kind-icon">FileZLog<wbr>Spec</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="module__run_z_log_z.zloggable.html" class="tsd-kind-icon">ZLoggable</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="Module__run_z_log_z_node.StreamZLogSpec.html" class="tsd-kind-icon">StreamZLog<wbr>Spec</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite">
-								<a href="module__run_z_log_z.zloggable.html#tolog" class="tsd-kind-icon">to<wbr>Log</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="Module__run_z_log_z_node.StreamZLogSpec.html#eol" class="tsd-kind-icon">eol</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="Module__run_z_log_z_node.StreamZLogSpec.html#format" class="tsd-kind-icon">format</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/Module__run_z_log_z_node.html#logZToFile" class="tsd-kind-icon">logZTo<wbr>File</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/Module__run_z_log_z_node.html#logZToStream" class="tsd-kind-icon">logZTo<wbr>Stream</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -186,7 +207,7 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

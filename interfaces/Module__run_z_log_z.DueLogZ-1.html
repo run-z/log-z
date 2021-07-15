@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Target | Log Z</title>
+	<title>DueLogZ | Log Z</title>
 	<meta name="description" content="Documentation for Log Z">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,16 +55,13 @@
 					<a href="../modules.html">Log Z</a>
 				</li>
 				<li>
-					<a href="../modules/module__run_z_log_z.html">Module @run-z/log-z</a>
+					<a href="../modules/Module__run_z_log_z.html">Module @run-z/log-z</a>
 				</li>
 				<li>
-					<a href="../modules/module__run_z_log_z.duelogz.html">DueLogZ</a>
-				</li>
-				<li>
-					<a href="module__run_z_log_z.duelogz.target.html">Target</a>
+					<a href="Module__run_z_log_z.DueLogZ-1.html">DueLogZ</a>
 				</li>
 			</ul>
-			<h1>Interface Target</h1>
+			<h1>Interface DueLogZ</h1>
 		</div>
 	</div>
 </header>
@@ -74,25 +71,19 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A message to process before being logged by <a href="../classes/module__run_z_log_z.zlogger.html">ZLogger</a>.</p>
+						<p>A message about to be logged by <a href="../classes/Module__run_z_log_z.ZLogger.html">ZLogger</a>.</p>
 					</div>
-					<p>Has the same structure as <a href="../modules/module__run_z_log_z.duelogz.html">DueLogZ</a> but some properties may be initially omitted. They will be fulfilled
-					by <a href="../modules/module__run_z_log_z.html#duelogz-2">dueLogZ</a> before returned.</p>
+					<p>Adds a <a href="../classes/Module__run_z_log_z.ZLogger.html">ZLogger</a>-specific properties atop of <code>DueLog</code>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">Target</span>
+						<span class="tsd-signature-type">DueLog</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">Target</span>
-								<ul class="tsd-hierarchy">
-									<li>
-										<a href="module__run_z_log_z.duelogz.processed.html" class="tsd-signature-type" data-tsd-kind="Interface">Processed</a>
-									</li>
-								</ul>
+								<span class="target">DueLogZ</span>
 							</li>
 						</ul>
 					</li>
@@ -105,11 +96,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="module__run_z_log_z.duelogz.target.html#index" class="tsd-kind-icon">index</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="module__run_z_log_z.duelogz.target.html#line" class="tsd-kind-icon">line</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="module__run_z_log_z.duelogz.target.html#on" class="tsd-kind-icon">on</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.duelogz.target.html#zdetails" class="tsd-kind-icon">z<wbr>Details</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="module__run_z_log_z.duelogz.target.html#zlevel" class="tsd-kind-icon">z<wbr>Level</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="Module__run_z_log_z.DueLogZ-1.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="Module__run_z_log_z.DueLogZ-1.html#line" class="tsd-kind-icon">line</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="Module__run_z_log_z.DueLogZ-1.html#on" class="tsd-kind-icon">on</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Module__run_z_log_z.DueLogZ-1.html#zDetails" class="tsd-kind-icon">z<wbr>Details</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Module__run_z_log_z.DueLogZ-1.html#zLevel" class="tsd-kind-icon">z<wbr>Level</a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,28 +108,21 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="index" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> index</h3>
+					<h3>index</h3>
 					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides DueLog.Target.index</p>
+						<p>Inherited from DueLog.index</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/due-log.ts#L94">run-z/log-z/src/message/due-log.ts:94</a></li>
+							<li>Defined in proc7ts/logger/index.d.ts:138</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>An index of the first element of the log <a href="module__run_z_log_z.duelogz.target.html#line">line</a> to process.</p>
+							<p>An index of currently processed element of the log <a href="Module__run_z_log_z.DueLogZ-1.html#line">line</a>.</p>
 						</div>
-						<p>Defaults to <code>0</code>. When set to negative value, reset to <code>0</code>. When set to the value greater than the length of the
-						log line, reset to the log line length.</p>
-						<p>After processing will be set to the value equal or greater then the length of the final log line.</p>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p>DueLogZ.index</p>
-							</dd>
-						</dl>
+						<p>Can be modified to specify the next element to process.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
@@ -146,84 +130,75 @@
 					<h3>line</h3>
 					<div class="tsd-signature tsd-kind-icon">line<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides DueLog.Target.line</p>
+						<p>Overrides DueLog.line</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/due-log.ts#L64">run-z/log-z/src/message/due-log.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/message/due-log.ts#L19">run-z/log-z/src/message/due-log.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Log line to process.</p>
+							<p>Log line to process and log.</p>
 						</div>
-						<p>Populated with <a href="module__run_z_log_z.zlogmessage.html#line">log line</a> initially.</p>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p>DueLogZ.line</p>
-							</dd>
-						</dl>
+						<p>Can be modified or replaced to change the final <a href="Module__run_z_log_z.ZLogMessage.html#line">log line</a>.</p>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="on" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on</h3>
 					<div class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides DueLog.Target.on</p>
+						<p>Inherited from DueLog.on</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/due-log.ts#L55">run-z/log-z/src/message/due-log.ts:55</a></li>
+							<li>Defined in proc7ts/logger/index.d.ts:126</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>A hint indicating the logging stage.</p>
 						</div>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p>DueLogZ.on</p>
-							</dd>
-						</dl>
+						<p>A {@link Loggable.toLog log processor} may wish to conditionally process the message depending on the stage.</p>
+						<p>Possible values are:</p>
+						<ul>
+							<li><code>&#39;in&#39;</code> - <em>input stage</em>. Set for the logger input. I.e., for the log line passed to the logger method.</li>
+							<li><code>&#39;out&#39;</code> - <em>output stage</em>. Set by log writer. I.e., right before the message written to the log.</li>
+							<li><code>undefined</code> - <em>default stage</em>. When set, the value should be processed unconditionally.</li>
+						</ul>
+						<p>Some logger implementations may wish to use this hint for special processing. If the stage is not recognized
+						by the loggable value, then it is generally means no processing should be performed.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="zdetails" class="tsd-anchor"></a>
-					<h3>z<wbr>Details</h3>
-					<div class="tsd-signature tsd-kind-icon">z<wbr>Details<span class="tsd-signature-symbol">:</span> <a href="../modules/module__run_z_log_z.zlogdetails.html#mutable" class="tsd-signature-type" data-tsd-kind="Type alias">Mutable</a></div>
+					<a name="zDetails" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> z<wbr>Details</h3>
+					<div class="tsd-signature tsd-kind-icon">z<wbr>Details<span class="tsd-signature-symbol">:</span> <a href="../modules/Module__run_z_log_z.ZLogDetails.html#Mutable" class="tsd-signature-type" data-tsd-kind="Type alias">Mutable</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/due-log.ts#L82">run-z/log-z/src/message/due-log.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/message/due-log.ts#L36">run-z/log-z/src/message/due-log.ts:36</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Log message details to process.</p>
+							<p>Log message details to process and log.</p>
 						</div>
-						<p>Populated with message <a href="module__run_z_log_z.zlogmessage.html#details">details</a> initially.</p>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p>DueLogZ.zDetails</p>
-							</dd>
-						</dl>
+						<p>Can be modified or replaced to change the final <a href="Module__run_z_log_z.ZLogMessage.html#details">message details</a>.</p>
+						<p>When missing, the message is not processed by <code>log-z</code>. A <a href="Module__run_z_log_z.ZLoggable.html">ZLoggable</a> instance should not perform any <code>log-z</code>-
+						specific processing in this case.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="zlevel" class="tsd-anchor"></a>
-					<h3>z<wbr>Level</h3>
-					<div class="tsd-signature tsd-kind-icon">z<wbr>Level<span class="tsd-signature-symbol">:</span> <a href="../enums/module__run_z_log_z.zloglevel.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ZLogLevel</a></div>
+					<a name="zLevel" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> z<wbr>Level</h3>
+					<div class="tsd-signature tsd-kind-icon">z<wbr>Level<span class="tsd-signature-symbol">:</span> <a href="../enums/Module__run_z_log_z.ZLogLevel.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ZLogLevel</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/run-z/log-z/blob/cf05818/src/message/due-log.ts#L73">run-z/log-z/src/message/due-log.ts:73</a></li>
+							<li>Defined in <a href="https://github.com/run-z/log-z/blob/f455566/src/message/due-log.ts#L26">run-z/log-z/src/message/due-log.ts:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Log level to process.</p>
+							<p>Log level to process and log.</p>
 						</div>
-						<p>Populated with message <a href="module__run_z_log_z.zlogmessage.html#level">log level</a> initially.</p>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p>DueLogZ.zLevel</p>
-							</dd>
-						</dl>
+						<p>Can be modified to change the final <a href="Module__run_z_log_z.ZLogMessage.html#level">log level</a>.</p>
 					</div>
 				</section>
 			</section>
@@ -234,32 +209,35 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/Module__run_z_log_z.html">Module @run-<wbr>z/log-<wbr>z</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/Module__run_z_log_z_node.html">Module @run-<wbr>z/log-<wbr>z/node</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
-						<a href="module__run_z_log_z.duelogz.processed.html" class="tsd-kind-icon">Processed</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-namespace">
-						<a href="module__run_z_log_z.duelogz.target.html" class="tsd-kind-icon">Target</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="Module__run_z_log_z.DueLogZ-1.html" class="tsd-kind-icon">Due<wbr>LogZ</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
-								<a href="module__run_z_log_z.duelogz.target.html#index" class="tsd-kind-icon">index</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="Module__run_z_log_z.DueLogZ-1.html#index" class="tsd-kind-icon">index</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
-								<a href="module__run_z_log_z.duelogz.target.html#line" class="tsd-kind-icon">line</a>
+								<a href="Module__run_z_log_z.DueLogZ-1.html#line" class="tsd-kind-icon">line</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
-								<a href="module__run_z_log_z.duelogz.target.html#on" class="tsd-kind-icon">on</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="Module__run_z_log_z.DueLogZ-1.html#on" class="tsd-kind-icon">on</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.duelogz.target.html#zdetails" class="tsd-kind-icon">z<wbr>Details</a>
+								<a href="Module__run_z_log_z.DueLogZ-1.html#zDetails" class="tsd-kind-icon">z<wbr>Details</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="module__run_z_log_z.duelogz.target.html#zlevel" class="tsd-kind-icon">z<wbr>Level</a>
+								<a href="Module__run_z_log_z.DueLogZ-1.html#zLevel" class="tsd-kind-icon">z<wbr>Level</a>
 							</li>
 						</ul>
 					</li>
