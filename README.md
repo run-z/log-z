@@ -263,6 +263,7 @@ There are several additional log recorders that can combine or modify the behavi
 - [logZToBuffer] - A log buffer that can be drained to another log recorder.   
 - [logZToLogger] - Logs to another `Logger`. To `consoleLogger` by default. This is the default recorder used by [logZ]
   function.
+- [logZToOther] - Logs to another log recorder provided by function.
 - [logZUpdated] - Updates log messages.
 - [logZWhenLevel] - A log recorder of messages with required level.
   Messages not satisfying the condition either logged by another recorder, or discarded.
@@ -274,6 +275,7 @@ There are several additional log recorders that can combine or modify the behavi
 [logZTimestamp]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZTimestamp
 [logZToBuffer]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToBuffer
 [logZToLogger]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToLogger
+[logZToOther]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToOther
 [logZUpdated]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZUpdated
 [logZWhenLevel]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZWhenLevel
 [logZWithDetails]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZWithDetails
