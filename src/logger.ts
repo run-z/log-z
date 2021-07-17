@@ -4,6 +4,8 @@ import type { ZLogRecorder } from './log-recorder';
  * Message logger interface.
  *
  * Extends {@link ZLogRecorder log recorder} with convenient logging methods.
+ *
+ * Supposed to be constructed by {@link logZ} or {@link logZBy} function.
  */
 export interface ZLogger extends ZLogRecorder {
 
