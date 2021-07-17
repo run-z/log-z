@@ -1,14 +1,40 @@
+import { ZLogLevel } from './level';
 import type { ZLogRecorder } from './log-recorder';
-import { ZLogger } from './logger';
+import type { ZLogger } from './logger';
 import type { ZLogMessage } from './message';
+import { zlogMessage } from './message';
 
-/**
- * @internal
- */
-class DelegatingZLogger extends ZLogger {
+class ZLogger$ implements ZLogger {
 
   constructor(private readonly _by: ZLogRecorder) {
-    super();
+  }
+
+  log(level: number, ...args: unknown[]): void {
+    this.record(zlogMessage(level, ...args));
+  }
+
+  fatal(...args: unknown[]): void {
+    this.log(ZLogLevel.Fatal, ...args);
+  }
+
+  error(...args: unknown[]): void {
+    this.log(ZLogLevel.Error, ...args);
+  }
+
+  warn(...args: unknown[]): void {
+    this.log(ZLogLevel.Warning, ...args);
+  }
+
+  info(...args: unknown[]): void {
+    this.log(ZLogLevel.Info, ...args);
+  }
+
+  debug(...args: unknown[]): void {
+    this.log(ZLogLevel.Debug, ...args);
+  }
+
+  trace(...args: unknown[]): void {
+    this.log(ZLogLevel.Trace, ...args);
   }
 
   record(message: ZLogMessage): void {
@@ -35,5 +61,5 @@ class DelegatingZLogger extends ZLogger {
  * @returns New message logger.
  */
 export function logZBy(by: ZLogRecorder): ZLogger {
-  return new DelegatingZLogger(by);
+  return new ZLogger$(by);
 }

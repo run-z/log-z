@@ -122,7 +122,7 @@ the one created by [zlogDetails()].
 A [zlogMessage()] function can be used to construct a log message. A level-specific messages can be constructed by
 dedicated functions like [zlogDEBUG] or [zlogERROR].
 
-[logger]: https://run-z.github.io/log-z/classes/Module__run_z_log_z.ZLogger.html
+[logger]: https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLogger.html
 [Loggable]: https://proc7ts.github.io/logger/interfaces/Loggable.html
 [zlogDetails()]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogDetails
 [zlogMessage()]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogMessage
