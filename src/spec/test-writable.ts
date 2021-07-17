@@ -8,7 +8,7 @@ export class TestWritable extends Writable {
     super({ decodeStrings: false, ...opts });
   }
 
-  _write(
+  override _write(
       chunk: unknown,
       _encoding: string,
       callback: (error?: (Error | null)) => void,
