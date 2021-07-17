@@ -147,18 +147,18 @@
 						<p>The keys of this map are specific to application or log recorder implementation.</p>
 					</li>
 				</ul>
-				<p>The <code>record()</code> method of the <a href="https://run-z.github.io/log-z/classes/module__run_z_log_z.zlogger.html">logger</a> logs such messages.</p>
-				<p>The <a href="https://run-z.github.io/log-z/classes/module__run_z_log_z.zlogger.html">logger</a> also has more convenient methods accepting arbitrary parameters and corresponding to each predefined log
-					level, like <code>info()</code> and <code>error()</code>, <code>warn()</code>, <code>trace()</code>, etc. Each of these methods processes <code>Loggable</code> values. E.g.
-				the one created by <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdetails-1">zlogDetails()</a>.</p>
-				<p>A <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogmessage-1">zlogMessage()</a> function can be used to construct a log message. A level-specific messages can be constructed by
-				dedicated functions like <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdebug">zlogDEBUG</a> or <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogerror">zlogERROR</a>.</p>
+				<p>The <code>record()</code> method of the <a href="https://run-z.github.io/log-z/classes/Module__run_z_log_z.ZLogger.html">logger</a> logs such messages.</p>
+				<p>The <a href="https://run-z.github.io/log-z/classes/Module__run_z_log_z.ZLogger.html">logger</a> also has more convenient methods accepting arbitrary parameters and corresponding to each predefined log
+					level, like <code>info()</code> and <code>error()</code>, <code>warn()</code>, <code>trace()</code>, etc. Each of these methods processes <a href="https://proc7ts.github.io/logger/interfaces/Loggable.html">Loggable</a> values. E.g.
+				the one created by <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogDetails">zlogDetails()</a>.</p>
+				<p>A <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogMessage">zlogMessage()</a> function can be used to construct a log message. A level-specific messages can be constructed by
+				dedicated functions like <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogDEBUG">zlogDEBUG</a> or <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogERROR">zlogERROR</a>.</p>
 				<a href="#loggable-values" id="loggable-values" style="color: inherit; text-decoration: none;">
 					<h2>Loggable Values</h2>
 				</a>
-				<p>A message error or any message parameter can customize how it is logged by implementing <code>Loggable</code> or <code>ZLoggable</code>
-				interface. I.e. it should implement <code>toLog()</code> method. See the <a href="https://www.npmjs.com/package/@proc7ts/logger">@proc7ts/logger</a> for the details.</p>
-				<p>For example, a <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#zlogdetails-1">zlogDetails()</a> creates a loggable value that adjusts the details of the logged message.</p>
+				<p>A message error or any message parameter can customize how it is logged by implementing <a href="https://proc7ts.github.io/logger/interfaces/Loggable.html">Loggable</a> or <a href="https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLoggable.html">ZLoggable</a>
+				interface. I.e. it should implement <a href="https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLoggable.html#toLog">toLog()</a> method. See the <a href="https://www.npmjs.com/package/@proc7ts/logger">@proc7ts/logger</a> for the details.</p>
+				<p>For example, a <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogDetails">zlogDetails()</a> creates a loggable value that adjusts the details of the logged message.</p>
 				<p>Another possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
 				This can be done with <code>logDefer()</code> function:</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">logDefer</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@proc7ts/logger&#039;</span><span style="color: #000000">;</span>
@@ -230,7 +230,7 @@
 				<a href="#custom-loggers" id="custom-loggers" style="color: inherit; text-decoration: none;">
 					<h2>Custom Loggers</h2>
 				</a>
-				<p>Custom logger can be built by implementing a <a href="https://run-z.github.io/log-z/interfaces/module__run_z_log_z.zlogrecorder.html">ZLogRecorder</a> interface. The latter has three methods:</p>
+				<p>Custom logger can be built by implementing a <a href="https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLogRecorder.html">ZLogRecorder</a> interface. The latter has three methods:</p>
 				<ul>
 					<li><p><code>record(message: ZLogMessage): void</code> - Records a log message.</p>
 						<p>The actual logging of the message can be asynchronous.</p>
@@ -247,27 +247,27 @@
 						<p>All messages discarded after this method call. </p>
 					</li>
 				</ul>
-				<p>The <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logz">logZ</a> and <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzby">logZBy</a> functions converts arbitrary <a href="https://run-z.github.io/log-z/interfaces/module__run_z_log_z.zlogrecorder.html">ZLogRecorder</a> to <a href="https://run-z.github.io/log-z/classes/module__run_z_log_z.zlogger.html">logger</a>. The former accepts additional
+				<p>The <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZ">logZ</a> and <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZBy">logZBy</a> functions converts arbitrary <a href="https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLogRecorder.html">ZLogRecorder</a> to <a href="https://run-z.github.io/log-z/classes/Module__run_z_log_z.ZLogger.html">logger</a>. The former accepts additional
 				parameters, e.g. is able to filter out some debug messages.</p>
 				<a href="#additional-log-recorders" id="additional-log-recorders" style="color: inherit; text-decoration: none;">
 					<h2>Additional Log Recorders</h2>
 				</a>
 				<p>There are several additional log recorders that can combine or modify the behavior of other recorders:</p>
 				<ul>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzatopof">logZAtopOf</a> - Logs messages atop of the target log recorder.
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZAtopOf">logZAtopOf</a> - Logs messages atop of the target log recorder.
 						When it ends logging, the target recorder still can record messages.
-					This, combined with <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzwithdetails">logZWithDetails</a>, can be treated as &quot;child&quot; logger.</li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzbyall">logZByAll</a> - Logs messages by all the given recorders.</li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzbyany">logZByAny</a> - Logs messages by any of the given recorders.</li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logztimestamp">logZTimestamp</a> - Timestamp log recorder.
+					This, combined with <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZWithDetails">logZWithDetails</a>, can be treated as &quot;child&quot; logger.</li>
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZByAll">logZByAll</a> - Logs messages by all the given recorders.</li>
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZByAny">logZByAny</a> - Logs messages by any of the given recorders.</li>
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZTimestamp">logZTimestamp</a> - Timestamp log recorder.
 					Adds a timestamp property to message details.</li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logztobuffer">logZToBuffer</a> - A log buffer that can be drained to another log recorder.   </li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logztologger">logZToLogger</a> - Logs to another <code>Logger</code>. To <code>consoleLogger</code> by default. This is the default recorder used by <a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logz">logZ</a>
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToBuffer">logZToBuffer</a> - A log buffer that can be drained to another log recorder.   </li>
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToLogger">logZToLogger</a> - Logs to another <code>Logger</code>. To <code>consoleLogger</code> by default. This is the default recorder used by <a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZ">logZ</a>
 					function.</li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzupdated">logZUpdated</a> - Updates log messages.</li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzwhenlevel">logZWhenLevel</a> - A log recorder of messages with required level.
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZUpdated">logZUpdated</a> - Updates log messages.</li>
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZWhenLevel">logZWhenLevel</a> - A log recorder of messages with required level.
 					Messages not satisfying the condition either logged by another recorder, or discarded.</li>
-					<li><a href="https://run-z.github.io/log-z/modules/module__run_z_log_z.html#logzwithdetails">logZWithDetails</a> - Updates message details.     </li>
+					<li><a href="https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZWithDetails">logZWithDetails</a> - Updates message details.     </li>
 				</ul>
 			</div>
 		</div>
