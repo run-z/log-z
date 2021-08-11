@@ -19,7 +19,12 @@ describe('logZToFile', () => {
     logFile = path.join(logDir, 'test.log');
   });
   afterEach(async () => {
-    await fs.rmdir(testRootDir, { recursive: true });
+    try {
+      await fs.rmdir(testRootDir, { recursive: true });
+    } catch (e) {
+      // Throws in Node 16+.
+      // Replace with `fs.rm` for Node 14+.
+    }
   });
 
   it('logs to file', async () => {
