@@ -30,7 +30,7 @@ export interface TextZLogFormat {
    *
    * @default Built by {@link TextZLogFormat.defaultFields}.
    */
-  readonly fields?: readonly (ZLogField | number | string)[];
+  readonly fields?: readonly (ZLogField | number | string)[] | undefined;
 
 }
 

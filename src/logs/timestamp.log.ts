@@ -12,7 +12,7 @@ export interface TimestampZLogSpec {
    *
    * @default `"timestamp"`.
    */
-  readonly to?: string | symbol;
+  readonly to?: string | symbol | undefined;
 
   /**
    * Gets timestamp for the message.

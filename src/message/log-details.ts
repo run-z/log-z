@@ -7,14 +7,14 @@ import type { ZLoggable } from './loggable';
  *
  * The keys of this map are specific to application or log recorder implementation.
  */
-export type ZLogDetails = { readonly [key in string | symbol]?: unknown };
+export type ZLogDetails = { readonly [key in string | symbol]?: unknown | undefined };
 
 export namespace ZLogDetails {
 
   /**
    * Mutable log message details map.
    */
-  export type Mutable = { [key in string | symbol]?: unknown };
+  export type Mutable = { [key in string | symbol]?: unknown | undefined };
 
 }
 

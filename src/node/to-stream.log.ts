@@ -24,14 +24,14 @@ export interface StreamZLogSpec {
    *
    * @default {@link textZLogFormatter Text log format}.
    */
-  readonly format?: TextZLogFormat | ZLogFormatter;
+  readonly format?: TextZLogFormat | ZLogFormatter | undefined;
 
   /**
    * The end of line symbol to separate log lines with.
    *
    * @default `os.EOL` - an OS-specific new line separator.
    */
-  readonly eol?: string;
+  readonly eol?: string | undefined;
 
 }
 

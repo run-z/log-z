@@ -16,7 +16,7 @@ export interface ZLogBufferSpec {
    *
    * @default 1024
    */
-  readonly atMost?: number;
+  readonly atMost?: number | undefined;
 
   /**
    * This is called whenever a log message is about to be buffered.

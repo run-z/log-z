@@ -11,7 +11,7 @@ export interface TimestampZLogFieldFormat {
    * Timestamp value is expected to be either a Date, a number (i.e. epoch milliseconds), or preformatted string.
    * In the latter case no further formatting would be applied.
    */
-  readonly key?: string;
+  readonly key?: string | undefined;
 
   /**
    * Timestamp value format.
@@ -25,7 +25,10 @@ export interface TimestampZLogFieldFormat {
    *
    * [Intl.DateTimeFormat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
    */
-  readonly format?: Intl.DateTimeFormat | ((this: void, timestamp: number) => string);
+  readonly format?:
+      | Intl.DateTimeFormat
+      | ((this: void, timestamp: number) => string)
+      | undefined;
 
 }
 

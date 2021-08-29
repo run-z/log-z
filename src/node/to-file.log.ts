@@ -21,7 +21,7 @@ export interface FileZLogSpec extends StreamZLogSpec {
    * The log file and directories creation is asynchronous. So, the buffer is used while the log file is not created
    * yet. It is also used if the i/o operations are not fast enough to write everything logged.
    */
-  readonly buffer?: ZLogBuffer;
+  readonly buffer?: ZLogBuffer | undefined;
 
 }
 

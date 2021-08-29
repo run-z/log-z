@@ -10,14 +10,14 @@ export interface DecoratorZLogFieldFormat {
    *
    * Applied only when non-empty field value is written.
    */
-  readonly prefix?: string;
+  readonly prefix?: string | undefined;
 
   /**
    * A suffix to add to field value.
    *
    * Applied only when non-empty field value is written.
    */
-  readonly suffix?: string;
+  readonly suffix?: string | undefined;
 
   /**
    * Empty value placeholder.
@@ -26,7 +26,7 @@ export interface DecoratorZLogFieldFormat {
    *
    * Nothing is written instead of empty value by default.
    */
-  readonly empty?: string;
+  readonly empty?: string | undefined;
 
 }
 

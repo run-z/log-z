@@ -23,7 +23,7 @@ export interface DueLogZ extends DueLog {
    *
    * Can be modified to change the final {@link ZLogMessage.level log level}.
    */
-  zLevel?: ZLogLevel;
+  zLevel?: ZLogLevel | undefined;
 
   /**
    * Log message details to process and log.
@@ -33,7 +33,7 @@ export interface DueLogZ extends DueLog {
    * When missing, the message is not processed by `log-z`. A {@link ZLoggable} instance should not perform any `log-z`-
    * specific processing in this case.
    */
-  zDetails?: ZLogDetails.Mutable;
+  zDetails?: ZLogDetails.Mutable | undefined;
 
 }
 
@@ -52,7 +52,7 @@ export namespace DueLogZ {
      *
      * @see DueLogZ.on
      */
-    on?: string;
+    on?: string | undefined;
 
     /**
      * Log line to process.
@@ -91,7 +91,7 @@ export namespace DueLogZ {
      *
      * @see DueLogZ.index
      */
-    index?: number;
+    index?: number | undefined;
 
   }
 
