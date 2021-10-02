@@ -74,6 +74,7 @@ export class ZLogBuffer$ {
       target.record(message);
       whenLogged.resolve(target.whenLogged());
     };
+
     drop = (entry: ZLogBuffer.Entry): void => {
       drop = noop;
       recordTo = noop;
@@ -142,6 +143,7 @@ export class ZLogBuffer$ {
         this.contents,
         entry => {
           batch.push(entry);
+
           return --size > 0;
         },
     );

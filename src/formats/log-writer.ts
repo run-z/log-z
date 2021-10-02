@@ -74,6 +74,7 @@ export abstract class ZLogWriter {
         delete updatedDetails[key];
         ZLogLine$compactDetails(detailsReplacement, path, 0);
         this.changeMessage({ ...message, details: detailsReplacement });
+
         return value;
       }
 

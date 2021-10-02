@@ -44,6 +44,7 @@ export function logZToLogger(logger: Logger = consoleLogger): ZLogRecorder {
     record = noop;
     whenLogged = notLogged;
     end = alreadyEnded;
+
     return alreadyEnded();
   };
 

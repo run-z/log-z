@@ -26,6 +26,7 @@ export default defineConfig({
     if (id.startsWith(path.resolve('src', 'node') + path.sep)) {
       return 'log-z.node';
     }
+
     return 'log-z';
   },
   output: {

@@ -24,6 +24,7 @@ export function streamWriter(to: Writable): (data: unknown) => WhenWritten {
           },
       ));
     }
+
     return drainPromise;
   };
 

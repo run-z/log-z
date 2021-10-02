@@ -52,6 +52,7 @@ export function logZToFile(
     if (file !== expectedLogFile) {
       // Recorder opened for wrong log file.
       recorder.end().catch(noop);
+
       return;
     }
 

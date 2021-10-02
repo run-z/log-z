@@ -65,6 +65,7 @@ export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails 
               line[index] = restDetails;
               line.push(error);
               ++target.index;
+
               return;
             }
 
