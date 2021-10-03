@@ -122,12 +122,12 @@ the one created by [zlogDetails()].
 A [zlogMessage()] function can be used to construct a log message. A level-specific messages can be constructed by
 dedicated functions like [zlogDEBUG] or [zlogERROR].
 
-[logger]: https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLogger.html
+[logger]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLogger.html
 [Loggable]: https://proc7ts.github.io/logger/interfaces/Loggable.html
-[zlogDetails()]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogDetails
-[zlogMessage()]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogMessage
-[zlogDEBUG]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogDEBUG
-[zlogERROR]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#zlogERROR
+[zlogDetails()]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogDetails
+[zlogMessage()]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogMessage
+[zlogDEBUG]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogDEBUG
+[zlogERROR]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogERROR
 
 
 Loggable Values
@@ -149,8 +149,8 @@ logger.debug('Debug info', logDefer(() => zlogDetails({ info: evaluateDebugInfo(
 // which may happen at a later time, or not happen at all.
 ``` 
 
-[ZLoggable]: https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLoggable.html
-[toLog()]: https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLoggable.html#toLog
+[ZLoggable]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html
+[toLog()]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html#toLog
 
 Log Formats
 -----------
@@ -243,9 +243,9 @@ Custom logger can be built by implementing a [ZLogRecorder] interface. The latte
 The [logZ] and [logZBy] functions converts arbitrary [ZLogRecorder] to [logger]. The former accepts additional
 parameters, e.g. is able to filter out some debug messages.
 
-[logZ]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZ
-[logZBy]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZBy
-[ZLogRecorder]: https://run-z.github.io/log-z/interfaces/Module__run_z_log_z.ZLogRecorder.html
+[logZ]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZ
+[logZBy]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZBy
+[ZLogRecorder]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLogRecorder.html
 
 
 Additional Log Recorders
@@ -269,13 +269,13 @@ There are several additional log recorders that can combine or modify the behavi
   Messages not satisfying the condition either logged by another recorder, or discarded.
 - [logZWithDetails] - Updates message details.     
 
-[logZAtopOf]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZAtopOf
-[logZByAll]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZByAll
-[logZByAny]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZByAny
-[logZTimestamp]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZTimestamp
-[logZToBuffer]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToBuffer
-[logZToLogger]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToLogger
-[logZToOther]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZToOther
-[logZUpdated]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZUpdated
-[logZWhenLevel]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZWhenLevel
-[logZWithDetails]: https://run-z.github.io/log-z/modules/Module__run_z_log_z.html#logZWithDetails
+[logZAtopOf]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZAtopOf
+[logZByAll]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZByAll
+[logZByAny]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZByAny
+[logZTimestamp]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZTimestamp
+[logZToBuffer]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToBuffer
+[logZToLogger]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToLogger
+[logZToOther]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToOther
+[logZUpdated]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZUpdated
+[logZWhenLevel]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZWhenLevel
+[logZWithDetails]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZWithDetails
