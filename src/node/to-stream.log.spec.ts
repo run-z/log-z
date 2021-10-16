@@ -163,8 +163,9 @@ describe('logZToStream', () => {
       const out = new TestWritable({ objectMode: true });
       const logger = logZBy(logZToStream(out));
       const whenEnded = logger.end();
-      const ended = expect(logger.end()).toBe(whenEnded);
+      const ended = logger.end();
 
+      expect(ended).toBe(whenEnded);
       expect(await ended).toBeUndefined();
     });
   });

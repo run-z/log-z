@@ -122,7 +122,7 @@ describe('textZLogFormatter', () => {
         ],
       });
 
-      expect(format(zlogINFO(zlogDetails({ meta: 'test' })))).toEqual('meta(test)');
+      expect(format(zlogINFO(zlogDetails({ meta: 'test' })))).toBe('meta(test)');
     });
     it('does not change original message when formats another one', () => {
 
@@ -144,7 +144,7 @@ describe('textZLogFormatter', () => {
         ],
       });
 
-      expect(format(zlogINFO(zlogDetails({ meta: 'test' })))).toEqual('meta(test) meta: "test"');
+      expect(format(zlogINFO(zlogDetails({ meta: 'test' })))).toBe('meta(test) meta: "test"');
     });
   });
 

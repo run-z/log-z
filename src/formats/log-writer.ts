@@ -261,6 +261,7 @@ function ZLogLine$compactDetails(
   const key = path[index] as string;
   const nested = details[key];
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   if (nested && ZLogLine$compactDetails(nested, path, index + 1)) {
     delete details[key];
   }
