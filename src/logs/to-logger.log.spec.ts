@@ -51,7 +51,7 @@ describe('logZToLogger', () => {
 
   it('logs empty message', () => {
     logger.error();
-    expect(errorSpy).toHaveBeenCalledWith();
+    expect(errorSpy).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
   });
 
   it('logs error', () => {
