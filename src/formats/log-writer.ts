@@ -113,7 +113,7 @@ export abstract class ZLogWriter {
     if (typeof value === 'string') {
       this.writeString(value);
     } else if (value != null && typeof value === 'object') {
-      this.writeObject(value as object);
+      this.writeObject(value);
     } else {
       this.writeByDefault(value);
     }
