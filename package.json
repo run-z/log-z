@@ -57,7 +57,7 @@
     "run-z": "=1.10.0-bootstrap",
     "shx": "^0.3.3",
     "strip-ansi": "^7.0.1",
-    "ts-jest": "^27.1.1",
+    "ts-jest": "^27.1.2",
     "tslib": "^2.3.1",
     "typedoc": "^0.22.10",
     "typescript": "^4.5.4"
