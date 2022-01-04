@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import { logDefer } from '@proc7ts/logger';
-import * as os from 'os';
+import * as os from 'node:os';
 import { levelZLogField, messageZLogField } from '../fields';
 import { textZLogFormatter } from '../formats';
 import { ZLogLevel } from '../level';

@@ -1,4 +1,4 @@
-import { Writable, WritableOptions } from 'stream';
+import { Writable, WritableOptions } from 'node:stream';
 
 export class TestWritable extends Writable {
 

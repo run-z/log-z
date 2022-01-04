@@ -1,6 +1,6 @@
 import { valueProvider } from '@proc7ts/primitives';
-import * as os from 'os';
-import type { Writable } from 'stream';
+import * as os from 'node:os';
+import type { Writable } from 'node:stream';
 import type { TextZLogFormat, ZLogFormatter } from '../formats';
 import { textZLogFormatter } from '../formats';
 import type { ZLogRecorder } from '../log-recorder';

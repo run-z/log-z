@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
-import { promises as fs } from 'fs';
-import * as path from 'path';
+import { promises as fs } from 'node:fs';
+import * as path from 'node:path';
 import { logZBy } from '../log-by';
 import type { ZLogger } from '../logger';
 import type { ZLogMessage } from '../message';
