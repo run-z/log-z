@@ -70,7 +70,7 @@ fileLogger.debug('Message');
 // Create a daily rolling file logger.
 const rollingLogger = logZ({
   by: logZToFile(() => {
-    
+
     const now = new Date();
 
     return `test.${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}.log`;
@@ -103,7 +103,7 @@ A log message is an object with the following properties:
     An operator should look at this soon(ish).
   - `Warning` - A note on something that should probably be looked at by an operator eventually.
   - `Info` - Detail on regular operation.
-  - `Debug` - Anything else, i.e. too verbose to be included in "info" level.     
+  - `Debug` - Anything else, i.e. too verbose to be included in "info" level.
   - `Trace` - Logging from external libraries used by your app or very detailed application logging.
 
 - `line` - Log line containing arbitrary values to log.
@@ -147,7 +147,7 @@ logger.debug('Debug info', logDefer(() => zlogDetails({ info: evaluateDebugInfo(
 // `evaluateDebugInfo()` will be called only if `DEBUG` log level enabled.
 // Note that this will happen right before writing to the log,
 // which may happen at a later time, or not happen at all.
-``` 
+```
 
 [ZLoggable]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html
 [toLog()]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html#toLog
@@ -228,16 +228,16 @@ Custom logger can be built by implementing a [ZLogRecorder] interface. The latte
   The actual logging of the message can be asynchronous.
 
 - `whenLogged(which?: 'all' | 'last'): Promise<boolean>` - Awaits for the recorded message(s) to be either logged or
-  discarded.  
+  discarded.
 
   The optional `which` parameter can be one of:
-  
+
   - `"all"` to wait for all messages,
   - `"last"` (the default) to wait for the last recorded message only.
 
 - `end(): Promise<void>` - Ends log recording and returns a promise resolved when recorder stopped.
 
-  All messages discarded after this method call. 
+  All messages discarded after this method call.
 
 
 The [logZ] and [logZBy] functions converts arbitrary [ZLogRecorder] to [logger]. The former accepts additional
@@ -260,14 +260,14 @@ There are several additional log recorders that can combine or modify the behavi
 - [logZByAny] - Logs messages by any of the given recorders.
 - [logZTimestamp] - Timestamp log recorder.
   Adds a timestamp property to message details.
-- [logZToBuffer] - A log buffer that can be drained to another log recorder.   
+- [logZToBuffer] - A log buffer that can be drained to another log recorder.
 - [logZToLogger] - Logs to another `Logger`. To `consoleLogger` by default. This is the default recorder used by [logZ]
   function.
 - [logZToOther] - Logs to another log recorder provided by function.
 - [logZUpdated] - Updates log messages.
 - [logZWhenLevel] - A log recorder of messages with required level.
   Messages not satisfying the condition either logged by another recorder, or discarded.
-- [logZWithDetails] - Updates message details.     
+- [logZWithDetails] - Updates message details.
 
 [logZAtopOf]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZAtopOf
 [logZByAll]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZByAll
