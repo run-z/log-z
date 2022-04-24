@@ -1,12 +1,11 @@
-Log That
-========
+# Log That
 
 [![NPM][npm-image]][npm-url]
 [![Build Status][build-status-img]][build-status-link]
 [![Code Quality][quality-img]][quality-link]
 [![Coverage][coverage-img]][coverage-link]
 [![GitHub Project][github-image]][github-url]
-[![API Documentation][api-docs-image]][API documentation]
+[![API Documentation][api-docs-image]][api documentation]
 
 Logging library for browsers and Node.js.
 
@@ -23,40 +22,40 @@ This is a reference implementation of the logging API defined by [@proc7ts/logge
 [github-image]: https://img.shields.io/static/v1?logo=github&label=GitHub&message=project&color=informational
 [github-url]: https://github.com/run-z/log-z
 [api-docs-image]: https://img.shields.io/static/v1?logo=typescript&label=API&message=docs&color=informational
-[API documentation]: https://run-z.github.io/log-z/
+[api documentation]: https://run-z.github.io/log-z/
 [@proc7ts/logger]: https://www.npmjs.com/package/@proc7ts/logger
 
-
-Examples
---------
+## Examples
 
 Default logger:
+
 ```typescript
 import { logZ } from '@run-z/log-z';
 
-const logger = logZ();  // Create default logger to `console`.
+const logger = logZ(); // Create default logger to `console`.
 
 logger.info('Message'); // Logs with `console.info()`.
-logger.error('Error');  // Logs with `console.error()`.
-logger.debug('Debug');  // Messages below "Warning" discarded by default.
+logger.error('Error'); // Logs with `console.error()`.
+logger.debug('Debug'); // Messages below "Warning" discarded by default.
 ```
 
 Logger that logs all messages, including debug and trace.
+
 ```typescript
 import { logZ, zlogDetails } from '@run-z/log-z';
 
 // Create default logger to `console` that logs all messages.
 const logger = logZ({ atLeast: 0 });
 
-logger.debug('Debug');  // Logs with `console.log()`.
+logger.debug('Debug'); // Logs with `console.log()`.
 logger.trace('Without stack trace'); // Logs with `console.debug()`.
 logger.trace('With stack trace', zlogDetails({ stackTrace: true })); // Logs with `console.trace()`.
 ```
 
-Node.js Support
----------------
+## Node.js Support
 
 Log to file
+
 ```typescript
 import { logZ, zlogDEBUG } from '@run-z/log-z';
 import { logZToFile } from '@run-z/log-z/node';
@@ -70,15 +69,15 @@ fileLogger.debug('Message');
 // Create a daily rolling file logger.
 const rollingLogger = logZ({
   by: logZToFile(() => {
-
     const now = new Date();
 
     return `test.${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}.log`;
   }),
-})
+});
 ```
 
 Log to arbitrary stream
+
 ```typescript
 import { logZ, zlogDEBUG } from '@run-z/log-z';
 import { logZToStream } from '@run-z/log-z/node';
@@ -90,8 +89,7 @@ streamLogger.info('Message');
 // [INFO ] Message
 ```
 
-Log Messages
-------------
+## Log Messages
 
 A log message is an object with the following properties:
 
@@ -112,7 +110,6 @@ A log message is an object with the following properties:
 
   The keys of this map are specific to application or log recorder implementation.
 
-
 The `record()` method of the [logger] logs such messages.
 
 The [logger] also has more convenient methods accepting arbitrary parameters and corresponding to each predefined log
@@ -123,15 +120,13 @@ A [zlogMessage()] function can be used to construct a log message. A level-speci
 dedicated functions like [zlogDEBUG] or [zlogERROR].
 
 [logger]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLogger.html
-[Loggable]: https://proc7ts.github.io/logger/interfaces/Loggable.html
-[zlogDetails()]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogDetails
-[zlogMessage()]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogMessage
-[zlogDEBUG]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogDEBUG
-[zlogERROR]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogERROR
+[loggable]: https://proc7ts.github.io/logger/interfaces/Loggable.html
+[zlogdetails()]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogDetails
+[zlogmessage()]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogMessage
+[zlogdebug]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogDEBUG
+[zlogerror]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#zlogERROR
 
-
-Loggable Values
----------------
+## Loggable Values
 
 A message error or any message parameter can customize how it is logged by implementing [Loggable] or [ZLoggable]
 interface. I.e. it should implement [toLog()] method. See the [@proc7ts/logger] for the details.
@@ -140,29 +135,33 @@ For example, a [zlogDetails()] creates a loggable value that adjusts the details
 
 Another possible usage scenario is deferring the actual evaluation of the logged message until it is written to the log.
 This can be done with `logDefer()` function:
+
 ```typescript
 import { logDefer } from '@proc7ts/logger';
 
-logger.debug('Debug info', logDefer(() => zlogDetails({ info: evaluateDebugInfo() })));
+logger.debug(
+  'Debug info',
+  logDefer(() => zlogDetails({ info: evaluateDebugInfo() })),
+);
 // `evaluateDebugInfo()` will be called only if `DEBUG` log level enabled.
 // Note that this will happen right before writing to the log,
 // which may happen at a later time, or not happen at all.
 ```
 
-[ZLoggable]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html
-[toLog()]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html#toLog
+[zloggable]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html
+[tolog()]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLoggable.html#toLog
 
-Log Formats
------------
+## Log Formats
 
 The Node.js loggers write messages in predefined format by default:
+
 ```typescript
 import { logZ } from '@run-z/log-z';
 import { logZToStream } from '@run-z/log-z/node';
 
 const logger = logZ({ by: logZToStream(process.stdout) });
 
-logger.info('Message', new Error('Failed'), zlogDetails({ detail1: 'value', detail2: 2 }), 'Extra 1', [2, 3])
+logger.info('Message', new Error('Failed'), zlogDetails({ detail1: 'value', detail2: 2 }), 'Extra 1', [2, 3]);
 // [INFO ] Message ("Extra 1", [2, 3]) { detail1: "value"; detail2: 2 } Error: Failed
 //    at file:///.../example.mjs:6:24
 //    at ModuleJob.run (internal/modules/esm/module_job.js:146:37)
@@ -171,28 +170,26 @@ logger.info('Message', new Error('Failed'), zlogDetails({ detail1: 'value', deta
 ```
 
 This format can be customized:
+
 ```typescript
 import { levelZLogField, logZ, messageZLogField, zlogDetails, zlogLevelName } from '@run-z/log-z';
 import { logZToStream } from '@run-z/log-z/node';
 
 const logger = logZ({
-  by: logZToStream(
-    process.stdout,
-    {
-      format: {
-        fields: [
-          '>>> ',
-          levelZLogField(zlogLevelName),
-          ' "',
-          messageZLogField(),
-          '" ',
-          line => {
-            line.write(JSON.stringify(line.message.details));
-          },
-        ],
-      },
+  by: logZToStream(process.stdout, {
+    format: {
+      fields: [
+        '>>> ',
+        levelZLogField(zlogLevelName),
+        ' "',
+        messageZLogField(),
+        '" ',
+        line => {
+          line.write(JSON.stringify(line.message.details));
+        },
+      ],
     },
-  ),
+  }),
 });
 
 logger.info('Message', zlogDetails({ detail1: 'value', detail2: 2 }));
@@ -200,26 +197,22 @@ logger.info('Message', zlogDetails({ detail1: 'value', detail2: 2 }));
 ```
 
 Or completely replaced:
+
 ```typescript
 import { logZ, zlogDetails } from '@run-z/log-z';
 import { logZToStream } from '@run-z/log-z/node';
 
 const logger = logZ({
-  by: logZToStream(
-    process.stdout,
-    {
-      format: JSON.stringify,
-    },
-  ),
+  by: logZToStream(process.stdout, {
+    format: JSON.stringify,
+  }),
 });
 
 logger.info('Message', zlogDetails({ detail1: 'value', detail2: 2 }));
 // {"level":30,"text":"Message","details":{"detail1":"value","detail2":2},"extra":[]}
 ```
 
-
-Custom Loggers
---------------
+## Custom Loggers
 
 Custom logger can be built by implementing a [ZLogRecorder] interface. The latter has three methods:
 
@@ -239,17 +232,14 @@ Custom logger can be built by implementing a [ZLogRecorder] interface. The latte
 
   All messages discarded after this method call.
 
-
 The [logZ] and [logZBy] functions converts arbitrary [ZLogRecorder] to [logger]. The former accepts additional
 parameters, e.g. is able to filter out some debug messages.
 
-[logZ]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZ
-[logZBy]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZBy
-[ZLogRecorder]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLogRecorder.html
+[logz]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZ
+[logzby]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZBy
+[zlogrecorder]: https://run-z.github.io/log-z/interfaces/_run_z_log_z.ZLogRecorder.html
 
-
-Additional Log Recorders
-------------------------
+## Additional Log Recorders
 
 There are several additional log recorders that can combine or modify the behavior of other recorders:
 
@@ -269,13 +259,13 @@ There are several additional log recorders that can combine or modify the behavi
   Messages not satisfying the condition either logged by another recorder, or discarded.
 - [logZWithDetails] - Updates message details.
 
-[logZAtopOf]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZAtopOf
-[logZByAll]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZByAll
-[logZByAny]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZByAny
-[logZTimestamp]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZTimestamp
-[logZToBuffer]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToBuffer
-[logZToLogger]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToLogger
-[logZToOther]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToOther
-[logZUpdated]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZUpdated
-[logZWhenLevel]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZWhenLevel
-[logZWithDetails]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZWithDetails
+[logzatopof]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZAtopOf
+[logzbyall]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZByAll
+[logzbyany]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZByAny
+[logztimestamp]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZTimestamp
+[logztobuffer]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToBuffer
+[logztologger]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToLogger
+[logztoother]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZToOther
+[logzupdated]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZUpdated
+[logzwhenlevel]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZWhenLevel
+[logzwithdetails]: https://run-z.github.io/log-z/modules/_run_z_log_z.html#logZWithDetails
