@@ -12,11 +12,11 @@ import { logZToLogger } from './to-logger.log';
 describe('logZToLogger', () => {
 
   let testLogger: Logger;
-  let errorSpy: SpyInstance<void, unknown[]>;
-  let warnSpy: SpyInstance<void, unknown[]>;
-  let infoSpy: SpyInstance<void, unknown[]>;
-  let debugSpy: SpyInstance<void, unknown[]>;
-  let traceSpy: SpyInstance<void, unknown[]>;
+  let errorSpy: SpyInstance<(...args: unknown[]) => void>;
+  let warnSpy: SpyInstance<(...args: unknown[]) => void>;
+  let infoSpy: SpyInstance<(...args: unknown[]) => void>;
+  let debugSpy: SpyInstance<(...args: unknown[]) => void>;
+  let traceSpy: SpyInstance<(...args: unknown[]) => void>;
 
   beforeEach(() => {
     testLogger = {

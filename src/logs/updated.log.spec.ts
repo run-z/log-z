@@ -17,7 +17,7 @@ describe('logZUpdated', () => {
     target = logZToMock();
   });
 
-  let update: Mock<ZLogMessage, [ZLogMessage]>;
+  let update: Mock<(message: ZLogMessage) => ZLogMessage>;
   let logger: ZLogger;
 
   beforeEach(() => {

@@ -49,8 +49,8 @@ describe('ZLogger', () => {
 
   describe('by default', () => {
 
-    let infoSpy: SpyInstance<void, unknown[]>;
-    let debugSpy: SpyInstance<void, unknown[]>;
+    let infoSpy: SpyInstance<(...args: unknown[]) => void>;
+    let debugSpy: SpyInstance<(...args: unknown[]) => void>;
 
     beforeEach(() => {
       infoSpy = spyOn(consoleLogger, 'info').mockImplementation(() => void 0);
