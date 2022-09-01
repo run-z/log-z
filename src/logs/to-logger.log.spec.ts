@@ -10,7 +10,6 @@ import { zlogDetails } from '../message';
 import { logZToLogger } from './to-logger.log';
 
 describe('logZToLogger', () => {
-
   let testLogger: Logger;
   let errorSpy: SpyInstance<(...args: unknown[]) => void>;
   let warnSpy: SpyInstance<(...args: unknown[]) => void>;
@@ -55,7 +54,6 @@ describe('logZToLogger', () => {
   });
 
   it('logs error', () => {
-
     const error = new Error('!!!');
 
     logger.error(error);
@@ -63,7 +61,6 @@ describe('logZToLogger', () => {
   });
 
   it('logs details after error', () => {
-
     const error = new Error('!!!');
     const details = { details: 'many' };
 
@@ -71,7 +68,6 @@ describe('logZToLogger', () => {
     expect(errorSpy).toHaveBeenCalledWith(error, details);
   });
   it('logs details without message text', () => {
-
     const details = { details: 'many' };
 
     logger.error(zlogDetails(details));
@@ -172,11 +168,20 @@ describe('logZToLogger', () => {
   });
 
   function spyOnLogger(testLogger: Logger): void {
-    errorSpy = jest.spyOn(testLogger, 'error').mockImplementation(() => {/* noop */});
-    warnSpy = jest.spyOn(testLogger, 'warn').mockImplementation(() => {/* noop */});
-    infoSpy = jest.spyOn(testLogger, 'info').mockImplementation(() => {/* noop */});
-    debugSpy = jest.spyOn(testLogger, 'debug').mockImplementation(() => {/* noop */});
-    traceSpy = jest.spyOn(testLogger, 'trace').mockImplementation(() => {/* noop */});
+    errorSpy = jest.spyOn(testLogger, 'error').mockImplementation(() => {
+      /* noop */
+    });
+    warnSpy = jest.spyOn(testLogger, 'warn').mockImplementation(() => {
+      /* noop */
+    });
+    infoSpy = jest.spyOn(testLogger, 'info').mockImplementation(() => {
+      /* noop */
+    });
+    debugSpy = jest.spyOn(testLogger, 'debug').mockImplementation(() => {
+      /* noop */
+    });
+    traceSpy = jest.spyOn(testLogger, 'trace').mockImplementation(() => {
+      /* noop */
+    });
   }
-
 });

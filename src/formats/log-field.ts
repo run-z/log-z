@@ -9,7 +9,7 @@ import type { ZLogWriter } from './log-writer';
  * @typeParam TWriter - Log writer type.
  */
 export type ZLogField<TWriter extends ZLogWriter = ZLogWriter> =
-/**
- * @param writer - A writer to write the field with.
- */
-    (this: void, writer: TWriter) => void;
+  /**
+   * @param writer - A writer to write the field with.
+   */
+  (this: void, writer: TWriter) => void;

@@ -14,7 +14,6 @@ import { streamWriter } from './stream-writer.impl';
  * A specification of how to log messages {@link logZToStream to Node.js stream}.
  */
 export interface StreamZLogSpec {
-
   /**
    * Message format or formatter to use for text message logging.
    *
@@ -32,7 +31,6 @@ export interface StreamZLogSpec {
    * @default `os.EOL` - an OS-specific new line separator.
    */
   readonly eol?: string | undefined;
-
 }
 
 /**
@@ -53,7 +51,6 @@ export interface StreamZLogSpec {
  * [drain]: https://nodejs.org/dist/latest/docs/api/stream.html#stream_event_drain
  */
 export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecorder {
-
   const { eol = os.EOL } = spec;
   const recordMessage = logRecorderFor(to, eol, spec);
 
@@ -73,7 +70,6 @@ export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecor
   };
 
   return {
-
     record(message) {
       record(message);
     },
@@ -85,7 +81,6 @@ export function logZToStream(to: Writable, spec: StreamZLogSpec = {}): ZLogRecor
     end(): Promise<void> {
       return end();
     },
-
   };
 }
 
@@ -100,17 +95,15 @@ function doNotLogZ(_message: ZLogMessage): WhenWritten {
  * @internal
  */
 function logRecorderFor(
-    to: Writable,
-    eol: string,
-    { format }: StreamZLogSpec,
+  to: Writable,
+  eol: string,
+  { format }: StreamZLogSpec,
 ): (message: ZLogMessage) => WhenWritten {
   if (to.writableEnded) {
     return doNotLogZ;
   }
 
-  const formatter = typeof format === 'function'
-      ? format
-      : textZLogFormatter(format);
+  const formatter = typeof format === 'function' ? format : textZLogFormatter(format);
 
   let record: (message: ZLogMessage) => WhenWritten;
   const write = streamWriter(to);
@@ -119,7 +112,6 @@ function logRecorderFor(
     record = write;
   } else {
     record = message => {
-
       const formatted = formatter(zlogExpand(message));
 
       return formatted == null ? notLogged : write(formatted + eol);

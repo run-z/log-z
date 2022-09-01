@@ -22,16 +22,19 @@ export function detailZLogField(...path: (keyof ZLogDetails)[]): ZLogField;
  *
  * @returns Log detail field.
  */
-export function detailZLogField<T>(...pathAndWrite: [
-  ...path: (keyof ZLogDetails)[],
-  write: (this: void, writer: ZLogWriter, value: T) => void,
-]): ZLogField;
+export function detailZLogField<T>(
+  ...pathAndWrite: [
+    ...path: (keyof ZLogDetails)[],
+    write: (this: void, writer: ZLogWriter, value: T) => void,
+  ]
+): ZLogField;
 
-export function detailZLogField<T>(...pathAndWrite: [
-  ...path: (keyof ZLogDetails)[],
-  ...write: [((this: void, writer: ZLogWriter, value: T) => void)?],
-]): ZLogField {
-
+export function detailZLogField<T>(
+  ...pathAndWrite: [
+    ...path: (keyof ZLogDetails)[],
+    ...write: [((this: void, writer: ZLogWriter, value: T) => void)?],
+  ]
+): ZLogField {
   let path: (keyof ZLogDetails)[];
   let write: (this: void, writer: ZLogWriter, value: T) => void;
   const writeOrKey = pathAndWrite[pathAndWrite.length - 1];
@@ -45,7 +48,6 @@ export function detailZLogField<T>(...pathAndWrite: [
   }
 
   return writer => {
-
     const value = writer.extractDetail(...path);
 
     if (value !== undefined) {

@@ -7,7 +7,5 @@ import type { DueLogZ } from './due-log';
  * Can be passed to {@link zlogMessage} function or to any {@link ZLogger.log logger method} to be processed.
  */
 export interface ZLoggable<TTarget extends DueLogZ = DueLogZ> extends Loggable<TTarget> {
-
   toLog(target: TTarget): void | unknown;
-
 }

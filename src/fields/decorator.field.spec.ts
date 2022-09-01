@@ -24,6 +24,8 @@ describe('decoratorZLogField', () => {
   });
 
   function format(format: DecoratorZLogFieldFormat, field: ZLogField): string | undefined {
-    return textZLogFormatter({ fields: [decoratorZLogField(format, field)] })(zlogMessage(ZLogLevel.Info));
+    return textZLogFormatter({ fields: [decoratorZLogField(format, field)] })(
+      zlogMessage(ZLogLevel.Info),
+    );
   }
 });

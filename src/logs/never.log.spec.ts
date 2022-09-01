@@ -3,7 +3,6 @@ import type { ZLogger } from '../logger';
 import { neverLogZ } from './never.log';
 
 describe('neverLogZ', () => {
-
   let logger: ZLogger;
 
   beforeEach(() => {

@@ -13,11 +13,9 @@ export function errorZLogField(): ZLogField {
 }
 
 function formatZLogError(text: ZLogWriter): void {
-
   let error = text.extractDetail('error');
 
   if (error === undefined) {
-
     const { line } = text.message;
     const last = line[line.length - 1];
 

@@ -7,7 +7,6 @@ import { logZToMock, MockZLogRecorder } from '../spec';
 import { logZAtopOf } from './atop-of.log';
 
 describe('logZAtopOf', () => {
-
   let logger: ZLogger;
   let target: MockZLogRecorder;
 

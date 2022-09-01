@@ -5,7 +5,6 @@ import { streamWriter } from './stream-writer.impl';
 
 describe('streamWriter', () => {
   it('writes to stream', async () => {
-
     const out = new TestWritable();
     const writer = streamWriter(out);
 
@@ -14,7 +13,6 @@ describe('streamWriter', () => {
     expect(out.chunks).toEqual(['abc']);
   });
   it('awaits for stream draining', async () => {
-
     let write!: () => void;
     const whenWritten = new Promise<void>(resolve => {
       write = resolve;
@@ -22,13 +20,17 @@ describe('streamWriter', () => {
 
     class DelayedWritable extends TestWritable {
 
-      override _write(chunk: unknown, encoding: string, callback: (error?: (Error | null)) => void): void {
+      override _write(
+        chunk: unknown,
+        encoding: string,
+        callback: (error?: Error | null) => void,
+      ): void {
         // eslint-disable-next-line jest/valid-expect-in-promise
         super._write(chunk, encoding, () => void 0);
         whenWritten.then(() => callback()).catch(callback);
       }
 
-    }
+}
 
     const out = new DelayedWritable({ highWaterMark: 2, objectMode: true });
     const writer = streamWriter(out);
@@ -46,16 +48,19 @@ describe('streamWriter', () => {
     expect(out.chunks).toEqual(['abc', 'def', '!']);
   });
   it('reports write error', async () => {
-
     const error = new Error('Test');
 
     class ErrorWritable extends Writable {
 
-      override _write(_chunk: unknown, _encoding: string, callback: (error?: (Error | null)) => void): void {
+      override _write(
+        _chunk: unknown,
+        _encoding: string,
+        callback: (error?: Error | null) => void,
+      ): void {
         Promise.reject(error).catch(callback);
       }
 
-    }
+}
 
     const out = new ErrorWritable();
     const onError = new Promise(resolve => {

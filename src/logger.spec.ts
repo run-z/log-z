@@ -9,7 +9,6 @@ import { zlogDetails } from './message';
 import { logZToMock } from './spec';
 
 describe('ZLogger', () => {
-
   let cxBuilder: CxBuilder;
 
   beforeEach(() => {
@@ -24,7 +23,6 @@ describe('ZLogger', () => {
   });
 
   it('logs to most recent log recorder', () => {
-
     const testLogRecorder = logZToMock();
 
     cxBuilder.provide(cxConstAsset(ZLogger, testLogRecorder));
@@ -41,14 +39,12 @@ describe('ZLogger', () => {
     expect(testLogRecorder.record).toHaveBeenCalledTimes(1);
   });
   it('is singleton', () => {
-
     const cxBuilder2 = new CxBuilder(get => ({ get }), cxBuilder);
 
     expect(cxBuilder2.get(ZLogger)).toBe(logger);
   });
 
   describe('by default', () => {
-
     let infoSpy: SpyInstance<(...args: unknown[]) => void>;
     let debugSpy: SpyInstance<(...args: unknown[]) => void>;
 
@@ -61,7 +57,6 @@ describe('ZLogger', () => {
     });
 
     it('logs info message to console', () => {
-
       const error = new Error('Test');
 
       logger.info('Info', error);

@@ -10,7 +10,6 @@ import { logZToMock } from '../spec';
 import { logZUpdated } from './updated.log';
 
 describe('logZUpdated', () => {
-
   let target: MockZLogRecorder;
 
   beforeEach(() => {
@@ -26,15 +25,19 @@ describe('logZUpdated', () => {
   });
 
   it('records updated message', () => {
-    update.mockImplementation(message => ({ ...message, details: { ...message.details, update: true } }));
+    update.mockImplementation(message => ({
+      ...message,
+      details: { ...message.details, update: true },
+    }));
 
     logger.error('Message');
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ update: true })));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ update: true })),
+    );
   });
 
   describe('whenLogged', () => {
     it('calls target', async () => {
-
       const whenLogged = logger.whenLogged();
 
       expect(await whenLogged).toBe(true);
@@ -44,7 +47,6 @@ describe('logZUpdated', () => {
 
   describe('end', () => {
     it('calls target', async () => {
-
       const whenStopped = logger.end();
 
       expect(await whenStopped).toBeUndefined();

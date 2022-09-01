@@ -4,7 +4,6 @@ import type { ZLogField, ZLogWriter } from '../formats';
  * Log field decorator format.
  */
 export interface DecoratorZLogFieldFormat {
-
   /**
    * A prefix to add to field value.
    *
@@ -27,7 +26,6 @@ export interface DecoratorZLogFieldFormat {
    * Nothing is written instead of empty value by default.
    */
   readonly empty?: string | undefined;
-
 }
 
 /**
@@ -41,15 +39,13 @@ export interface DecoratorZLogFieldFormat {
  * @returns
  */
 export function decoratorZLogField<TWriter extends ZLogWriter>(
-    format: DecoratorZLogFieldFormat,
-    field: ZLogField<TWriter>,
+  format: DecoratorZLogFieldFormat,
+  field: ZLogField<TWriter>,
 ): ZLogField<TWriter> {
   return writer => {
-
     const value = writer.format(field);
 
     if (value) {
-
       const { prefix, suffix } = format;
 
       if (prefix) {
@@ -60,7 +56,6 @@ export function decoratorZLogField<TWriter extends ZLogWriter>(
         writer.write(suffix);
       }
     } else if (value != null) {
-
       const { empty } = format;
 
       if (empty) {

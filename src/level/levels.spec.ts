@@ -1,15 +1,23 @@
 import { describe, expect, it } from '@jest/globals';
 import { zlogMessage } from '../message';
-import { zlogDEBUG, zlogERROR, zlogFATAL, zlogINFO, ZLogLevelFn, zlogTRACE, zlogWARN } from './levels';
+import {
+  zlogDEBUG,
+  zlogERROR,
+  zlogFATAL,
+  zlogINFO,
+  ZLogLevelFn,
+  zlogTRACE,
+  zlogWARN,
+} from './levels';
 import { ZLogLevel, zlogLevelOf } from './log-level';
 
 describe.each([
-    ['FATAL', zlogFATAL, ZLogLevel.Fatal],
-    ['ERROR', zlogERROR, ZLogLevel.Error],
-    ['WARN', zlogWARN, ZLogLevel.Warning],
-    ['INFO', zlogINFO, ZLogLevel.Info],
-    ['DEBUG', zlogDEBUG, ZLogLevel.Debug],
-    ['TRACE', zlogTRACE, ZLogLevel.Trace],
+  ['FATAL', zlogFATAL, ZLogLevel.Fatal],
+  ['ERROR', zlogERROR, ZLogLevel.Error],
+  ['WARN', zlogWARN, ZLogLevel.Warning],
+  ['INFO', zlogINFO, ZLogLevel.Info],
+  ['DEBUG', zlogDEBUG, ZLogLevel.Debug],
+  ['TRACE', zlogTRACE, ZLogLevel.Trace],
 ])('%s', (name: string, levelFn: ZLogLevelFn, level: ZLogLevel) => {
   it('has numeric value', () => {
     // eslint-disable-next-line eqeqeq

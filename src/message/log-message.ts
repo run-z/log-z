@@ -8,7 +8,6 @@ import type { ZLogDetails } from './log-details';
  * Can be constructed by {@link zlogMessage} function.
  */
 export interface ZLogMessage {
-
   /**
    * The log level of this message.
    *
@@ -30,7 +29,6 @@ export interface ZLogMessage {
    * The keys of this map are specific to application or log recorder implementation.
    */
   readonly details: ZLogDetails;
-
 }
 
 /**

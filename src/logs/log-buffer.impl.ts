@@ -1,6 +1,13 @@
 import { isPresent, newPromiseResolver, noop } from '@proc7ts/primitives';
 import type { PushIterable } from '@proc7ts/push-iterator';
-import { filterIndexed, IndexedItemList, itsEach, itsEvery, mapIt, PushIterator__symbol } from '@proc7ts/push-iterator';
+import {
+  filterIndexed,
+  IndexedItemList,
+  itsEach,
+  itsEvery,
+  mapIt,
+  PushIterator__symbol,
+} from '@proc7ts/push-iterator';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogMessage } from '../message';
 import type { ZLogBuffer } from './log-buffer';
@@ -21,18 +28,15 @@ export class ZLogBuffer$ {
   constructor(private readonly limit: number) {
     this.entries.length = limit;
     this.contents = {
-
       [Symbol.iterator]() {
         return this[PushIterator__symbol]();
       },
 
       [PushIterator__symbol]: accept => {
-
         const head = this.head;
         const list: IndexedItemList<ZLogBuffer.Entry> = {
           length: this.size,
           item: index => {
-
             const offset = index + head;
             const overflow = offset - this.limit;
 
@@ -43,7 +47,7 @@ export class ZLogBuffer$ {
         return filterIndexed(list, isPresent)[PushIterator__symbol](accept);
       },
 
-      fillRatio: () => this.size ? this.size / this.limit : 0,
+      fillRatio: () => (this.size ? this.size / this.limit : 0),
     };
   }
 
@@ -60,8 +64,10 @@ export class ZLogBuffer$ {
     });
   }
 
-  add(message: ZLogMessage, onRecord: Exclude<ZLogBufferSpec['onRecord'], undefined>): ZLogBuffer.Entry {
-
+  add(
+    message: ZLogMessage,
+    onRecord: Exclude<ZLogBufferSpec['onRecord'], undefined>,
+  ): ZLogBuffer.Entry {
     let index = -1;
 
     const whenLogged = newPromiseResolver<boolean>();
@@ -83,7 +89,6 @@ export class ZLogBuffer$ {
     };
 
     const entry: ZLogBuffer.Entry = {
-
       message,
 
       drop() {
@@ -97,7 +102,6 @@ export class ZLogBuffer$ {
       whenLogged() {
         return whenLogged.promise();
       },
-
     };
 
     onRecord(entry, this.contents);
@@ -136,23 +140,18 @@ export class ZLogBuffer$ {
   }
 
   private batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
-
     const batch: ZLogBuffer.Entry[] = [];
 
-    itsEvery(
-        this.contents,
-        entry => {
-          batch.push(entry);
+    itsEvery(this.contents, entry => {
+      batch.push(entry);
 
-          return --size > 0;
-        },
-    );
+      return --size > 0;
+    });
 
     return batch as [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]];
   }
 
   private remove(entry: ZLogBuffer.Entry, index: number): void {
-
     const found = this.entries[index];
 
     if (found !== entry) {

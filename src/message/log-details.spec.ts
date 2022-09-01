@@ -5,11 +5,9 @@ import { assignZLogDetails, cloneZLogDetails, ZLogDetails, zlogDetails } from '.
 
 describe('zlogDetails', () => {
   it('treated as message details', () => {
-    expect(zlogDEBUG(
-        zlogDetails({ test: 'value' }),
-        zlogDetails({ test2: 'value2' }),
-        'msg',
-    )).toEqual({
+    expect(
+      zlogDEBUG(zlogDetails({ test: 'value' }), zlogDetails({ test2: 'value2' }), 'msg'),
+    ).toEqual({
       level: ZLogLevel.Debug,
       line: ['msg'],
       details: {
@@ -19,10 +17,12 @@ describe('zlogDetails', () => {
     });
   });
   it('can be used within `logline`', () => {
-    expect(zlogDEBUG(logline`
+    expect(
+      zlogDEBUG(logline`
         ${zlogDetails({ test: 'value' })}${zlogDetails({ test2: 'value2' })}
         msg
-    `)).toEqual({
+    `),
+    ).toEqual({
       level: ZLogLevel.Debug,
       line: ['msg'],
       details: {
@@ -34,16 +34,22 @@ describe('zlogDetails', () => {
 
   describe('outside `log-z`', () => {
     it('does nothing in input stage', () => {
-
       const details = zlogDetails({ foo: 'bar' });
 
       expect(dueLog({ on: 'in', line: ['a', details, 'b'] }).line).toEqual(['a', details, 'b']);
     });
     it('logs an object', () => {
-      expect(dueLog({ line: ['a', zlogDetails({ foo: 'bar' }), 'b'] }).line).toEqual(['a', { foo: 'bar' }, 'b']);
+      expect(dueLog({ line: ['a', zlogDetails({ foo: 'bar' }), 'b'] }).line).toEqual([
+        'a',
+        { foo: 'bar' },
+        'b',
+      ]);
     });
     it('logs an object if the last in the line', () => {
-      expect(dueLog({ line: ['a', zlogDetails({ foo: 'bar' })] }).line).toEqual(['a', { foo: 'bar' }]);
+      expect(dueLog({ line: ['a', zlogDetails({ foo: 'bar' })] }).line).toEqual([
+        'a',
+        { foo: 'bar' },
+      ]);
     });
     it('logs nothing if empty', () => {
       expect(dueLog({ line: ['a', zlogDetails({}), 'b'] }).line).toEqual(['a', 'b']);
@@ -51,22 +57,27 @@ describe('zlogDetails', () => {
 
     describe('with `error`', () => {
       it('logs an object if not the last in the line', () => {
-
         const error = new Error();
 
-        expect(dueLog({ line: ['a', zlogDetails({ error }), 'b'] }).line).toEqual(['a', { error }, 'b']);
+        expect(dueLog({ line: ['a', zlogDetails({ error }), 'b'] }).line).toEqual([
+          'a',
+          { error },
+          'b',
+        ]);
       });
       it('logs an error if the last in the line', () => {
-
         const error = new Error();
 
         expect(dueLog({ line: ['a', zlogDetails({ error })] }).line).toEqual(['a', error]);
       });
       it('logs non-empty object and error if the last in the line', () => {
-
         const error = new Error();
 
-        expect(dueLog({ line: ['a', zlogDetails({ error, foo: 'bar' })] }).line).toEqual(['a', { foo: 'bar' }, error]);
+        expect(dueLog({ line: ['a', zlogDetails({ error, foo: 'bar' })] }).line).toEqual([
+          'a',
+          { foo: 'bar' },
+          error,
+        ]);
       });
     });
   });
@@ -74,15 +85,17 @@ describe('zlogDetails', () => {
 
 describe('cloneZLogDetails', () => {
   it('deeply clones message details', () => {
-    expect(cloneZLogDetails({
-      n: 1,
-      o: {
-        a: [1, 2],
-        b: { foo: 'bar' },
-        c: undefined,
-        d: null,
-      },
-    })).toEqual({
+    expect(
+      cloneZLogDetails({
+        n: 1,
+        o: {
+          a: [1, 2],
+          b: { foo: 'bar' },
+          c: undefined,
+          d: null,
+        },
+      }),
+    ).toEqual({
       n: 1,
       o: {
         a: [1, 2],
@@ -95,7 +108,6 @@ describe('cloneZLogDetails', () => {
 
 describe('assignZLogDetails', () => {
   it('merges records', () => {
-
     const target: ZLogDetails.Mutable = {
       a: {
         a: 1,
@@ -114,7 +126,6 @@ describe('assignZLogDetails', () => {
     });
   });
   it('overrides raw values with objects', () => {
-
     const target: ZLogDetails.Mutable = {
       a: {
         b: 1,
@@ -124,7 +135,6 @@ describe('assignZLogDetails', () => {
     expect(assignZLogDetails(target, { a: { b: { c: 1 } } })).toEqual({ a: { b: { c: 1 } } });
   });
   it('overrides objects with raw values', () => {
-
     const target: ZLogDetails.Mutable = {
       a: {
         b: { c: 1 },
@@ -134,7 +144,6 @@ describe('assignZLogDetails', () => {
     expect(assignZLogDetails(target, { a: { b: 1 } })).toEqual({ a: { b: 1 } });
   });
   it('overrides plain objects with non-plain objects', () => {
-
     const target: ZLogDetails.Mutable = {
       a: {
         b: 1,

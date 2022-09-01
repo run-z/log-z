@@ -6,7 +6,6 @@ import { logZUpdated } from './updated.log';
  * A specification of how to add {@link logZTimestamp timestamp} to log message.
  */
 export interface TimestampZLogSpec {
-
   /**
    * A key of {@link ZLogMessage.details message details} property to record timestamp to.
    *
@@ -24,7 +23,6 @@ export interface TimestampZLogSpec {
    * @default `Date.now()`
    */
   get?(message: ZLogMessage): Date | number | string;
-
 }
 
 /**
@@ -53,10 +51,9 @@ export function logZTimestamp(by: ZLogRecorder): ZLogRecorder;
 export function logZTimestamp(how: TimestampZLogSpec, by: ZLogRecorder): ZLogRecorder;
 
 export function logZTimestamp(
-    howOrBy: TimestampZLogSpec | ZLogRecorder,
-    by?: ZLogRecorder,
+  howOrBy: TimestampZLogSpec | ZLogRecorder,
+  by?: ZLogRecorder,
 ): ZLogRecorder {
-
   let how: TimestampZLogSpec;
   let recorder: ZLogRecorder;
 
@@ -71,14 +68,14 @@ export function logZTimestamp(
   const { to = 'timestamp', get = defaultZLogTimestamp } = how;
 
   return logZUpdated(
-      message => ({
-        ...message,
-        details: {
-          [to]: get(message),
-          ...message.details,
-        },
-      }),
-      recorder,
+    message => ({
+      ...message,
+      details: {
+        [to]: get(message),
+        ...message.details,
+      },
+    }),
+    recorder,
   );
 }
 

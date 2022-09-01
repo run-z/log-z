@@ -14,7 +14,6 @@ import { logZToStream, StreamZLogSpec } from './to-stream.log';
  * A specification of how to log messages {@link logZToFile to file}.
  */
 export interface FileZLogSpec extends StreamZLogSpec {
-
   /**
    * A buffer of log messages to use prior to writing to the file.
    *
@@ -22,7 +21,6 @@ export interface FileZLogSpec extends StreamZLogSpec {
    * yet. It is also used if the i/o operations are not fast enough to write everything logged.
    */
   readonly buffer?: ZLogBuffer | undefined;
-
 }
 
 /**
@@ -35,10 +33,9 @@ export interface FileZLogSpec extends StreamZLogSpec {
  * @returns New log recorder.
  */
 export function logZToFile(
-    to: string | ((this: void, message: ZLogMessage) => string),
-    how: FileZLogSpec = {},
+  to: string | ((this: void, message: ZLogMessage) => string),
+  how: FileZLogSpec = {},
 ): ZLogRecorder {
-
   const { buffer = logZToBuffer() } = how;
   const toFile = typeof to === 'string' ? valueProvider(to) : to;
 
@@ -46,7 +43,6 @@ export function logZToFile(
   let currentLog: FileZLog | undefined;
   let whenLog: Promise<FileZLog | void> | FileZLog | undefined;
   const setLog = (newLog: FileZLog): FileZLog | void => {
-
     const [file, recorder] = newLog;
 
     if (file !== expectedLogFile) {
@@ -63,7 +59,6 @@ export function logZToFile(
   };
 
   let record = (message: ZLogMessage): void => {
-
     const newFile = toFile(message);
 
     if (newFile !== expectedLogFile) {
@@ -73,22 +68,20 @@ export function logZToFile(
       buffer.drainTo(null);
 
       whenLog = Promise.all([openFileZLogRecorder(newFile, how), closeFileZLog(currentLog)])
-          .then(([newRecorder]) => setLog([newFile, newRecorder]))
-          .catch(
-              /* istanbul ignore next */
-              error => consoleLogger.error('Failed to open log file (', newFile, '):', error),
-          );
+        .then(([newRecorder]) => setLog([newFile, newRecorder]))
+        .catch(
+          /* istanbul ignore next */
+          error => consoleLogger.error('Failed to open log file (', newFile, '):', error),
+        );
     }
 
     buffer.record(message);
   };
   let whenLogged = async (which?: 'all' | 'last'): Promise<boolean> => {
     if (which === 'all') {
-
       const log = await whenLog;
 
       if (log) {
-
         const [, recorder] = log;
         const whenBufferLogged = buffer.whenLogged(which);
 
@@ -104,11 +97,10 @@ export function logZToFile(
     expectedLogFile = undefined;
 
     const whenEnded = whenLog
-        ? Promise.all([
-          Promise.resolve(whenLog).then(log => log && log[1].end()),
-          buffer.end(),
-        ]).then(noop)
-        : buffer.end();
+      ? Promise.all([Promise.resolve(whenLog).then(log => log && log[1].end()), buffer.end()]).then(
+          noop,
+        )
+      : buffer.end();
 
     whenLog = currentLog = undefined;
 
@@ -118,7 +110,6 @@ export function logZToFile(
   };
 
   return {
-
     record(message) {
       record(message);
     },
@@ -130,7 +121,6 @@ export function logZToFile(
     end() {
       return end();
     },
-
   };
 }
 
@@ -143,7 +133,6 @@ type FileZLog = readonly [file: string, recorder: ZLogRecorder];
  * @internal
  */
 async function openFileZLogRecorder(to: string, how: FileZLogSpec): Promise<ZLogRecorder> {
-
   const dirname = path.dirname(to);
 
   await fsPromises.mkdir(dirname, { recursive: true });
@@ -164,10 +153,11 @@ function closeFileZLog(log: FileZLog | undefined): Promise<unknown> {
   const [file, recorder] = log;
   const end = (): Promise<void> => recorder.end();
 
-  return recorder.whenLogged('all')
-      .then(end, end)
-      .catch(
-          /* istanbul ignore next */
-          error => consoleLogger.error('Error closing log file (', file, '):', error),
-      );
+  return recorder
+    .whenLogged('all')
+    .then(end, end)
+    .catch(
+      /* istanbul ignore next */
+      error => consoleLogger.error('Error closing log file (', file, '):', error),
+    );
 }

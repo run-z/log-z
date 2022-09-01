@@ -12,7 +12,6 @@ import { logZToLogger, logZToOther, logZWhenLevel } from './logs';
  * Supposed to be constructed by {@link logZ} or {@link logZBy} function.
  */
 export interface ZLogger extends ZLogRecorder {
-
   /**
    * Logs a message with specified log level.
    *
@@ -76,7 +75,6 @@ export interface ZLogger extends ZLogRecorder {
    * @param args - Log message arguments.
    */
   trace(...args: unknown[]): void;
-
 }
 
 /**
@@ -85,18 +83,17 @@ export interface ZLogger extends ZLogRecorder {
  * By default, logs messages with at least {@link ZLogLevel.Info} level to {@link logZToLogger console}.
  */
 export const ZLogger: CxEntry<ZLogger, ZLogRecorder> = {
-  perContext: (/*#__PURE__*/ cxScoped(
-      CxGlobals,
-      (/*#__PURE__*/ cxRecent<ZLogger, ZLogRecorder, ZLogRecorder>({
-        create: (recent, _) => recent,
-        byDefault: _ => logZWhenLevel(logZToLogger()),
-        assign({ get, to }) {
+  perContext: /*#__PURE__*/ cxScoped(
+    CxGlobals,
+    /*#__PURE__*/ cxRecent<ZLogger, ZLogRecorder, ZLogRecorder>({
+      create: (recent, _) => recent,
+      byDefault: _ => logZWhenLevel(logZToLogger()),
+      assign({ get, to }) {
+        const logger = logZBy(logZToOther(get));
 
-          const logger = logZBy(logZToOther(get));
-
-          return receiver => to((_, by) => receiver(logger, by));
-        },
-      })),
-  )),
+        return receiver => to((_, by) => receiver(logger, by));
+      },
+    }),
+  ),
   toString: () => '[ZLogger]',
 };

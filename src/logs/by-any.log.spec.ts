@@ -9,7 +9,6 @@ import { logZToMock } from '../spec';
 import { logZByAny } from './by-any.log';
 
 describe('logZByAny', () => {
-
   let target1: MockZLogRecorder;
   let target2: MockZLogRecorder;
 
@@ -34,7 +33,6 @@ describe('logZByAny', () => {
 
   describe('whenLogged', () => {
     it('awaits for every logger to log the message', async () => {
-
       const resolver = newPromiseResolver<boolean>();
 
       target1.whenLogged.mockImplementation(() => resolver.promise());
@@ -49,7 +47,6 @@ describe('logZByAny', () => {
       expect(await whenLogged).toBe(true);
     });
     it('resolves to `true` if at least one logger log the message', async () => {
-
       const resolver = newPromiseResolver<boolean>();
 
       target1.whenLogged.mockImplementation(() => resolver.promise());
@@ -64,7 +61,6 @@ describe('logZByAny', () => {
       expect(await whenLogged).toBe(true);
     });
     it('resolves to `false` if none of the loggers log the message', async () => {
-
       const resolver = newPromiseResolver<boolean>();
 
       target1.whenLogged.mockImplementation(() => resolver.promise());
@@ -89,5 +85,4 @@ describe('logZByAny', () => {
       expect(target2.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
     });
   });
-
 });

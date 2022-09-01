@@ -15,13 +15,13 @@ import { logZUpdated } from './updated.log';
  */
 export function logZWithDetails(details: ZLogDetails, by: ZLogRecorder): ZLogRecorder {
   return logZUpdated(
-      message => ({
-        ...message,
-        details: {
-          ...details,
-          ...message.details,
-        },
-      }),
-      by,
+    message => ({
+      ...message,
+      details: {
+        ...details,
+        ...message.details,
+      },
+    }),
+    by,
   );
 }

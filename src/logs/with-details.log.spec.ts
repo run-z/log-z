@@ -8,7 +8,6 @@ import { logZToMock } from '../spec';
 import { logZWithDetails } from './with-details.log';
 
 describe('logZWithDetails', () => {
-
   let target: MockZLogRecorder;
 
   beforeEach(() => {
@@ -23,20 +22,21 @@ describe('logZWithDetails', () => {
 
   it('sets message details', () => {
     logger.error('Message');
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ updated: 1 })));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ updated: 1 })),
+    );
   });
   it('respects existing message details', () => {
     logger.error('Message', zlogDetails({ original: 1 }));
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(
-        ZLogLevel.Error,
-        'Message',
-        zlogDetails({ original: 1, updated: 1 }),
-    ));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ original: 1, updated: 1 })),
+    );
   });
   it('does not override message details', () => {
     logger = logZBy(logZWithDetails({ updated: 2 }, logger));
     logger.error('Message');
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ updated: 2 })));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ updated: 2 })),
+    );
   });
-
 });

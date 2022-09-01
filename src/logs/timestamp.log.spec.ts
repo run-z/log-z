@@ -8,7 +8,6 @@ import { logZToMock } from '../spec';
 import { logZTimestamp } from './timestamp.log';
 
 describe('logZTimestamp', () => {
-
   let target: ZLogRecorder;
 
   beforeEach(() => {
@@ -23,47 +22,39 @@ describe('logZTimestamp', () => {
 
   it('adds timestamp to messages', () => {
     logger.log(ZLogLevel.Error, 'Message');
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(
-        ZLogLevel.Error,
-        'Message',
-        zlogDetails({ timestamp: expect.anything() }),
-    ));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ timestamp: expect.anything() })),
+    );
   });
   it('does not override existing timestamp', () => {
     logger.log(ZLogLevel.Error, 'Message', zlogDetails({ timestamp: 'set' }));
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(
-        ZLogLevel.Error,
-        'Message',
-        zlogDetails({ timestamp: 'set' }),
-    ));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ timestamp: 'set' })),
+    );
   });
   it('records timestamp to custom details property', () => {
     logger = logZ({ atLeast: 0, by: logZTimestamp({ to: 'ts' }, target) });
 
     logger.log(ZLogLevel.Error, 'Message');
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(
-        ZLogLevel.Error,
-        'Message',
-        zlogDetails({ ts: expect.anything() }),
-    ));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ ts: expect.anything() })),
+    );
   });
   it('generates timestamp by custom method', () => {
     logger = logZ({
       atLeast: 0,
       by: logZTimestamp(
-          {
-            to: 'ts',
-            get: ({ details: { timestamp } }) => +(timestamp as number | string) + 1,
-          },
-          target,
+        {
+          to: 'ts',
+          get: ({ details: { timestamp } }) => +(timestamp as number | string) + 1,
+        },
+        target,
       ),
     });
 
     logger.log(ZLogLevel.Error, 'Message', zlogDetails({ timestamp: 12 }));
-    expect(target.record).toHaveBeenCalledWith(zlogMessage(
-        ZLogLevel.Error,
-        'Message',
-        zlogDetails({ timestamp: 12, ts: 13 }),
-    ));
+    expect(target.record).toHaveBeenCalledWith(
+      zlogMessage(ZLogLevel.Error, 'Message', zlogDetails({ timestamp: 12, ts: 13 })),
+    );
   });
 });

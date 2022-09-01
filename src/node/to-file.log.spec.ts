@@ -8,7 +8,6 @@ import { zlogDetails } from '../message';
 import { FileZLogSpec, logZToFile } from './to-file.log';
 
 describe('logZToFile', () => {
-
   let testRootDir: string;
   let logDir: string;
   let logFile: string;
@@ -28,7 +27,6 @@ describe('logZToFile', () => {
   });
 
   it('logs to file', async () => {
-
     const logger = newLogger();
 
     logger.info('Message 1');
@@ -44,7 +42,6 @@ describe('logZToFile', () => {
     expect(log).toContain('[INFO ] Message 2');
   });
   it('logs to dedicated file', async () => {
-
     const logger = newLogger(({ details: { log } }) => path.join(logDir, log as string));
 
     logger.info('Message 1', zlogDetails({ log: '1.log' }));
@@ -64,7 +61,6 @@ describe('logZToFile', () => {
     expect(log2).toContain('[INFO ] Message 2');
   });
   it('logs to latest file', async () => {
-
     const logger = newLogger(({ details: { log } }) => path.join(logDir, log as string));
 
     logger.info('Message 1', zlogDetails({ log: '1.log' }));
@@ -82,7 +78,6 @@ describe('logZToFile', () => {
 
   describe('end', () => {
     it('ends logger before logging anything', async () => {
-
       const logger = newLogger();
 
       expect(await logger.whenLogged('all')).toBe(true);
@@ -91,10 +86,9 @@ describe('logZToFile', () => {
   });
 
   function newLogger(
-      to: string | ((message: ZLogMessage) => string) = logFile,
-      how?: FileZLogSpec,
+    to: string | ((message: ZLogMessage) => string) = logFile,
+    how?: FileZLogSpec,
   ): ZLogger {
     return logZBy(logZToFile(to, how));
   }
-
 });

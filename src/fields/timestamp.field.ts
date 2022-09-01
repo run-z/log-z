@@ -4,7 +4,6 @@ import type { ZLogField } from '../formats';
  * Log message {@link logZTimestamp timestamp} format.
  */
 export interface TimestampZLogFieldFormat {
-
   /**
    * A key of {@link ZLogMessage.details log message details} property containing timestamp value.
    *
@@ -25,11 +24,7 @@ export interface TimestampZLogFieldFormat {
    *
    * [Intl.DateTimeFormat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
    */
-  readonly format?:
-      | Intl.DateTimeFormat
-      | ((this: void, timestamp: number) => string)
-      | undefined;
-
+  readonly format?: Intl.DateTimeFormat | ((this: void, timestamp: number) => string) | undefined;
 }
 
 /**
@@ -39,19 +34,16 @@ export interface TimestampZLogFieldFormat {
  *
  * @returns Message timestamp field.
  */
-export function timestampZLogField(
-    format: TimestampZLogFieldFormat = {},
-): ZLogField {
-
+export function timestampZLogField(format: TimestampZLogFieldFormat = {}): ZLogField {
   const { format: tsFormat, key = 'timestamp' } = format;
-  const doFormat = typeof tsFormat === 'function'
+  const doFormat
+    = typeof tsFormat === 'function'
       ? tsFormat
-      : (tsFormat
-          ? (timestamp: number) => tsFormat.format(timestamp)
-          : formatZLogTimestamp);
+      : tsFormat
+      ? (timestamp: number) => tsFormat.format(timestamp)
+      : formatZLogTimestamp;
 
   return writer => {
-
     const timestamp = writer.extractDetail(key) as number | string | Date;
 
     if (typeof timestamp === 'number') {
@@ -62,7 +54,6 @@ export function timestampZLogField(
       writer.write(doFormat(timestamp.getTime()));
     }
   };
-
 }
 
 /**

@@ -12,11 +12,10 @@ import type { ZLogMessage } from '../message';
  * @returns Updating log recorder.
  */
 export function logZUpdated(
-    update: (this: void, message: ZLogMessage) => ZLogMessage,
-    by: ZLogRecorder,
+  update: (this: void, message: ZLogMessage) => ZLogMessage,
+  by: ZLogRecorder,
 ): ZLogRecorder {
   return {
-
     record(message) {
       by.record(update(message));
     },
@@ -28,6 +27,5 @@ export function logZUpdated(
     end() {
       return by.end();
     },
-
   };
 }

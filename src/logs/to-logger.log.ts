@@ -34,11 +34,7 @@ const LogZToLogger$methods: [LogZToLogger$Method, ...LogZToLogger$Method[]] = [
  * @returns New log recorder.
  */
 export function logZToLogger(logger: Logger = consoleLogger): ZLogRecorder {
-
-  let record = (message: ZLogMessage): void => zlogLevelMap(message.level, LogZToLogger$methods)(
-      logger,
-      zlogExpand(message),
-  );
+  let record = recordToLogger;
   let whenLogged = alreadyLogged;
   let end = (): Promise<void> => {
     record = noop;
@@ -49,7 +45,6 @@ export function logZToLogger(logger: Logger = consoleLogger): ZLogRecorder {
   };
 
   return {
-
     record(message: ZLogMessage): void {
       record(message);
     },
@@ -61,19 +56,19 @@ export function logZToLogger(logger: Logger = consoleLogger): ZLogRecorder {
     end() {
       return end();
     },
-
   };
+
+  function recordToLogger(message: ZLogMessage): void {
+    zlogLevelMap(message.level, LogZToLogger$methods)(logger, zlogExpand(message));
+  }
 }
 
 function LogZToLogger$args(
-    message: ZLogMessage,
-    prefix = '',
-    details = message.details,
+  message: ZLogMessage,
+  prefix = '',
+  details = message.details,
 ): unknown[] {
-
-  const args: unknown[] = prefix
-      ? [prefix, ...message.line]
-      : message.line.slice();
+  const args: unknown[] = prefix ? [prefix, ...message.line] : message.line.slice();
 
   if (Reflect.ownKeys(details).length) {
     args.push(zlogDetails(details));

@@ -6,8 +6,7 @@ import { zlogMessage } from './message';
 
 class ZLogger$ implements ZLogger {
 
-  constructor(private readonly _by: ZLogRecorder) {
-  }
+  constructor(private readonly _by: ZLogRecorder) {}
 
   log(level: number, ...args: unknown[]): void {
     this.record(zlogMessage(level, ...args));

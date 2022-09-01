@@ -10,9 +10,7 @@ import { TestWritable } from '../spec';
 import { logZToStream } from './to-stream.log';
 
 describe('logZToStream', () => {
-
   it('formats message', async () => {
-
     const out = new TestWritable();
     const logger = logZBy(logZToStream(out));
 
@@ -24,7 +22,6 @@ describe('logZToStream', () => {
     expect(out.chunks).toEqual([`[INFO ] TEST${os.EOL}`, `[ERROR] ERROR${os.EOL}`]);
   });
   it('expands message', async () => {
-
     const out = new TestWritable();
     const logger = logZBy(logZToStream(out));
 
@@ -34,19 +31,17 @@ describe('logZToStream', () => {
     expect(await logger.whenLogged()).toBe(true);
 
     expect(out.chunks).toEqual([
-        `[INFO ] TEST { expanded: true }${os.EOL}`,
-        `[ERROR] ERROR${os.EOL}`,
+      `[INFO ] TEST { expanded: true }${os.EOL}`,
+      `[ERROR] ERROR${os.EOL}`,
     ]);
   });
   it('formats message with custom format', async () => {
-
     const out = new TestWritable();
-    const logger = logZBy(logZToStream(
-        out,
-        {
-          format: { fields: [levelZLogField(), ' ', messageZLogField(), '!'] },
-        },
-    ));
+    const logger = logZBy(
+      logZToStream(out, {
+        format: { fields: [levelZLogField(), ' ', messageZLogField(), '!'] },
+      }),
+    );
 
     logger.info('TEST');
     logger.error('ERROR');
@@ -56,14 +51,12 @@ describe('logZToStream', () => {
     expect(out.chunks).toEqual([`[INFO ] TEST!${os.EOL}`, `[ERROR] ERROR!${os.EOL}`]);
   });
   it('formats message by custom formatter', async () => {
-
     const out = new TestWritable();
-    const logger = logZBy(logZToStream(
-        out,
-        {
-          format: textZLogFormatter({ fields: [levelZLogField(), ' ', messageZLogField(), '!'] }),
-        },
-    ));
+    const logger = logZBy(
+      logZToStream(out, {
+        format: textZLogFormatter({ fields: [levelZLogField(), ' ', messageZLogField(), '!'] }),
+      }),
+    );
 
     logger.info('TEST');
     logger.error('ERROR');
@@ -73,14 +66,12 @@ describe('logZToStream', () => {
     expect(out.chunks).toEqual([`[INFO ] TEST!${os.EOL}`, `[ERROR] ERROR!${os.EOL}`]);
   });
   it('discards message if formatter returned `undefined`', async () => {
-
     const out = new TestWritable();
-    const logger = logZBy(logZToStream(
-        out,
-        {
-          format: () => void 0,
-        },
-    ));
+    const logger = logZBy(
+      logZToStream(out, {
+        format: () => void 0,
+      }),
+    );
 
     logger.info('TEST');
 
@@ -89,14 +80,12 @@ describe('logZToStream', () => {
     expect(out.chunks).toHaveLength(0);
   });
   it('separates log lines with specified EOL symbol', async () => {
-
     const out = new TestWritable();
-    const logger = logZBy(logZToStream(
-        out,
-        {
-          eol: '!!!\n',
-        },
-    ));
+    const logger = logZBy(
+      logZToStream(out, {
+        eol: '!!!\n',
+      }),
+    );
 
     logger.info('TEST');
     logger.error('ERROR');
@@ -106,7 +95,6 @@ describe('logZToStream', () => {
     expect(out.chunks).toEqual(['[INFO ] TEST!!!\n', '[ERROR] ERROR!!!\n']);
   });
   it('writes message as is in object mode', async () => {
-
     const out = new TestWritable({ objectMode: true });
     const logger = logZBy(logZToStream(out));
 
@@ -121,7 +109,6 @@ describe('logZToStream', () => {
     ]);
   });
   it('stops logging when stream finished', async () => {
-
     const out = new TestWritable({ objectMode: true });
     const logger = logZBy(logZToStream(out));
 
@@ -132,7 +119,6 @@ describe('logZToStream', () => {
     expect(await logger.end()).toBeUndefined();
   });
   it('does not log if the stream is ended already', async () => {
-
     const out = new TestWritable({ objectMode: true });
 
     out.end();
@@ -146,7 +132,6 @@ describe('logZToStream', () => {
 
   describe('end', () => {
     it('stops logging', async () => {
-
       const out = new TestWritable({ objectMode: true });
       const logger = logZBy(logZToStream(out));
 
@@ -159,7 +144,6 @@ describe('logZToStream', () => {
       expect(out.writableFinished).toBe(true);
     });
     it('does nothing after the second time', async () => {
-
       const out = new TestWritable({ objectMode: true });
       const logger = logZBy(logZToStream(out));
       const whenEnded = logger.end();
@@ -169,5 +153,4 @@ describe('logZToStream', () => {
       expect(await ended).toBeUndefined();
     });
   });
-
 });

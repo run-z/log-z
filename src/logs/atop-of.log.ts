@@ -14,7 +14,6 @@ import type { ZLogMessage } from '../message';
  * @returns New log recorder.
  */
 export function logZAtopOf(target: ZLogRecorder): ZLogRecorder {
-
   let record = (message: ZLogMessage): void => target.record(message);
   let whenLogged = (which?: 'all' | 'last'): Promise<boolean> => target.whenLogged(which);
   let end = (): Promise<void> => {

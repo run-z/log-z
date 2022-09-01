@@ -7,7 +7,6 @@ import { logZToMock, MockZLogRecorder } from '../spec';
 import { logZToOther } from './to-other.log';
 
 describe('logZToOther', () => {
-
   let logger: ZLogger;
   let target: MockZLogRecorder;
 

@@ -6,7 +6,6 @@ import type { ZLogMessage } from './message';
  * Records messages to the log.
  */
 export interface ZLogRecorder {
-
   /**
    * Records a log message.
    *
@@ -34,5 +33,4 @@ export interface ZLogRecorder {
    * @returns A promise resolved when recorder stopped.
    */
   end(): Promise<void>;
-
 }

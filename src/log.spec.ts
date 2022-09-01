@@ -7,7 +7,6 @@ import { zlogMessage } from './message';
 import { logZToMock } from './spec';
 
 describe('logZ', () => {
-
   let logger: ZLogger;
   let recorder: ZLogRecorder;
 
@@ -32,5 +31,4 @@ describe('logZ', () => {
     expect(recorder.record).toHaveBeenCalledWith(zlogMessage(ZLogLevel.Debug, 'TEST'));
     expect(await logger.whenLogged()).toBe(true);
   });
-
 });

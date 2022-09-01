@@ -10,12 +10,10 @@ import type { ZLoggable } from './loggable';
 export type ZLogDetails = { readonly [key in string | symbol]?: unknown | undefined };
 
 export namespace ZLogDetails {
-
   /**
    * Mutable log message details map.
    */
   export type Mutable = { [key in string | symbol]?: unknown | undefined };
-
 }
 
 /**
@@ -34,11 +32,12 @@ export namespace ZLogDetails {
  *
  * @returns Loggable value.
  */
-export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails | null | undefined)): ZLoggable {
+export function zlogDetails(
+  details: ZLogDetails | ((this: void) => ZLogDetails | null | undefined),
+): ZLoggable {
   if (typeof details === 'function') {
     return logDefer(() => ({
       toLog(_target: DueLogZ) {
-
         const expanded = details();
 
         return expanded ? zlogDetails(expanded) : [];
@@ -48,7 +47,6 @@ export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails 
 
   return {
     toLog(target: DueLogZ) {
-
       const { on = 'out', line, index, zDetails } = target;
 
       if (!zDetails) {
@@ -57,7 +55,6 @@ export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails 
         }
 
         if (index + 1 === line.length) {
-
           const { error, ...restDetails } = details;
 
           if (error !== undefined) {
@@ -95,11 +92,9 @@ export function zlogDetails(details: ZLogDetails | ((this: void) => ZLogDetails 
  * @returns Mutable `details` clone.
  */
 export function cloneZLogDetails(details: ZLogDetails): ZLogDetails.Mutable {
-
   const clone: ZLogDetails.Mutable = {};
 
   for (const key of Reflect.ownKeys(details)) {
-
     const value = details[key as string];
 
     if (value !== undefined) {
@@ -122,9 +117,11 @@ export function cloneZLogDetails(details: ZLogDetails): ZLogDetails.Mutable {
  *
  * @returns `target` details instance.
  */
-export function assignZLogDetails(target: ZLogDetails.Mutable, details: ZLogDetails): ZLogDetails.Mutable {
+export function assignZLogDetails(
+  target: ZLogDetails.Mutable,
+  details: ZLogDetails,
+): ZLogDetails.Mutable {
   for (const key of Reflect.ownKeys(details)) {
-
     const oldValue = target[key as string];
     const newValue = details[key as string];
 
@@ -141,5 +138,9 @@ export function assignZLogDetails(target: ZLogDetails.Mutable, details: ZLogDeta
 }
 
 function isZLogDetails(value: unknown): value is ZLogDetails {
-  return typeof value === 'object' && !!value && (value.constructor === Object || value.constructor == null);
+  return (
+    typeof value === 'object'
+    && !!value
+    && (value.constructor === Object || value.constructor == null)
+  );
 }

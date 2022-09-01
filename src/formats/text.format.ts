@@ -15,7 +15,6 @@ import { ZLogWriter } from './log-writer';
  * Text log format.
  */
 export interface TextZLogFormat {
-
   /**
    * Fields to write.
    *
@@ -31,11 +30,9 @@ export interface TextZLogFormat {
    * @default Built by {@link TextZLogFormat.defaultFields}.
    */
   readonly fields?: readonly (ZLogField | number | string)[] | undefined;
-
 }
 
 export const TextZLogFormat = {
-
   /**
    * Builds log fields used by default by {@link textZLogFormatter text log format}.
    *
@@ -54,15 +51,14 @@ export const TextZLogFormat = {
       messageZLogField(),
       ' ',
       decoratorZLogField(
-          {
-            prefix: '{ ',
-            suffix: ' }',
-          },
-          detailsZLogField(),
+        {
+          prefix: '{ ',
+          suffix: ' }',
+        },
+        detailsZLogField(),
       ),
     ];
   },
-
 };
 
 /**
@@ -73,17 +69,15 @@ export const TextZLogFormat = {
  * @returns A log formatter constructing a textual form of log messages.
  */
 export function textZLogFormatter(format: TextZLogFormat = {}): ZLogFormatter {
-
   const { fields = TextZLogFormat.defaultFields() } = format;
 
   return message => zlogMessageText(fields, [message]);
 }
 
 function zlogMessageText(
-    fields: Exclude<TextZLogFormat['fields'], undefined>,
-    state: [message: ZLogMessage],
+  fields: Exclude<TextZLogFormat['fields'], undefined>,
+  state: [message: ZLogMessage],
 ): string | undefined {
-
   const outputByOrder = new Map<number, Written[]>();
   let currentOrder = 0;
   let currentOutput: Written[] = [];
@@ -108,7 +102,7 @@ function zlogMessageText(
       return zlogMessageText([field as ZLogField], message ? [message] : state);
     }
 
-  }
+}
 
   const writer = new ZLogWriter$();
 
@@ -141,8 +135,9 @@ function zlogMessageText(
 type Written = readonly [value?: string, isSeparator?: 1];
 
 function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | undefined {
-
-  const allWritten: [number, Written[]][] = [...outputByOrder].sort(([order1], [order2]) => order1 - order2);
+  const allWritten: [number, Written[]][] = [...outputByOrder].sort(
+    ([order1], [order2]) => order1 - order2,
+  );
 
   let prefix: string | undefined;
   let hasFields = false;
@@ -183,11 +178,7 @@ function zlogLineOutputText(outputByOrder: Map<number, Written[]>): string | und
   }
 
   if (text == null) {
-    return prefix == null
-        ? delimiter
-        : (delimiter == null
-            ? prefix
-            : prefix + delimiter);
+    return prefix == null ? delimiter : delimiter == null ? prefix : prefix + delimiter;
   }
 
   return (prefix || '') + text + (delimiter || ''); // Prefix and suffix delimiters are always added

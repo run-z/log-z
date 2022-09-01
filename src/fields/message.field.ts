@@ -10,7 +10,7 @@ import type { ZLogField } from '../formats';
  * @returns Log line field.
  */
 export function messageZLogField(
-    format: (this: void, line: readonly unknown[]) => string = messageZLogField$default,
+  format: (this: void, line: readonly unknown[]) => string = messageZLogField$default,
 ): ZLogField {
   return writer => writer.write(format(writer.message.line));
 }

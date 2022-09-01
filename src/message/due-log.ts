@@ -10,7 +10,6 @@ import type { ZLogMessage } from './log-message';
  * Adds a {@link ZLogger}-specific properties atop of `DueLog`.
  */
 export interface DueLogZ extends DueLog {
-
   /**
    * Log line to process and log.
    *
@@ -34,11 +33,9 @@ export interface DueLogZ extends DueLog {
    * specific processing in this case.
    */
   zDetails?: ZLogDetails.Mutable | undefined;
-
 }
 
 export namespace DueLogZ {
-
   /**
    * A message to process before being logged by {@link ZLogger}.
    *
@@ -46,7 +43,6 @@ export namespace DueLogZ {
    * by {@link dueLogZ} before returned.
    */
   export interface Target extends DueLog.Target {
-
     /**
      * A hint indicating the logging stage.
      *
@@ -92,23 +88,19 @@ export namespace DueLogZ {
      * @see DueLogZ.index
      */
     index?: number | undefined;
-
   }
 
   /**
    * Fully {@link dueLogZ processed} message about to be logged by {@link ZLogger}.
    */
   export interface Processed extends DueLogZ.Target, DueLog {
-
     index: number;
 
     /**
      * Processed log message.
      */
     readonly zMessage: ZLogMessage;
-
   }
-
 }
 
 /**
@@ -122,9 +114,8 @@ export namespace DueLogZ {
  * @see Loggable.toLog for loggable value processing rules.
  */
 export function dueLogZ<TTarget extends DueLogZ.Target>(
-    target: TTarget,
+  target: TTarget,
 ): TTarget & DueLogZ.Processed {
-
   const processed = dueLog<DueLogZ.Target>(target) as TTarget & DueLogZ.Processed;
 
   (processed as { zMessage: ZLogMessage }).zMessage = {

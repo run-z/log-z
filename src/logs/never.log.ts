@@ -7,8 +7,7 @@ import type { ZLogMessage } from '../message';
  *
  * All recorded messages are discarded.
  */
-export const neverLogZ: ZLogger = (/*#__PURE__*/ logZBy({
-
+export const neverLogZ: ZLogger = /*#__PURE__*/ logZBy({
   record(_message: ZLogMessage): void {
     /* Never log */
   },
@@ -20,5 +19,4 @@ export const neverLogZ: ZLogger = (/*#__PURE__*/ logZBy({
   end(): Promise<void> {
     return Promise.resolve();
   },
-
-}));
+});

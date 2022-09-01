@@ -6,7 +6,6 @@
  * [Bunyan log levels]: https://github.com/trentm/node-bunyan#levels
  */
 export const enum ZLogLevel {
-
   /**
    * The service/app is going to stop or become unusable now. An operator should definitely look into this soon.
    */
@@ -37,13 +36,20 @@ export const enum ZLogLevel {
    * Logging from external libraries used by your app or very detailed application logging.
    */
   Trace = 10,
-
 }
 
 /**
  * @internal
  */
-const defaultZLogLevelNames = ['Silly', 'Trace', 'Debug', 'Info', 'Warning', 'Error', 'Fatal'] as const;
+const defaultZLogLevelNames = [
+  'Silly',
+  'Trace',
+  'Debug',
+  'Info',
+  'Warning',
+  'Error',
+  'Fatal',
+] as const;
 
 /**
  * Detects {@link ZLogMessage.level log level} name by its numeric value.
@@ -62,7 +68,7 @@ const defaultZLogLevelNames = ['Silly', 'Trace', 'Debug', 'Info', 'Warning', 'Er
  * @returns Log level name.
  */
 export function zlogLevelName(
-    level: ZLogLevel,
+  level: ZLogLevel,
 ): 'Fatal' | 'Error' | 'Warning' | 'Info' | 'Debug' | 'Trace' | 'Silly' {
   return zlogLevelMap(level, defaultZLogLevelNames);
 }
@@ -70,7 +76,15 @@ export function zlogLevelName(
 /**
  * @internal
  */
-const defaultZLogLevelAbbrs = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL'] as const;
+const defaultZLogLevelAbbrs = [
+  'SILLY',
+  'TRACE',
+  'DEBUG',
+  'INFO',
+  'WARN',
+  'ERROR',
+  'FATAL',
+] as const;
 
 /**
  * Detects {@link ZLogMessage.level log level} abbreviation by its numeric value.
@@ -89,7 +103,7 @@ const defaultZLogLevelAbbrs = ['SILLY', 'TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR
  * @returns Log level abbreviation.
  */
 export function zlogLevelAbbr(
-    level: ZLogLevel,
+  level: ZLogLevel,
 ): 'FATAL' | 'ERROR' | 'WARN' | 'INFO' | 'DEBUG' | 'TRACE' | 'SILLY' {
   return zlogLevelMap(level, defaultZLogLevelAbbrs);
 }
@@ -97,7 +111,15 @@ export function zlogLevelAbbr(
 /**
  * @internal
  */
-const defaultZLogLevelAbbrs5 = ['SILLY', 'TRACE', 'DEBUG', 'INFO ', 'WARN ', 'ERROR', 'FATAL'] as const;
+const defaultZLogLevelAbbrs5 = [
+  'SILLY',
+  'TRACE',
+  'DEBUG',
+  'INFO ',
+  'WARN ',
+  'ERROR',
+  'FATAL',
+] as const;
 
 /**
  * Detects 5-letter {@link ZLogMessage.level log level} abbreviation.
@@ -116,7 +138,7 @@ const defaultZLogLevelAbbrs5 = ['SILLY', 'TRACE', 'DEBUG', 'INFO ', 'WARN ', 'ER
  * @returns Log level abbreviation.
  */
 export function zlogLevelAbbr5(
-    level: ZLogLevel,
+  level: ZLogLevel,
 ): 'FATAL' | 'ERROR' | 'WARN ' | 'INFO ' | 'DEBUG' | 'TRACE' | 'SILLY' {
   return zlogLevelMap(level, defaultZLogLevelAbbrs5);
 }
@@ -151,7 +173,6 @@ export function zlogLevelOf(value: unknown): number | undefined {
   }
 
   if (hasLogLevel(value)) {
-
     const logLevel = +value.toLogLevel();
 
     return Number.isNaN(logLevel) ? undefined : logLevel;
@@ -164,7 +185,9 @@ export function zlogLevelOf(value: unknown): number | undefined {
  * @internal
  */
 function hasLogLevel(value: unknown): value is { toLogLevel(): ZLogLevel } {
-  return !!value
-      && (typeof value === 'object' || typeof value === 'function')
-      && typeof (value as { toLogLevel?: unknown | undefined }).toLogLevel === 'function';
+  return (
+    !!value
+    && (typeof value === 'object' || typeof value === 'function')
+    && typeof (value as { toLogLevel?: unknown | undefined }).toLogLevel === 'function'
+  );
 }

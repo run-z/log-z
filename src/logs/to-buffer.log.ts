@@ -8,7 +8,6 @@ import { ZLogBuffer$ } from './log-buffer.impl';
  * A specification of how to buffer log messages.
  */
 export interface ZLogBufferSpec {
-
   /**
    * Buffer limit. I.e. the maximum number of log messages to store in buffer.
    *
@@ -30,7 +29,6 @@ export interface ZLogBufferSpec {
    * @param contents - Current contents of the log buffer.
    */
   onRecord?(newEntry: ZLogBuffer.Entry, contents: ZLogBuffer.Contents): void;
-
 }
 
 /**
@@ -43,19 +41,15 @@ export interface ZLogBufferSpec {
  * @returns New log buffer.
  */
 export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
-
   const { atMost = 1024 } = how;
   const onRecord = how.onRecord ? how.onRecord.bind(how) : noop;
   const buffer = new ZLogBuffer$(Math.max(1, atMost));
 
   let whenLogged: (which?: 'all' | 'last') => Promise<boolean> = alreadyLogged;
   let record = (message: ZLogMessage): void => {
-
     const entry = buffer.add(message, onRecord);
 
-    whenLogged = which => which === 'all'
-        ? buffer.whenAllLogged().then(() => entry.whenLogged())
-        : entry.whenLogged();
+    whenLogged = which => which === 'all' ? buffer.whenAllLogged().then(() => entry.whenLogged()) : entry.whenLogged();
   };
   let drainTo = ZLogBuffer.drainer(atOnce => buffer.next(atOnce));
   let end = (): Promise<void> => {
@@ -70,7 +64,6 @@ export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
   };
 
   return {
-
     record(message) {
       record(message);
     },
@@ -86,6 +79,5 @@ export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
     drainTo(target, atOnce) {
       drainTo(target, atOnce);
     },
-
   };
 }

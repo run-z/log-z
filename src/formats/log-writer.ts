@@ -43,7 +43,6 @@ export abstract class ZLogWriter {
   extractDetail(...path: (keyof ZLogDetails)[]): unknown;
 
   extractDetail(...path: (keyof ZLogDetails)[]): unknown {
-
     const { message } = this;
     const last = path.length - 1;
     let { details } = message;
@@ -59,7 +58,6 @@ export abstract class ZLogWriter {
     let updatedDetails: Record<keyof ZLogDetails, unknown> = {};
 
     for (let i = 0; ; ++i) {
-
       const key = path[i] as string;
       const value = details[key];
 
@@ -128,7 +126,6 @@ export abstract class ZLogWriter {
    */
   writeError(error: unknown): void {
     if (error instanceof Error) {
-
       const { stack } = error;
 
       this.write(stack ? String(stack) : String(error));
@@ -165,7 +162,6 @@ export abstract class ZLogWriter {
       this.writeElements(value);
       this.write(']');
     } else {
-
       const formatted = this.format(writer => writer.writeProperties(value));
 
       this.write(formatted ? `{ ${formatted} }` : '{}');
@@ -179,16 +175,12 @@ export abstract class ZLogWriter {
    *
    * @param value - Object value to write.
    */
-  writeProperties(value: object): void {
-
+  writeProperties(value: object): void;
+  writeProperties(value: Record<PropertyKey, any>): void {
     let written = false;
 
     for (const key of Reflect.ownKeys(value)) {
-
-      const formatted = this.format(writer => writer.writeKeyAndValue(
-          key,
-          (value as Record<PropertyKey, any>)[key as string],
-      ));
+      const formatted = this.format(writer => writer.writeKeyAndValue(key, value[key]));
 
       if (formatted != null) {
         if (written) {
@@ -209,7 +201,6 @@ export abstract class ZLogWriter {
    * @param value - An iterable of elements to write.
    */
   writeElements(value: Iterable<any>): void {
-
     let written = false;
 
     for (const param of value) {
@@ -253,11 +244,10 @@ export abstract class ZLogWriter {
 }
 
 function ZLogLine$compactDetails(
-    details: Record<keyof ZLogDetails, any>,
-    path: (keyof ZLogDetails)[],
-    index: number,
+  details: Record<keyof ZLogDetails, any>,
+  path: (keyof ZLogDetails)[],
+  index: number,
 ): boolean {
-
   const key = path[index] as string;
   const nested = details[key];
 

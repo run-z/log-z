@@ -9,9 +9,9 @@ export class TestWritable extends Writable {
   }
 
   override _write(
-      chunk: unknown,
-      _encoding: string,
-      callback: (error?: (Error | null)) => void,
+    chunk: unknown,
+    _encoding: string,
+    callback: (error?: Error | null) => void,
   ): void {
     this.chunks.push(chunk);
     callback();

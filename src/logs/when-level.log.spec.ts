@@ -8,7 +8,6 @@ import { logZToMock } from '../spec';
 import { logZWhenLevel } from './when-level.log';
 
 describe('logZWhenLevel', () => {
-
   let logger: ZLogger;
   let recorder: MockZLogRecorder;
 
@@ -57,7 +56,6 @@ describe('logZWhenLevel', () => {
     expect(logZWhenLevel(0, recorder)).toBe(recorder);
   });
   it('logs messages with log level satisfying the condition', async () => {
-
     logger = logZBy(logZWhenLevel(level => level < ZLogLevel.Error, recorder));
 
     logger.debug('TEST');
@@ -69,7 +67,6 @@ describe('logZWhenLevel', () => {
     expect(await logger.whenLogged('all')).toBe(false);
   });
   it('logs not matching messages by another recorder', async () => {
-
     const other = logZToMock();
 
     logger = logZBy(logZWhenLevel(recorder, other));
@@ -90,7 +87,6 @@ describe('logZWhenLevel', () => {
     expect(other.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
   });
   it('creates new logger if everything logged, but not matching messages directed to another logger', async () => {
-
     const other = logZToMock();
 
     logger = logZBy(logZWhenLevel(0, recorder, other));

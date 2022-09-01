@@ -8,7 +8,6 @@ import { logZToLogger, logZWhenLevel } from './logs';
  * A specification of how to {@link logZ log}.
  */
 export interface ZLogSpec {
-
   /**
    * The minimum log level of logged messages. The messages with lower levels will be discarded.
    *
@@ -24,7 +23,6 @@ export interface ZLogSpec {
    * @default {@link logZToLogger console log recorder}.
    */
   readonly by?: ZLogRecorder | undefined;
-
 }
 
 /**
@@ -35,11 +33,7 @@ export interface ZLogSpec {
  * @returns New message logger.
  */
 export function logZ(how: ZLogSpec = {}): ZLogger {
-
-  const {
-    atLeast = ZLogLevel.Info,
-    by = logZToLogger(),
-  } = how;
+  const { atLeast = ZLogLevel.Info, by = logZToLogger() } = how;
 
   return logZBy(logZWhenLevel(atLeast, by));
 }
