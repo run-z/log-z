@@ -36,8 +36,8 @@ export interface TimestampZLogFieldFormat {
  */
 export function timestampZLogField(format: TimestampZLogFieldFormat = {}): ZLogField {
   const { format: tsFormat, key = 'timestamp' } = format;
-  const doFormat
-    = typeof tsFormat === 'function'
+  const doFormat =
+    typeof tsFormat === 'function'
       ? tsFormat
       : tsFormat
       ? (timestamp: number) => tsFormat.format(timestamp)
