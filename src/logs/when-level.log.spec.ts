@@ -83,8 +83,8 @@ describe('logZWhenLevel', () => {
 
     await logger.end();
 
-    expect(recorder.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
-    expect(other.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
+    expect(recorder.end).toHaveBeenCalledWith();
+    expect(other.end).toHaveBeenCalledWith();
   });
   it('creates new logger if everything logged, but not matching messages directed to another logger', async () => {
     const other = logZToMock();
@@ -104,7 +104,7 @@ describe('logZWhenLevel', () => {
 
     await logger.end();
 
-    expect(recorder.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
-    expect(other.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
+    expect(recorder.end).toHaveBeenCalledWith();
+    expect(other.end).toHaveBeenCalledWith();
   });
 });

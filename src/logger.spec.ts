@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
 import { CxBuilder, cxConstAsset } from '@proc7ts/context-builder';
 import { CxGlobals } from '@proc7ts/context-values';
 import { consoleLogger } from '@proc7ts/logger';
-import { SpyInstance, spyOn } from 'jest-mock';
+import { Mock, spyOn } from 'jest-mock';
 import { ZLogLevel } from './level';
 import { ZLogger } from './logger';
 import { zlogDetails } from './message';
@@ -45,12 +45,12 @@ describe('ZLogger', () => {
   });
 
   describe('by default', () => {
-    let infoSpy: SpyInstance<(...args: unknown[]) => void>;
-    let debugSpy: SpyInstance<(...args: unknown[]) => void>;
+    let infoSpy: Mock<(...args: unknown[]) => void>;
+    let debugSpy: Mock<(...args: unknown[]) => void>;
 
     beforeEach(() => {
-      infoSpy = spyOn(consoleLogger, 'info').mockImplementation(() => void 0);
-      debugSpy = spyOn(consoleLogger, 'debug').mockImplementation(() => void 0);
+      infoSpy = spyOn(consoleLogger, 'info').mockImplementation(() => void 0) as typeof infoSpy;
+      debugSpy = spyOn(consoleLogger, 'debug').mockImplementation(() => void 0) as typeof debugSpy;
     });
     afterEach(() => {
       infoSpy.mockRestore();

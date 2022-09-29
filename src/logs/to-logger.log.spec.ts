@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals
 import type { Logger } from '@proc7ts/logger';
 import { consoleLogger, logDefer, processingLogger } from '@proc7ts/logger';
 import { noop } from '@proc7ts/primitives';
-import type { SpyInstance } from 'jest-mock';
+import type { Mock } from 'jest-mock';
 import { ZLogLevel } from '../level';
 import { logZ } from '../log';
 import type { ZLogger } from '../logger';
@@ -11,11 +11,11 @@ import { logZToLogger } from './to-logger.log';
 
 describe('logZToLogger', () => {
   let testLogger: Logger;
-  let errorSpy: SpyInstance<(...args: unknown[]) => void>;
-  let warnSpy: SpyInstance<(...args: unknown[]) => void>;
-  let infoSpy: SpyInstance<(...args: unknown[]) => void>;
-  let debugSpy: SpyInstance<(...args: unknown[]) => void>;
-  let traceSpy: SpyInstance<(...args: unknown[]) => void>;
+  let errorSpy: Mock<(...args: unknown[]) => void>;
+  let warnSpy: Mock<(...args: unknown[]) => void>;
+  let infoSpy: Mock<(...args: unknown[]) => void>;
+  let debugSpy: Mock<(...args: unknown[]) => void>;
+  let traceSpy: Mock<(...args: unknown[]) => void>;
 
   beforeEach(() => {
     testLogger = {
@@ -50,7 +50,7 @@ describe('logZToLogger', () => {
 
   it('logs empty message', () => {
     logger.error();
-    expect(errorSpy).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
+    expect(errorSpy).toHaveBeenCalledWith();
   });
 
   it('logs error', () => {
@@ -170,18 +170,18 @@ describe('logZToLogger', () => {
   function spyOnLogger(testLogger: Logger): void {
     errorSpy = jest.spyOn(testLogger, 'error').mockImplementation(() => {
       /* noop */
-    });
+    }) as typeof errorSpy;
     warnSpy = jest.spyOn(testLogger, 'warn').mockImplementation(() => {
       /* noop */
-    });
+    }) as typeof warnSpy;
     infoSpy = jest.spyOn(testLogger, 'info').mockImplementation(() => {
       /* noop */
-    });
+    }) as typeof infoSpy;
     debugSpy = jest.spyOn(testLogger, 'debug').mockImplementation(() => {
       /* noop */
-    });
+    }) as typeof debugSpy;
     traceSpy = jest.spyOn(testLogger, 'trace').mockImplementation(() => {
       /* noop */
-    });
+    }) as typeof traceSpy;
   }
 });

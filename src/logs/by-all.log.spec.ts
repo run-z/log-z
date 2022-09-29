@@ -66,8 +66,8 @@ describe('logZByAll', () => {
     it('ends all recorders', async () => {
       expect(await logger.end()).toBeUndefined();
 
-      expect(target1.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
-      expect(target2.end).toHaveBeenCalledWith(...([] as unknown[] as [unknown, unknown[]]));
+      expect(target1.end).toHaveBeenCalledWith();
+      expect(target2.end).toHaveBeenCalledWith();
     });
   });
 });
