@@ -1,5 +1,5 @@
 import { valueProvider } from '@proc7ts/primitives';
-import * as os from 'node:os';
+import os from 'node:os';
 import type { Writable } from 'node:stream';
 import type { TextZLogFormat, ZLogFormatter } from '../formats';
 import { textZLogFormatter } from '../formats';

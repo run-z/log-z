@@ -18,11 +18,23 @@
     "url": "https://github.com/run-z/log-z/issues"
   },
   "type": "module",
-  "main": "./dist/log-z.js",
-  "types": "./index.d.ts",
+  "types": "./dist/log-z.d.ts",
+  "typesVersions": {
+    "*": {
+      "node": [
+        "./dist/log-z.node.d.ts"
+      ]
+    }
+  },
   "exports": {
-    ".": "./dist/log-z.js",
-    "./node": "./dist/log-z.node.js"
+    ".": {
+      "types": "./dist/log-z.d.ts",
+      "default": "./dist/log-z.js"
+    },
+    "./node": {
+      "types": "./dist/log-z.node.d.ts",
+      "default": "./dist/log-z.node.js"
+    }
   },
   "dependencies": {
     "@proc7ts/context-values": "^7.0.1",
@@ -33,15 +45,15 @@
   "devDependencies": {
     "@jest/globals": "^29.3.1",
     "@proc7ts/context-builder": "^7.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
     "@run-z/eslint-config": "^3.3.1",
     "@run-z/prettier-config": "^2.0.0",
-    "@run-z/rollup-helpers": "^2.1.0",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
     "eslint-plugin-jest": "^27.2.1",
-    "gh-pages": "^4.0.0",
+    "gh-pages": "^5.0.0",
     "jest": "^29.3.1",
     "jest-junit": "^15.0.0",
     "jest-mock": "^29.3.1",
@@ -49,7 +61,7 @@
     "prettier-eslint-cli": "^7.1.0",
     "rollup": "^3.10.1",
     "rollup-plugin-flat-dts": "^2.0.1",
-    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-unbundle": "^0.2.1",
     "run-z": "1.10.1-bootstrap",
     "shx": "^0.3.4",
     "strip-ansi": "^7.0.1",
@@ -63,7 +75,7 @@
     "bootstrap": "rollup -c",
     "build": "run-z +z bootstrap",
     "ci:all": "run-z all +test/--ci/--runInBand",
-    "clean": "run-z +z --then shx rm -rf \"index.d.ts?(.map)\" \"*/index.d.ts?(.map)\" dist target",
+    "clean": "run-z +z --then shx rm -rf dist target",
     "doc": "run-z +z --then typedoc",
     "doc:publish": "run-z doc --then gh-pages --dist target/typedoc --dotfiles",
     "format": "run-z +z --then prettier-eslint --write --include-dot-files \"src/**/*.*\" \"*.{js,cjs,json,md}\"",

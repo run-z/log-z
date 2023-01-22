@@ -1,8 +1,7 @@
 import { consoleLogger } from '@proc7ts/logger';
 import { noop, valueProvider } from '@proc7ts/primitives';
-import * as fs from 'node:fs';
-import { promises as fsPromises } from 'node:fs';
-import * as path from 'node:path';
+import fs, { promises as fsPromises } from 'node:fs';
+import path from 'node:path';
 import type { ZLogRecorder } from '../log-recorder';
 import { notLogged } from '../log-recorder.impl';
 import type { ZLogBuffer } from '../logs';

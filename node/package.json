@@ -1,4 +1,0 @@
-{
-  "main": "../dist/log-z.node.js",
-  "types": "./index.d.ts"
-}

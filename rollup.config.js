@@ -1,9 +1,11 @@
-import { externalModules } from '@run-z/rollup-helpers';
-import path from 'node:path';
+import ts from '@rollup/plugin-typescript';
 import { defineConfig } from 'rollup';
 import flatDts from 'rollup-plugin-flat-dts';
-import ts from 'rollup-plugin-typescript2';
+import unbundle from 'rollup-plugin-unbundle';
+import { resolveRootPackage } from 'rollup-plugin-unbundle/api';
 import typescript from 'typescript';
+
+const resolutionRoot = resolveRootPackage();
 
 export default defineConfig({
   input: {
@@ -11,13 +13,15 @@ export default defineConfig({
     'log-z.node': './src/node/index.ts',
   },
   plugins: [
+    unbundle({
+      resolutionRoot,
+    }),
     ts({
       typescript,
       tsconfig: 'tsconfig.main.json',
-      cacheRoot: 'target/.rts2_cache',
+      cacheDir: 'target/.rts_cache',
     }),
   ],
-  external: externalModules(),
   output: {
     format: 'esm',
     sourcemap: true,
@@ -25,8 +29,15 @@ export default defineConfig({
     entryFileNames: 'dist/[name].js',
     chunkFileNames: 'dist/_[name].js',
     manualChunks(id) {
-      if (id.startsWith(path.resolve('src', 'node') + path.sep)) {
-        return 'log-z.node';
+      const module = resolutionRoot.resolveImport(id);
+      const host = module.host;
+
+      if (host?.name === '@run-z/log-z') {
+        const path = module.uri.slice(host.uri.length + 1);
+
+        if (path.startsWith('src/node')) {
+          return 'log-z.node';
+        }
       }
 
       return 'log-z';
@@ -36,12 +47,13 @@ export default defineConfig({
       flatDts({
         tsconfig: 'tsconfig.main.json',
         lib: true,
+        file: './dist/log-z.d.ts',
         compilerOptions: {
           declarationMap: true,
         },
         entries: {
           node: {
-            file: 'node/index.d.ts',
+            file: './dist/log-z.node.d.ts',
           },
         },
         internal: ['**/impl/**', '**/*.impl.ts'],
