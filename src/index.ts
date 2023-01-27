@@ -1,5 +1,4 @@
 /**
- * @packageDocumentation
  * @module @run-z/log-z
  */
 export * from './fields';

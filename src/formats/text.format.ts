@@ -27,7 +27,7 @@ export interface TextZLogFormat {
    * Fields are applied in order of their presence. However, the written data can be reordered. For that, a numeric
    * order value can be used before fields or delimiters. By default, the order value is `0`.
    *
-   * @default Built by {@link TextZLogFormat.defaultFields}.
+   * @default Built by {@link TextZLogFormat:object.defaultFields TextZLogFormat.defaultFields()}.
    */
   readonly fields?: readonly (ZLogField | number | string)[] | undefined;
 }

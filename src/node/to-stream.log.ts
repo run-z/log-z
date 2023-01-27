@@ -21,7 +21,7 @@ export interface StreamZLogSpec {
    *
    * [object mode]: https://nodejs.org/dist/latest/docs/api/stream.html#stream_object_mode
    *
-   * @default {@link textZLogFormatter Text log format}.
+   * @default {@link @run-z/log-z!textZLogFormatter Text log format}.
    */
   readonly format?: TextZLogFormat | ZLogFormatter | undefined;
 
@@ -40,7 +40,7 @@ export interface StreamZLogSpec {
  *
  * Reports logging complete immediately if `to.write()` returned `true`. Awaits for stream to [drain] otherwise.
  *
- * Ends underlying stream(s) on {@link ZLogRecorder.end .end()} method call.
+ * Ends underlying stream(s) on {@link @run-z/log-z!ZLogRecorder.end .end()} method call.
  *
  * @param to - Writable stream to log messages to.
  * @param spec - A specification of how to log messages to Node.js stream.

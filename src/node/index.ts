@@ -1,5 +1,4 @@
 /**
- * @packageDocumentation
  * @module @run-z/log-z/node
  */
 export * from './to-file.log';

@@ -14,7 +14,7 @@ export interface ZLogBuffer extends ZLogRecorder {
    * Drains buffered messages to target log recorder.
    *
    * Messages are drained one at a time. The next message is recorded to target only when the previous one
-   * {@link ZLogRecorder.whenLogged either logged or discarded}.
+   * {@link ZLogRecorder#whenLogged either logged or discarded}.
    *
    * Calling this method again changes the target.
    *
@@ -28,8 +28,8 @@ export namespace ZLogBuffer {
   /**
    * Log buffer entry.
    *
-   * Represents a buffered log message and allows to either {@link drop} it, or {@link recordTo record} to another
-   * log recorder.
+   * Represents a buffered log message and allows to either {@link Entry#drop drop} it,
+   * or {@link Entry#recordTo record} to another log recorder.
    */
   export interface Entry {
     /**
@@ -42,7 +42,7 @@ export namespace ZLogBuffer {
      *
      * Removes the message from the buffer and discards it.
      *
-     * Calling this method when the message is already {@ling recordTo recorded} to another recorder or
+     * Calling this method when the message is already {@link recordTo recorded} to another recorder or
      * {@link drop dropped} has no effect.
      */
     drop(): void;
@@ -52,7 +52,7 @@ export namespace ZLogBuffer {
      *
      * Removes the message from the buffer.
      *
-     * Calling this method when the message is already {@ling logTo logged} or {@link drop dropped} has no effect.
+     * Calling this method when the message is already {@link recordTo logged} or {@link drop dropped} has no effect.
      */
     recordTo(target: ZLogRecorder): void;
 
