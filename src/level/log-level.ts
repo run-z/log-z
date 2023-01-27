@@ -5,7 +5,7 @@
  *
  * [Bunyan log levels]: https://github.com/trentm/node-bunyan#levels
  */
-export const enum ZLogLevel {
+export enum ZLogLevel {
   /**
    * The service/app is going to stop or become unusable now. An operator should definitely look into this soon.
    */
