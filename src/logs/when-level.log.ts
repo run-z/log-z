@@ -17,7 +17,7 @@ import { neverLogZ } from './never.log';
  * @returns New log recorder.
  */
 export function logZWhenLevel(
-  when: ZLogLevel | ((this: void, level: ZLogLevel) => boolean),
+  when: number | ((this: void, level: number) => boolean),
   by: ZLogRecorder,
   orBy?: ZLogRecorder,
 ): ZLogRecorder;
@@ -93,6 +93,6 @@ export function logZWhenLevel(
 /**
  * @internal
  */
-function atLeastInfoZLevel(level: ZLogLevel): boolean {
+function atLeastInfoZLevel(level: number): boolean {
   return level >= ZLogLevel.Info;
 }

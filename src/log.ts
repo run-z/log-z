@@ -15,7 +15,7 @@ export interface ZLogSpec {
    *
    * @default {@link ZLogLevel.Info Info}.
    */
-  readonly atLeast?: ZLogLevel | undefined;
+  readonly atLeast?: number | undefined;
 
   /**
    * The log recorder to record messages by.
