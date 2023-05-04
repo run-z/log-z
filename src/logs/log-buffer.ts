@@ -81,7 +81,7 @@ export namespace ZLogBuffer {
   /**
    * Log buffer drainer signature.
    *
-   * Drains buffered messages to target log recorder. Can be used as implementation of {@link ZLogBuffer.drainTo}
+   * Drains buffered messages to target log recorder. Can be used as implementation of {@link ZLogBuffer#drainTo}
    * method.
    */
   export type Drainer =

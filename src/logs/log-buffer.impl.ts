@@ -1,12 +1,12 @@
 import { isPresent, newPromiseResolver, noop } from '@proc7ts/primitives';
 import type { PushIterable } from '@proc7ts/push-iterator';
 import {
-  filterIndexed,
   IndexedItemList,
+  PushIterator__symbol,
+  filterIndexed,
   itsEach,
   itsEvery,
   mapIt,
-  PushIterator__symbol,
 } from '@proc7ts/push-iterator';
 import type { ZLogRecorder } from '../log-recorder';
 import type { ZLogMessage } from '../message';

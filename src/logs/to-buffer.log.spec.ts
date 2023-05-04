@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
-import { itsElements, itsFirst } from '@proc7ts/push-iterator';
 import { ZLogLevel } from '../level';
 import type { ZLogRecorder } from '../log-recorder';
 import { ZLogMessage, zlogMessage } from '../message';
@@ -42,7 +41,7 @@ describe('logZToBuffer', () => {
     buffer = logZToBuffer({
       atMost: 3,
       onRecord(_newEntry, contents) {
-        reported.push(itsElements(contents, ({ message: { line } }) => line.join(', ')));
+        reported.push([...contents].map(({ message: { line } }) => line.join(', ')));
       },
     });
 
@@ -85,10 +84,10 @@ describe('logZToBuffer', () => {
       atMost: 4,
       onRecord(_newEntry, contents) {
         if (contents.fillRatio() >= 0.5) {
-          const oldestEntry = itsFirst(contents);
+          const oldestEntry = [...contents][0];
 
-          oldestEntry!.drop();
-          oldestEntry!.drop();
+          oldestEntry.drop();
+          oldestEntry.drop();
         }
       },
     });
