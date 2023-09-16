@@ -1,9 +1,9 @@
 import { PromiseResolver } from '@proc7ts/async';
 import { noop } from '@proc7ts/primitives';
-import { ZLogBuffer } from './log-buffer.js';
-import { ZLogMessage } from '../messages/log-message.js';
-import { ZLogBufferSpec } from './to-buffer.log.js';
 import { ZLogRecorder } from '../log-recorder.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { ZLogBuffer } from './log-buffer.js';
+import { ZLogBufferSpec } from './to-buffer.log.js';
 
 /**
  * @internal
@@ -41,12 +41,12 @@ export class ZLogBuffer$ {
 
   next(atOnce: number): Promise<[ZLogBuffer.Entry, ...ZLogBuffer.Entry[]]> {
     if (this.#size) {
-      return Promise.resolve(this.batch(atOnce));
+      return Promise.resolve(this.#batch(atOnce));
     }
 
     return new Promise(resolve => {
       this.#firstAdded = () => {
-        resolve(this.batch(atOnce));
+        resolve(this.#batch(atOnce));
         this.#firstAdded = noop;
       };
     });
@@ -64,7 +64,7 @@ export class ZLogBuffer$ {
     let recordTo = (entry: ZLogBuffer.Entry, target: ZLogRecorder): void => {
       drop = noop;
       recordTo = noop;
-      this.remove(entry, index);
+      this.#remove(entry, index);
       target.record(message);
       whenLogged.resolve(target.whenLogged());
     };
@@ -72,7 +72,7 @@ export class ZLogBuffer$ {
     drop = (entry: ZLogBuffer.Entry): void => {
       drop = noop;
       recordTo = noop;
-      this.remove(entry, index);
+      this.#remove(entry, index);
       whenLogged.resolve(false);
     };
 
@@ -129,7 +129,7 @@ export class ZLogBuffer$ {
     return Promise.all([...this.#iterate()].map(async entry => await entry.whenLogged()));
   }
 
-  private batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
+  #batch(size: number): [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]] {
     const batch: ZLogBuffer.Entry[] = [];
 
     for (const entry of this.#iterate()) {
@@ -141,7 +141,7 @@ export class ZLogBuffer$ {
     return batch as [ZLogBuffer.Entry, ...ZLogBuffer.Entry[]];
   }
 
-  private remove(entry: ZLogBuffer.Entry, index: number): void {
+  #remove(entry: ZLogBuffer.Entry, index: number): void {
     const found = this.#entries[index];
 
     if (found !== entry) {
