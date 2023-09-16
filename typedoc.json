@@ -1,6 +1,7 @@
 {
   "entryPoints": ["src/index.ts", "src/node/index.ts"],
   "name": "Log Z",
+  "sort": ["static-first", "visibility", "enum-value-ascending", "alphabetical", "kind"],
   "out": "./target/typedoc",
   "tsconfig": "tsconfig.json"
 }
