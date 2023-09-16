@@ -1,4 +1,4 @@
-import type { ZLogRecorder } from '../log-recorder';
+import type { ZLogRecorder } from '../log-recorder.js';
 
 /**
  * Creates a log recorder that logs messages by proxying them to provided one.

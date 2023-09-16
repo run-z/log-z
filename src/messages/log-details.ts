@@ -1,6 +1,6 @@
 import { logDefer } from '@proc7ts/logger';
-import type { DueLogZ } from './due-log';
-import type { ZLoggable } from './loggable';
+import type { DueLogZ } from './due-log.js';
+import type { ZLoggable } from './loggable.js';
 
 /**
  * Log message details map.

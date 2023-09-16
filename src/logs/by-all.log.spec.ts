@@ -1,12 +1,11 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { PromiseResolver } from '@proc7ts/async';
-import { ZLogLevel } from '../level';
-import { logZBy } from '../log-by';
-import type { ZLogger } from '../logger';
-import { zlogMessage } from '../message';
-import type { MockZLogRecorder } from '../spec';
-import { logZToMock } from '../spec';
-import { logZByAll } from './by-all.log';
+import { ZLogLevel } from '../levels/log-level.js';
+import { logZBy } from '../log-by.js';
+import { ZLogger } from '../logger.js';
+import { zlogMessage } from '../messages/log-message.js';
+import { MockZLogRecorder, logZToMock } from '../spec/mock-log-recorder.js';
+import { logZByAll } from './by-all.log.js';
 
 describe('logZByAll', () => {
   let target1: MockZLogRecorder;

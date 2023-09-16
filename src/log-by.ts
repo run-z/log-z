@@ -1,8 +1,8 @@
-import { ZLogLevel } from './level';
-import type { ZLogRecorder } from './log-recorder';
-import type { ZLogger } from './logger';
-import type { ZLogMessage } from './message';
-import { zlogMessage } from './message';
+import { ZLogLevel } from './levels/log-level.js';
+import type { ZLogRecorder } from './log-recorder.js';
+import type { ZLogger } from './logger.js';
+import type { ZLogMessage } from './messages/log-message.js';
+import { zlogMessage } from './messages/log-message.js';
 
 class ZLogger$ implements ZLogger {
 

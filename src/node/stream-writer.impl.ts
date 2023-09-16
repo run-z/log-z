@@ -1,6 +1,6 @@
 import { lazyValue, noop, valueProvider } from '@proc7ts/primitives';
 import type { Writable } from 'node:stream';
-import { alreadyLogged } from '../log-recorder.impl';
+import { alreadyLogged } from '../log-recorder.impl.js';
 
 /**
  * @internal

@@ -1,15 +1,15 @@
 import { describe, expect, it } from '@jest/globals';
-import { zlogMessage } from '../message';
+import { zlogMessage } from '../messages/log-message.js';
 import {
+  ZLogLevelFn,
   zlogDEBUG,
   zlogERROR,
   zlogFATAL,
   zlogINFO,
-  ZLogLevelFn,
   zlogTRACE,
   zlogWARN,
-} from './levels';
-import { ZLogLevel, zlogLevelOf } from './log-level';
+} from './levels.js';
+import { ZLogLevel, zlogLevelOf } from './log-level.js';
 
 describe.each([
   ['FATAL', zlogFATAL, ZLogLevel.Fatal],

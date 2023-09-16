@@ -1,6 +1,6 @@
-import type { ZLogLevel } from '../level';
-import { dueLogZ } from './due-log';
-import type { ZLogDetails } from './log-details';
+import { ZLogLevel } from '../levels/log-level.js';
+import { dueLogZ } from './due-log.js';
+import type { ZLogDetails } from './log-details.js';
 
 /**
  * Log message.

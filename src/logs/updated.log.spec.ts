@@ -1,13 +1,12 @@
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import type { Mock } from 'jest-mock';
-import { ZLogLevel } from '../level';
-import { logZBy } from '../log-by';
-import type { ZLogger } from '../logger';
-import type { ZLogMessage } from '../message';
-import { zlogDetails, zlogMessage } from '../message';
-import type { MockZLogRecorder } from '../spec';
-import { logZToMock } from '../spec';
-import { logZUpdated } from './updated.log';
+import { MockZLogRecorder, logZToMock } from '../spec/mock-log-recorder.js';
+import { ZLogMessage, zlogMessage } from '../messages/log-message.js';
+import { ZLogger } from '../logger.js';
+import { logZBy } from '../log-by.js';
+import { logZUpdated } from './updated.log.js';
+import { ZLogLevel } from '../levels/log-level.js';
+import { zlogDetails } from '../messages/log-details.js';
 
 describe('logZUpdated', () => {
   let target: MockZLogRecorder;

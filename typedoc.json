@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["src/index.ts", "src/node/index.ts"],
+  "entryPoints": ["src/mod.ts", "src/node/mod.ts"],
   "name": "Log Z",
   "sort": ["static-first", "visibility", "enum-value-ascending", "alphabetical", "kind"],
   "out": "./target/typedoc",

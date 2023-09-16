@@ -1,9 +1,11 @@
 import { describe, expect, it } from '@jest/globals';
-import { detailsZLogField } from '../fields';
-import { zlogINFO, ZLogLevel } from '../level';
-import { zlogDetails, zlogMessage } from '../message';
-import type { ZLogField } from './log-field';
-import { TextZLogFormat, textZLogFormatter } from './text.format';
+import { detailsZLogField } from '../fields/details.field.js';
+import { zlogINFO } from '../levels/levels.js';
+import { ZLogLevel } from '../levels/log-level.js';
+import { zlogDetails } from '../messages/log-details.js';
+import { zlogMessage } from '../messages/log-message.js';
+import type { ZLogField } from './log-field.js';
+import { TextZLogFormat, textZLogFormatter } from './text.format.js';
 
 describe('textZLogFormatter', () => {
   describe('delimiters', () => {

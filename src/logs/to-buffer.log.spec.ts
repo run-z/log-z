@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
-import { ZLogLevel } from '../level';
-import type { ZLogRecorder } from '../log-recorder';
-import { ZLogMessage, zlogMessage } from '../message';
-import type { ZLogBuffer } from './log-buffer';
-import { logZToBuffer } from './to-buffer.log';
+import { ZLogBuffer } from './log-buffer.js';
+import { logZToBuffer } from './to-buffer.log.js';
+import { ZLogRecorder } from '../log-recorder.js';
+import { ZLogMessage, zlogMessage } from '../messages/log-message.js';
+import { ZLogLevel } from '../levels/log-level.js';
 
 describe('logZToBuffer', () => {
   let buffer: ZLogBuffer;

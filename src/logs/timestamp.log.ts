@@ -1,6 +1,6 @@
-import type { ZLogRecorder } from '../log-recorder';
-import type { ZLogMessage } from '../message';
-import { logZUpdated } from './updated.log';
+import { ZLogRecorder } from '../log-recorder.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { logZUpdated } from './updated.log.js';
 
 /**
  * A specification of how to add {@link logZTimestamp timestamp} to log message.

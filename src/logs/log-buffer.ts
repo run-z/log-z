@@ -1,6 +1,6 @@
 import { noop } from '@proc7ts/primitives';
-import type { ZLogRecorder } from '../log-recorder';
-import type { ZLogMessage } from '../message';
+import type { ZLogRecorder } from '../log-recorder.js';
+import { ZLogMessage } from '../messages/log-message.js';
 
 /**
  * Log buffer.

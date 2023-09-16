@@ -1,9 +1,9 @@
 import { PromiseResolver } from '@proc7ts/async';
 import { noop } from '@proc7ts/primitives';
-import type { ZLogRecorder } from '../log-recorder';
-import type { ZLogMessage } from '../message';
-import type { ZLogBuffer } from './log-buffer';
-import type { ZLogBufferSpec } from './to-buffer.log';
+import { ZLogBuffer } from './log-buffer.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { ZLogBufferSpec } from './to-buffer.log.js';
+import { ZLogRecorder } from '../log-recorder.js';
 
 /**
  * @internal

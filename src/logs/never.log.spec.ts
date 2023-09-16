@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import type { ZLogger } from '../logger';
-import { neverLogZ } from './never.log';
+import { ZLogger } from '../logger.js';
+import { neverLogZ } from './never.log.js';
 
 describe('neverLogZ', () => {
   let logger: ZLogger;

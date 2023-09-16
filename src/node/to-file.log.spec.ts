@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { logZBy } from '../log-by';
-import type { ZLogger } from '../logger';
-import type { ZLogMessage } from '../message';
-import { zlogDetails } from '../message';
-import { FileZLogSpec, logZToFile } from './to-file.log';
+import { logZBy } from '../log-by.js';
+import { ZLogger } from '../logger.js';
+import { zlogDetails } from '../messages/log-details.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { FileZLogSpec, logZToFile } from './to-file.log.js';
 
 describe('logZToFile', () => {
   let testRootDir: string;

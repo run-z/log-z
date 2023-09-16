@@ -1,6 +1,6 @@
-import { dueLogZ } from './due-log';
-import { cloneZLogDetails } from './log-details';
-import type { ZLogMessage } from './log-message';
+import { dueLogZ } from './due-log.js';
+import { cloneZLogDetails } from './log-details.js';
+import type { ZLogMessage } from './log-message.js';
 
 /**
  * Expands a log message.

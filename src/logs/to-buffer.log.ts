@@ -1,8 +1,8 @@
 import { noop } from '@proc7ts/primitives';
-import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
-import type { ZLogMessage } from '../message';
-import { ZLogBuffer } from './log-buffer';
-import { ZLogBuffer$ } from './log-buffer.impl';
+import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl.js';
+import { ZLogBuffer } from './log-buffer.js';
+import { ZLogBuffer$ } from './log-buffer.impl.js';
+import { ZLogMessage } from '../messages/log-message.js';
 
 /**
  * A specification of how to buffer log messages.

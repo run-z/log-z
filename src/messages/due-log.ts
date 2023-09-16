@@ -1,8 +1,8 @@
 import type { DueLog } from '@proc7ts/logger';
 import { dueLog } from '@proc7ts/logger';
-import type { ZLogLevel } from '../level';
-import type { ZLogDetails } from './log-details';
-import type { ZLogMessage } from './log-message';
+import { ZLogLevel } from '../levels/log-level.js';
+import type { ZLogDetails } from './log-details.js';
+import type { ZLogMessage } from './log-message.js';
 
 /**
  * A message about to be logged by {@link ZLogger}.

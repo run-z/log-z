@@ -2,12 +2,12 @@ import { consoleLogger } from '@proc7ts/logger';
 import { noop, valueProvider } from '@proc7ts/primitives';
 import fs, { promises as fsPromises } from 'node:fs';
 import path from 'node:path';
-import type { ZLogRecorder } from '../log-recorder';
-import { notLogged } from '../log-recorder.impl';
-import type { ZLogBuffer } from '../logs';
-import { logZToBuffer } from '../logs';
-import type { ZLogMessage } from '../message';
-import { logZToStream, StreamZLogSpec } from './to-stream.log';
+import { notLogged } from '../log-recorder.impl.js';
+import type { ZLogRecorder } from '../log-recorder.js';
+import type { ZLogBuffer } from '../logs/log-buffer.js';
+import { logZToBuffer } from '../logs/to-buffer.log.js';
+import type { ZLogMessage } from '../messages/log-message.js';
+import { StreamZLogSpec, logZToStream } from './to-stream.log.js';
 
 /**
  * A specification of how to log messages {@link logZToFile to file}.

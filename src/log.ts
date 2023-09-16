@@ -1,8 +1,9 @@
-import { ZLogLevel } from './level';
-import { logZBy } from './log-by';
-import type { ZLogRecorder } from './log-recorder';
-import type { ZLogger } from './logger';
-import { logZToLogger, logZWhenLevel } from './logs';
+import { ZLogLevel } from './levels/log-level.js';
+import { logZBy } from './log-by.js';
+import type { ZLogRecorder } from './log-recorder.js';
+import type { ZLogger } from './logger.js';
+import { logZToLogger } from './logs/to-logger.log.js';
+import { logZWhenLevel } from './logs/when-level.log.js';
 
 /**
  * A specification of how to {@link logZ log}.

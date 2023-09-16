@@ -1,7 +1,7 @@
 import { noop, valueProvider } from '@proc7ts/primitives';
-import type { ZLogRecorder } from '../log-recorder';
-import { notLogged } from '../log-recorder.impl';
-import type { ZLogMessage } from '../message';
+import { notLogged } from '../log-recorder.impl.js';
+import type { ZLogRecorder } from '../log-recorder.js';
+import { ZLogMessage } from '../messages/log-message.js';
 
 /**
  * Creates a log recorder that logs messages atop of the target one.

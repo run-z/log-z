@@ -3,11 +3,11 @@ import type { Logger } from '@proc7ts/logger';
 import { consoleLogger, logDefer, processingLogger } from '@proc7ts/logger';
 import { noop } from '@proc7ts/primitives';
 import type { Mock } from 'jest-mock';
-import { ZLogLevel } from '../level';
-import { logZ } from '../log';
-import type { ZLogger } from '../logger';
-import { zlogDetails } from '../message';
-import { logZToLogger } from './to-logger.log';
+import { ZLogLevel } from '../levels/log-level.js';
+import { logZ } from '../log.js';
+import { ZLogger } from '../logger.js';
+import { zlogDetails } from '../messages/log-details.js';
+import { logZToLogger } from './to-logger.log.js';
 
 describe('logZToLogger', () => {
   let testLogger: Logger;

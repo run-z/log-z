@@ -1,5 +1,5 @@
-import { logZBy } from './log-by';
-import type { ZLogRecorder } from './log-recorder';
+import { logZBy } from './log-by.js';
+import type { ZLogRecorder } from './log-recorder.js';
 
 /**
  * Message logger interface.

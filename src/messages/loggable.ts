@@ -1,5 +1,5 @@
 import type { Loggable } from '@proc7ts/logger';
-import type { DueLogZ } from './due-log';
+import type { DueLogZ } from './due-log.js';
 
 /**
  * A value that may be logged by `log-z` in a custom way.

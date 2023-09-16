@@ -1,13 +1,15 @@
 import { describe, expect, it } from '@jest/globals';
 import { logDefer } from '@proc7ts/logger';
 import os from 'node:os';
-import { levelZLogField, messageZLogField } from '../fields';
-import { textZLogFormatter } from '../formats';
-import { ZLogLevel } from '../level';
-import { logZBy } from '../log-by';
-import { zlogDetails, zlogMessage } from '../message';
-import { TestWritable } from '../spec';
-import { logZToStream } from './to-stream.log';
+import { levelZLogField } from '../fields/level.field.js';
+import { messageZLogField } from '../fields/message.field.js';
+import { textZLogFormatter } from '../formats/text.format.js';
+import { ZLogLevel } from '../levels/log-level.js';
+import { logZBy } from '../log-by.js';
+import { zlogDetails } from '../messages/log-details.js';
+import { zlogMessage } from '../messages/log-message.js';
+import { TestWritable } from '../spec/test-writable.js';
+import { logZToStream } from './to-stream.log.js';
 
 describe('logZToStream', () => {
   it('formats message', async () => {

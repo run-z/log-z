@@ -1,7 +1,6 @@
 import { valueProvider } from '@proc7ts/primitives';
-import type { ZLogMessage } from '../message';
-import { zlogMessage } from '../message';
-import { ZLogLevel } from './log-level';
+import { ZLogMessage, zlogMessage } from '../messages/log-message.js';
+import { ZLogLevel } from './log-level.js';
 
 /**
  * A function representing particular log level.

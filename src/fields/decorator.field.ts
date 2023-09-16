@@ -1,4 +1,5 @@
-import type { ZLogField, ZLogWriter } from '../formats';
+import { ZLogField } from '../formats/log-field.js';
+import { ZLogWriter } from '../formats/log-writer.js';
 
 /**
  * Log field decorator format.
