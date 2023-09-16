@@ -21,7 +21,7 @@
   "types": "./dist/log-z.d.ts",
   "typesVersions": {
     "*": {
-      "node": [
+      "node.js": [
         "./dist/log-z.node.d.ts"
       ]
     }
