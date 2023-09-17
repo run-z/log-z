@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>logZ | Log Z</title><meta name="description" content="Documentation for Log Z"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>logZToFile | Log Z</title><meta name="description" content="Documentation for Log Z"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -13,28 +13,34 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Log Z</a></li>
-<li><a href="../modules/_run_z_log_z.html">@run-z/log-z</a></li>
-<li><a href="_run_z_log_z.logZ.html">logZ</a></li></ul>
-<h1>Function logZ</h1></div>
+<li><a href="../modules/_run_z_log_z_node_js.html">@run-z/log-z/node.js</a></li>
+<li><a href="_run_z_log_z_node_js.logZToFile.html">logZToFile</a></li></ul>
+<h1>Function logZToFile</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="logZ"><span class="tsd-kind-call-signature">logZ</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">how</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_run_z_log_z.ZLogger.html" class="tsd-signature-type tsd-kind-interface">ZLogger</a><a href="#logZ" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="logZToFile"><span class="tsd-kind-call-signature">logZTo<wbr/>File</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">to</span>, <span class="tsd-kind-parameter">how</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_run_z_log_z.ZLogRecorder.html" class="tsd-signature-type tsd-kind-interface">ZLogRecorder</a><a href="#logZToFile" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a logger that records messages by the given log recorder.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a log recorder that writes messages to a file.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">how</span>: <a href="../interfaces/_run_z_log_z.ZLogSpec.html" class="tsd-signature-type tsd-kind-interface">ZLogSpec</a><span class="tsd-signature-symbol"> = {}</span></h5>
-<div class="tsd-comment tsd-typography"><p>A specification of how to log.</p>
+<h5><span class="tsd-kind-parameter">to</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">this</span>, <span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></h5>
+<div class="tsd-comment tsd-typography"><p>The log file to write messages to. Either a string containing a file path, or a function accepting log
+message and returning a file path.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">how</span>: <a href="../interfaces/_run_z_log_z_node_js.FileZLogSpec.html" class="tsd-signature-type tsd-kind-interface">FileZLogSpec</a><span class="tsd-signature-symbol"> = {}</span></h5>
+<div class="tsd-comment tsd-typography"><p>A specification of how to log messages to file.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../interfaces/_run_z_log_z.ZLogger.html" class="tsd-signature-type tsd-kind-interface">ZLogger</a></h4><p>New message logger.</p>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/_run_z_log_z.ZLogRecorder.html" class="tsd-signature-type tsd-kind-interface">ZLogRecorder</a></h4><p>New log recorder.</p>
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/run-z/log-z/blob/d0a8274/src/log.ts#L36">run-z/log-z/src/log.ts:36</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/run-z/log-z/blob/d0a8274/src/node/to-file.log.ts#L34">run-z/log-z/src/node/to-file.log.ts:34</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
