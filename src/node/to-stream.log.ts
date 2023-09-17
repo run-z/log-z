@@ -1,14 +1,13 @@
 import { valueProvider } from '@proc7ts/primitives';
 import os from 'node:os';
 import type { Writable } from 'node:stream';
-import type { TextZLogFormat, ZLogFormatter } from '../formats';
-import { textZLogFormatter } from '../formats';
-import type { ZLogRecorder } from '../log-recorder';
-import { alreadyLogged, notLogged } from '../log-recorder.impl';
-import type { ZLogMessage } from '../message';
-import { zlogExpand } from '../message';
-import type { WhenWritten } from './stream-writer.impl';
-import { streamWriter } from './stream-writer.impl';
+import { TextZLogFormat, textZLogFormatter } from '../formats/text.format.js';
+import { ZLogFormatter } from '../formats/log-formatter.js';
+import { ZLogRecorder } from '../log-recorder.js';
+import { WhenWritten, streamWriter } from './stream-writer.impl.js';
+import { alreadyLogged, notLogged } from '../log-recorder.impl.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { zlogExpand } from '../messages/log-expand.js';
 
 /**
  * A specification of how to log messages {@link logZToStream to Node.js stream}.

@@ -1,8 +1,8 @@
 import { noop } from '@proc7ts/primitives';
-import { ZLogLevel, zlogLevelOf } from '../level';
-import type { ZLogRecorder } from '../log-recorder';
-import type { ZLogMessage } from '../message';
-import { neverLogZ } from './never.log';
+import { ZLogRecorder } from '../log-recorder.js';
+import { ZLogLevel, zlogLevelOf } from '../levels/log-level.js';
+import { neverLogZ } from './never.log.js';
+import { ZLogMessage } from '../messages/log-message.js';
 
 /**
  * Creates a log recorder of messages with required level. Messages not satisfying the condition either logged

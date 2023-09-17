@@ -1,11 +1,12 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import { ZLogLevel } from '../level';
-import { logZ } from '../log';
-import type { ZLogRecorder } from '../log-recorder';
-import type { ZLogger } from '../logger';
-import { zlogDetails, zlogMessage } from '../message';
-import { logZToMock } from '../spec';
-import { logZTimestamp } from './timestamp.log';
+import { ZLogLevel } from '../levels/log-level.js';
+import { ZLogRecorder } from '../log-recorder.js';
+import { logZ } from '../log.js';
+import { ZLogger } from '../logger.js';
+import { zlogDetails } from '../messages/log-details.js';
+import { zlogMessage } from '../messages/log-message.js';
+import { logZToMock } from '../spec/mock-log-recorder.js';
+import { logZTimestamp } from './timestamp.log.js';
 
 describe('logZTimestamp', () => {
   let target: ZLogRecorder;

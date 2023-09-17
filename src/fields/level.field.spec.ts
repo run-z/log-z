@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
-import { textZLogFormatter } from '../formats';
-import { ZLogLevel, zlogLevelName } from '../level';
-import { zlogMessage } from '../message';
-import { levelZLogField } from './level.field';
+import { textZLogFormatter } from '../formats/text.format.js';
+import { zlogMessage } from '../messages/log-message.js';
+import { ZLogLevel, zlogLevelName } from '../levels/log-level.js';
+import { levelZLogField } from './level.field.js';
 
 describe('levelZLogField', () => {
   it('writes log level by default', () => {

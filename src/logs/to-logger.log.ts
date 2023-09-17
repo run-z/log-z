@@ -1,11 +1,12 @@
 import type { Logger } from '@proc7ts/logger';
 import { consoleLogger } from '@proc7ts/logger';
 import { noop } from '@proc7ts/primitives';
-import { zlogLevelMap } from '../level';
-import type { ZLogRecorder } from '../log-recorder';
-import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl';
-import type { ZLogMessage } from '../message';
-import { zlogDetails, zlogExpand } from '../message';
+import { zlogLevelMap } from '../levels/log-level.js';
+import { alreadyEnded, alreadyLogged, notLogged } from '../log-recorder.impl.js';
+import { ZLogRecorder } from '../log-recorder.js';
+import { zlogExpand } from '../messages/log-expand.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { zlogDetails } from '../messages/log-details.js';
 
 type LogZToLogger$Method = (this: void, logger: Logger, message: ZLogMessage) => void;
 

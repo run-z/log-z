@@ -1,7 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 import { dueLog, logline } from '@proc7ts/logger';
-import { zlogDEBUG, ZLogLevel } from '../level';
-import { assignZLogDetails, cloneZLogDetails, ZLogDetails, zlogDetails } from './log-details';
+import { zlogDEBUG } from '../levels/levels.js';
+import { ZLogLevel } from '../levels/log-level.js';
+import { ZLogDetails, assignZLogDetails, cloneZLogDetails, zlogDetails } from './log-details.js';
 
 describe('zlogDetails', () => {
   it('treated as message details', () => {

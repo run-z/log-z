@@ -1,8 +1,5 @@
-import type { CxEntry } from '@proc7ts/context-values';
-import { CxGlobals, cxRecent, cxScoped } from '@proc7ts/context-values';
-import { logZBy } from './log-by';
-import type { ZLogRecorder } from './log-recorder';
-import { logZToLogger, logZToOther, logZWhenLevel } from './logs';
+import { logZBy } from './log-by.js';
+import type { ZLogRecorder } from './log-recorder.js';
 
 /**
  * Message logger interface.
@@ -76,24 +73,3 @@ export interface ZLogger extends ZLogRecorder {
    */
   trace(...args: unknown[]): void;
 }
-
-/**
- * Global context entry containing a {@link ZLogger logger} instance to use.
- *
- * By default, logs messages with at least {@link ZLogLevel.Info} level to {@link logZToLogger console}.
- */
-export const ZLogger: CxEntry<ZLogger, ZLogRecorder> = {
-  perContext: /*#__PURE__*/ cxScoped(
-    CxGlobals,
-    /*#__PURE__*/ cxRecent<ZLogger, ZLogRecorder, ZLogRecorder>({
-      create: (recent, _) => recent,
-      byDefault: _ => logZWhenLevel(logZToLogger()),
-      assign({ get, to }) {
-        const logger = logZBy(logZToOther(get));
-
-        return receiver => to((_, by) => receiver(logger, by));
-      },
-    }),
-  ),
-  toString: () => '[ZLogger]',
-};

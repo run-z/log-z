@@ -1,4 +1,4 @@
-import type { ZLogMessage } from './message';
+import { ZLogMessage } from './messages/log-message.js';
 
 /**
  * Log recorder.

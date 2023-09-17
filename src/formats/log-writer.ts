@@ -1,5 +1,6 @@
-import type { ZLogDetails, ZLogMessage } from '../message';
-import type { ZLogField } from './log-field';
+import { ZLogDetails } from '../messages/log-details.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { ZLogField } from './log-field.js';
 
 /**
  * Log message writer.

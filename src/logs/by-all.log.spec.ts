@@ -1,12 +1,11 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import { newPromiseResolver } from '@proc7ts/primitives';
-import { ZLogLevel } from '../level';
-import { logZBy } from '../log-by';
-import type { ZLogger } from '../logger';
-import { zlogMessage } from '../message';
-import type { MockZLogRecorder } from '../spec';
-import { logZToMock } from '../spec';
-import { logZByAll } from './by-all.log';
+import { PromiseResolver } from '@proc7ts/async';
+import { ZLogLevel } from '../levels/log-level.js';
+import { logZBy } from '../log-by.js';
+import { ZLogger } from '../logger.js';
+import { zlogMessage } from '../messages/log-message.js';
+import { MockZLogRecorder, logZToMock } from '../spec/mock-log-recorder.js';
+import { logZByAll } from './by-all.log.js';
 
 describe('logZByAll', () => {
   let target1: MockZLogRecorder;
@@ -33,9 +32,9 @@ describe('logZByAll', () => {
 
   describe('whenLogged', () => {
     it('awaits for every logger to log the message', async () => {
-      const resolver = newPromiseResolver<boolean>();
+      const resolver = new PromiseResolver<boolean>();
 
-      target1.whenLogged.mockImplementation(() => resolver.promise());
+      target1.whenLogged.mockImplementation(() => resolver.whenDone());
 
       const whenLogged = logger.whenLogged('all');
 
@@ -47,9 +46,9 @@ describe('logZByAll', () => {
       expect(await whenLogged).toBe(true);
     });
     it('resolves to `false` if at least one logger did not log the message', async () => {
-      const resolver = newPromiseResolver<boolean>();
+      const resolver = new PromiseResolver<boolean>();
 
-      target1.whenLogged.mockImplementation(() => resolver.promise());
+      target1.whenLogged.mockImplementation(() => resolver.whenDone());
 
       const whenLogged = logger.whenLogged('all');
 

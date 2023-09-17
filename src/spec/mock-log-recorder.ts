@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 import type { Mock } from 'jest-mock';
-import type { ZLogRecorder } from '../log-recorder';
+import type { ZLogRecorder } from '../log-recorder.js';
 
 export type MockZLogRecorder = {
   [K in keyof ZLogRecorder]: Mock<ZLogRecorder[K]>;

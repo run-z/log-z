@@ -1,10 +1,9 @@
 import { describe, expect, it } from '@jest/globals';
-import type { ZLogField } from '../formats';
-import { textZLogFormatter } from '../formats';
-import { ZLogLevel } from '../level';
-import { zlogMessage } from '../message';
-import type { DecoratorZLogFieldFormat } from './decorator.field';
-import { decoratorZLogField } from './decorator.field';
+import { DecoratorZLogFieldFormat, decoratorZLogField } from './decorator.field.js';
+import { ZLogField } from '../formats/log-field.js';
+import { textZLogFormatter } from '../formats/text.format.js';
+import { zlogMessage } from '../messages/log-message.js';
+import { ZLogLevel } from '../levels/log-level.js';
 
 describe('decoratorZLogField', () => {
   it('prefixes non-empty field value', () => {

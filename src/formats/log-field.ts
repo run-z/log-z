@@ -1,4 +1,4 @@
-import type { ZLogWriter } from './log-writer';
+import type { ZLogWriter } from './log-writer.js';
 
 /**
  * Log field signature.

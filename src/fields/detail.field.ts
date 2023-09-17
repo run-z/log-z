@@ -1,5 +1,6 @@
-import type { ZLogField, ZLogWriter } from '../formats';
-import type { ZLogDetails } from '../message';
+import { ZLogField } from '../formats/log-field.js';
+import { ZLogWriter } from '../formats/log-writer.js';
+import { ZLogDetails } from '../messages/log-details.js';
 
 /**
  * Creates a log field for {@link ZLogWriter.extractDetail extracted} message detail.

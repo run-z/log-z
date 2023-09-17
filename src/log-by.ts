@@ -1,12 +1,16 @@
-import { ZLogLevel } from './level';
-import type { ZLogRecorder } from './log-recorder';
-import type { ZLogger } from './logger';
-import type { ZLogMessage } from './message';
-import { zlogMessage } from './message';
+import { ZLogLevel } from './levels/log-level.js';
+import type { ZLogRecorder } from './log-recorder.js';
+import type { ZLogger } from './logger.js';
+import type { ZLogMessage } from './messages/log-message.js';
+import { zlogMessage } from './messages/log-message.js';
 
 class ZLogger$ implements ZLogger {
 
-  constructor(private readonly _by: ZLogRecorder) {}
+  readonly #by: ZLogRecorder;
+
+  constructor(by: ZLogRecorder) {
+    this.#by = by;
+  }
 
   log(level: number, ...args: unknown[]): void {
     this.record(zlogMessage(level, ...args));
@@ -37,15 +41,15 @@ class ZLogger$ implements ZLogger {
   }
 
   record(message: ZLogMessage): void {
-    this._by.record(message);
+    this.#by.record(message);
   }
 
   whenLogged(which?: 'all' | 'last'): Promise<boolean> {
-    return this._by.whenLogged(which);
+    return this.#by.whenLogged(which);
   }
 
   end(): Promise<void> {
-    return this._by.end();
+    return this.#by.end();
   }
 
 }

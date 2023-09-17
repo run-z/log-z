@@ -1,4 +1,4 @@
-import type { ZLogField } from '../formats';
+import { ZLogField } from '../formats/log-field.js';
 
 /**
  * Creates a log field containing a {@link ZLogMessage.line log line}.

@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { Writable } from 'node:stream';
-import { TestWritable } from '../spec';
-import { streamWriter } from './stream-writer.impl';
+import { TestWritable } from '../spec/test-writable.js';
+import { streamWriter } from './stream-writer.impl.js';
 
 describe('streamWriter', () => {
   it('writes to stream', async () => {

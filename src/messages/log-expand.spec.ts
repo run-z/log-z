@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 import { logDefer } from '@proc7ts/logger';
-import { zlogINFO } from '../level';
-import { zlogDetails } from './log-details';
-import { zlogExpand } from './log-expand';
+import { zlogINFO } from '../levels/levels.js';
+import { zlogDetails } from './log-details.js';
+import { zlogExpand } from './log-expand.js';
 
 describe('zlogExpand', () => {
   it('expands message text', () => {

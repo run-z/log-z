@@ -1,15 +1,13 @@
-import {
-  decoratorZLogField,
-  detailsZLogField,
-  errorZLogField,
-  levelZLogField,
-  messageZLogField,
-  timestampZLogField,
-} from '../fields';
-import type { ZLogMessage } from '../message';
-import type { ZLogField } from './log-field';
-import type { ZLogFormatter } from './log-formatter';
-import { ZLogWriter } from './log-writer';
+import { decoratorZLogField } from '../fields/decorator.field.js';
+import { detailsZLogField } from '../fields/details.field.js';
+import { errorZLogField } from '../fields/error.field.js';
+import { levelZLogField } from '../fields/level.field.js';
+import { messageZLogField } from '../fields/message.field.js';
+import { timestampZLogField } from '../fields/timestamp.field.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { ZLogField } from './log-field.js';
+import { ZLogFormatter } from './log-formatter.js';
+import { ZLogWriter } from './log-writer.js';
 
 /**
  * Text log format.

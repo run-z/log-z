@@ -1,6 +1,6 @@
-import type { ZLogRecorder } from '../log-recorder';
-import type { ZLogDetails } from '../message';
-import { logZUpdated } from './updated.log';
+import { ZLogRecorder } from '../log-recorder.js';
+import { ZLogDetails } from '../messages/log-details.js';
+import { logZUpdated } from './updated.log.js';
 
 /**
  * Creates a log message recorder that updates message details.

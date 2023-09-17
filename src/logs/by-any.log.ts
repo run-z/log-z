@@ -1,5 +1,5 @@
 import { asis, noop } from '@proc7ts/primitives';
-import type { ZLogRecorder } from '../log-recorder';
+import type { ZLogRecorder } from '../log-recorder.js';
 
 /**
  * Creates a recorder that logs messages by any of the given recorders.

@@ -1,4 +1,5 @@
-import type { ZLogField, ZLogWriter } from '../formats';
+import { ZLogField } from '../formats/log-field.js';
+import { ZLogWriter } from '../formats/log-writer.js';
 
 /**
  * A field for {@link ZLogMessage.details message details}.

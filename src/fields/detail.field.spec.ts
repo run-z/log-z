@@ -1,10 +1,10 @@
 import { describe, expect, it } from '@jest/globals';
-import { textZLogFormatter } from '../formats';
-import { zlogERROR } from '../level';
-import { zlogDetails } from '../message';
-import { decoratorZLogField } from './decorator.field';
-import { detailZLogField } from './detail.field';
-import { detailsZLogField } from './details.field';
+import { textZLogFormatter } from '../formats/text.format.js';
+import { zlogERROR } from '../levels/levels.js';
+import { zlogDetails } from '../messages/log-details.js';
+import { decoratorZLogField } from './decorator.field.js';
+import { detailZLogField } from './detail.field.js';
+import { detailsZLogField } from './details.field.js';
 
 describe('detailZLogField', () => {
   describe('with empty path', () => {

@@ -1,4 +1,4 @@
-import type { ZLogField } from '../formats';
+import type { ZLogField } from '../formats/log-field.js';
 
 /**
  * Log message {@link logZTimestamp timestamp} format.

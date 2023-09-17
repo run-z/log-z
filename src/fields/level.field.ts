@@ -1,6 +1,5 @@
-import type { ZLogField } from '../formats';
-import type { ZLogLevel } from '../level';
-import { zlogLevelAbbr5 } from '../level';
+import { ZLogField } from '../formats/log-field.js';
+import { ZLogLevel, zlogLevelAbbr5 } from '../levels/log-level.js';
 
 /**
  * Creates a log level field.

@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import { ZLogLevel } from '../level';
-import { logZBy } from '../log-by';
-import type { ZLogger } from '../logger';
-import { zlogMessage } from '../message';
-import { logZToMock, MockZLogRecorder } from '../spec';
-import { logZAtopOf } from './atop-of.log';
+import { ZLogger } from '../logger.js';
+import { MockZLogRecorder, logZToMock } from '../spec/mock-log-recorder.js';
+import { logZAtopOf } from './atop-of.log.js';
+import { logZBy } from '../log-by.js';
+import { zlogMessage } from '../messages/log-message.js';
+import { ZLogLevel } from '../levels/log-level.js';
 
 describe('logZAtopOf', () => {
   let logger: ZLogger;

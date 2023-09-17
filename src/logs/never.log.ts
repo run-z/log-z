@@ -1,6 +1,6 @@
-import { logZBy } from '../log-by';
-import type { ZLogger } from '../logger';
-import type { ZLogMessage } from '../message';
+import { logZBy } from '../log-by.js';
+import { ZLogger } from '../logger.js';
+import { ZLogMessage } from '../messages/log-message.js';
 
 /**
  * A logger that never logs any messages.
