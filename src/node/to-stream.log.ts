@@ -1,13 +1,13 @@
 import { valueProvider } from '@proc7ts/primitives';
 import os from 'node:os';
 import type { Writable } from 'node:stream';
-import { TextZLogFormat, textZLogFormatter } from '../formats/text.format.js';
 import { ZLogFormatter } from '../formats/log-formatter.js';
-import { ZLogRecorder } from '../log-recorder.js';
-import { WhenWritten, streamWriter } from './stream-writer.impl.js';
+import { TextZLogFormat, textZLogFormatter } from '../formats/text.format.js';
 import { alreadyLogged, notLogged } from '../log-recorder.impl.js';
-import { ZLogMessage } from '../messages/log-message.js';
+import { ZLogRecorder } from '../log-recorder.js';
 import { zlogExpand } from '../messages/log-expand.js';
+import { ZLogMessage } from '../messages/log-message.js';
+import { WhenWritten, streamWriter } from './stream-writer.impl.js';
 
 /**
  * A specification of how to log messages {@link logZToStream to Node.js stream}.
@@ -128,7 +128,7 @@ function endLogging(to: Writable): Promise<void> {
     if (to.writableFinished) {
       resolve();
     } else {
-      to.end(resolve);
+      to.end(() => resolve());
     }
   });
 }
