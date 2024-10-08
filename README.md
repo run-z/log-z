@@ -16,9 +16,9 @@ This is a reference implementation of the logging API defined by [@proc7ts/logge
 [build-status-img]: https://github.com/run-z/log-z/workflows/Build/badge.svg
 [build-status-link]: https://github.com/run-z/log-z/actions?query=workflow:Build
 [quality-img]: https://app.codacy.com/project/badge/Grade/17c8d581b0254f379875ec1355dcdce4
-[quality-link]: https://www.codacy.com/gh/run-z/log-z/dashboard?utm_source=github.com&utm_medium=referral&utm_content=run-z/log-z&utm_campaign=Badge_Grade
+[quality-link]: https://app.codacy.com/gh/run-z/log-z/dashboard?utm_source=gh&utm_medium=referral&utm_content=run-z/log-z&utm_campaign=Badge_Grade
 [coverage-img]: https://app.codacy.com/project/badge/Coverage/17c8d581b0254f379875ec1355dcdce4
-[coverage-link]: https://www.codacy.com/gh/run-z/log-z/dashboard?utm_source=github.com&utm_medium=referral&utm_content=run-z/log-z&utm_campaign=Badge_Coverage
+[coverage-link]: https://app.codacy.com/gh/run-z/log-z/dashboard?utm_source=gh&utm_medium=referral&utm_content=run-z/log-z&utm_campaign=Badge_Coverage
 [github-image]: https://img.shields.io/static/v1?logo=github&label=GitHub&message=project&color=informational
 [github-url]: https://github.com/run-z/log-z
 [api-docs-image]: https://img.shields.io/static/v1?logo=typescript&label=API&message=docs&color=informational
