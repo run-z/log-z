@@ -49,7 +49,8 @@ export function logZToBuffer(how: ZLogBufferSpec = {}): ZLogBuffer {
   let record = (message: ZLogMessage): void => {
     const entry = buffer.add(message, onRecord);
 
-    whenLogged = which => which === 'all' ? buffer.whenAllLogged().then(() => entry.whenLogged()) : entry.whenLogged();
+    whenLogged = which =>
+      which === 'all' ? buffer.whenAllLogged().then(() => entry.whenLogged()) : entry.whenLogged();
   };
   let drainTo = ZLogBuffer.drainer(atOnce => buffer.next(atOnce));
   let end = (): Promise<void> => {

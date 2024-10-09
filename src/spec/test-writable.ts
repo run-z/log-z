@@ -1,7 +1,6 @@
 import { Writable, WritableOptions } from 'node:stream';
 
 export class TestWritable extends Writable {
-
   readonly chunks: unknown[] = [];
 
   constructor(opts: WritableOptions = {}) {
@@ -16,5 +15,4 @@ export class TestWritable extends Writable {
     this.chunks.push(chunk);
     callback();
   }
-
 }

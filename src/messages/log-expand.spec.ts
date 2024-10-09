@@ -80,12 +80,10 @@ describe('zlogExpand', () => {
   });
   it('expands message error', () => {
     class TestError extends Error {
-
       toLog(): unknown {
         return zlogDetails({ error: this.message + '!' });
       }
-
-}
+    }
 
     const error = new TestError('Test');
 

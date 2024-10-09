@@ -9,7 +9,6 @@ import { ZLogBufferSpec } from './to-buffer.log.js';
  * @internal
  */
 export class ZLogBuffer$ {
-
   readonly #limit: number;
   readonly #entries: (ZLogBuffer.Entry | undefined)[] = [];
   #head = 0;
@@ -160,5 +159,4 @@ export class ZLogBuffer$ {
       }
     } while (this.#size && this.#entries[index]);
   }
-
 }

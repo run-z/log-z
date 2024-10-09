@@ -10,7 +10,6 @@ import { ZLogField } from './log-field.js';
  * The instance of this class can be reused by different messages and fields.
  */
 export abstract class ZLogWriter {
-
   /**
    * The log message to format and write.
    */
@@ -241,7 +240,6 @@ export abstract class ZLogWriter {
   protected writeByDefault(value: unknown): void {
     this.write(String(value));
   }
-
 }
 
 function ZLogLine$compactDetails(

@@ -40,8 +40,8 @@ export function timestampZLogField(format: TimestampZLogFieldFormat = {}): ZLogF
     typeof tsFormat === 'function'
       ? tsFormat
       : tsFormat
-      ? (timestamp: number) => tsFormat.format(timestamp)
-      : formatZLogTimestamp;
+        ? (timestamp: number) => tsFormat.format(timestamp)
+        : formatZLogTimestamp;
 
   return writer => {
     const timestamp = writer.extractDetail(key) as number | string | Date;

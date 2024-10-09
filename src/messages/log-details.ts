@@ -139,8 +139,8 @@ export function assignZLogDetails(
 
 function isZLogDetails(value: unknown): value is ZLogDetails {
   return (
-    typeof value === 'object'
-    && !!value
-    && (value.constructor === Object || value.constructor == null)
+    typeof value === 'object' &&
+    !!value &&
+    (value.constructor === Object || value.constructor == null)
   );
 }

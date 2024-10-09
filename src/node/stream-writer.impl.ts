@@ -15,10 +15,12 @@ export function streamWriter(to: Writable): (data: unknown) => WhenWritten {
   const whenDrained: WhenWritten = () => {
     if (!drainPromise) {
       // Register listener once
-      drainPromise = new Promise<boolean>(resolve => to.once('drain', () => {
+      drainPromise = new Promise<boolean>(resolve =>
+        to.once('drain', () => {
           drainPromise = undefined;
           resolve(true);
-        }));
+        }),
+      );
     }
 
     return drainPromise;

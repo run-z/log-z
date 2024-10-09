@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals
 import type { Logger } from '@proc7ts/logger';
 import { consoleLogger, logDefer, processingLogger } from '@proc7ts/logger';
 import { noop } from '@proc7ts/primitives';
-import type { Mock } from 'jest-mock';
 import { ZLogLevel } from '../levels/log-level.js';
 import { logZ } from '../log.js';
 import { ZLogger } from '../logger.js';
@@ -11,11 +10,11 @@ import { logZToLogger } from './to-logger.log.js';
 
 describe('logZToLogger', () => {
   let testLogger: Logger;
-  let errorSpy: Mock<(...args: unknown[]) => void>;
-  let warnSpy: Mock<(...args: unknown[]) => void>;
-  let infoSpy: Mock<(...args: unknown[]) => void>;
-  let debugSpy: Mock<(...args: unknown[]) => void>;
-  let traceSpy: Mock<(...args: unknown[]) => void>;
+  let errorSpy: jest.Mock<(...args: unknown[]) => void>;
+  let warnSpy: jest.Mock<(...args: unknown[]) => void>;
+  let infoSpy: jest.Mock<(...args: unknown[]) => void>;
+  let debugSpy: jest.Mock<(...args: unknown[]) => void>;
+  let traceSpy: jest.Mock<(...args: unknown[]) => void>;
 
   beforeEach(() => {
     testLogger = {

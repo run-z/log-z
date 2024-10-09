@@ -5,7 +5,6 @@ import type { ZLogMessage } from './messages/log-message.js';
 import { zlogMessage } from './messages/log-message.js';
 
 class ZLogger$ implements ZLogger {
-
   readonly #by: ZLogRecorder;
 
   constructor(by: ZLogRecorder) {
@@ -51,7 +50,6 @@ class ZLogger$ implements ZLogger {
   end(): Promise<void> {
     return this.#by.end();
   }
-
 }
 
 /**

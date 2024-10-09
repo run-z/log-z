@@ -83,7 +83,6 @@ function zlogMessageText(
   outputByOrder.set(currentOrder, currentOutput);
 
   class ZLogWriter$ extends ZLogWriter {
-
     get message(): ZLogMessage {
       return state[0];
     }
@@ -99,8 +98,7 @@ function zlogMessageText(
     format(field: ZLogField<this>, message?: ZLogMessage): string | undefined {
       return zlogMessageText([field as ZLogField], message ? [message] : state);
     }
-
-}
+  }
 
   const writer = new ZLogWriter$();
 

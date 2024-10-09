@@ -19,7 +19,6 @@ describe('streamWriter', () => {
     });
 
     class DelayedWritable extends TestWritable {
-
       override _write(
         chunk: unknown,
         encoding: string,
@@ -29,8 +28,7 @@ describe('streamWriter', () => {
         super._write(chunk, encoding, () => void 0);
         whenWritten.then(() => callback()).catch(callback);
       }
-
-}
+    }
 
     const out = new DelayedWritable({ highWaterMark: 2, objectMode: true });
     const writer = streamWriter(out);
@@ -51,7 +49,6 @@ describe('streamWriter', () => {
     const error = new Error('Test');
 
     class ErrorWritable extends Writable {
-
       override _write(
         _chunk: unknown,
         _encoding: string,
@@ -59,8 +56,7 @@ describe('streamWriter', () => {
       ): void {
         Promise.reject(error).catch(callback);
       }
-
-}
+    }
 
     const out = new ErrorWritable();
     const onError = new Promise(resolve => {

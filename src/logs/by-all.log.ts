@@ -14,7 +14,9 @@ export function logZByAll(...by: ZLogRecorder[]): ZLogRecorder {
       by.forEach(recorder => recorder.record(message));
     },
     whenLogged(which) {
-      return Promise.all(by.map(recorder => recorder.whenLogged(which))).then(results => results.every(asis));
+      return Promise.all(by.map(recorder => recorder.whenLogged(which))).then(results =>
+        results.every(asis),
+      );
     },
     end() {
       return Promise.all(by.map(recorder => recorder.end())).then(noop);
